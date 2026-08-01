@@ -1,0 +1,98 @@
+---
+interface Props {
+  bigTitle: string;
+  date?: Date;
+  dateLabel?: string;
+  emphasis?: string;
+  headline: string;
+  cover: string;
+  author: string;
+  readTime: string;
+  excerpt: string;
+  href: string;
+  hasNext?: boolean;
+}
+
+const { bigTitle, date, dateLabel, emphasis, headline, cover, author, readTime, excerpt, href, hasNext = false } = Astro.props;
+
+const formatted = dateLabel ?? (date
+  ? new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+      .format(date)
+      .replaceAll('/', '.')
+  : '');
+
+const parts = emphasis ? headline.split('{emphasis}') : [headline];
+---
+
+<div class="blog-header">
+  <div class="blog-article header-article">
+    <div class="blog-big__title">{bigTitle}</div>
+    <div class="blog-menu small-title date">{formatted}</div>
+  </div>
+  <div class="blog-article featured-content">
+    <img
+      class="featured-content__image"
+      src={cover}
+      alt={bigTitle}
+      data-section={bigTitle.toLowerCase()}
+    />
+    <div class="featured-content__copy">
+      <h2>
+        {
+          emphasis ? (
+            <>
+              {parts[0]}
+              <span>{emphasis}</span>
+              {parts[1]}
+            </>
+          ) : (
+            headline
+          )
+        }
+      </h2>
+      <p>{excerpt}</p>
+      <div class="featured-content__actions">
+        {hasNext && (
+          <button type="button" data-featured-next aria-label="Scroll to the next section">Next ↓</button>
+        )}
+        <a href={href}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M15 10l5 5-5 5"></path>
+            <path d="M4 4v7a4 4 0 004 4h12"></path>
+          </svg>
+          See More
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const button = target.closest<HTMLButtonElement>('[data-featured-next]');
+    if (!button) return;
+
+    const current = button.closest<HTMLElement>('.blog-header');
+    const next = current?.nextElementSibling;
+    if (!(next instanceof HTMLElement)) return;
+
+    next.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  });
+</script>

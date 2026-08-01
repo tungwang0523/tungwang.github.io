@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Menu from '../components/Menu.astro';
+import StickyHeader from '../components/StickyHeader.astro';
+import FeaturedArticle from '../components/FeaturedArticle.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+const sections = await getCollection('home');
+const microblogEntries = (await getCollection('microblog', ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.date - +a.data.date);
+// The homepage window is anchored to the build system clock, not to the newest post.
+const sixMonthsAgo = new Date();
+sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+const recentMicroblogEntries = microblogEntries.filter((entry) => entry.data.date >= sixMonthsAgo);
+const archiveEntry = microblogEntries.find((entry) => entry.data.date < sixMonthsAgo);
+const microblog = await Promise.all(
+  recentMicroblogEntries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { ...entry, Content };
+  }),
+);
+
+sections.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Tung Wang — Researcher & Designer"
+  description="The personal website of Tung Wang, an interdisciplinary researcher and designer."
+>
+  <div class="blog">
+    <Menu />
+    <StickyHeader
+      title="Tung’s"
+      pinnedLabel=""
+      pageNumber=""
+      pageContext={['A', 'Curious', 'Creator']}
+    />
+
+    <div class="blog-header-container">
+      {
+        sections.map((section, index) => (
+          <FeaturedArticle
+            bigTitle={section.data.bigTitle}
+            dateLabel={section.data.label}
+            emphasis={section.data.emphasis}
+            headline={section.data.headline}
+            cover={section.data.cover}
+            author={section.data.metaLeft}
+            readTime={section.data.metaRight}
+            excerpt={section.data.excerpt}
+            href={section.data.href}
+            hasNext={index < sections.length - 1}
+          />
+        ))
+      }
+    </div>
+
+    <Sidebar entries={microblog} archiveEntryId={archiveEntry?.id} />
+  </div>
+</BaseLayout>

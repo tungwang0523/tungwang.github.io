@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tungwang-images",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-01",
+  "r2_buckets": [
+    {
+      "binding": "IMAGES",
+      "bucket_name": "tungwang-images"
+    }
+  ]
+}

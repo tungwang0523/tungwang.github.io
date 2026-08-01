@@ -1,0 +1,53 @@
+---
+interface Props {
+  title?: string;
+  titleEn?: string;
+  subtitle?: string;
+  subtitleEn?: string;
+  cta?: string;
+  ctaEn?: string;
+  href?: string;
+}
+
+const {
+  title = 'Leave Your Old Life Behind',
+  titleEn = title,
+  subtitle = "Don't try to be like someone else, be yourself. Be secure with yourself.",
+  subtitleEn = subtitle,
+  cta = 'Explore',
+  ctaEn = cta,
+  href,
+} = Astro.props;
+---
+
+{
+  href ? (
+    <a class="circle" href={href}>
+      <div class="circle-title">
+        <span data-copy-language="zh">{title}</span><span data-copy-language="en">{titleEn}</span>
+      </div>
+      {subtitle && (
+        <div class="circle-subtitle">
+          <span data-copy-language="zh">{subtitle}</span><span data-copy-language="en">{subtitleEn}</span>
+        </div>
+      )}
+      <div class="circle-footer">
+        <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+      </div>
+    </a>
+  ) : (
+    <div class="circle">
+      <div class="circle-title">
+        <span data-copy-language="zh">{title}</span><span data-copy-language="en">{titleEn}</span>
+      </div>
+      {subtitle && (
+        <div class="circle-subtitle">
+          <span data-copy-language="zh">{subtitle}</span><span data-copy-language="en">{subtitleEn}</span>
+        </div>
+      )}
+      <div class="circle-footer">
+        <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+      </div>
+    </div>
+  )
+}

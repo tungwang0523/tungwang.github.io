@@ -1,0 +1,52 @@
+<div class="microblog-language" role="group" aria-label="Microblog language">
+  <button type="button" data-language-option="zh" aria-pressed="true">中文</button>
+  <span aria-hidden="true">/</span>
+  <button type="button" data-language-option="en" aria-pressed="false">EN</button>
+</div>
+
+<script>
+  type MicroblogLanguage = 'zh' | 'en';
+
+  const updateMicroblogLinks = (scope: HTMLElement, language: MicroblogLanguage) => {
+    scope.querySelectorAll<HTMLAnchorElement>('a[href^="/microblog"]').forEach((anchor) => {
+      const url = new URL(anchor.href, window.location.origin);
+      if (language === 'en') url.searchParams.set('lang', 'en');
+      else url.searchParams.delete('lang');
+      anchor.href = `${url.pathname}${url.search}${url.hash}`;
+    });
+  };
+
+  const setMicroblogLanguage = (scope: HTMLElement, language: MicroblogLanguage) => {
+    scope.dataset.language = language;
+    scope.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((option) => {
+      option.setAttribute('aria-pressed', String(option.dataset.languageOption === language));
+    });
+    updateMicroblogLinks(scope, language);
+
+    if (window.location.pathname.startsWith('/microblog')) {
+      const url = new URL(window.location.href);
+      if (language === 'en') url.searchParams.set('lang', 'en');
+      else url.searchParams.delete('lang');
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+  };
+
+  const initialiseLanguageToggles = () => {
+    document.querySelectorAll<HTMLElement>('[data-microblog-scope]').forEach((scope) => {
+      if (scope.dataset.languageReady === 'true') return;
+      scope.dataset.languageReady = 'true';
+      const language: MicroblogLanguage = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
+      setMicroblogLanguage(scope, language);
+
+      scope.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const language = button.dataset.languageOption === 'en' ? 'en' : 'zh';
+          setMicroblogLanguage(scope, language);
+        });
+      });
+    });
+  };
+
+  initialiseLanguageToggles();
+  document.addEventListener('astro:page-load', initialiseLanguageToggles);
+</script>

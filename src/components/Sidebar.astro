@@ -1,0 +1,59 @@
+---
+import Marquee from './Marquee.astro';
+import MicroblogEntry from './MicroblogEntry.astro';
+import MicroblogLanguageToggle from './MicroblogLanguageToggle.astro';
+import Circle from './Circle.astro';
+
+interface Entry {
+  id: string;
+  data: {
+    date: Date;
+    type: 'note' | 'image' | 'quote' | 'link';
+    image?: string;
+    alt?: string;
+    images?: Array<{ src: string; alt: string }>;
+    translation: string;
+    comment?: string;
+    commentEn?: string;
+    location?: string;
+    locationEn?: string;
+    tags: string[];
+    link?: string;
+    linkLabel?: string;
+    linkLabelEn?: string;
+  };
+  Content: any;
+}
+
+interface Props {
+  entries: Entry[];
+  heading?: string;
+  archiveEntryId?: string;
+}
+
+const { entries, heading = 'Microblog', archiveEntryId } = Astro.props;
+---
+
+<aside class="blog-part right-blog microblog-sidebar" aria-label="Latest microblog entries" data-microblog-scope data-language="zh">
+  <Marquee items={['Notes · Images · Links · Fragments', 'Small things, kept in motion']} />
+  <div class="blog-right-title-container">
+    <div class="blog-right-title">{heading}</div>
+    <MicroblogLanguageToggle />
+  </div>
+  <div class="blog-right microblog-feed">
+    {
+      entries.map((entry) => <MicroblogEntry entry={entry} Content={entry.Content} compact />)
+    }
+    {archiveEntryId && (
+      <Circle
+        href={`/microblog#${archiveEntryId}`}
+        title="Earlier Notes"
+        titleEn="Earlier Notes"
+        subtitle=""
+        subtitleEn=""
+        cta="View All ↘"
+        ctaEn="View All ↘"
+      />
+    )}
+  </div>
+</aside>

@@ -1,0 +1,339 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const publications = [
+  {
+    before: '',
+    author: 'Z. Wang',
+    after: ', & F. You (2026).',
+    title:
+      'Reconstructing subtle embodied social experience as designable relations: An image-schema-mediated empirical-to-design method demonstrated through a public-space gaze case.',
+    credit: 'First Author',
+    status: 'Submitted to',
+    venue: 'International Journal of Human–Computer Interaction',
+    note: 'Preprint available on SSRN.',
+    href: 'https://doi.org/10.2139/ssrn.7201181',
+    linkLabel: 'doi:10.2139/ssrn.7201181',
+  },
+  {
+    before: 'F. You, X. Yan, ',
+    author: 'Z. Wang',
+    after: ', & Q. Fu (2026).',
+    title:
+      'Seeing the whole process: How cooperative process transparency in AR-HMI affects driver cognition in V2V lane changes.',
+    credit: 'Corresponding Author',
+    status: 'Revision under review at',
+    venue: 'Transportation Research Part F: Traffic Psychology and Behaviour',
+  },
+  {
+    before: 'Y. Chen, F. Jia, ',
+    author: 'Z. Wang',
+    after: ', X. Wu, & J. Wang (2026).',
+    title:
+      'Designing multimodal takeover request interfaces: The impact of warning modalities and information types on drivers’ takeover performance and subjective perceptions.',
+    status: 'Under review at',
+    venue: 'International Journal of Human–Computer Interaction',
+  },
+  {
+    before: 'Y. Chen, Y. Jin, F. Jia, J. Wang, ',
+    author: 'Z. Wang',
+    after: ', B. Mehler, & F. You (2026).',
+    title:
+      'Beyond attention reminders: Effects of monitoring request design type and non-driving-related task engagement on driver takeover performance and subjective perceptions.',
+    status: 'Under review at',
+    venue: 'Accident Analysis & Prevention',
+  },
+  {
+    before: 'Y. Chen, J. Wang, F. Jia, X. Wu, Q. Xiao, ',
+    author: 'Z. Wang',
+    after: ', & F. You (2025).',
+    title:
+      'Is control necessary for drivers? Exploring the influence of human–machine collaboration modes on driving behavior and subjective perception under different hazard visibility scenarios.',
+    status: 'Published in',
+    venue: 'Accident Analysis & Prevention, 217, 108067.',
+    href: 'https://doi.org/10.1016/j.aap.2025.108067',
+    linkLabel: 'doi:10.1016/j.aap.2025.108067',
+  },
+];
+
+const education = [
+  {
+    period: '9/2024 - 6/2027',
+    degree: 'Master’s Candidate in Design',
+    institutions: [
+      { label: 'User Experience Lab', href: 'https://uxlab.tongji.edu.cn/' },
+      { label: 'College of Arts and Media', href: 'https://am.tongji.edu.cn/' },
+      { label: 'Tongji University', href: 'https://www.tongji.edu.cn/' },
+    ],
+    details: [
+      'Working thesis title: Mixed-Reality Interaction Design for Public-Space Social Experience',
+      'GPA: 4.76/5.0 · Supervisor: Prof. Fang You',
+    ],
+  },
+  {
+    period: '9/2020 - 6/2024',
+    degree: 'Bachelor’s Degree in Physics',
+    institutions: [
+      { label: 'College of Physics', href: 'https://phy.jlu.edu.cn/' },
+      { label: 'Jilin University', href: 'https://www.jlu.edu.cn/' },
+    ],
+    details: ['Intellectual formation in mathematical abstraction, idealization, and model-based reasoning'],
+  },
+];
+
+const projects = [
+  {
+    period: '2025 - Present',
+    title: 'XR-Mediated Design for Subtle Embodied Social Experience',
+    role: 'Master’s Researcher, Tongji University',
+    description:
+      'Investigates how subtle embodied experiences of public-space social interaction can be reconstructed as design-operable relations and instantiated through XR design propositions.',
+    bullets: [
+      'Conceived the theoretical and methodological framework and designed and conducted a first-person study with 16 participants.',
+      'Developed the Evidence-Side and Design-Side Image-Schematic Systems and generated XR symbolic-metaphor propositions.',
+      'Led data analysis, visualization, and manuscript preparation; currently developing the Unity-based XR prototype and preparing its empirical evaluation.',
+    ],
+  },
+  {
+    period: '2025 - Present',
+    title: 'Cooperative Process Transparency in AR-HMI',
+    role: 'Co-Researcher, Tongji University',
+    description:
+      'Examines how different levels of cooperative process transparency affect driver cognition during V2V cooperative lane changes.',
+    bullets: [
+      'Contributed to the conceptualization and three-level operationalization of cooperative process transparency; curated and formally analysed performance and subjective data.',
+      'Produced research visualizations and led manuscript preparation and revision.',
+    ],
+  },
+  {
+    period: '2024 - 2025',
+    title: 'AR Social-Space Design through Interpersonal Distance and Social Cues',
+    role: 'Co-Researcher, Tongji University',
+    description:
+      'Examines how virtual-agent layout, gesture amplitude, and interaction guidance shape affect, social presence, and continued engagement in AR.',
+    bullets: [
+      'Contributed to research conceptualization and curated and formally analysed the experimental data.',
+      'Drafted the original manuscript and contributed to its review and revision.',
+    ],
+  },
+  {
+    period: '2024 - Present',
+    title: 'Automated-Driving HMI and Driver Attention',
+    role: 'Co-Researcher, Tongji University',
+    description:
+      'Comprises three driving-simulator studies of collaboration modes, monitoring requests, and multimodal takeover warnings.',
+    bullets: [
+      'Contributed to the experimental design and execution of one controlled driving-simulator study.',
+      'Processed and analysed eye-tracking and fNIRS data across the project studies.',
+      'Contributed to the interpretation of results and manuscript review and revision.',
+    ],
+  },
+];
+
+const collaborations = [
+  {
+    period: '2025',
+    title: 'Eye-Tracking Experiment and Analysis Coordinator',
+    institution: 'Tongji University & Huawei Technologies Co., Ltd.',
+    description:
+      'Provided methodological training and supervised eye-tracking experiments and data analysis for an industry collaboration on task complexity in cloud change operations.',
+  },
+  {
+    period: '2025 - 2026',
+    title: 'EEG Data Analysis Coordinator',
+    institution: 'Beijing Institute of Petrochemical Technology',
+    description:
+      'Supervised and conducted EEG data analysis for the project “Cognitive and Neural Mechanisms Underlying the Detection and Dissemination of AI-Generated Misinformation.”',
+  },
+];
+
+const skills = [
+  { label: 'Research · Analysis', value: 'SPSS · MATLAB · GraphPad Prism · NVivo · Tobii Pro Lab' },
+  { label: 'Programming · XR', value: 'Unity · Python · C/C++ · HTML' },
+  { label: 'Design · Media', value: 'Figma · Adobe Photoshop · Adobe Premiere Pro · Blender · SketchUp' },
+  { label: 'Authoring', value: 'LaTeX' },
+];
+
+const [primaryProject, ...otherProjects] = projects;
+---
+
+<PageLayout
+  title="Wang Zhaodong"
+  description="Interdisciplinary Researcher, Master’s Candidate in Design"
+  descriptionLines={['Interdisciplinary Researcher', 'Master’s Candidate in Design']}
+  pageTitle="Academic Profile — Tung Wang"
+  pageClass="page--research"
+>
+  <div class="cv-web">
+    <section class="cv-web__profile" aria-label="Academic profile">
+      <p>
+        Interdisciplinary researcher with a background in physics and design, studying how embodied
+        experience makes social relations meaningful and reconstructing them as designable
+        structures through technological mediation.
+      </p>
+      <div class="cv-web__contact">
+        <span>Shanghai, China</span>
+        <a href="mailto:tungwang@tongji.edu.cn">tungwang@tongji.edu.cn</a>
+        <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer">
+          ORCID 0009-0008-1111-6742
+        </a>
+        <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
+      </div>
+    </section>
+
+    <section class="cv-section cv-section--interests" id="research-interests">
+      <h2>Research Interests</h2>
+      <ul class="cv-interest-grid">
+        <li>Design Epistemology and Methodology</li>
+        <li>Cognitive Semantics and Meaning-Making</li>
+        <li>Embodied Cognition</li>
+        <li>Human–Technology Relations</li>
+      </ul>
+    </section>
+
+    <section class="cv-section cv-section--education" id="formation">
+      <h2>Education</h2>
+      <div class="cv-entries">
+        {education.map((item) => (
+          <article class="cv-entry">
+            <div class="cv-entry__meta">{item.period}</div>
+            <div class="cv-entry__heading">
+              <h3>{item.degree}</h3>
+              <strong class="cv-entry__institutions">
+                {item.institutions.map((institution, index) => (
+                  <>
+                    <a href={institution.href} target="_blank" rel="noreferrer">
+                      {institution.label}
+                    </a>
+                    {index < item.institutions.length - 1 && <span>, </span>}
+                  </>
+                ))}
+              </strong>
+            </div>
+            <div class="cv-entry__content">
+              {item.details.map((detail) => <p>{detail}</p>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section" id="projects">
+      <h2>Selected Research<br />{' '}Projects</h2>
+      <div class="cv-projects cv-projects--featured">
+        <article class="cv-project cv-project--primary">
+          <div class="cv-project__meta">
+            <span>{primaryProject.period}</span>
+            <strong>{primaryProject.role}</strong>
+          </div>
+          <h3>{primaryProject.title}</h3>
+          <p>{primaryProject.description}</p>
+          <ul>
+            {primaryProject.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+        </article>
+
+        {otherProjects.map((project) => (
+          <article class="cv-project">
+            <div class="cv-project__meta">
+              <span>{project.period}</span>
+              <strong>{project.role}</strong>
+            </div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <ul>
+              {project.bullets.map((bullet) => <li>{bullet}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section" id="publications">
+      <h2>Publications &<br />{' '}Manuscripts</h2>
+      <div class="cv-publications">
+        {publications.map((publication) => (
+          <article>
+            <div class="cv-publications__main">
+              <h3>{publication.title}</h3>
+              <p class="cv-publications__authors">
+                {publication.before}<strong>{publication.author}</strong>{publication.after}
+              </p>
+            </div>
+            <div class="cv-publications__details">
+              <p class="cv-publications__status">
+                {publication.credit && <strong>{publication.credit}</strong>}
+                <span><b>{publication.status}</b> {publication.venue}</span>
+              </p>
+              {publication.note && <span>{publication.note}</span>}
+              {publication.href && (
+                <a href={publication.href} target="_blank" rel="noreferrer">{publication.linkLabel}</a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section" id="methods">
+      <h2>Research Capabilities<br />{' '}& Technical Skills</h2>
+      <div class="cv-methods-grid">
+        <section>
+          <h3>Research Capabilities</h3>
+          <ul class="cv-plain-list">
+            <li>Conceptual Analysis · Framework Development</li>
+            <li>Embodied Experience Analysis</li>
+            <li>Metaphor/Schema Analysis · XR Prototyping</li>
+            <li>Driving Simulation · Eye Tracking · EEG/fNIRS Analysis</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Technical Skills</h3>
+          <dl class="cv-skills">
+            {skills.map((skill) => (
+              <div>
+                <dt>{skill.label}</dt>
+                <dd>{skill.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>External Research<br />{' '}Collaborations</h2>
+      <div class="cv-entries">
+        {collaborations.map((item) => (
+          <article class="cv-entry">
+            <div class="cv-entry__meta">{item.period}</div>
+            <div class="cv-entry__heading">
+              <h3>{item.title}</h3>
+              <strong>{item.institution}</strong>
+            </div>
+            <div class="cv-entry__content">
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section cv-section--languages">
+      <h2>Languages</h2>
+      <p class="cv-languages">
+        <strong>Chinese</strong> - Native · <strong>English</strong> - Academic working proficiency ·{' '}
+        <strong>Japanese</strong> - Intermediate · <strong>French</strong> - Elementary
+      </p>
+    </section>
+
+    <section class="cv-web__closing" aria-label="Academic links">
+      <p>Curriculum Vitae · Publications · Research Collaboration</p>
+      <div>
+        <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
+        <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
+        <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer">ORCID ↗</a>
+      </div>
+    </section>
+  </div>
+</PageLayout>
