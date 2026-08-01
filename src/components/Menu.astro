@@ -7,10 +7,6 @@ interface MenuItem {
 
 interface Props {
   items?: MenuItem[];
-  mention?: string;
-  mentionHref?: string;
-  subscribeLabel?: string;
-  subscribeHref?: string;
 }
 
 const {
@@ -22,10 +18,6 @@ const {
     { label: 'Microblog', href: '/microblog' },
     { label: 'Contact', href: '/contact' },
   ],
-  mention = '@tungwang',
-  mentionHref = '/',
-  subscribeLabel = 'Subscribe',
-  subscribeHref = '/contact',
 } = Astro.props;
 ---
 
@@ -67,8 +59,17 @@ const {
       </a>
     ))
   }
-  <a href={mentionHref} class="blog-menu mention">{mention}</a>
-  <a href={subscribeHref} class="blog-menu subscribe">{subscribeLabel}</a>
+  <div class="blog-menu mention">
+    <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
+    <span class="mention__name">Tung Wang</span>
+    <small class="mention__role">
+      Founder of <a href="https://mockingbird.team" target="_blank" rel="noreferrer">Mockingbird Studio</a>
+    </small>
+    <span class="mention__details">
+      <small>Greetings from Shanghai</small>
+      <small>© 2026 Tung Wang</small>
+    </span>
+  </div>
 </div>
 
 <script>

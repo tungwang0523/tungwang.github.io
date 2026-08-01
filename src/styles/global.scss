@@ -112,31 +112,65 @@ body {
     &.mention {
       margin-top: auto;
       font-size: 19px;
-
-      @media screen and (max-width: 1260px) {
-        font-size: 1.4vw;
-      }
-    }
-
-    &.subscribe {
-      margin-top: 8px;
-      font-size: 19px;
-      position: relative;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
 
       @media screen and (max-width: 1260px) {
         font-size: 1.4vw;
       }
 
-      &:before {
-        content: '';
-        width: 16px;
-        height: 16px;
-        background-color: $subtitle-color;
-        left: 0;
-        border-radius: 1px;
-        margin-right: 14px;
+      .mention__mark {
+        display: block;
+        width: 44px;
+        height: 44px;
+        margin-bottom: 16px;
+      }
+
+      .mention__name {
+        display: block;
+        font-family: $title-font;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -2px;
+      }
+
+      .mention__role {
+        display: block;
+        margin-top: 8px;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.2;
+
+        a {
+          color: inherit;
+          font-weight: 600;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+          }
+        }
+      }
+
+      .mention__details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+        margin-top: 14px;
+
+        small {
+          display: block;
+          font-size: 11px;
+          font-weight: 400;
+          line-height: 1.1;
+        }
       }
     }
+
     &.rounded {
       &:before {
         content: '';
@@ -1022,6 +1056,8 @@ marquee {
     max-width: min(88vw, 1200px);
     max-height: min(72vh, 780px);
     object-fit: contain;
+    touch-action: pan-y;
+    user-select: none;
   }
 
   &__caption {
@@ -1051,6 +1087,72 @@ marquee {
     line-height: 1;
     cursor: pointer;
   }
+
+  &__nav {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 80px;
+    padding: 0;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: $title-font;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+
+    &--previous {
+      left: clamp(12px, 2.5vw, 36px);
+
+      .microblog-lightbox__nav-icon {
+        transform: rotate(90deg);
+      }
+    }
+
+    &--next {
+      right: clamp(12px, 2.5vw, 36px);
+
+      .microblog-lightbox__nav-icon {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.18;
+      cursor: default;
+
+      .microblog-lightbox__nav-icon {
+        animation: none;
+      }
+    }
+  }
+
+  &__nav-icon {
+    display: inline-block;
+  }
+
+  &__counter {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: $title-font;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .microblog-lightbox__nav {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 520px) {
@@ -1075,6 +1177,11 @@ marquee {
       max-height: 24vh;
       margin-top: 12px;
       padding-top: 10px;
+    }
+
+    &__counter {
+      top: 18px;
+      font-size: 12px;
     }
   }
 }
@@ -1386,8 +1493,7 @@ body.menu-open {
 @media screen and (max-width: 1030px) {
   /* The vw-based menu font-size collapses to nothing once the menu becomes
      a drawer — anchor it back to readable sizes. */
-  .blog .blog-menu.mention,
-  .blog .blog-menu.subscribe {
+  .blog .blog-menu.mention {
     font-size: 18px;
   }
 
