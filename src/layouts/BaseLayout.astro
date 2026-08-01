@@ -6,7 +6,7 @@ interface Props {
 }
 
 const {
-  title = 'Tung Wang — Researcher & Designer',
+  title = 'Tung‘s',
   description = 'The personal website of Tung Wang, an interdisciplinary researcher and designer.',
   image,
 } = Astro.props;
@@ -24,7 +24,7 @@ const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : und
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="Tung Wang" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Tung‘s" href="/rss.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />

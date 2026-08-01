@@ -9,6 +9,8 @@ interface Props {
       alt?: string;
       images?: Array<{ src: string; alt: string }>;
       translation: string;
+      imageTextEn?: Array<{ page: number; text: string[] }>;
+      imageTextZh?: Array<{ page: number; text: string[] }>;
       comment?: string;
       commentEn?: string;
       location?: string;
@@ -30,6 +32,20 @@ const year = String(entry.data.date.getFullYear());
 const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(entry.data.date).toUpperCase();
 const gallery = entry.data.images ?? [];
 const useSmallGrid = gallery.length === 2 || gallery.length === 4;
+const splitTranslatedText = (value: string) =>
+  value
+    .trim()
+    .split(/<br\s*\/?>/i)
+    .map((section) => section.trim().replace(/\r\n?/g, '\n').replace(/\n{2,}/g, '\n'));
+const translationSections = splitTranslatedText(entry.data.translation);
+const commentEnSections = entry.data.commentEn ? splitTranslatedText(entry.data.commentEn) : [];
+const imageCaption = (language: 'zh' | 'en', page: number) => {
+  const captions = language === 'zh' ? entry.data.imageTextZh : entry.data.imageTextEn;
+  const items = captions?.find((caption) => caption.page === page)?.text ?? [];
+  return JSON.stringify(
+    items.map((item) => item.trim().replace(/\r\n?/g, '\n').replace(/\n{2,}/g, '\n')),
+  );
+};
 ---
 
 <article class:list={['microblog-entry', `microblog-entry--${entry.data.type}`, { 'is-compact': compact }]} id={entry.id}>
@@ -50,7 +66,14 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
   <div class="microblog-entry__content">
     <div class="microblog-entry__text">
       <div data-copy-language="zh"><Content /></div>
-      <div data-copy-language="en">{entry.data.translation}</div>
+      <div data-copy-language="en">
+        {translationSections.map((section, index) => (
+          <Fragment>
+            {index > 0 && <Fragment><br /><br /></Fragment>}
+            {section}
+          </Fragment>
+        ))}
+      </div>
     </div>
     {gallery.length === 1 && (
       <button
@@ -59,6 +82,8 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
         data-microblog-image
         data-src={gallery[0].src}
         data-alt={gallery[0].alt}
+        data-caption-zh={imageCaption('zh', 1)}
+        data-caption-en={imageCaption('en', 1)}
         aria-label="View full image"
       >
         <img src={gallery[0].src} alt={gallery[0].alt} loading="lazy" />
@@ -66,13 +91,15 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
     )}
     {gallery.length > 1 && (
       <div class:list={['microblog-entry__gallery', { 'is-small-grid': useSmallGrid }]}> 
-        {gallery.map((image) => (
+        {gallery.map((image, index) => (
           <button
             class="microblog-entry__image"
             type="button"
             data-microblog-image
             data-src={image.src}
             data-alt={image.alt}
+            data-caption-zh={imageCaption('zh', index + 1)}
+            data-caption-en={imageCaption('en', index + 1)}
             aria-label="View full image"
           >
             <img src={image.src} alt={image.alt} loading="lazy" />
@@ -87,6 +114,8 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
         data-microblog-image
         data-src={entry.data.image}
         data-alt={entry.data.alt ?? ''}
+        data-caption-zh={imageCaption('zh', 1)}
+        data-caption-en={imageCaption('en', 1)}
         aria-label="View full image"
       >
         <img src={entry.data.image} alt={entry.data.alt ?? ''} loading="lazy" />
@@ -102,7 +131,14 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
     {entry.data.commentEn && (
       <div class="microblog-entry__comment" data-copy-language="en">
         <span aria-hidden="true">“</span>
-        <p>{entry.data.commentEn}</p>
+        <p>
+          {commentEnSections.map((section, index) => (
+            <Fragment>
+              {index > 0 && <Fragment><br /><br /></Fragment>}
+              {section}
+            </Fragment>
+          ))}
+        </p>
         <span aria-hidden="true">”</span>
       </div>
     )}
@@ -132,7 +168,10 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
     dialog.setAttribute('aria-label', 'Full-size image');
     dialog.innerHTML = `
       <button class="microblog-lightbox__close" type="button" aria-label="Close full-size image">×</button>
-      <img class="microblog-lightbox__image" alt="" />
+      <div class="microblog-lightbox__stage">
+        <img class="microblog-lightbox__image" alt="" />
+        <div class="microblog-image-caption microblog-lightbox__caption" hidden></div>
+      </div>
     `;
     document.body.append(dialog);
 
@@ -144,6 +183,79 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
     return dialog;
   };
 
+  const ensureImageCaptionTooltip = () => {
+    const existing = document.querySelector<HTMLElement>('.microblog-image-tooltip');
+    if (existing) return existing;
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'microblog-image-caption microblog-image-tooltip';
+    tooltip.setAttribute('role', 'tooltip');
+    tooltip.hidden = true;
+    document.body.append(tooltip);
+    return tooltip;
+  };
+
+  const readImageCaption = (trigger: HTMLElement) => {
+    const scope = trigger.closest<HTMLElement>('[data-microblog-scope]');
+    const language = scope?.dataset.language === 'en' ? 'en' : 'zh';
+    const rawCaption = language === 'en' ? trigger.dataset.captionEn : trigger.dataset.captionZh;
+    if (!rawCaption) return [];
+
+    try {
+      const caption = JSON.parse(rawCaption);
+      return Array.isArray(caption) ? caption.filter((item): item is string => typeof item === 'string' && item.length > 0) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const renderImageCaption = (container: HTMLElement, items: string[]) => {
+    container.replaceChildren();
+    items.forEach((item) => {
+      const text = document.createElement('span');
+      text.className = 'microblog-image-caption__item';
+      text.textContent = item;
+      container.append(text);
+    });
+    container.hidden = items.length === 0;
+  };
+
+  const positionImageCaptionTooltip = (tooltip: HTMLElement, event: PointerEvent) => {
+    const offset = 16;
+    const edge = 12;
+    const bounds = tooltip.getBoundingClientRect();
+    const left = Math.min(event.clientX + offset, window.innerWidth - bounds.width - edge);
+    const preferredTop = event.clientY + offset;
+    const top = preferredTop + bounds.height <= window.innerHeight - edge
+      ? preferredTop
+      : Math.max(edge, event.clientY - bounds.height - offset);
+    tooltip.style.transform = `translate(${Math.max(edge, left)}px, ${top}px)`;
+  };
+
+  document.addEventListener('pointerover', (event) => {
+    if (!(event instanceof PointerEvent) || event.pointerType === 'touch') return;
+    const target = event.target as HTMLElement;
+    const trigger = target.closest<HTMLElement>('[data-microblog-image]');
+    if (!trigger || trigger.contains(event.relatedTarget as Node | null)) return;
+
+    const tooltip = ensureImageCaptionTooltip();
+    renderImageCaption(tooltip, readImageCaption(trigger));
+    if (!tooltip.hidden) positionImageCaptionTooltip(tooltip, event);
+  });
+
+  document.addEventListener('pointermove', (event) => {
+    const tooltip = document.querySelector<HTMLElement>('.microblog-image-tooltip:not([hidden])');
+    if (tooltip) positionImageCaptionTooltip(tooltip, event);
+  });
+
+  document.addEventListener('pointerout', (event) => {
+    const target = event.target as HTMLElement;
+    const trigger = target.closest<HTMLElement>('[data-microblog-image]');
+    if (!trigger || trigger.contains(event.relatedTarget as Node | null)) return;
+    const tooltip = document.querySelector<HTMLElement>('.microblog-image-tooltip');
+    if (tooltip) tooltip.hidden = true;
+  });
+
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     const trigger = target.closest<HTMLElement>('[data-microblog-image]');
@@ -151,10 +263,14 @@ const useSmallGrid = gallery.length === 2 || gallery.length === 4;
 
     const dialog = ensureMicroblogLightbox();
     const image = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
-    if (!image) return;
+    const caption = dialog.querySelector<HTMLElement>('.microblog-lightbox__caption');
+    if (!image || !caption) return;
 
     image.src = trigger.dataset.src ?? '';
     image.alt = trigger.dataset.alt ?? '';
+    renderImageCaption(caption, readImageCaption(trigger));
+    const tooltip = document.querySelector<HTMLElement>('.microblog-image-tooltip');
+    if (tooltip) tooltip.hidden = true;
     dialog.showModal();
   });
 </script>

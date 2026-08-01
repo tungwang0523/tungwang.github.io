@@ -13,6 +13,8 @@ interface Entry {
     alt?: string;
     images?: Array<{ src: string; alt: string }>;
     translation: string;
+    imageTextEn?: Array<{ page: number; text: string[] }>;
+    imageTextZh?: Array<{ page: number; text: string[] }>;
     comment?: string;
     commentEn?: string;
     location?: string;
@@ -35,10 +37,17 @@ const { entries, heading = 'Microblog', archiveEntryId } = Astro.props;
 ---
 
 <aside class="blog-part right-blog microblog-sidebar" aria-label="Latest microblog entries" data-microblog-scope data-language="zh">
-  <Marquee items={['Notes · Images · Links · Fragments', 'Small things, kept in motion']} />
-  <div class="blog-right-title-container">
-    <div class="blog-right-title">{heading}</div>
-    <MicroblogLanguageToggle />
+  <div class="microblog-sidebar__sticky-head">
+    <Marquee
+      items={[
+        'I’m applying for PhD programmes. If you’re looking for a doctoral student, I’d love to hear from you.',
+        'Not a PhD supervisor? I’m also looking for a girlfriend. If you’d like to date me, I’d love to hear from you too.',
+      ]}
+    />
+    <div class="blog-right-title-container">
+      <div class="blog-right-title">{heading}</div>
+      <MicroblogLanguageToggle />
+    </div>
   </div>
   <div class="blog-right microblog-feed">
     {

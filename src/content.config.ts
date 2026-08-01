@@ -58,6 +58,22 @@ const microblog = defineCollection({
       .optional(),
     alt: z.string().optional(),
     translation: z.string().default(''),
+    imageTextEn: z
+      .array(
+        z.object({
+          page: z.number().int().positive(),
+          text: z.array(z.string()).min(1),
+        }),
+      )
+      .optional(),
+    imageTextZh: z
+      .array(
+        z.object({
+          page: z.number().int().positive(),
+          text: z.array(z.string()).min(1),
+        }),
+      )
+      .optional(),
     comment: z.string().optional(),
     commentEn: z.string().optional(),
     location: z.string().optional(),

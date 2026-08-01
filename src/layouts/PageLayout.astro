@@ -12,8 +12,8 @@ interface Props {
   pageClass?: string;
 }
 
-const { title, description, descriptionLines, eyebrow, heroImage, pageTitle, pageClass } = Astro.props;
-const headTitle = pageTitle ?? `${title} — Tung’s`;
+const { title, description, heroImage, pageTitle, pageClass } = Astro.props;
+const headTitle = pageTitle ?? `${title} - Tung‘s`;
 ---
 
 <BaseLayout title={headTitle} description={description} image={heroImage}>
@@ -41,15 +41,7 @@ const headTitle = pageTitle ?? `${title} — Tung’s`;
       }
 
       <section class="page-head">
-        {eyebrow && <div class="page-eyebrow">{eyebrow}</div>}
         <h1 class="page-title">{title}</h1>
-        {(description || descriptionLines) && (
-          <p class:list={['page-deck', { 'page-deck--lines': descriptionLines }]}>
-            {descriptionLines
-              ? descriptionLines.map((line) => <span>{line}</span>)
-              : description}
-          </p>
-        )}
       </section>
 
       <div class="page-body">

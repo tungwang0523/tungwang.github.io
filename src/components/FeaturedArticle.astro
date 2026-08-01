@@ -57,7 +57,9 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
       <p>{excerpt}</p>
       <div class="featured-content__actions">
         {hasNext && (
-          <button type="button" data-featured-next aria-label="Scroll to the next section">Next ↓</button>
+          <button type="button" data-featured-next aria-label="Scroll to the next section">
+            Next <span class="featured-next__arrow" aria-hidden="true">↓</span>
+          </button>
         )}
         <a href={href}>
           <svg
