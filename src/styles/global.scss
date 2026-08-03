@@ -3222,6 +3222,47 @@ html {
   line-height: 1.45;
 }
 
+.blog-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  width: min(100%, 480px);
+  margin: 1.6em 0;
+
+  &__item,
+  &__media {
+    display: block;
+    min-width: 0;
+  }
+
+  &__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .blog-image-caption {
+    width: 100%;
+    margin: 6px 0 10px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+}
+
+.blog-post-page .prose .blog-image-grid img[data-blog-image] {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  object-fit: cover;
+}
+
 .blog-post-page .prose img[data-blog-image]:focus-visible {
   outline: 2px solid $title-color;
   outline-offset: 4px;

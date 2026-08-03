@@ -1,0 +1,169 @@
+<script is:inline>
+  (() => {
+    const hashPattern = /^#dev-preview-(\d+)-([a-z0-9]+)$/;
+    const requestedAnchor = location.hash.match(hashPattern);
+
+    if (requestedAnchor) {
+      history.scrollRestoration = 'manual';
+      document.documentElement.dataset.devAnchorRestoring = '';
+      document.documentElement.dataset.devAnchorHidden = '';
+      const guardStyle = document.createElement('style');
+      guardStyle.dataset.devAnchorGuard = '';
+      guardStyle.textContent = `
+        html[data-dev-anchor-restoring] { scroll-behavior: auto !important; }
+        html[data-dev-anchor-hidden] body { visibility: hidden !important; }
+      `;
+      document.head.append(guardStyle);
+    }
+
+    const start = () => {
+      const article = document.querySelector('.blog-post-page .prose');
+      if (!article) {
+        document.documentElement.removeAttribute('data-dev-anchor-restoring');
+        document.documentElement.removeAttribute('data-dev-anchor-hidden');
+        return;
+      }
+
+      const blockSelector = ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > p, :scope > blockquote, :scope > ul, :scope > ol, :scope > pre, :scope > .blog-image-grid';
+      const blocks = Array.from(article.querySelectorAll(blockSelector));
+      let updateFrame = 0;
+      let correctionFrame = 0;
+      let correctionsActive = Boolean(requestedAnchor);
+
+      const topGuide = () => {
+        const navHeight = Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+        ) || 0;
+        return navHeight + 16;
+      };
+
+      const signature = (element) => {
+        const text = element.textContent?.replace(/\s+/g, ' ').trim().slice(0, 160) || '';
+        const imageSources = Array.from(element.querySelectorAll('img'))
+          .slice(0, 3)
+          .map((image) => image.getAttribute('src') || '')
+          .join('|');
+        return `${element.tagName}:${text || imageSources}`;
+      };
+
+      const hashSignature = (value) => {
+        let hash = 2166136261;
+        for (let index = 0; index < value.length; index += 1) {
+          hash ^= value.charCodeAt(index);
+          hash = Math.imul(hash, 16777619);
+        }
+        return (hash >>> 0).toString(36);
+      };
+
+      blocks.forEach((block, index) => {
+        block.dataset.devPreviewAnchor = `dev-preview-${index}-${hashSignature(signature(block))}`;
+      });
+
+      const targetFromHash = () => {
+        const match = location.hash.match(hashPattern);
+        if (!match) return null;
+        const exact = article.querySelector(`[data-dev-preview-anchor="${location.hash.slice(1)}"]`);
+        return exact || blocks[Number(match[1])] || null;
+      };
+
+      const restore = () => {
+        if (!correctionsActive) return;
+        const target = targetFromHash();
+        if (!target) return;
+        const targetTop = window.scrollY + target.getBoundingClientRect().top - topGuide();
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
+      };
+
+      const reveal = () => {
+        document.documentElement.removeAttribute('data-dev-anchor-hidden');
+      };
+
+      const finishCorrections = () => {
+        correctionsActive = false;
+        document.documentElement.removeAttribute('data-dev-anchor-restoring');
+        document.querySelector('style[data-dev-anchor-guard]')?.remove();
+      };
+
+      const cancelCorrections = () => {
+        if (!correctionsActive) return;
+        reveal();
+        finishCorrections();
+      };
+
+      const updateHash = () => {
+        if (correctionsActive) return;
+        const guide = topGuide();
+        const articleTop = window.scrollY + article.getBoundingClientRect().top;
+
+        if (window.scrollY + guide < articleTop) {
+          if (hashPattern.test(location.hash)) {
+            history.replaceState(history.state, '', `${location.pathname}${location.search}`);
+          }
+          return;
+        }
+
+        const firstVisibleIndex = blocks.findIndex((block) => block.getBoundingClientRect().bottom > guide);
+        const index = firstVisibleIndex >= 0 ? firstVisibleIndex : blocks.length - 1;
+        const anchor = blocks[index]?.dataset.devPreviewAnchor;
+        if (anchor && location.hash !== `#${anchor}`) {
+          history.replaceState(history.state, '', `${location.pathname}${location.search}#${anchor}`);
+        }
+      };
+
+      const scheduleHashUpdate = () => {
+        if (updateFrame || correctionsActive) return;
+        updateFrame = requestAnimationFrame(() => {
+          updateFrame = 0;
+          updateHash();
+        });
+      };
+
+      window.addEventListener('scroll', scheduleHashUpdate, { passive: true });
+
+      if (!requestedAnchor) {
+        updateHash();
+        return;
+      }
+
+      window.addEventListener('wheel', cancelCorrections, { passive: true, once: true });
+      window.addEventListener('touchstart', cancelCorrections, { passive: true, once: true });
+      window.addEventListener('pointerdown', cancelCorrections, { passive: true, once: true });
+      window.addEventListener('keydown', cancelCorrections, { once: true });
+
+      requestAnimationFrame(() => {
+        restore();
+        reveal();
+      });
+      setTimeout(restore, 120);
+      setTimeout(restore, 500);
+      setTimeout(restore, 1000);
+      setTimeout(restore, 1800);
+      window.addEventListener('load', restore, { once: true });
+
+      article.querySelectorAll('img').forEach((image) => {
+        if (!image.complete) image.addEventListener('load', restore, { once: true });
+      });
+
+      const resizeObserver = new ResizeObserver(() => {
+        if (!correctionsActive || correctionFrame) return;
+        correctionFrame = requestAnimationFrame(() => {
+          correctionFrame = 0;
+          restore();
+        });
+      });
+      resizeObserver.observe(article);
+
+      setTimeout(() => {
+        resizeObserver.disconnect();
+        finishCorrections();
+        updateHash();
+      }, 2500);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start, { once: true });
+    } else {
+      start();
+    }
+  })();
+</script>

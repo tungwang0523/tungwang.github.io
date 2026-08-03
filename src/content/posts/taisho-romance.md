@@ -193,7 +193,7 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 印刷技术和通讯技术的发展使文化从权贵阶级下放到平民，在民间的艺术文学工作者逐渐向着理想主义和个人主义进发。同时，时代的矛盾与纠结又让文学艺术作品开始呼唤新时代的期望。日本人的“日本梦”——对未来的希望与信心使得未来主义思潮成为日本近代文学艺术的主流。
 
-![](https://up.jinzhao.wiki/wikipedia/commons/thumb/8/88/Tokyo_station_building_front_view_1914.jpg/2880px-Tokyo_station_building_front_view_1914.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Tokyo_station_building_front_view_1914.jpg/2880px-Tokyo_station_building_front_view_1914.jpg)
 
 1914年完工的東京駅（东京站）是非常典型的西式建筑。西方艺术在公共建筑中的运用体现了日本艺术家对新事物的喜爱。在这之后，日本人建造的京城駅（现在的首尔车站）、奉天駅（现在的沈阳站）均以东京站为蓝本设计。
 
@@ -209,12 +209,12 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 这种在大正时代产生的日本近代艺术，对昭和时代的日本及其殖民地满洲、台湾、朝鲜等地产生了非常深刻的影响。
 
-![](https://up.jinzhao.wiki/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
 
 建于1936年的日本国会议事堂，将日本艺术、西方建筑艺术与现代建筑艺术有机结合。
 
-![](https://up.jinzhao.wiki/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
-![](https://up.jinzhao.wiki/wikipedia/commons/c/c3/Feng-Ler_Theatre.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Feng-Ler_Theatre.jpg)
 
 伪满时期新京特别市（长春）的宝山百货店和丰乐剧场。伪满时期的新京是日本建筑师自由创作的天堂，日本艺术家对新事物的向往体现在遍布新京的现代主义风格建筑中。
 

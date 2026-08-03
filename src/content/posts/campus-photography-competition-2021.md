@@ -43,13 +43,13 @@ draft: false
 帝冠样式是1930年代在日本民族主义势力抬头的背景下，为对抗现代主义建筑而产生的日本建筑样式。现代建筑辅以日本式的屋顶，是该样式非常显著的特点。该样式又以“穿着军服的建筑”之绰号为人所知。因为兼具实用和容易表现日本建筑的构思这些特点，不只是日本本土，中国东北（昔日的满洲国范围）等中国旧时受日本控制的地区也有留存不少帝冠样式的建筑。
 ——来自维基百科词条“帝冠样式”
 
-![](https://up.jinzhao.wiki/wikipedia/commons/thumb/b/b0/Kanagawa_Prefectural_Office.jpg/1599px-Kanagawa_Prefectural_Office.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Kanagawa_Prefectural_Office.jpg/1599px-Kanagawa_Prefectural_Office.jpg)
 
 (日本神奈川县厅舍，“帝冠式”建筑。图源维基百科)
 
 而作为伪满洲国最高行政机关驻所，伪满洲国国务院旧址大楼与同时期建造的日本东京的国会议事堂非常相似。
 
-![](https://up.jinzhao.wiki/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
 
 （日本国会议事堂，与伪满洲国国务院旧址在同一时期建成。图源维基百科）
 

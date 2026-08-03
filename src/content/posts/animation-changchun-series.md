@@ -64,7 +64,7 @@ draft: false
 >1945年抗战胜利后，这里曾开设中国青年公司东北区公司，1947年改为中国贸易企业公司；1948年中国百货公司长春市公司营业部在大楼一层开业，1952年店名改为长春市百货公司第二商店，1984年改称长白山百货商场，1994年改为长春中兴商厦，2005年由长春欧亚集团收购重组为欧亚新发商厦。
 宝山百货店大楼现基本保持完好，被定为长春市级文物保护单位。
 
-![](https://up.jinzhao.wiki/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
+![](https://upload.wikimedia.org/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
 
 （Paoshan Dept. store of Hsinking. 伪满时期的宝山洋行，图源维基百科）
 

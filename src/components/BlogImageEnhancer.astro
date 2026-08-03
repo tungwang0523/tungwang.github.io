@@ -3,6 +3,75 @@
     document.querySelectorAll<HTMLImageElement>('.blog-post-page .prose img'),
   );
 
+  const prose = document.querySelector<HTMLElement>('.blog-post-page .prose');
+
+  const imageMediaInBlock = (block: Element) => {
+    if (block.tagName !== 'P') return null;
+
+    const media: HTMLElement[] = [];
+    for (const node of block.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && !node.textContent?.trim()) continue;
+      if (!(node instanceof HTMLElement)) return null;
+
+      if (node instanceof HTMLImageElement) {
+        media.push(node);
+        continue;
+      }
+
+      if (
+        node instanceof HTMLAnchorElement
+        && node.textContent?.trim() === ''
+        && node.children.length === 1
+        && node.firstElementChild instanceof HTMLImageElement
+      ) {
+        media.push(node);
+        continue;
+      }
+
+      return null;
+    }
+
+    return media.length > 0 ? media : null;
+  };
+
+  if (prose) {
+    const blocks = Array.from(prose.children);
+    for (let index = 0; index < blocks.length;) {
+      const run: Array<{ block: Element; media: HTMLElement[] }> = [];
+      let imageCount = 0;
+
+      while (index < blocks.length) {
+        const block = blocks[index];
+        const media = block ? imageMediaInBlock(block) : null;
+        if (!block || !media) break;
+        run.push({ block, media });
+        imageCount += media.length;
+        index += 1;
+      }
+
+      if (imageCount >= 2) {
+        const grid = document.createElement('div');
+        grid.className = 'blog-image-grid';
+        run[0]?.block.insertAdjacentElement('beforebegin', grid);
+
+        run.forEach(({ block, media }) => {
+          media.forEach((item) => {
+            const gridItem = document.createElement('span');
+            gridItem.className = 'blog-image-grid__item';
+            const gridMedia = document.createElement('span');
+            gridMedia.className = 'blog-image-grid__media';
+            gridItem.append(gridMedia);
+            gridMedia.append(item);
+            grid.append(gridItem);
+          });
+          block.remove();
+        });
+      }
+
+      if (run.length === 0) index += 1;
+    }
+  }
+
   images.forEach((image) => {
     const caption = image.getAttribute('title')?.trim() || image.alt.trim();
     image.dataset.blogImage = '';
@@ -18,8 +87,13 @@
       visibleCaption.textContent = caption;
       image.classList.add('has-blog-caption');
 
-      const imageLink = image.parentElement?.tagName === 'A' ? image.parentElement : null;
-      (imageLink ?? image).insertAdjacentElement('afterend', visibleCaption);
+      const gridItem = image.closest('.blog-image-grid__item');
+      if (gridItem) {
+        gridItem.append(visibleCaption);
+      } else {
+        const imageLink = image.parentElement?.tagName === 'A' ? image.parentElement : null;
+        (imageLink ?? image).insertAdjacentElement('afterend', visibleCaption);
+      }
     }
 
     // The persistent caption replaces the browser's delayed native title tooltip.
