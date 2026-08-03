@@ -1,11 +1,11 @@
 ---
 bigTitle: 'Writing'
-headline: 'Blog, Diary and Reading Notes'
-excerpt: 'Essays, observations, personal records and notes made while reading and thinking.'
+headline: 'A Creator’s Keen Curiosity'
+excerpt: 'Notes from books I read, places I wander, images I notice and days I want to remember, each small question pressing through the limits of what I know.'
 metaLeft: 'Writing'
 metaRight: 'Recent notes'
 label: ''
-cover: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=75'
+cover: '/pictures/writing.png'
 href: '/blog'
 order: 3
 ---

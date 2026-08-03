@@ -6,7 +6,7 @@ excerpt: '我在2020年7月底和8月初在上海旅行。'
 author: 'Tung Wang'
 readTime: '24 Min Read'
 date: 2020-08-15
-cover: 'https://s4.ax1x.com/2021/12/19/TeRBZj.jpg'
+cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
 featured: false
 pageNumber: '旅行日志'
 tags: ["游记", "上海", "摄影"]

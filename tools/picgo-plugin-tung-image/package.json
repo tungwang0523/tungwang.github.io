@@ -1,0 +1,20 @@
+{
+  "name": "picgo-plugin-tung-image",
+  "version": "0.1.0",
+  "description": "Resize, convert, and watermark images before PicGo uploads them.",
+  "main": "index.cjs",
+  "keywords": [
+    "picgo-plugin",
+    "picgo-gui-plugin",
+    "image",
+    "webp",
+    "watermark"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.34.0"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true
+  }
+}
