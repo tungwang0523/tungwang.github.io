@@ -42,6 +42,14 @@ const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : und
   </head>
   <body>
     <slot />
+    <script is:inline>
+      document.addEventListener('contextmenu', (event) => {
+        if (event.target instanceof HTMLImageElement) event.preventDefault();
+      });
+      document.addEventListener('dragstart', (event) => {
+        if (event.target instanceof HTMLImageElement) event.preventDefault();
+      });
+    </script>
   </body>
 </html>
 

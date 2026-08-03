@@ -6,7 +6,7 @@ excerpt: '长春有两处建筑隐藏在废墟或者居民区中，不是很容�
 author: 'Tung Wang'
 readTime: '6 Min Read'
 date: 2021-03-21
-cover: 'https://s4.ax1x.com/2021/12/20/Tu8ugP.jpg'
+cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/8581e4e95e7d38e1fffb866e99191d95.webp'
 featured: false
 pageNumber: '摄影日志'
 tags: ["摄影", "长春", "历史建筑", "建国忠灵庙", "长春东本愿寺"]
@@ -27,18 +27,18 @@ draft: false
 >伪满建国忠灵庙原位于今长春市工农广场西南方东临人民大街的狭长地带，是伪满政府专为祭祀为其“尽忠殉职”的文武官员(包括日本人)所修建的庙宇，其目的是“为慰以身殉我满洲帝国建国圣业之英灵于千载……以殉国烈士之忠魂为护国神，永久奉祀。”，从而加深对东北人民的奴化教育，使活着的文武官吏为伪满洲国尽忠卖命。 伪满建国忠灵庙每年固定的祭祀活动多达20次，到伪满覆灭之前共合祀日伪亡灵40850人。日伪还采取强制性手段迫使东北人民祭拜所谓的“建国神庙”和“建国忠灵庙”。1940年7月15日发布的《对于建国神庙及其摄庙不敬罪处罚法》,是以法制化手段强制实施的。该法规定：“对于建国神庙有不敬行为者，处一年以上有期徒刑”，“对于建国神庙之摄庙有不敬行为者处七年以下有期徒刑”。还规定：“本法无论任何人，对于在帝国领域外犯本法之罪者，亦适用之。”可见该法施用范围之广，用心之毒，施行之专横霸道。伪满建国神庙及伪满建国忠灵庙的建立，惟神之道的实行，使日本在东北的殖民统治、民族奴化的程度进一步加深。
 >——来自网络
 
-![](https://s4.ax1x.com/2021/12/20/TuJFFH.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/2dd882fe66be18a3e50e8012feaa6181.webp)
 
-![TuJBtJ.png](https://s4.ax1x.com/2021/12/20/TuJBtJ.png)
+![TuJBtJ.png](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/4d4fb664408015ae218bf1f2397ddf9c.webp)
 
 （建国忠灵庙设计图，图片摘自《建国庙造营概要》，来自新浪博客[渡桥的博客](http://blog.sina.com.cn/duqiao)）
 
-[![TutQRs.png](https://s4.ax1x.com/2021/12/20/TutQRs.png)](https://imgtu.com/i/TutQRs)
+[![TutQRs.png](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/6d7bc6b8cd940c989011b1c90e249bf0.webp)](https://imgtu.com/i/TutQRs)
 
 （建国忠灵庙伪满时期老照片，来自新浪博客[渡桥的博客](http://blog.sina.com.cn/duqiao)）
 
 
-![TuY9cq.png](https://s4.ax1x.com/2021/12/20/TuY9cq.png)
+![TuY9cq.png](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/269febe009719a00cd3b75dc250063ae.webp)
 
 （“满洲帝国皇帝”溥仪与日本关东军司令官梅津美治郎参加在建国忠灵庙举行的祭拜仪式，来自新浪博客[渡桥的博客](http://blog.sina.com.cn/duqiao)）
 
@@ -50,23 +50,23 @@ draft: false
 
 建国忠灵庙的大门前是居民校区的小广场，有很多退休的老大爷在这里锻炼下棋。看到我这个脖子上挂着个相机的外人（小区外的人），都笑着对我说：“小伙子，好好拍吧！”。我问他们可不可以从这个大门进去，他们说这个庙已经成了废弃的仓库，大门已经锁了好几年。不过大门中间的门缝可以被撑大，我可以将镜头身在里面拍摄拜殿。
 
-![](https://s4.ax1x.com/2021/12/20/Tu8ugP.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/8581e4e95e7d38e1fffb866e99191d95.webp)
 
 （建国忠灵庙的大门）
 
-![](https://s4.ax1x.com/2021/12/20/Tu3jAJ.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/d4d99d53f2f7de9fc4c2e670dd95af86.webp)
 
 也许这里被认为是是长春的“靖国神社”，很多中国人出于对日本帝国主义的仇恨，来这里在大门处随地大小便。有些人看不惯这些损坏文物的行为，就用粉笔在大门上写下“佛门净地 禁止便溺”和“随意便者 烂生殖口”的标语。这位文物爱好者可能以为建国忠灵庙是“庙”，便误认为这里是“佛门净地”。随地大小便破坏文物的行为当然可耻，但是这种在文物上留标语的行为可能也是破坏文物，虽然留标语者是出于保护文物的好心。
 
-![Tua5l9.jpg](https://s4.ax1x.com/2021/12/20/Tua5l9.jpg)
+![Tua5l9.jpg](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/755db724edf578261fd24929be91ab64.webp)
 
 在建国忠灵庙的围墙外面还可以看到上世纪的政治标语。
 
-![](https://s4.ax1x.com/2021/12/20/TurQW8.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/6c6f791eaedea36170f28072744485fc.webp)
 
 从大门的门缝里面看拜殿。拜殿早就没有了伪满时期的富丽堂皇，成为了一个破败的仓库。
 
-![](https://s4.ax1x.com/2021/12/20/Tu8VNd.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/92aba1b8c2339b81b11ef5ace783356d.webp)
 
 这是建国忠灵庙的灵骨殿，是存放“殉国烈士”灵骨的地方。（当然现在是不可能有存放的了）
 
@@ -84,43 +84,43 @@ draft: false
 
 这座东本愿寺是日本京都东本愿寺在长春的“别院”，称作“东本愿寺新京别院”。东本愿寺在大连也有别院，叫做“关东”别院。
 
-![](https://s4.ax1x.com/2021/12/20/TugCvT.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/2adad62064aa80bd05ffed5caba66efd.webp)
 
 （京都东本愿寺，图源网络）
 
 长春东本愿寺位于康德会馆旧址（长春市政府旧址）以北，我去的时候东本愿寺处在一片被铁皮围墙围起来的废弃工地里面，工地的大美用大铁链子锁着，我想尽办法也无法进入，只能从门缝里面看到里面的东本愿寺。正当我快要放弃的时候，我发现侧面的小旅馆旁边的砖墙上开了一个小门。我成功地通过这个小门进入了这片工地。
 
-![](https://s4.ax1x.com/2021/12/20/Tu8Kjf.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/83c96de1a01af6df737f747b473fe1b3.webp)
 
 这是东本愿寺所处废弃工地的环境。在长春市中心的中心，出现这样破败的荒废地块，实在是令人吃惊。
 
 当天刚好刚下完雪，废弃工地的地上堆满了树枝，树枝下面是雪化掉形成的小溪和尚未化开的冰雪。我从小门接近东本愿寺大殿的路程真可谓是“跋山涉水”。中途不慎摔了一跤，摔得全身都是泥。当天在地铁上的人可能会看见一个怕染脏座位只好站着，全身是泥，脖子上还挂着个相机的眼镜胖子。
 
-![](https://s4.ax1x.com/2021/12/20/Tu8n3t.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/edb407daa1dc90ac00da61c9ac544007.webp)
 
 这就是长春东本愿寺的大殿了。
 
-![](https://s4.ax1x.com/2021/12/20/Tu3qnU.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/aa01d0eab0d16a5c63aa4f02d5cd2b09.webp)
 
 我拍了张正殿的山花。从山花可以看出，东本愿寺的装饰完全按照日本样式建造。山花上有水波纹（或鱼鳞纹）的装饰，这种装饰虽起源于中国，但在现当代却似乎成为了日本的特色装饰。我们还可以从山花看出这处建筑同样用石头代替了东亚传统建筑的木结构，这一点可以从山花上的斗拱看出来。
 
-![](https://s4.ax1x.com/2021/12/20/Tu3O74.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f256a3fd9eddffcc3b596ba65d75620b.webp)
 
 我们可以从这张照片中明显地看出石料的斗拱。
 
-![](https://s4.ax1x.com/2021/12/20/Tu3LBF.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/9d0dc46b1ffa53c988f4a2f9267f4515.webp)
 
 这是大殿侧面的走廊。这种在建筑侧面安排走廊的样式现在大量存留于日本建筑当中。
 
-![](https://s4.ax1x.com/2021/12/21/TuWSPA.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/0cb3cbbbd649b2f80ec4af795aa5f631.webp)
 
 配殿大门上的唐破风。
 
-![](https://s4.ax1x.com/2021/12/20/Tu3T10.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/c688b28cfbf6e1cd4ddee1b33942dcf4.webp)
 
 配殿局部。
 
-![](https://s4.ax1x.com/2021/12/20/Tu3vN9.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/56f69fe5918c691f6c78518c2b2e0289.webp)
 
 大殿屋顶。
 

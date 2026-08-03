@@ -98,6 +98,12 @@ async function processImage(image, config) {
 
 function getSettings(ctx) {
   const settings = ctx.getConfig(pluginName) || {};
+  const requestedWatermarkScale = toNumber(settings.watermarkScale, 0.06);
+  const watermarkScale = clamp(
+    requestedWatermarkScale > 0.1 ? 0.06 : requestedWatermarkScale,
+    0.01,
+    0.1,
+  );
   const transparency =
     settings.transparency !== undefined
       ? toNumber(settings.transparency, 0)
@@ -110,10 +116,11 @@ function getSettings(ctx) {
     quality: Math.round(clamp(toNumber(settings.quality, 100), 1, 100)),
     lossless: toBoolean(settings.lossless, true),
     watermarkPath: resolve(settings.watermarkPath || defaultWatermark),
-    watermarkScale: clamp(toNumber(settings.watermarkScale, 0.2), 0.01, 0.5),
+    // The square site mark needs less area than the former wide watermark.
+    watermarkScale,
     opacity: 1 - clamp(transparency, 0, 1),
     transparency: clamp(transparency, 0, 1),
-    margin: Math.round(clamp(toNumber(settings.margin, 32), 0, 512)),
+    margin: Math.round(clamp(toNumber(settings.margin, 64), 64, 512)),
   };
 }
 

@@ -6,7 +6,7 @@ excerpt: '通过YOASOBI的火热歌曲《大正浪漫》，我回溯到同名原
 author: 'Tung Wang'
 readTime: '11 Min Read'
 date: 2022-03-17
-cover: 'https://s1.ax1x.com/2022/03/17/q9RGlD.png'
+cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/b76cb5a60fa0f54c132c1cf8e858ea60.webp'
 featured: false
 pageNumber: '读书笔记'
 tags: ["读书笔记", "大正浪漫", "日本"]
@@ -124,52 +124,52 @@ Apple Music 上 YOASOBI 的歌曲《大正浪漫》
 
 而这首歌的MV制作也非常精良，配合着小说情节来看这个MV，会在视觉上加强对这跨越时代的浪漫的理解。
 
-![](https://s1.ax1x.com/2022/03/17/q95mIs.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/927f03ec6caa69dbbac2538a602457c4.webp)
 
 MV开头，大正时期日本西化的文化元素与传统的和式元素密集地涌入时空隧道。这样的安排很好地象征了日本大正时代社会变革之激烈。钟表，电话，收音机，唱片机……大量的新事物从西方涌入日本，与传统的和式元素激烈碰撞，迸发出近代日本繁荣社会的火花。千代子就是在这样的“脱亚入欧”的历史背景下生活的一个女孩子。
 
-![](https://s1.ax1x.com/2022/03/17/qClvIx.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/5c1ea4e77e472230e2620a3404d9fef8.webp)
 
 时翔沉浸在千代子优美而温柔的语言中。
 
-![](https://s1.ax1x.com/2022/03/17/qCljd1.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/801dda7cb19d3e217904af0f81e23f36.webp)
 
 电冰箱、电视机、洗衣机……千代子沉浸在时翔描述的未来世界中。
 
-![](https://s1.ax1x.com/2022/03/17/qClXZR.md.png)
-![](https://s1.ax1x.com/2022/03/17/qClTRU.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/27126c148e472d775d6216c99a731429.webp)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/045bad8bcd08c2f051466576bde9b57c.webp)
 
 两人在各自时代的东京街头阅读对方的信。注意背景的钟表也是对应时代的样式。
 
-![](https://s1.ax1x.com/2022/03/17/qClLL9.md.png)
-![](https://s1.ax1x.com/2022/03/17/qClqsJ.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/9c2c7ae40ad9af241b505d0e854ded7f.webp)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/cc7311b2f1625fa22394c4ce0acb4a3a.webp)
 
 两人沉浸在对方的文字中。有一个细节：环绕时翔的语言是大正时代书籍出版常用的竖版明朝体文字，而环绕千代子的语言是现代生活中常用的黑体横板字。
 
-![](https://s1.ax1x.com/2022/03/17/qCloGT.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f9b56f4fab4102e9183262e73863db7b.webp)
 
 两人虽然身处不同时代，物理上永远无法见面，但各自的心早已结在一起。
 
-![](https://s1.ax1x.com/2022/03/17/qClIiV.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/3a77201116d58a0c0eb5f0e393eca3ed.webp)
 
 时翔发现一百年前的千代子正要面临灭顶之灾。注意，时钟指向关东大震灾发生的时间。
 
-![](https://s1.ax1x.com/2022/03/17/qCGLp6.md.png)
-![](https://s1.ax1x.com/2022/03/17/qCG7kR.md.png)
-![](https://s1.ax1x.com/2022/03/17/qCGO1K.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/e871c719f0420aafc4cf437c612645b5.webp)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/6d474aa724e5b59df81c491b7e4b2810.webp)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/401fe4e747c843540271dcef6fa7bf0b.webp)
 
 时翔马上写信给千代子让她逃离东京，经过沉落的万千废墟后终于寄到了千代子手上。可时空隧道失效，两人无法再通信了。
 
-[![qCYvod.md.png](https://s1.ax1x.com/2022/03/17/qCYvod.md.png)](https://imgtu.com/i/qCYvod)
-[![qCYzFA.md.png](https://s1.ax1x.com/2022/03/17/qCYzFA.md.png)](https://imgtu.com/i/qCYzFA)
+[![qCYvod.md.png](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/948d92b8396871be1b8b0954d941a641.webp)](https://imgtu.com/i/qCYvod)
+[![qCYzFA.md.png](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/aac151923becf11961ef0bb44c6f7ccb.webp)](https://imgtu.com/i/qCYzFA)
 
 千代子发现时空隧道失效后，决心与时间赛跑，希望可以在未来见到心爱的时翔君。在背景里时代元素的变化中，千代子过完了自己的一生。
 
-![](https://s1.ax1x.com/2022/03/17/qCYjdH.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/045025c23357cc916ed47bcb014eca14.webp)
 
 时翔收到了千代子临终前的信。被时间分隔的两人终于站在一起。
 
-![](https://s1.ax1x.com/2022/03/17/qCYXee.md.png)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/6468b0de3b471fa3123ba98fef1d0dc8.webp)
 
 但时间与生死的屏障无法打破，时翔怀中的千代子最终幻化成“好き”（“我喜欢你”）的星光。
 

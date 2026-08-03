@@ -1,0 +1,157 @@
+<script>
+  const images = Array.from(
+    document.querySelectorAll<HTMLImageElement>('.blog-post-page .prose img'),
+  );
+
+  images.forEach((image) => {
+    const caption = image.getAttribute('title')?.trim() || image.alt.trim();
+    image.dataset.blogImage = '';
+    image.dataset.caption = caption;
+    image.tabIndex = 0;
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', caption ? `View image: ${caption}` : 'View full-size image');
+    image.draggable = false;
+
+    if (caption) {
+      const visibleCaption = document.createElement('small');
+      visibleCaption.className = 'blog-image-caption';
+      visibleCaption.textContent = caption;
+      image.classList.add('has-blog-caption');
+
+      const imageLink = image.parentElement?.tagName === 'A' ? image.parentElement : null;
+      (imageLink ?? image).insertAdjacentElement('afterend', visibleCaption);
+    }
+
+    // The persistent caption replaces the browser's delayed native title tooltip.
+    if (image.hasAttribute('title')) image.removeAttribute('title');
+  });
+
+  if (images.length > 0) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'microblog-lightbox blog-lightbox';
+    dialog.setAttribute('aria-label', 'Full-size article image');
+    dialog.innerHTML = `
+      <button class="microblog-lightbox__close" type="button" aria-label="Close full-size image">×</button>
+      <button class="microblog-lightbox__nav microblog-lightbox__nav--previous" type="button" aria-label="Previous image">
+        <span class="microblog-lightbox__nav-icon" aria-hidden="true">↓</span>
+      </button>
+      <div class="microblog-lightbox__stage">
+        <img class="microblog-lightbox__image" alt="" draggable="false" />
+        <div class="microblog-image-caption microblog-lightbox__caption" hidden></div>
+      </div>
+      <button class="microblog-lightbox__nav microblog-lightbox__nav--next" type="button" aria-label="Next image">
+        <span class="microblog-lightbox__nav-icon" aria-hidden="true">↓</span>
+      </button>
+      <div class="microblog-lightbox__counter" aria-live="polite"></div>
+    `;
+    document.body.append(dialog);
+
+    const lightboxImage = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
+    const lightboxCaption = dialog.querySelector<HTMLElement>('.microblog-lightbox__caption');
+    const previousButton = dialog.querySelector<HTMLButtonElement>('.microblog-lightbox__nav--previous');
+    const nextButton = dialog.querySelector<HTMLButtonElement>('.microblog-lightbox__nav--next');
+    const counter = dialog.querySelector<HTMLElement>('.microblog-lightbox__counter');
+    let activeIndex = 0;
+    let lastTrigger: HTMLImageElement | null = null;
+
+    const renderCaption = (container: HTMLElement, caption: string) => {
+      container.replaceChildren();
+      if (!caption) {
+        container.hidden = true;
+        return;
+      }
+
+      const item = document.createElement('span');
+      item.className = 'microblog-image-caption__item';
+      item.textContent = caption;
+      container.append(item);
+      container.hidden = false;
+    };
+
+    const renderImage = (index: number) => {
+      const source = images[index];
+      if (!source || !lightboxImage || !lightboxCaption || !previousButton || !nextButton || !counter) return;
+
+      activeIndex = index;
+      lightboxImage.src = source.currentSrc || source.src;
+      lightboxImage.alt = source.alt;
+      renderCaption(lightboxCaption, source.dataset.caption ?? '');
+
+      const hasMultipleImages = images.length > 1;
+      previousButton.hidden = !hasMultipleImages;
+      nextButton.hidden = !hasMultipleImages;
+      counter.hidden = !hasMultipleImages;
+      previousButton.disabled = index === 0;
+      nextButton.disabled = index === images.length - 1;
+      counter.textContent = `${index + 1} / ${images.length}`;
+      dialog.setAttribute('aria-label', `Full-size article image ${index + 1} of ${images.length}`);
+    };
+
+    const move = (direction: -1 | 1) => {
+      const nextIndex = activeIndex + direction;
+      if (nextIndex >= 0 && nextIndex < images.length) renderImage(nextIndex);
+    };
+
+    const open = (image: HTMLImageElement) => {
+      lastTrigger = image;
+      renderImage(images.indexOf(image));
+      dialog.showModal();
+    };
+
+    images.forEach((image) => {
+      image.addEventListener('click', (event) => {
+        event.preventDefault();
+        open(image);
+      });
+
+      image.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        open(image);
+      });
+
+    });
+
+    dialog.querySelector('.microblog-lightbox__close')?.addEventListener('click', () => dialog.close());
+    previousButton?.addEventListener('click', () => move(-1));
+    nextButton?.addEventListener('click', () => move(1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => lastTrigger?.focus());
+
+    document.addEventListener('keydown', (event) => {
+      if (!dialog.open) return;
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        move(-1);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(1);
+      }
+    });
+
+    let touchStartX: number | null = null;
+    let touchStartY: number | null = null;
+
+    lightboxImage?.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+
+    lightboxImage?.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch || touchStartX === null || touchStartY === null) return;
+
+      const distanceX = touch.clientX - touchStartX;
+      const distanceY = touch.clientY - touchStartY;
+      touchStartX = null;
+      touchStartY = null;
+      if (Math.abs(distanceX) < 48 || Math.abs(distanceX) <= Math.abs(distanceY)) return;
+      move(distanceX < 0 ? 1 : -1);
+    }, { passive: true });
+  }
+</script>

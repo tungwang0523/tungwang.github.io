@@ -162,7 +162,7 @@ draft: false
 
 我在世博会博物馆的纪念品商店买到了一本《中国2010年上海世博会 护照》，是当年参观世博会用来收集各展馆印章的“护照”，类似于现在的博物馆参观护照。我找前台盖了几个展馆的印章，还有上海世博会十周年的纪念印章。
 
-[![Tue2mn.jpg](https://s4.ax1x.com/2021/12/20/Tue2mn.jpg)](https://imgtu.com/i/Tue2mn)
+[![Tue2mn.jpg](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/d45fc873ecd85878b3787469c1f1e4c4.webp)](https://imgtu.com/i/Tue2mn)
 
 感兴趣的朋友可以在世博会博物馆官网 www.expo-museum.cn 全景参观世博会博物馆。
 

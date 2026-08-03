@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
+import BlogImageEnhancer from '../../components/BlogImageEnhancer.astro';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
@@ -53,6 +54,8 @@ const fmt = (d: Date) =>
   <div class="prose">
     <Content />
   </div>
+
+  <BlogImageEnhancer />
 
   <nav class="post-nav" aria-label="Adjacent essays">
     {

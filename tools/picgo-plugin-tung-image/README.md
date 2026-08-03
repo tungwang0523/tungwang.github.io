@@ -11,9 +11,9 @@ resize to a maximum edge -> convert to WebP -> apply watermark -> upload
 - Maximum edge: `4096px`
 - WebP: lossless, quality `100`
 - Watermark: `public/pictures/watermark.png`
-- Watermark width: `20%` of the processed image width
+- Watermark width: `6%` of the processed image width (maximum `10%`)
 - Transparency: `0%` (fully opaque)
-- Right and bottom margin: `32px`
+- Right and bottom margin: at least `64px`
 
 ## Installation
 

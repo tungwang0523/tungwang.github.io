@@ -6,7 +6,7 @@ excerpt: '这幅摄影作品《风云基础楼》有幸在2021年底获得了第
 author: 'Tung Wang'
 readTime: '5 Min Read'
 date: 2021-12-16
-cover: 'https://s4.ax1x.com/2022/02/02/HEe8ld.png'
+cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f7a415619c782f8183d4e51d570e0b64.webp'
 featured: false
 pageNumber: '摄影日志'
 tags: ["摄影", "比赛", "长春", "伪满洲国国务院旧址", "历史建筑"]
@@ -15,7 +15,7 @@ draft: false
 > 本文用简体中文书写。
 这幅摄影作品《风云基础楼》有幸在2021年底获得了第四届吉林大学大学生校园摄影大赛的一等奖。在本日志中，我将会分享关于这张照片的很多故事。
 
-![](https://s4.ax1x.com/2021/12/16/TCMYNR.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f2f75462fd1632a876413ebf6f2a6881.webp)
 
 # 基础楼的历史
 >伪满洲国国务院旧址是伪八大部建筑群中的主要建筑，位于长春市新民大街2号，此处原为总务厅和参议院的办公楼，现为吉林大学白求恩医学院基础教学楼。伪满洲国国务院旧址又称“第五厅舍”，由石井达郎设计，大林组施工，1934年7月19日动工，1936年11月20日竣工.占地面积50600平方米，建筑面积20500平方米，呈“川”字形，主要建筑为钢筋混凝土结构，正门朝西，正面五层（地下室一层）塔式屋顶，楼顶铺盖烟色琉璃瓦，外墙以咖啡色瓷砖贴面。  ——百度百科  
@@ -61,7 +61,7 @@ draft: false
 
 2020年12月7日，我电脑的手写笔坏了，我去市中心某座大厦寻求保修。从保修点出来，我从走廊尽头的窗户向外看，发现了这般景色。我当时还没有购置相机，只好用手机的长焦镜头拍摄下这一场景。
 
-![](https://s4.ax1x.com/2021/12/16/TPvigP.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/a8590faa12d41dfe308e0575594ca301.webp)
 
 现在看来这张照片质量实在是糟糕，但在当初的我的心中，这是我的得意之作。昔日长春最高大的建筑伪满洲国国务院旧址，现在淹没在长春的高楼之中不再显得高大。这好像正诉说着昔日东北所受到的创伤正被发达的现代社会抹平，战争的年代被和平的年代所取代的寓意。
 
@@ -69,13 +69,13 @@ draft: false
 
 2021年春天，我用压岁钱购置了我人生中第一个可换镜头相机——富士XA5。自带的1245狗头玩够以后，我又花三百多块钱从闲鱼上淘来比我爸爸年纪都大的宾得老手动镜头 SMC PENTAX-M ZOOM 1:4 75~150mm ，只为体验一下长焦的感觉。
 
-![](https://s4.ax1x.com/2021/12/16/TPzJh9.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/5bd8f00a66387109d1fe02935707f98f.webp)
 
 （我的这颗老镜头）
 
 2021年五一假期，我去哈尔滨旅游。这次旅游也是我第一次带上这颗老长焦镜头去拍摄。踏上去哈尔滨的火车前，我又专程去那栋大厦的同一个窗户，希望用这颗长焦镜头可以留下这个景色质量更好的照片。
 
-![](https://s4.ax1x.com/2021/12/16/TiSP3R.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/51fe3b03e802937d63086e6429b88899.webp)
 
 为了增加照片的层次感，我为背景的一群高楼加了些雾。当初的我刚开始后期技术，处理得不是很理想。但是这张照片比上一张来说，画质有了飞跃性的提升（鸟枪换炮了），色彩也更加自然。不过这张照片拍摄时是阴天，光线比较单调，照片内容有些平淡无味。这也是我第三次拍摄这个场景的动力。
 
@@ -85,7 +85,7 @@ draft: false
 
 2021年十月份，我以吉林大学官微记者团摄影部记者的身份去往遍布长春的吉林大学各个校区去拍摄校园秋景。本来计划在拍摄完吉大南岭校区第二教学楼（也是伪满时期建筑遗存）完毕后回南校区，但是我看了看手机上的天气预报，显示当天晚上长春大概率出现晚霞，我就立刻想起这个机位，想去拍摄这个机位的金灿灿的晚霞了。我从南岭校区出来，毫不犹豫地打车去往那个机位了。
 
-![](https://s4.ax1x.com/2021/12/16/Tip4YQ.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/c33de8473e2a33c0510064187c40b9e2.webp)
 
 （当天拍摄的校园景色之一，同样拍摄于伪满洲国国务院旧址）
 
@@ -93,7 +93,7 @@ draft: false
 
 正当这时，太阳从乌云的缝隙中露出来，射下的阳光打在建筑的西立面上。我眼前的景象不再是死黑一片，阳光将立体感赋予给景象里的建筑，使画面不再单调。我瞅准机会按下快门，持续拍摄了几分钟，生怕这难得的窗口期被我浪费掉。不过先前没有拍摄这张照片的准备，没有带三脚架，而环境光非常昏暗，导致我只能用身体稳定相机，同时无奈地提高感光度（尼康D7100的高感画质较差）。幸好，我在几十张原片里挑出了一张成像清晰画质较好的片子。之后，经过简单的后期，一张紫色黄昏下的近代宫殿的照片成型了。
 
-![](https://s4.ax1x.com/2021/12/16/TiCKC4.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/ac48ad12d47e64e96af65b4a70ef651f.webp)
 
 <a class="tag is-info is-medium" href="https://500px.com.cn/community/photo-details/af05d7eb91264500a6a5ab3d327038b8" target="_blank">
 
@@ -107,7 +107,7 @@ draft: false
 
 >吉林大学基础医学部大楼，原伪满洲国傀儡统治的中心，在这七十余年内见证了英雄的中国人民在东北大地上的苦难与成就。
 
-![](https://s4.ax1x.com/2021/12/16/TCMYNR.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f2f75462fd1632a876413ebf6f2a6881.webp)
 
 很幸运，这张照片最终获得了第四届吉林大学大学生校园摄影大赛的一等奖。
 
@@ -117,11 +117,11 @@ draft: false
 
 伪满洲国国务院旧址应该是我最感兴趣的长春建筑了。我在长春拍的照片，很大一部分都是关于这个建筑的。
 
-![](https://s4.ax1x.com/2021/12/16/TiFsq1.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/f00eb0ff967545729205ab9ed7f5d812.webp)
 
-![](https://s4.ax1x.com/2021/12/16/TiFIsA.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/3d1946a7a230390ebfeee2e0e321dee6.webp)
 
-![](https://s4.ax1x.com/2021/12/16/TiF5Md.jpg)
+![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/ca3e38f37cdb4491fc615144b8a517c2.webp)
 
 (我关于伪满洲国国务院旧址的一些其它照片)
 
