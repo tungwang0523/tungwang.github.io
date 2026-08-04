@@ -6,10 +6,13 @@ This local PicGo plugin processes every image before the configured uploader rec
 resize to a maximum edge -> convert to WebP -> apply watermark -> upload
 ```
 
+It passes the processed image to the S3/R2 uploader as binary data, avoiding
+the incorrect `Content-Encoding: base64` metadata produced by PicGo's Base64 path.
+
 ## Defaults
 
-- Maximum edge: `4096px`
-- WebP: lossless, quality `100`
+- Maximum edge: `2560px`
+- WebP: lossy, quality `88`
 - Watermark: `public/pictures/watermark.png`
 - Watermark width: `6%` of the processed image width (maximum `10%`)
 - Transparency: `0%` (fully opaque)

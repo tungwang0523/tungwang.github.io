@@ -11,9 +11,25 @@ interface Props {
   excerpt: string;
   href: string;
   hasNext?: boolean;
+  imageLoading?: 'eager' | 'lazy';
+  imageFetchPriority?: 'high' | 'low' | 'auto';
 }
 
-const { bigTitle, date, dateLabel, emphasis, headline, cover, author, readTime, excerpt, href, hasNext = false } = Astro.props;
+const {
+  bigTitle,
+  date,
+  dateLabel,
+  emphasis,
+  headline,
+  cover,
+  author,
+  readTime,
+  excerpt,
+  href,
+  hasNext = false,
+  imageLoading = 'lazy',
+  imageFetchPriority = 'low',
+} = Astro.props;
 
 const formatted = dateLabel ?? (date
   ? new Intl.DateTimeFormat('en-GB', {
@@ -38,6 +54,9 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
       class="featured-content__image"
       src={cover}
       alt={bigTitle}
+      loading={imageLoading}
+      decoding="async"
+      fetchpriority={imageFetchPriority}
       data-section={bigTitle.toLowerCase()}
     />
     <div class="featured-content__copy">

@@ -51,6 +51,8 @@ sections.sort((a, b) => a.data.order - b.data.order);
             excerpt={section.data.excerpt}
             href={section.data.href}
             hasNext={index < sections.length - 1}
+            imageLoading={index === 0 ? 'eager' : 'lazy'}
+            imageFetchPriority={index === 0 ? 'high' : 'low'}
           />
         ))
       }

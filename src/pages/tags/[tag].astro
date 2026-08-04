@@ -1,6 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
+import {
+  cloudflareImage,
+  cloudflareSrcset,
+  imagePresets,
+} from '../../utils/cloudflare-image.mjs';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -21,6 +26,17 @@ export async function getStaticPaths() {
 const { tag, posts } = Astro.props;
 const fmt = (d: Date) =>
   `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+const coverImage = (source: string) => cloudflareImage(source, {
+  width: 640,
+  fit: 'scale-down',
+  quality: imagePresets.listing.quality,
+  format: 'auto',
+});
+const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.listing.widths, {
+  fit: 'scale-down',
+  quality: imagePresets.listing.quality,
+  format: 'auto',
+});
 ---
 
 <PageLayout
@@ -36,7 +52,14 @@ const fmt = (d: Date) =>
       posts.map((post) => (
         <a class="post-card" href={`/blog/${post.id}`}>
           <div class="post-card__cover">
-            <img src={post.data.cover} alt="" loading="lazy" />
+            <img
+              src={coverImage(post.data.cover)}
+              srcset={coverSrcset(post.data.cover)}
+              sizes={imagePresets.listing.sizes}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div>
             <div class="post-card__meta">

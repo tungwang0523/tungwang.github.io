@@ -1,4 +1,10 @@
 ---
+import {
+  cloudflareImage,
+  cloudflareSrcset,
+  imagePresets,
+} from '../utils/cloudflare-image.mjs';
+
 interface Props {
   entry: {
     id: string;
@@ -32,6 +38,34 @@ const year = String(entry.data.date.getFullYear());
 const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(entry.data.date).toUpperCase();
 const gallery = entry.data.images ?? [];
 const useSmallGrid = gallery.length === 2 || gallery.length === 4;
+const singleWidths = compact ? [320, 640] : imagePresets.article.widths;
+const singleSizes = compact ? '280px' : imagePresets.article.sizes;
+const singleImage = (source: string) => cloudflareImage(source, {
+  width: compact ? 320 : imagePresets.article.srcWidth,
+  fit: 'scale-down',
+  quality: imagePresets.article.quality,
+  format: 'auto',
+});
+const singleSrcset = (source: string) => cloudflareSrcset(source, singleWidths, {
+  fit: 'scale-down',
+  quality: imagePresets.article.quality,
+  format: 'auto',
+});
+const gridImage = (source: string) => cloudflareImage(source, {
+  ...imagePresets.microblogGrid,
+  fit: 'cover',
+  format: 'auto',
+});
+const lightboxImage = (source: string) => cloudflareImage(source, {
+  ...imagePresets.lightbox,
+  fit: 'scale-down',
+  format: 'auto',
+});
+const mobileLightboxImage = (source: string) => cloudflareImage(source, {
+  ...imagePresets.lightboxMobile,
+  fit: 'scale-down',
+  format: 'auto',
+});
 const splitTranslatedText = (value: string) =>
   value
     .trim()
@@ -80,13 +114,21 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
         class="microblog-entry__image microblog-entry__image--single"
         type="button"
         data-microblog-image
-        data-src={gallery[0].src}
+        data-src={lightboxImage(gallery[0].src)}
+        data-src-mobile={mobileLightboxImage(gallery[0].src)}
         data-alt={gallery[0].alt}
         data-caption-zh={imageCaption('zh', 1)}
         data-caption-en={imageCaption('en', 1)}
         aria-label="View full image"
       >
-        <img src={gallery[0].src} alt={gallery[0].alt} loading="lazy" />
+        <img
+          src={singleImage(gallery[0].src)}
+          srcset={singleSrcset(gallery[0].src)}
+          sizes={singleSizes}
+          alt={gallery[0].alt}
+          loading="lazy"
+          decoding="async"
+        />
       </button>
     )}
     {gallery.length > 1 && (
@@ -96,13 +138,14 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
             class="microblog-entry__image"
             type="button"
             data-microblog-image
-            data-src={image.src}
+            data-src={lightboxImage(image.src)}
+            data-src-mobile={mobileLightboxImage(image.src)}
             data-alt={image.alt}
             data-caption-zh={imageCaption('zh', index + 1)}
             data-caption-en={imageCaption('en', index + 1)}
             aria-label="View full image"
           >
-            <img src={image.src} alt={image.alt} loading="lazy" />
+            <img src={gridImage(image.src)} alt={image.alt} loading="lazy" decoding="async" />
           </button>
         ))}
       </div>
@@ -112,13 +155,21 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
         class="microblog-entry__image microblog-entry__image--single"
         type="button"
         data-microblog-image
-        data-src={entry.data.image}
+        data-src={lightboxImage(entry.data.image)}
+        data-src-mobile={mobileLightboxImage(entry.data.image)}
         data-alt={entry.data.alt ?? ''}
         data-caption-zh={imageCaption('zh', 1)}
         data-caption-en={imageCaption('en', 1)}
         aria-label="View full image"
       >
-        <img src={entry.data.image} alt={entry.data.alt ?? ''} loading="lazy" />
+        <img
+          src={singleImage(entry.data.image)}
+          srcset={singleSrcset(entry.data.image)}
+          sizes={singleSizes}
+          alt={entry.data.alt ?? ''}
+          loading="lazy"
+          decoding="async"
+        />
       </button>
     )}
     {(entry.data.comment || entry.data.commentEn) && (
@@ -159,6 +210,48 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
 </article>
 
 <script>
+  const lightboxReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let microblogImageRequestId = 0;
+  const microblogImagePreloads = new Map<string, Promise<boolean>>();
+
+  const preloadLightboxImage = (source: string) => {
+    const existing = microblogImagePreloads.get(source);
+    if (existing) return existing;
+
+    const request = new Promise<boolean>((resolve) => {
+      const loader = new Image();
+      loader.onload = () => resolve(true);
+      loader.onerror = () => resolve(false);
+      loader.src = source;
+    });
+    microblogImagePreloads.set(source, request);
+    return request;
+  };
+
+  const showLightbox = (dialog: HTMLDialogElement) => {
+    dialog.classList.remove('is-closing');
+    dialog.showModal();
+    if (lightboxReducedMotion()) {
+      dialog.classList.add('is-visible');
+      return;
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-visible')));
+  };
+
+  const hideLightbox = (dialog: HTMLDialogElement) => {
+    if (!dialog.open || dialog.classList.contains('is-closing')) return;
+    microblogImageRequestId += 1;
+    if (lightboxReducedMotion()) {
+      dialog.close();
+      return;
+    }
+    dialog.classList.add('is-closing');
+    dialog.classList.remove('is-visible');
+    window.setTimeout(() => {
+      if (dialog.open) dialog.close();
+    }, 220);
+  };
+
   const ensureMicroblogLightbox = () => {
     const existing = document.querySelector<HTMLDialogElement>('.microblog-lightbox');
     if (existing) return existing;
@@ -172,7 +265,7 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
         <span class="microblog-lightbox__nav-icon" aria-hidden="true">↓</span>
       </button>
       <div class="microblog-lightbox__stage">
-        <img class="microblog-lightbox__image" alt="" draggable="false" />
+        <img class="microblog-lightbox__image" alt="" decoding="async" draggable="false" />
         <div class="microblog-image-caption microblog-lightbox__caption" hidden></div>
       </div>
       <button class="microblog-lightbox__nav microblog-lightbox__nav--next" type="button" aria-label="Next image">
@@ -182,9 +275,18 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
     `;
     document.body.append(dialog);
 
-    dialog.querySelector('.microblog-lightbox__close')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector('.microblog-lightbox__close')?.addEventListener('click', () => hideLightbox(dialog));
     dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) dialog.close();
+      if (event.target === dialog) hideLightbox(dialog);
+    });
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      hideLightbox(dialog);
+    });
+    dialog.addEventListener('close', () => {
+      dialog.classList.remove('is-visible', 'is-closing');
+      dialog.querySelector('.microblog-lightbox__image')?.classList.remove('is-loading');
+      dialog.querySelector('.microblog-lightbox__stage')?.classList.remove('is-loading');
     });
 
     return dialog;
@@ -229,8 +331,18 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
 
   let activeGallery: HTMLElement[] = [];
   let activeImageIndex = 0;
+  let lightboxImageIsSwitching = false;
+  const lightboxSource = (trigger: HTMLElement) =>
+    (window.matchMedia('(max-width: 768px)').matches ? trigger.dataset.srcMobile : trigger.dataset.src)
+    || trigger.dataset.src
+    || '';
+  const preloadGalleryNeighbors = (index: number) => {
+    [activeGallery[index - 1], activeGallery[index + 1]].forEach((neighbor) => {
+      if (neighbor) void preloadLightboxImage(lightboxSource(neighbor));
+    });
+  };
 
-  const renderLightboxImage = (dialog: HTMLDialogElement, index: number) => {
+  const renderLightboxImage = (dialog: HTMLDialogElement, index: number, displaySource?: string) => {
     const trigger = activeGallery[index];
     const image = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
     const caption = dialog.querySelector<HTMLElement>('.microblog-lightbox__caption');
@@ -240,7 +352,7 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
     if (!trigger || !image || !caption || !previous || !next || !counter) return;
 
     activeImageIndex = index;
-    image.src = trigger.dataset.src ?? '';
+    image.src = displaySource || lightboxSource(trigger);
     image.alt = trigger.dataset.alt ?? '';
     renderImageCaption(caption, readImageCaption(trigger));
 
@@ -254,10 +366,65 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
     dialog.setAttribute('aria-label', `Full-size image ${index + 1} of ${activeGallery.length}`);
   };
 
-  const moveLightboxImage = (dialog: HTMLDialogElement, direction: -1 | 1) => {
+  const moveLightboxImage = async (dialog: HTMLDialogElement, direction: -1 | 1) => {
     const nextIndex = activeImageIndex + direction;
-    if (nextIndex < 0 || nextIndex >= activeGallery.length) return;
-    renderLightboxImage(dialog, nextIndex);
+    if (nextIndex < 0 || nextIndex >= activeGallery.length || lightboxImageIsSwitching) return;
+
+    const image = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
+    const stage = dialog.querySelector<HTMLElement>('.microblog-lightbox__stage');
+    if (!image || !stage) return;
+
+    lightboxImageIsSwitching = true;
+    const requestId = ++microblogImageRequestId;
+    const nextTrigger = activeGallery[nextIndex];
+    const nextSource = nextTrigger ? lightboxSource(nextTrigger) : '';
+    if (!nextSource) {
+      lightboxImageIsSwitching = false;
+      return;
+    }
+    const loading = preloadLightboxImage(nextSource);
+    const distance = direction > 0 ? -28 : 28;
+    const outgoing = !lightboxReducedMotion() && !image.classList.contains('is-loading')
+      ? image.animate(
+          [
+            { opacity: 1, transform: 'translateX(0)' },
+            { opacity: 0, transform: `translateX(${distance}px)` },
+          ],
+          { duration: 120, easing: 'ease-in', fill: 'forwards' },
+        )
+      : null;
+    await outgoing?.finished.catch(() => undefined);
+    if (requestId !== microblogImageRequestId || !dialog.open) {
+      outgoing?.cancel();
+      lightboxImageIsSwitching = false;
+      return;
+    }
+    image.classList.add('is-loading');
+    stage.classList.add('is-loading');
+    renderLightboxImage(dialog, nextIndex, nextSource);
+    outgoing?.cancel();
+    lightboxImageIsSwitching = false;
+
+    const loaded = await loading;
+    if (requestId !== microblogImageRequestId || !dialog.open) return;
+    if (!loaded) {
+      image.classList.remove('is-loading');
+      stage.classList.remove('is-loading');
+      return;
+    }
+    await image.decode().catch(() => undefined);
+    image.classList.remove('is-loading');
+    stage.classList.remove('is-loading');
+    preloadGalleryNeighbors(nextIndex);
+    if (lightboxReducedMotion()) return;
+    const incoming = image.animate(
+      [
+        { opacity: 0, transform: `translateX(${-distance}px)` },
+        { opacity: 1, transform: 'translateX(0)' },
+      ],
+      { duration: 190, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+    );
+    await incoming.finished.catch(() => undefined);
   };
 
   const positionImageCaptionTooltip = (tooltip: HTMLElement, event: PointerEvent) => {
@@ -307,11 +474,23 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
       ? Array.from(entry.querySelectorAll<HTMLElement>('[data-microblog-image]'))
       : [trigger];
     const triggerIndex = activeGallery.indexOf(trigger);
-    renderLightboxImage(dialog, triggerIndex >= 0 ? triggerIndex : 0);
+    const index = triggerIndex >= 0 ? triggerIndex : 0;
+    const preview = trigger.querySelector<HTMLImageElement>('img');
+    const fullSource = lightboxSource(trigger);
+    const requestId = ++microblogImageRequestId;
+    renderLightboxImage(dialog, index, preview?.currentSrc || preview?.src || fullSource);
 
     const tooltip = document.querySelector<HTMLElement>('.microblog-image-tooltip');
     if (tooltip) tooltip.hidden = true;
-    dialog.showModal();
+    showLightbox(dialog);
+    if (fullSource) {
+      void preloadLightboxImage(fullSource).then((loaded) => {
+        const image = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
+        if (!loaded || requestId !== microblogImageRequestId || activeImageIndex !== index || !dialog.open || !image) return;
+        image.src = fullSource;
+        preloadGalleryNeighbors(index);
+      });
+    }
   });
 
   document.addEventListener('click', (event) => {

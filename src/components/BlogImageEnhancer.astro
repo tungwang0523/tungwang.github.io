@@ -62,6 +62,12 @@
             gridMedia.className = 'blog-image-grid__media';
             gridItem.append(gridMedia);
             gridMedia.append(item);
+            const gridImage = item instanceof HTMLImageElement
+              ? item
+              : item.querySelector<HTMLImageElement>('img');
+            if (gridImage?.srcset) {
+              gridImage.sizes = '(max-width: 560px) calc((100vw - 50px) / 3), 157px';
+            }
             grid.append(gridItem);
           });
           block.remove();
@@ -76,6 +82,8 @@
     const caption = image.getAttribute('title')?.trim() || image.alt.trim();
     image.dataset.blogImage = '';
     image.dataset.caption = caption;
+    image.loading = 'lazy';
+    image.decoding = 'async';
     image.tabIndex = 0;
     image.setAttribute('role', 'button');
     image.setAttribute('aria-label', caption ? `View image: ${caption}` : 'View full-size image');
@@ -101,6 +109,7 @@
   });
 
   if (images.length > 0) {
+    const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const dialog = document.createElement('dialog');
     dialog.className = 'microblog-lightbox blog-lightbox';
     dialog.setAttribute('aria-label', 'Full-size article image');
@@ -110,7 +119,7 @@
         <span class="microblog-lightbox__nav-icon" aria-hidden="true">↓</span>
       </button>
       <div class="microblog-lightbox__stage">
-        <img class="microblog-lightbox__image" alt="" draggable="false" />
+        <img class="microblog-lightbox__image" alt="" decoding="async" draggable="false" />
         <div class="microblog-image-caption microblog-lightbox__caption" hidden></div>
       </div>
       <button class="microblog-lightbox__nav microblog-lightbox__nav--next" type="button" aria-label="Next image">
@@ -121,12 +130,69 @@
     document.body.append(dialog);
 
     const lightboxImage = dialog.querySelector<HTMLImageElement>('.microblog-lightbox__image');
+    const lightboxStage = dialog.querySelector<HTMLElement>('.microblog-lightbox__stage');
     const lightboxCaption = dialog.querySelector<HTMLElement>('.microblog-lightbox__caption');
     const previousButton = dialog.querySelector<HTMLButtonElement>('.microblog-lightbox__nav--previous');
     const nextButton = dialog.querySelector<HTMLButtonElement>('.microblog-lightbox__nav--next');
     const counter = dialog.querySelector<HTMLElement>('.microblog-lightbox__counter');
     let activeIndex = 0;
     let lastTrigger: HTMLImageElement | null = null;
+    let imageIsSwitching = false;
+    let imageRequestId = 0;
+    const imagePreloads = new Map<string, Promise<boolean>>();
+
+    const preloadImage = (source: string) => {
+      const existing = imagePreloads.get(source);
+      if (existing) return existing;
+
+      const request = new Promise<boolean>((resolve) => {
+        const loader = new Image();
+        loader.onload = () => resolve(true);
+        loader.onerror = () => resolve(false);
+        loader.src = source;
+      });
+      imagePreloads.set(source, request);
+      return request;
+    };
+
+    const fullImageSource = (source: HTMLImageElement) =>
+      (window.matchMedia('(max-width: 768px)').matches
+        ? source.dataset.lightboxMobileSrc
+        : source.dataset.lightboxSrc)
+      || source.dataset.lightboxSrc
+      || source.dataset.originalSrc
+      || source.currentSrc
+      || source.src;
+
+    const preloadNeighbors = (index: number) => {
+      [images[index - 1], images[index + 1]].forEach((neighbor) => {
+        if (neighbor) void preloadImage(fullImageSource(neighbor));
+      });
+    };
+
+    const showDialog = () => {
+      dialog.classList.remove('is-closing');
+      dialog.showModal();
+      if (reducedMotion()) {
+        dialog.classList.add('is-visible');
+        return;
+      }
+      requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-visible')));
+    };
+
+    const hideDialog = () => {
+      if (!dialog.open || dialog.classList.contains('is-closing')) return;
+      imageRequestId += 1;
+      if (reducedMotion()) {
+        dialog.close();
+        return;
+      }
+      dialog.classList.add('is-closing');
+      dialog.classList.remove('is-visible');
+      window.setTimeout(() => {
+        if (dialog.open) dialog.close();
+      }, 220);
+    };
 
     const renderCaption = (container: HTMLElement, caption: string) => {
       container.replaceChildren();
@@ -142,12 +208,12 @@
       container.hidden = false;
     };
 
-    const renderImage = (index: number) => {
+    const renderImage = (index: number, displaySource?: string) => {
       const source = images[index];
       if (!source || !lightboxImage || !lightboxCaption || !previousButton || !nextButton || !counter) return;
 
       activeIndex = index;
-      lightboxImage.src = source.currentSrc || source.src;
+      lightboxImage.src = displaySource || fullImageSource(source);
       lightboxImage.alt = source.alt;
       renderCaption(lightboxCaption, source.dataset.caption ?? '');
 
@@ -161,15 +227,76 @@
       dialog.setAttribute('aria-label', `Full-size article image ${index + 1} of ${images.length}`);
     };
 
-    const move = (direction: -1 | 1) => {
+    const move = async (direction: -1 | 1) => {
       const nextIndex = activeIndex + direction;
-      if (nextIndex >= 0 && nextIndex < images.length) renderImage(nextIndex);
+      if (nextIndex < 0 || nextIndex >= images.length || imageIsSwitching) return;
+      if (!lightboxImage) return;
+
+      imageIsSwitching = true;
+      const requestId = ++imageRequestId;
+      const nextSource = images[nextIndex];
+      if (!nextSource || !lightboxStage) {
+        imageIsSwitching = false;
+        return;
+      }
+      const nextImageUrl = fullImageSource(nextSource);
+      const loading = preloadImage(nextImageUrl);
+      const distance = direction > 0 ? -28 : 28;
+      const outgoing = !reducedMotion() && !lightboxImage.classList.contains('is-loading')
+        ? lightboxImage.animate(
+            [
+              { opacity: 1, transform: 'translateX(0)' },
+              { opacity: 0, transform: `translateX(${distance}px)` },
+            ],
+            { duration: 120, easing: 'ease-in', fill: 'forwards' },
+          )
+        : null;
+      await outgoing?.finished.catch(() => undefined);
+      if (requestId !== imageRequestId || !dialog.open) {
+        outgoing?.cancel();
+        imageIsSwitching = false;
+        return;
+      }
+      lightboxImage.classList.add('is-loading');
+      lightboxStage.classList.add('is-loading');
+      renderImage(nextIndex, nextImageUrl);
+      outgoing?.cancel();
+      imageIsSwitching = false;
+
+      const loaded = await loading;
+      if (requestId !== imageRequestId || !dialog.open) return;
+      if (!loaded) {
+        lightboxImage.classList.remove('is-loading');
+        lightboxStage.classList.remove('is-loading');
+        return;
+      }
+      await lightboxImage.decode().catch(() => undefined);
+      lightboxImage.classList.remove('is-loading');
+      lightboxStage.classList.remove('is-loading');
+      preloadNeighbors(nextIndex);
+      if (reducedMotion()) return;
+      const incoming = lightboxImage.animate(
+        [
+          { opacity: 0, transform: `translateX(${-distance}px)` },
+          { opacity: 1, transform: 'translateX(0)' },
+        ],
+        { duration: 190, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+      );
+      await incoming.finished.catch(() => undefined);
     };
 
     const open = (image: HTMLImageElement) => {
       lastTrigger = image;
-      renderImage(images.indexOf(image));
-      dialog.showModal();
+      const index = images.indexOf(image);
+      const requestId = ++imageRequestId;
+      const fullSource = fullImageSource(image);
+      renderImage(index, image.currentSrc || image.src);
+      showDialog();
+      void preloadImage(fullSource).then((loaded) => {
+        if (!loaded || requestId !== imageRequestId || activeIndex !== index || !dialog.open || !lightboxImage) return;
+        lightboxImage.src = fullSource;
+        preloadNeighbors(index);
+      });
     };
 
     images.forEach((image) => {
@@ -186,13 +313,23 @@
 
     });
 
-    dialog.querySelector('.microblog-lightbox__close')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector('.microblog-lightbox__close')?.addEventListener('click', hideDialog);
     previousButton?.addEventListener('click', () => move(-1));
     nextButton?.addEventListener('click', () => move(1));
     dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) dialog.close();
+      if (event.target === dialog) hideDialog();
     });
-    dialog.addEventListener('close', () => lastTrigger?.focus());
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      hideDialog();
+    });
+    dialog.addEventListener('close', () => {
+      dialog.classList.remove('is-visible', 'is-closing');
+      lightboxImage?.classList.remove('is-loading');
+      lightboxStage?.classList.remove('is-loading');
+      imageIsSwitching = false;
+      lastTrigger?.focus();
+    });
 
     document.addEventListener('keydown', (event) => {
       if (!dialog.open) return;

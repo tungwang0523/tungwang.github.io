@@ -1,6 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import {
+  cloudflareImage,
+  cloudflareSrcset,
+  imagePresets,
+} from '../utils/cloudflare-image.mjs';
 
 interface Props {
   title: string;
@@ -14,6 +19,21 @@ interface Props {
 
 const { title, description, heroImage, pageTitle, pageClass } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
+const heroSrc = heroImage
+  ? cloudflareImage(heroImage, {
+      width: 960,
+      fit: 'cover',
+      quality: imagePresets.hero.quality,
+      format: 'auto',
+    })
+  : undefined;
+const heroSrcset = heroImage
+  ? cloudflareSrcset(heroImage, imagePresets.hero.widths, {
+      fit: 'cover',
+      quality: imagePresets.hero.quality,
+      format: 'auto',
+    })
+  : undefined;
 ---
 
 <BaseLayout title={headTitle} description={description} image={heroImage}>
@@ -34,7 +54,15 @@ const headTitle = pageTitle ?? `${title} - Tung‘s`;
       {
         heroImage && (
           <div class="page-hero">
-            <img src={heroImage} alt="" />
+            <img
+              src={heroSrc}
+              srcset={heroSrcset}
+              sizes={heroSrcset ? imagePresets.hero.sizes : undefined}
+              alt=""
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
           </div>
         )
       }

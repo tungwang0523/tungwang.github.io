@@ -1042,22 +1042,68 @@ marquee {
   border: 0;
   background: rgba(0, 0, 0, 0.94);
   color: #fff;
+  opacity: 0;
+  transition: opacity 180ms ease;
 
   &[open] {
     display: grid;
     place-items: center;
   }
 
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &.is-closing {
+    pointer-events: none;
+  }
+
   &::backdrop {
+    background: rgba(0, 0, 0, 0);
+    transition: background-color 180ms ease;
+  }
+
+  &.is-visible::backdrop {
     background: rgba(0, 0, 0, 0.72);
   }
 
   &__stage {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: min(88vw, 1200px);
     max-height: calc(100vh - clamp(76px, 12vw, 144px));
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+    transition:
+      opacity 220ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: rgba(255, 255, 255, 0.72);
+      font-family: $title-font;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 140ms ease;
+      content: 'LOADING';
+      pointer-events: none;
+    }
+
+    &.is-loading::before {
+      opacity: 1;
+    }
+  }
+
+  &.is-visible &__stage {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
   &__image {
@@ -1069,6 +1115,10 @@ marquee {
     object-fit: contain;
     touch-action: pan-y;
     user-select: none;
+
+    &.is-loading {
+      visibility: hidden;
+    }
   }
 
   &__caption {
@@ -1157,6 +1207,14 @@ marquee {
     font-family: $title-font;
     font-size: 14px;
     font-weight: 500;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .microblog-lightbox,
+  .microblog-lightbox::backdrop,
+  .microblog-lightbox__stage {
+    transition: none;
   }
 }
 

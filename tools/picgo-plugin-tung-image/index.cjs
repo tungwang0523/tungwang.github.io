@@ -87,13 +87,18 @@ async function processImage(image, config) {
   const originalName = image.fileName || 'image';
   const fileName = `${basename(originalName, extname(originalName))}.webp`;
 
-  return {
+  const processed = {
     ...image,
     buffer: output,
-    base64Image: output.toString('base64'),
     fileName,
     extname: '.webp',
   };
+
+  // picgo-plugin-s3 prefers base64Image over buffer and then writes an
+  // incorrect `Content-Encoding: base64` metadata value to R2. Keeping only
+  // the binary buffer produces a normal `image/webp` object instead.
+  delete processed.base64Image;
+  return processed;
 }
 
 function getSettings(ctx) {
@@ -112,9 +117,9 @@ function getSettings(ctx) {
         : 0;
 
   return {
-    maxEdge: Math.round(clamp(toNumber(settings.maxEdge, 4096), 320, 8192)),
-    quality: Math.round(clamp(toNumber(settings.quality, 100), 1, 100)),
-    lossless: toBoolean(settings.lossless, true),
+    maxEdge: Math.round(clamp(toNumber(settings.maxEdge, 2560), 320, 8192)),
+    quality: Math.round(clamp(toNumber(settings.quality, 88), 1, 100)),
+    lossless: toBoolean(settings.lossless, false),
     watermarkPath: resolve(settings.watermarkPath || defaultWatermark),
     // The square site mark needs less area than the former wide watermark.
     watermarkScale,
@@ -127,7 +132,7 @@ function getSettings(ctx) {
 function config(ctx) {
   const settings = getSettings(ctx);
   return [
-    { name: 'maxEdge', type: 'input', default: settings.maxEdge, message: 'Longest image edge in pixels (4096 recommended)' },
+    { name: 'maxEdge', type: 'input', default: settings.maxEdge, message: 'Longest image edge in pixels (2560 recommended)' },
     { name: 'quality', type: 'input', default: settings.quality, message: 'WebP quality, 1 to 100' },
     { name: 'lossless', type: 'confirm', default: settings.lossless, message: 'Use lossless WebP' },
     { name: 'watermarkPath', type: 'input', default: settings.watermarkPath, message: 'Absolute watermark PNG path' },
