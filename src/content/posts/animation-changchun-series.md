@@ -6,7 +6,7 @@ excerpt: '在此系列作品中，我试图用摄影与绘画结合的方式绘�
 author: 'Tung Wang'
 readTime: '3 Min Read'
 date: 2021-12-21
-cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp'
+cover: 'https://img.mockingbird.team/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp'
 featured: false
 pageNumber: '摄影日志'
 tags: ["动漫", "绘画", "长春", "历史建筑"]
@@ -23,7 +23,7 @@ draft: false
 
 # 伪满洲国国务院旧址
 
-![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/72c7de359fe78c14448d38eb5bd5092d.webp)
+![](https://img.mockingbird.team/images/2026/08/72c7de359fe78c14448d38eb5bd5092d.webp)
 
 **<font color="#085EB4">原名</font>** 伪满洲国国务院办公楼
 **<font color="#085EB4">现用途</font>** 吉林大学新民校区基础医学院大楼
@@ -46,11 +46,11 @@ draft: false
 
 (伪满洲国货币“满洲国圆”五圆纸币上的伪满洲国国务院，图源网络)
 
-![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp)
+![](https://img.mockingbird.team/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp)
 
 # 宝山百货店
 
-![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp)
+![](https://img.mockingbird.team/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp)
 
 **<font color="#085EB4">原名</font>** 宝山洋行、宝山百货店
 **<font color="#085EB4">现用途</font>** 欧亚奥特莱斯
@@ -70,7 +70,7 @@ draft: false
 
 # 藤坂写真馆
 
-![](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/976331cb3f96df51c56963835099d797.webp)
+![](https://img.mockingbird.team/images/2026/08/976331cb3f96df51c56963835099d797.webp)
 
 **<font color="#085EB4">原名</font>** 藤坂写真馆
 **<font color="#085EB4">现用途</font>** 出租给多家商户使用

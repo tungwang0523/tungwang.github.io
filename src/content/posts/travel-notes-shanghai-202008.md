@@ -6,7 +6,7 @@ excerpt: '我在2020年7月底和8月初在上海旅行。'
 author: 'Tung Wang'
 readTime: '24 Min Read'
 date: 2020-08-15
-cover: 'https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
+cover: 'https://img.mockingbird.team/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
 featured: false
 pageNumber: '旅行日志'
 tags: ["游记", "上海", "摄影"]
@@ -162,7 +162,7 @@ draft: false
 
 我在世博会博物馆的纪念品商店买到了一本《中国2010年上海世博会 护照》，是当年参观世博会用来收集各展馆印章的“护照”，类似于现在的博物馆参观护照。我找前台盖了几个展馆的印章，还有上海世博会十周年的纪念印章。
 
-[![Tue2mn.jpg](https://tungwang-images.chinalonghua144.workers.dev/images/2026/08/d45fc873ecd85878b3787469c1f1e4c4.webp)](https://imgtu.com/i/Tue2mn)
+[![Tue2mn.jpg](https://img.mockingbird.team/images/2026/08/d45fc873ecd85878b3787469c1f1e4c4.webp)](https://imgtu.com/i/Tue2mn)
 
 感兴趣的朋友可以在世博会博物馆官网 www.expo-museum.cn 全景参观世博会博物馆。
 
