@@ -4,12 +4,129 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 <PageLayout
   title="Selected Work"
-  eyebrow="Portfolio"
-  description="A sample of issues, collaborations, and side projects from the studio."
+  description="Research-led design, playable architecture, and digital reconstruction projects by Tung Wang."
   pageTitle="Tung‘s Work"
   pageClass="page--work"
 >
-  <div class="work-status" role="status" aria-label="Work in progress">
-    <span>Work<br />in progress</span>
+  <div class="work-index">
+    <div class="work-band work-band--research">
+      <a class="work-project work-project--research" href="/work/between-strangers">
+        <div class="work-project__body">
+          <span class="work-project__number">01</span>
+          <h2>Between Strangers</h2>
+          <p>
+            Making subtle gaze-related experience available as a designable relation through
+            first-person inquiry, image schemas and XR.
+          </p>
+          <span class="work-project__meta">Research through Design · 2025–Present</span>
+        </div>
+        <div class="work-project__media">
+          <img src="/pictures/research_white.png" alt="Between Strangers — a symbolic point suspended in a light field" />
+        </div>
+      </a>
+    </div>
+
+    <div class="work-band work-band--mine">
+      <a class="work-project work-project--mine" href="/work/minetrarchi">
+        <div class="work-project__body">
+          <span class="work-project__number">02</span>
+          <h2>Minetrarchi</h2>
+          <p>
+            A Minecraft-based sandbox concept that turns the structural knowledge of traditional
+            Chinese architecture into rules of play.
+          </p>
+          <span class="work-project__role"
+            >Role — user research & personas, game mechanics, art & UI</span
+          >
+          <span class="work-project__meta">Game & Interface Design · Earlier Work</span>
+        </div>
+        <div class="work-project__media">
+          <img src="/pictures/work/minetrarchi/m-hero.png" alt="Minetrarchi — exploded axonometric of a traditional timber building" />
+        </div>
+      </a>
+    </div>
+
+    <div class="work-band work-band--expo">
+      <a class="work-project work-project--expo" href="/work/expocraft">
+        <div class="work-project__body">
+          <span class="work-project__number">03</span>
+          <h2>ExpoCraft</h2>
+          <p>
+            An ongoing reconstruction of Expo 2010 Shanghai in Minecraft, assembled from maps,
+            photographs and surviving traces.
+          </p>
+          <span class="work-project__meta">Digital Reconstruction · Ongoing</span>
+        </div>
+        <div class="work-project__media">
+          <img src="/pictures/work/expocraft/e-hero.png" alt="ExpoCraft — rebuilt Expo site in Minecraft" />
+        </div>
+      </a>
+    </div>
+
+    <div class="work-band work-band--seeds">
+      <a class="work-project work-project--seeds" href="/work/field-of-seeds">
+        <div class="work-project__body">
+          <span class="work-project__number">04</span>
+          <h2>The Field of Seeds</h2>
+          <p>
+            A physical-computing installation of light dandelions returning to the lawn where
+            Expo 2010's Seed Cathedral once stood.
+          </p>
+          <span class="work-project__role"
+            >Role — topic, concept, form & circuit design · with Li Tinghao & Xu Xuanzhi</span
+          >
+          <span class="work-project__meta">Physical Media & Computing · Course Work</span>
+        </div>
+        <div class="work-project__media">
+          <img
+            src="/pictures/work/field-of-seeds/fos-hero.png"
+            alt="The Field of Seeds — a light dandelion field"
+          />
+        </div>
+      </a>
+    </div>
+
+    <div class="work-band work-band--roof">
+      <a class="work-project work-project--roof" href="/work/rooftop-garden">
+        <div class="work-project__body">
+          <span class="work-project__number">05</span>
+          <h2>Rooftop Garden</h2>
+          <p>
+            An interactive projection proposal that keeps a typhoon's leftover—the fallen iron
+            roof of Weixin Hall—as a canvas for passersby.
+          </p>
+          <span class="work-project__meta">Digital Media Art · Course Proposal</span>
+        </div>
+        <div class="work-project__media">
+          <img
+            src="/pictures/work/rooftop-garden/cover.png"
+            alt="Rooftop Garden — the fallen roof in the atrium"
+          />
+        </div>
+      </a>
+    </div>
+
+    <div class="work-band work-band--robotaxi">
+      <a class="work-project work-project--robotaxi" href="/work/robotaxi-cabin">
+        <div class="work-project__body">
+          <span class="work-project__number">06</span>
+          <h2>The Empathetic Robotaxi</h2>
+          <p>
+            An autonomous robotaxi cabin that earns passenger trust by making the vehicle's
+            effort feelable—through a pet-like persona, touch, voice and light.
+          </p>
+          <span class="work-project__role"
+            >Role — topic, concept, persona & journey, IA & HMI · with Li Tinghao</span
+          >
+          <span class="work-project__meta">Interaction Design · Course Work</span>
+        </div>
+        <div class="work-project__media">
+          <img
+            src="/pictures/work/robotaxi-cabin/cabin.png"
+            alt="The Empathetic Robotaxi — cabin"
+          />
+        </div>
+      </a>
+    </div>
   </div>
 </PageLayout>

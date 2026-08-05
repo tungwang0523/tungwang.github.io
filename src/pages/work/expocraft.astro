@@ -1,0 +1,322 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout
+  title="ExpoCraft"
+  subtitle="Rebuilding the temporary city of Expo 2010 Shanghai, one source and one block at a time."
+  description="An ongoing digital reconstruction and public archive of Expo 2010 Shanghai in Minecraft."
+  period="2023–Present"
+  kind="Digital Heritage & Participatory Reconstruction"
+  status="Ongoing public project"
+  projectClass="portfolio-page--expo"
+  nextHref="/work/field-of-seeds"
+  nextTitle="The Field of Seeds"
+>
+  <section class="project-hero project-hero--expo">
+    <img
+      class="project-hero__figure"
+      src="/pictures/work/expocraft/e-hero.png"
+      alt="Rebuilt Expo site in Minecraft: Expo Axis and Culture Center"
+    />
+    <p>What survives when a city designed for six months disappears?</p>
+  </section>
+
+  <script is:inline>
+    (function () {
+      function setHeroHeight() {
+        var h1 = document.querySelector('.portfolio-identity h1');
+        var hero = document.querySelector('.project-hero--expo');
+        if (!h1 || !hero) return;
+        var img = hero.querySelector('.project-hero__figure');
+        if (!img || !img.naturalWidth) return;
+        var hr = hero.getBoundingClientRect();
+        var rise = hr.top - h1.getBoundingClientRect().bottom;
+        // Full-bleed width, kept at its natural aspect ratio so the figure is
+        // never cropped. If that natural height would push its top above the
+        // title's bottom edge, extend the hero band downward to fit it whole.
+        var imageHeight = window.innerWidth * img.naturalHeight / img.naturalWidth;
+        var required = Math.max(0, imageHeight - Math.max(0, rise));
+        hero.style.minHeight = required > hr.height ? required + 'px' : '';
+      }
+      setHeroHeight();
+      window.addEventListener('resize', setHeroHeight);
+      window.addEventListener('load', setHeroHeight);
+    })();
+  </script>
+
+  <section class="portfolio-section portfolio-section--video">
+    <h3 class="video-band__title">Video Presentation</h3>
+    <div class="video-embed">
+      <iframe
+        src="https://www.youtube.com/embed/tFwcQXr1ZQg"
+        title="ExpoCraft — reconstruction in Minecraft"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <img
+      class="video-band__bottom"
+      src="/pictures/work/expocraft/video-bottom.png"
+      alt="ExpoCraft site panorama"
+    />
+  </section>
+
+  <section class="portfolio-section portfolio-section--lead">
+    <div class="portfolio-section__label">The child who toured a city online</div>
+    <div>
+      <p class="portfolio-statement">
+        In 2010 I was a child who could not travel to Shanghai—so I toured the Expo on the internet
+        instead.
+      </p>
+      <p class="portfolio-copy portfolio-copy--flush">
+        The Expo closed after six months, and most pavilions were torn down. I was only a child
+        then—I never got to see it, and that became the greatest sorrow of my childhood.
+      </p>
+      <p class="portfolio-copy portfolio-copy--flush">
+        What I had instead was the online Expo: the first world exposition to put itself on the
+        web, with <em>Future City</em>, a game that rebuilt the whole site in 3D and let you walk
+        through it. That was the first time I understood that a real place could continue to exist
+        as a navigable digital world.
+      </p>
+      <p class="portfolio-copy portfolio-copy--flush">
+        Since I first touched Minecraft in 2012 I have spent more than a decade building in
+        it—Chinese traditional architecture and modern architecture alike. Now I decided to make the
+        childhood dream come true: rebuild the 2010 Shanghai World Expo Park in the Minecraft world.
+      </p>
+    </div>
+    <div class="memory-timeline" aria-label="Expo memory timeline">
+      <article>
+        <small>2010 · The Expo opens</small>
+        <h3>A city of six months</h3>
+        <p>
+          Artists and architects gather in Shanghai, and the site becomes a collection of
+          architectural treasures across both banks of the Huangpu.
+        </p>
+      </article>
+      <article>
+        <small>2010 · Online Expo & Future City</small>
+        <h3>A virtual twin</h3>
+        <p>
+          <em>Future City</em> rebuilds the whole site in 3D and lets you walk through it before
+          the real park disappears.
+        </p>
+      </article>
+      <article>
+        <small>2010–2011 · The city vanishes</small>
+        <h3>Six months, then demolition</h3>
+        <p>
+          When the Expo closes, most pavilions are dismantled and websites decay—photographs
+          preserve buildings, but nobody preserves the whole.
+        </p>
+      </article>
+      <article>
+        <small>2023–present · Reconstruction</small>
+        <h3>The virtual Expo takes its place</h3>
+        <p>
+          In Minecraft the site is rebuilt block by block, every decision answering to a source—a
+          place that can be walked again.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>02</span><h2>A City Designed to Vanish</h2></div>
+    <p class="portfolio-statement">A world exposition is an archive built to vanish.</p>
+    <p class="portfolio-copy portfolio-copy--flush">
+      A world exposition is a large global exhibition that showcases the achievements of nations,
+      held at a specific site for a limited period. Expo 2010 Shanghai—held on both banks of the
+      Huangpu River from 1 May to 31 October 2010, under the theme "Better City, Better Life"—became
+      the most participated and most visited world exposition in history.
+    </p>
+    <blockquote class="expo-quote">
+      An exhibition is a display which, whatever its title, has as its principal purpose the
+      education of the public: it may exhibit the means at man's disposal for meeting the needs of
+      civilization, or demonstrate the progress achieved in one or more branches of human endeavour,
+      or show prospects for the future.
+      <cite>1928 Paris Convention, Article 1</cite>
+    </blockquote>
+    <p class="portfolio-copy portfolio-copy--flush">
+      And it was built to last six months. When it closed, buildings were dismantled and websites
+      decayed—the official online exhibition on EXPO.CN was permanently shut down in June 2026. The
+      complete spatial experience, the sequence of pavilions, distances and adjacencies, became
+      harder and harder to recover. Photographs preserved individual buildings. Nobody preserved
+      the whole.
+    </p>
+  </section>
+
+  <section class="portfolio-section portfolio-section--dark">
+    <div class="portfolio-section__inner">
+      <div class="portfolio-section__head"><span>03</span><h2>The Decision: Rebuild It</h2></div>
+      <p class="portfolio-copy portfolio-copy--flush">
+        The ambition began as a childhood wish; the discipline that followed is the real
+        contribution. A reconstruction of a vanished place is a claim about what was there, and the
+        only way to make that claim trustworthy is to make every block answer to a source.
+      </p>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>04</span><h2>Before a Block, a Source</h2></div>
+    <div class="archive-grid archive-grid--detailed">
+      <article>
+        <b>Official record</b><p>
+          Expo guides, yearbooks, pavilion descriptions, press material and planning documents.
+        </p>
+      </article>
+      <article>
+        <b>Spatial record</b><p>
+          Historical maps, sector plans, aerial photography, satellite imagery and coordinates.
+        </p>
+      </article>
+      <article>
+        <b>Visual record</b><p>
+          Visitor photographs, construction images, broadcast footage and surviving web pages.
+        </p>
+      </article>
+      <article>
+        <b>Living record</b><p>
+          Existing buildings, post-Expo reuse, site visits and comparisons with the current city.
+        </p>
+      </article>
+      <article>
+        <b>Community record</b><p>
+          Fan archives, personal recollections and material scattered across discontinued platforms.
+        </p>
+      </article>
+      <article>
+        <b>Recovered web</b><p>
+          Internet Archive captures and mirrored pages used when original Expo resources disappear.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="portfolio-section portfolio-section--dark">
+    <div class="portfolio-section__inner">
+      <div class="portfolio-section__head">
+        <span>05</span><h2>Reconstruction Is a Chain of Translation</h2>
+      </div>
+      <div class="expo-workflow">
+        <span>Find</span><span>Verify</span><span>Locate</span><span>Measure</span><span>Model</span
+        ><span>Convert</span><span>Build</span><span>Compare</span><span>Revise</span>
+      </div>
+      <div class="toolchain-grid">
+        <article>
+          <h3>Google Earth</h3><p>
+            Location, footprint, orientation, surviving traces and terrain context.
+          </p>
+        </article>
+        <article>
+          <h3>Plans & photographs</h3><p>
+            Façade rhythm, openings, structural cues, colour, material and relative scale.
+          </p>
+        </article>
+        <article>
+          <h3>SketchUp / Blender</h3><p>
+            Intermediate geometric studies where direct block construction is inefficient.
+          </p>
+        </article>
+        <article>
+          <h3>ObjToSchematic</h3><p>
+            Reference conversion before manual correction in Minecraft's block grammar.
+          </p>
+        </article>
+        <article>
+          <h3>Minecraft</h3><p>
+            The final reconstruction environment, navigable archive and shared building space.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head">
+      <span>06</span><h2>The Archive Has Three Horizons</h2>
+    </div>
+    <div class="method-architecture method-architecture--light">
+      <article>
+        <small>Stage I</small><h3>Reconstruct the site</h3><p>
+          Research the original park, restore its map and rebuild key buildings and public space
+          inside Minecraft.
+        </p><b>Spatial foundation</b>
+      </article>
+      <article>
+        <small>Stage II</small><h3>Deepen the record</h3><p>
+          Continue locating plans and images, revise proportions and complete sector-level ground
+          and building information.
+        </p><b>Iterative archive</b>
+      </article>
+      <article>
+        <small>Stage III</small><h3>Make it inhabitable</h3><p>
+          Develop interpretation, exploration and participatory building on top of the reconstructed
+          scene.
+        </p><b>Public experience</b>
+      </article>
+    </div>
+    <h3 class="portfolio-subhead">Project plan</h3>
+    <div class="expo-plan">
+      <article class="expo-plan__step expo-plan__step--active">
+        <small>STEP 1 · IN PROGRESS</small>
+        <h4>Build the Expo Park</h4>
+        <p>
+          Build the entire 2010 Shanghai Expo Park in Minecraft. Most of Sector A, the Expo Axis,
+          the Expo Culture Center and the Theme Pavilion in Sector B are built to date.
+        </p>
+      </article>
+      <article class="expo-plan__step">
+        <small>STEP 2</small>
+        <h4>Redesign the exhibits</h4>
+        <p>Redesign and rebuild the exhibition content.</p>
+      </article>
+      <article class="expo-plan__step">
+        <small>STEP 3</small>
+        <h4>Make it playable</h4>
+        <p>Design and develop games or interactive products based on the project.</p>
+      </article>
+      <article class="expo-plan__step">
+        <small>FURTHER</small>
+        <h4>Beyond 2010</h4>
+        <p>Rebuild the representative buildings of past World Expos—EXPO 1970 and beyond.</p>
+      </article>
+    </div>
+    <div class="site-facts">
+      <div><strong>5.29</strong><span>km² original Expo site</span></div>
+      <div><strong>A–E</strong><span>five principal sectors</span></div>
+      <div><strong>2</strong><span>banks of the Huangpu River</span></div>
+      <div><strong>Most</strong><span>visited world exposition in history</span></div>
+    </div>
+    <p class="portfolio-copy portfolio-copy--flush">
+      The site map is more than navigation. It is the index that connects a building's coordinate,
+      sector, country or function, evidence package, reconstruction status and revision history.
+    </p>
+  </section>
+
+  <section class="portfolio-section portfolio-section--closing expo-closing">
+    <div>
+      <div class="portfolio-section__label">What this is, and what it isn't</div>
+      <p class="portfolio-statement">
+        What survives is a walkable reconstruction—a coherent, navigable place that restores the
+        relationships isolated photographs cannot show—plus a building catalogue, a learning
+        environment, and a participatory project open to correction.
+      </p>
+      <p class="portfolio-copy portfolio-copy--flush">
+        The honesty cuts both ways: a new photograph can correct a window; a recovered plan can move
+        a whole façade. Completion is less important than keeping every reconstruction open to
+        evidence.
+      </p>
+      <div class="expo-support">
+        <p>
+          ExpoCraft is a third-party project supported purely by personal interest. If you can
+          provide relevant information or want to join the project team, get in touch through the
+          ExpoCraft site. If you would like to support us financially—by sponsoring a cup of
+          coffee—there is an AFDIAN page.
+        </p>
+      </div>
+    </div>
+  </section>
+</ProjectLayout>

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200">
+  <rect width="2400" height="1200" fill="#ffffff"/>
+
+  <!-- Inputs band -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="64" width="470" height="48" rx="6" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="315" y="93" text-anchor="middle" font-size="17" font-weight="700" letter-spacing="1.5" fill="#002fa7">PERCEPTUAL FUNCTIONS</text>
+    <rect x="610" y="64" width="470" height="48" rx="6" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="845" y="93" text-anchor="middle" font-size="17" font-weight="700" letter-spacing="1.5" fill="#002fa7">METAPHORICAL RELATIONS</text>
+    <rect x="1140" y="64" width="470" height="48" rx="6" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1375" y="93" text-anchor="middle" font-size="17" font-weight="700" letter-spacing="1.5" fill="#002fa7">DESIGN VALUE</text>
+    <rect x="1670" y="64" width="470" height="48" rx="6" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1905" y="93" text-anchor="middle" font-size="17" font-weight="700" letter-spacing="1.5" fill="#002fa7">REFERENCE SITUATION</text>
+
+    <!-- Column headers -->
+    <text x="500" y="172" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#94918f">EVIDENCE-SIDE RELATION</text>
+    <text x="1160" y="172" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#94918f">PROJECTION OPERATION</text>
+    <text x="1820" y="172" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#94918f">DESIGN-SIDE EXPRESSION</text>
+  </g>
+
+  <!-- Row 1 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="200" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="254" font-size="19" fill="#161419">Gaze moves toward a person and may remain.</text>
+    <rect x="1000" y="214" width="320" height="76" rx="10" fill="#002fa7"/>
+    <text x="1160" y="261" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">RETAIN + RELOCATE</text>
+    <rect x="1400" y="200" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="248" font-size="19" fill="#161419">Object shows source, direction, arrival, persistence,</text>
+    <text x="1430" y="274" font-size="19" fill="#161419">withdrawal — stops between the participants, not at the body.</text>
+    <line x1="920" y1="252" x2="1000" y2="252" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="252" x2="1400" y2="252" stroke="#94918f" stroke-width="2"/>
+  </g>
+
+  <!-- Row 2 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="326" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="380" font-size="19" fill="#161419">Two gaze paths meet when gaze is returned.</text>
+    <rect x="1000" y="340" width="320" height="76" rx="10" fill="#002fa7"/>
+    <text x="1160" y="387" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">RETAIN + REORGANIZE</text>
+    <rect x="1400" y="326" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="374" font-size="19" fill="#161419">Two objects merge at the common relation position;</text>
+    <text x="1430" y="400" font-size="19" fill="#161419">split when contact ends.</text>
+    <line x1="920" y1="378" x2="1000" y2="378" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="378" x2="1400" y2="378" stroke="#94918f" stroke-width="2"/>
+  </g>
+
+  <!-- Row 3 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="452" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="506" font-size="19" fill="#161419">Prolonged gaze may be construed as pressure or intrusion.</text>
+    <rect x="1000" y="466" width="320" height="76" rx="10" fill="#002fa7"/>
+    <text x="1160" y="513" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">USE AS CONSTRAINT</text>
+    <rect x="1400" y="452" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="506" font-size="19" fill="#161419">Objects stay outside both domains; sharpness stays low.</text>
+    <line x1="920" y1="504" x2="1000" y2="504" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="504" x2="1400" y2="504" stroke="#94918f" stroke-width="2"/>
+  </g>
+
+  <!-- Row 4 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="578" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="626" font-size="19" fill="#161419">Gaze may be construed as carrying affect,</text>
+    <text x="110" y="652" font-size="19" fill="#161419">intention, evaluation.</text>
+    <rect x="1000" y="592" width="320" height="76" rx="10" fill="#6f86c7"/>
+    <text x="1160" y="639" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">PARTLY RETAIN</text>
+    <rect x="1400" y="578" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="626" font-size="19" fill="#161419">Objects keep an interior; content is never filled,</text>
+    <text x="1430" y="652" font-size="19" fill="#161419">labelled, or classified.</text>
+    <line x1="920" y1="630" x2="1000" y2="630" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="630" x2="1400" y2="630" stroke="#94918f" stroke-width="2"/>
+  </g>
+
+  <!-- Row 5 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="704" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="752" font-size="19" fill="#161419">Concentrated attention may make a person</text>
+    <text x="110" y="778" font-size="19" fill="#161419">feel illuminated or exposed.</text>
+    <rect x="1000" y="718" width="320" height="76" rx="10" fill="#9aa6bf"/>
+    <text x="1160" y="765" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">EXCLUDE</text>
+    <rect x="1400" y="704" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="752" font-size="19" fill="#161419">The person is never spotlighted;</text>
+    <text x="1430" y="778" font-size="19" fill="#161419">changes appear in the relation.</text>
+    <line x1="920" y1="756" x2="1000" y2="756" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="756" x2="1400" y2="756" stroke="#94918f" stroke-width="2"/>
+  </g>
+
+  <!-- Row 6 -->
+  <g font-family="Space Grotesk, Helvetica, Arial, sans-serif">
+    <rect x="80" y="830" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="110" y="878" font-size="19" fill="#161419">Return gaze may be construed as catching</text>
+    <text x="110" y="904" font-size="19" fill="#161419">the prior watcher.</text>
+    <rect x="1000" y="844" width="320" height="76" rx="10" fill="#9aa6bf"/>
+    <text x="1160" y="891" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="1.5" fill="#ffffff">REDUCE TO GEOMETRY</text>
+    <rect x="1400" y="830" width="840" height="104" fill="#faf9f8" stroke="#d8d4d1"/>
+    <text x="1430" y="878" font-size="19" fill="#161419">Reciprocity visible without accountability,</text>
+    <text x="1430" y="904" font-size="19" fill="#161419">embarrassment, or blame.</text>
+    <line x1="920" y1="882" x2="1000" y2="882" stroke="#94918f" stroke-width="2"/>
+    <line x1="1320" y1="882" x2="1400" y2="882" stroke="#94918f" stroke-width="2"/>
+  </g>
+</svg>

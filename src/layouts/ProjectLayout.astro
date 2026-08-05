@@ -1,0 +1,85 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  description: string;
+  period: string;
+  kind: string;
+  status: string;
+  role?: string;
+  projectClass?: string;
+  nextHref?: string;
+  nextTitle?: string;
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  period,
+  kind,
+  status,
+  role,
+  projectClass,
+  nextHref,
+  nextTitle,
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} - Tung‘s Work`} description={description}>
+  <div class:list={['page', 'portfolio-page', projectClass]}>
+    <header class="page-nav">
+      <div class="page-nav__inner">
+        <a class="page-nav__brand" href="/">Tung’s</a>
+        <nav aria-label="Primary">
+          <a href="/academic">Research</a>
+          <a href="/work" aria-current="page">Work</a>
+          <a href="/blog">Blog</a>
+          <a href="/microblog">Microblog</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="portfolio-main">
+      <header class="portfolio-identity">
+        <div class="portfolio-identity__inner">
+          <a class="portfolio-back" href="/work"
+            ><span aria-hidden="true">←</span> Selected Work</a
+          >
+          <h1>{title}</h1>
+          <p class="portfolio-subtitle">{subtitle}</p>
+          <dl class="portfolio-meta">
+            <div><dt>Period</dt><dd>{period}</dd></div>
+            <div><dt>Type</dt><dd>{kind}</dd></div>
+            <div><dt>Status</dt><dd>{status}</dd></div>
+            {role && <div><dt>Role</dt><dd>{role}</dd></div>}
+          </dl>
+        </div>
+      </header>
+
+      <slot />
+
+      {
+        nextHref && nextTitle && (
+          <div class="portfolio-next">
+            <a class="portfolio-next__back" href="/work"
+              ><span aria-hidden="true">←</span> Selected Work</a
+            >
+            <a class="portfolio-next__link" href={nextHref}>
+              <div class="portfolio-next__inner">
+                <span>Next project</span>
+                <strong>{nextTitle}</strong>
+                <span aria-hidden="true">&#8594;</span>
+              </div>
+            </a>
+          </div>
+        )
+      }
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

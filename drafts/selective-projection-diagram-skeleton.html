@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selective-Projection Decision Map — Sketch Skeleton</title>
+    <style>
+      :root {
+        --blue: #002fa7;
+        --ink: #161419;
+        --line: #d8d4d1;
+        --paper: #ffffff;
+        --muted: #94918f;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 48px 24px;
+        background: #e9e6e4;
+        color: var(--ink);
+        font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+      }
+      .sheet {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 40px 48px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+      h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
+      .subtitle { margin: 0 0 32px; font-size: 14px; color: var(--muted); }
+
+      /* Inputs band */
+      .inputs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 32px;
+      }
+      .inputs span {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+
+      /* Column headers */
+      .cols {
+        display: grid;
+        grid-template-columns: 1fr 0.55fr 1fr;
+        gap: 24px;
+        margin-bottom: 10px;
+      }
+      .cols div {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      /* Rows */
+      .rows { display: grid; gap: 8px; }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 0.55fr 1fr;
+        gap: 24px;
+        align-items: center;
+      }
+      .evidence,
+      .design {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .evidence { background: #faf9f8; }
+      .design { background: #faf9f8; }
+      .op {
+        position: relative;
+        padding: 12px 10px;
+        background: var(--blue);
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.35;
+      }
+      .op::before,
+      .op::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 24px;
+        height: 1px;
+        background: var(--muted);
+      }
+      .op::before { right: 100%; }
+      .op::after { left: 100%; }
+
+      .notes {
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .notes strong { color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <h1>Selective-Projection Decision Map — Skeleton</h1>
+      <p class="subtitle">
+        Reference layout for drawing. White background · Klein Blue #002FA7 accents · thin gray
+        lines · Space Grotesk type. Draw at ≈2400×1200 (2× of the 1240px display width).
+      </p>
+
+      <div class="inputs">
+        <span>Perceptual functions</span>
+        <span>Metaphorical relations</span>
+        <span>Design value</span>
+        <span>Reference situation</span>
+      </div>
+
+      <div class="cols">
+        <div>Evidence-side relation</div>
+        <div>Projection operation</div>
+        <div>Design-side expression</div>
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <div class="evidence">Gaze moves toward a person and may remain.</div>
+          <div class="op">Retain + Relocate</div>
+          <div class="design">
+            Object shows source, direction, arrival, persistence, withdrawal — stops between the
+            participants, not at the body.
+          </div>
+        </div>
+        <div class="row">
+          <div class="evidence">Two gaze paths meet when gaze is returned.</div>
+          <div class="op">Retain + Reorganize</div>
+          <div class="design">
+            Two objects merge at the common relation position; split when contact ends.
+          </div>
+        </div>
+        <div class="row">
+          <div class="evidence">Prolonged gaze may be construed as pressure or intrusion.</div>
+          <div class="op">Use as constraint</div>
+          <div class="design">Objects stay outside both domains; sharpness stays low.</div>
+        </div>
+        <div class="row">
+          <div class="evidence">
+            Gaze may be construed as carrying affect, intention, evaluation.
+          </div>
+          <div class="op">Partly retain</div>
+          <div class="design">
+            Objects keep an interior; content is never filled, labelled, or classified.
+          </div>
+        </div>
+        <div class="row">
+          <div class="evidence">
+            Concentrated attention may make a person feel illuminated or exposed.
+          </div>
+          <div class="op">Exclude</div>
+          <div class="design">
+            The person is never spotlighted; changes appear in the relation.
+          </div>
+        </div>
+        <div class="row">
+          <div class="evidence">Return gaze may be construed as catching the prior watcher.</div>
+          <div class="op">Reduce to geometry</div>
+          <div class="design">
+            Reciprocity visible without accountability, embarrassment, or blame.
+          </div>
+        </div>
+      </div>
+
+      <div class="notes">
+        <strong>Drawing notes</strong> — keep the three columns and six rows as shown; the middle
+        badge is the decision word (Klein Blue, uppercase). Optionally group operations by tone:
+        retain/reorganize = blue, constraint/partial = muted blue, exclude/reduce = gray. Thin
+        connectors replace the dashed lines once you draw it by hand.
+      </div>
+    </div>
+  </body>
+</html>

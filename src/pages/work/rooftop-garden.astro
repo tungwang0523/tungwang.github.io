@@ -1,0 +1,187 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout
+  title="Rooftop Garden"
+  subtitle="A typhoon tore the iron roof off Weixin Hall—the fallen roof became a canvas for the people of the building."
+  description="An interactive projection proposal that keeps a storm's leftover as a living part of the building."
+  period="2024"
+  kind="Interactive Installation Concept · Digital Media Art"
+  status="Course proposal"
+  projectClass="portfolio-page--roof"
+  nextHref="/work/robotaxi-cabin"
+  nextTitle="The Empathetic Robotaxi"
+>
+  <section class="project-hero project-hero--roof">
+    <img
+      src="/pictures/work/rooftop-garden/rg-hero.png"
+      alt="The fallen iron roof in the atrium of Weixin Hall"
+    />
+    <p>The roof stayed with the building for fourteen years. Then a storm moved it into the atrium.</p>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>01</span><h2>The Storm Left Something Behind</h2></div>
+    <p class="portfolio-copy portfolio-copy--flush">
+      During the 2024 Mid-Autumn holiday, typhoon Bebinca made landfall in Shanghai—the strongest
+      typhoon to hit the city since 1949. It tore the iron roof of the car photography studio off
+      Weixin Hall and dropped it into the atrium.
+    </p>
+    <p class="portfolio-copy portfolio-copy--flush">
+      The fallen roof broke the monotony of the atrium and became a new talking point for people
+      passing by. Compared with clearing the remnant away, this project asks what it could become
+      instead.
+    </p>
+    <figure class="project-figure project-figure--white">
+      <img
+        src="/pictures/work/rooftop-garden/rg-p3-1.png"
+        alt="Weixin Hall, School of Art and Communication, Tongji University"
+      />
+      <figcaption>Weixin Hall · background photo by Hengzhong Lv.</figcaption>
+    </figure>
+  </section>
+
+  <section class="portfolio-section portfolio-section--dark">
+    <div class="portfolio-section__inner">
+      <div class="portfolio-section__head"><span>02</span><h2>Fourteen Years of Memory</h2></div>
+      <p class="portfolio-copy portfolio-copy--flush">
+        The iron roof had silently accompanied the students of Weixin Hall for fourteen years.
+        Instead of paying the high cost of removal, the proposal lets the building component keep
+        working—as memory.
+      </p>
+      <div class="method-architecture">
+        <article>
+          <small>I · Humanistic elevation</small>
+          <h3>People on the building</h3>
+          <p>
+            Project the building's people onto the fair-faced concrete, giving the cold architecture
+            the life of those who use it.
+          </p>
+          <b>Building + people</b>
+        </article>
+        <article>
+          <small>II · Memory retention</small>
+          <h3>A component that stays</h3>
+          <p>
+            The roof accompanied the school for fourteen years; the memory can keep working in a
+            new role.
+          </p>
+          <b>Keep the remnant</b>
+        </article>
+        <article>
+          <small>III · Spatial extension</small>
+          <h3>The atrium as garden</h3>
+          <p>
+            The roof's own shape bridges the lower outdoor platform and the upper roof garden,
+            breaking the flat eye-level view of the first floor.
+          </p>
+          <b>Garden, extended</b>
+        </article>
+      </div>
+      <p class="portfolio-caption">
+        The roof was later cleared away; this document remains a proposal for what could have been.
+      </p>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>03</span><h2>Spatial Analysis</h2></div>
+    <p class="portfolio-copy portfolio-copy--flush">
+      The installation sits in the atrium south of the college library. The audience walks and
+      interacts along the first-floor corridor; the camera and projector face the roof remnant in
+      the atrium below.
+    </p>
+    <figure class="project-figure project-figure--white">
+      <img
+        src="/pictures/work/rooftop-garden/rg-p4-1.png"
+        alt="Spatial analysis: installation position and viewing position in Weixin Hall"
+      />
+      <figcaption>Installation & viewing positions · PDF preview, replace with high-res export.</figcaption>
+    </figure>
+  </section>
+
+  <section class="portfolio-section portfolio-section--dark">
+    <div class="portfolio-section__inner">
+      <div class="portfolio-section__head"><span>04</span><h2>The Interaction: A Flower Shadow</h2></div>
+      <p class="portfolio-copy portfolio-copy--flush">
+        A camera watches the first-floor corridor. When a passerby walks through the interaction
+        area, the computer extracts their silhouette in real time and projects a flower-composed
+        human shadow onto the fallen roof in the atrium.
+      </p>
+      <figure class="project-figure">
+      <img
+        src="/pictures/work/rooftop-garden/rg-p5-1.png"
+        alt="Interaction diagram: camera on the corridor, projection on the roof remnant"
+      />
+      <figcaption>Interaction diagram · flower shadow rendered with Grok.</figcaption>
+    </figure>
+      <p class="portfolio-copy portfolio-copy--flush">
+        The person appears inside the roof remnant, as if they had become part of the garden the
+        roof once covered. The most beautiful flowers in the building meet the most spirited people
+        in the building.
+      </p>
+      <p class="portfolio-copy portfolio-copy--flush">
+        When projection is not possible during the day, the roof remains in the atrium as an
+        abstract sculpture.
+      </p>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>05</span><h2>Technical Notes</h2></div>
+    <div class="method-architecture method-architecture--light">
+      <article>
+        <small>01</small>
+        <h3>Non-planar projection</h3>
+        <p>
+          The remnant is not a flat screen: content must be mapped to its shape, and the surface
+          treated so it displays well.
+        </p>
+        <b>Projection mapping</b>
+      </article>
+      <article>
+        <small>02</small>
+        <h3>Silhouette extraction</h3>
+        <p>
+          The camera's live image is processed to extract the passerby's overall outline.
+        </p>
+        <b>Computer vision</b>
+      </article>
+      <article>
+        <small>03</small>
+        <h3>Flower-image generation</h3>
+        <p>
+          The extracted outline is turned into a moving figure composed of flowers.
+        </p>
+        <b>Image generation</b>
+      </article>
+    </div>
+  </section>
+
+  <section class="portfolio-section">
+    <div class="portfolio-section__head"><span>06</span><h2>References</h2></div>
+    <p class="portfolio-copy portfolio-copy--flush">
+      The design grew from a photograph taken on 20 September 2024, the day the roof fell, and from
+      the architectural documentation and on-site survey of Weixin Hall.
+    </p>
+    <div class="figure-row figure-row--two">
+      <figure>
+        <img src="/pictures/work/rooftop-garden/rg-p8-1.png" alt="The author's photograph of the fallen roof" />
+        <figcaption>The author's photograph, 20 September 2024 · design inspiration.</figcaption>
+      </figure>
+      <figure class="figure--match-first">
+        <img src="/pictures/work/rooftop-garden/rg-p9-1.png" alt="Architectural documentation of Weixin Hall" />
+        <figcaption>Architectural documentation of Weixin Hall.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="portfolio-section portfolio-section--closing">
+    <div class="portfolio-section__label">What this is</div>
+    <p class="portfolio-statement">
+      A proposal that keeps an accident as memory—rather than erasing it—by making the building's
+      people visible on the very piece the storm moved.
+    </p>
+  </section>
+</ProjectLayout>
