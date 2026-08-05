@@ -679,4 +679,29 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       prototype to answer.
     </p>
   </section>
+
+  <script is:inline>
+    (function () {
+      var stage = document.querySelector('.project-figure__stage');
+      if (!stage) return;
+      var pressed = false;
+      var startX = 0;
+      var startScroll = 0;
+      stage.addEventListener('mousedown', function (e) {
+        pressed = true;
+        startX = e.clientX;
+        startScroll = stage.scrollLeft;
+        stage.classList.add('is-dragging');
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!pressed) return;
+        stage.scrollLeft = startScroll - (e.clientX - startX);
+      });
+      window.addEventListener('mouseup', function () {
+        pressed = false;
+        stage.classList.remove('is-dragging');
+      });
+    })();
+  </script>
 </ProjectLayout>

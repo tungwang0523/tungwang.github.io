@@ -10532,9 +10532,15 @@ html {
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: grab;
 
     &::-webkit-scrollbar {
       display: none;
+    }
+
+    &.is-dragging {
+      cursor: grabbing;
+      user-select: none;
     }
 
     img {
