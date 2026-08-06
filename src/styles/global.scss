@@ -1626,8 +1626,19 @@ body.menu-open {
 }
 
 /* Smooth scroll for in-page nav */
+:root {
+  --page-nav-height: 75px;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--page-nav-height) + 16px);
+}
+
+@media screen and (max-width: 560px) {
+  :root {
+    --page-nav-height: 102px;
+  }
 }
 
 /* ---------- Subpage layout (PageLayout) ---------- */
