@@ -5407,8 +5407,9 @@ html {
   color: #ffffff;
 
   &__back {
-    position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     max-width: var(--page-content-width);
     margin: 0 auto clamp(28px, 4vw, 52px);
     padding: 0 clamp(20px, 4vw, 54px);
@@ -5418,12 +5419,6 @@ html {
     letter-spacing: -0.035em;
     color: inherit;
     text-decoration: none;
-
-    > span {
-      position: absolute;
-      left: 0;
-      top: 0.15em;
-    }
   }
 
   &__link {

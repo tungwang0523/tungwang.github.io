@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import rehypeImageLoading from './src/plugins/rehype-image-loading.mjs';
 
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://tung.mockingbird.team',
   trailingSlash: 'ignore',
   integrations: [mdx(), sitemap()],
   markdown: {
