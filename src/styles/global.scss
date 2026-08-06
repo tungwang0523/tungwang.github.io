@@ -4135,7 +4135,7 @@ html {
 
 .project-hero--roof {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
   min-height: clamp(420px, 52vh, 580px);
 
@@ -4144,7 +4144,10 @@ html {
     max-width: 44%;
     max-height: 76%;
     min-height: 0;
-    margin-right: clamp(20px, 4vw, 54px);
+    margin-right: max(
+      clamp(20px, 4vw, 54px),
+      calc((100vw - min(100vw, var(--page-content-width))) / 2 + clamp(20px, 4vw, 54px))
+    );
     padding: clamp(10px, 1.2vw, 16px);
     background: #ffffff;
     box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
@@ -5286,10 +5289,22 @@ html {
 
 .translation-flow > span,
 .expo-workflow > span {
-  flex-basis: 135px;
+  flex-basis: 110px;
   min-height: 100px;
   font-size: 12px;
   font-weight: 600;
+}
+
+/* Expo workflow: nine steps fit one row on desktop; swipe without a visible
+   scrollbar when the viewport narrows (same behaviour as the STEP strip). */
+
+.expo-workflow {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .metaphor-grid,
