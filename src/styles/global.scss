@@ -740,7 +740,6 @@ marquee {
   grid-template-columns: 76px minmax(0, 1fr);
   gap: clamp(18px, 3vw, 30px);
   padding-bottom: 64px;
-  scroll-margin-top: 32px;
 
   &:last-child {
     padding-bottom: 0;
@@ -1270,9 +1269,6 @@ marquee {
     background: $blog-bg;
   }
 
-  .microblog-entry {
-    scroll-margin-top: 72px;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2617,7 +2613,6 @@ html {
 
 .cv-section {
   margin-top: clamp(76px, 10vw, 112px);
-  scroll-margin-top: 76px;
 
   > h2 {
     margin: 0 0 clamp(26px, 4vw, 42px);
@@ -3062,7 +3057,6 @@ html {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(24px, 5vw, 56px);
-  scroll-margin-top: 76px;
 
   .cv-section {
     margin-top: clamp(76px, 10vw, 112px);
