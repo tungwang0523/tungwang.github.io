@@ -1,5 +1,10 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PortfolioSection from '../../components/portfolio/PortfolioSection.astro';
+import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionHeader.astro';
+import ProjectFigure from '../../components/portfolio/ProjectFigure.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 ---
 
 <ProjectLayout
@@ -14,43 +19,22 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/expocraft"
   nextTitle="ExpoCraft"
 >
-  <section class="project-hero project-hero--mine">
+  <ProjectHero class="project-hero--mine">
     <div class="project-hero__inner">
-      <img
+      <ResponsiveImage
         class="project-hero__figure"
         src="/pictures/work/minetrarchi/m-hero.png"
         alt="Exploded axonometric of a traditional timber building"
+        priority
       />
       <p>
         The building is not an image. It is a sequence of relations that can be learned by making.
       </p>
     </div>
-  </section>
+  </ProjectHero>
 
-  <script is:inline>
-    (function () {
-      function setAnchors() {
-        var h1 = document.querySelector('.portfolio-identity h1');
-        var hero = document.querySelector('.project-hero--mine');
-        if (!h1 || !hero) return;
-        var stmt = hero.querySelector('.project-hero__inner > p');
-        if (!stmt) return;
-        var hr = hero.getBoundingClientRect();
-        var topGap = hr.top - h1.getBoundingClientRect().bottom;
-        var bottomGap = hr.bottom - stmt.getBoundingClientRect().bottom;
-        hero.style.setProperty('--hero-anchor-top', Math.max(0, topGap) + 'px');
-        hero.style.setProperty('--hero-anchor-bottom', Math.max(0, bottomGap) + 'px');
-      }
-      setAnchors();
-      window.addEventListener('resize', setAnchors);
-      window.addEventListener('load', setAnchors);
-    })();
-  </script>
-
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>Heritage Knowledge Stays on the Surface</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Heritage Knowledge Stays on the Surface" />
     <p class="portfolio-statement portfolio-statement--small">
       A building is history made visible. Popular encounters stop at its surface.
     </p>
@@ -110,120 +94,125 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <small>Technological</small>
         <h3>Games as a cultural channel</h3>
         <p>
-          Games cross language and cultural boundaries; serious games turn knowledge into skill,
-          and open worlds plus VR/AR/MR expand what a builder can do.
+          Games cross language and cultural boundaries; serious games turn knowledge into skill, and
+          open worlds plus VR/AR/MR expand what a builder can do.
         </p>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-    <div class="portfolio-section__head"><h2>Interest Was Not the Problem</h2></div>
-    <div class="mine-research">
-      <div><strong>70</strong><span>questionnaires</span></div>
-      <div><strong>10</strong><span>depth interviews</span></div>
-      <p>
-        Desk research, questionnaires and interviews pointed to the same gap: curiosity was not the
-        problem. People wanted a relaxed route into architectural knowledge—but had no way to learn
-        by doing.
+      <PortfolioSectionHeader title="Interest Was Not the Problem" />
+      <div class="mine-research">
+        <div><strong>70</strong><span>questionnaires</span></div>
+        <div><strong>10</strong><span>depth interviews</span></div>
+        <p>
+          Desk research, questionnaires and interviews pointed to the same gap: curiosity was not
+          the problem. People wanted a relaxed route into architectural knowledge—but had no way to
+          learn by doing.
+        </p>
+      </div>
+      <div class="research-signal-grid">
+        <article>
+          <strong>79%</strong><p>
+            accepted the claim that traditional timber buildings are built without a single
+            nail—memorable folklore replacing structural understanding.
+          </p>
+        </article>
+        <article>
+          <strong>63%</strong><p>learned through documentaries or popular-science programmes.</p>
+        </article>
+        <article>
+          <strong>61%</strong><p>
+            through museums or exhibitions; books and offline visits were used less consistently.
+          </p>
+        </article>
+        <article>
+          <strong>60%</strong><p>
+            had met access restrictions around historic buildings, maintenance or protected
+            interiors.
+          </p>
+        </article>
+      </div>
+      <div class="research-signal-grid research-signal-grid--mini">
+        <article>
+          <strong>27%</strong><p>
+            could correctly identify a specific traditional building and explain something about it.
+          </p>
+        </article>
+        <article>
+          <strong>33%</strong><p>
+            were misled by modern imitations of ancient architecture into misunderstanding the real
+            thing.
+          </p>
+        </article>
+        <article>
+          <strong>40%</strong><p>
+            carried strong impressions from Japanese and Korean building imagery rather than local
+            heritage.
+          </p>
+        </article>
+      </div>
+      <p class="portfolio-caption">
+        Questionnaire snapshot: play happens mostly on mobile (phone 67% · PC 41% · tablet 34% ·
+        console 11% · others 7%), which shaped the multi-platform brief from the start.
+      </p>
+      <div class="persona-card">
+        <div class="persona-card__identity">
+          <small>Persona</small>
+          <h3>钱采薇 (Qian Caiwei)</h3>
+          <p class="persona-card__role">Leisure traveller · Game enthusiast</p>
+          <dl>
+            <div><dt>Gender</dt><dd>Female</dd></div>
+            <div><dt>Age</dt><dd>21</dd></div>
+            <div><dt>Occupation</dt><dd>University student</dd></div>
+            <div><dt>Location</dt><dd>Tianjin</dd></div>
+          </dl>
+          <ul class="persona-card__traits">
+            <li>Quiet</li><li>Shy</li><li>Plenty of free time</li><li>Home-oriented</li>
+          </ul>
+        </div>
+        <div class="persona-card__voice">
+          <small>What she said</small>
+          <blockquote>
+            “A game could let me understand the building by making it myself, rather than only
+            reading an explanation—even as if I had travelled to the site.”
+          </blockquote>
+          <ul>
+            <li>
+              Attracted by the Tang-style scenes of a TV series, she collected books on Tang
+              architecture—then fell asleep after two pages.
+            </li>
+            <li>
+              She has visited the Forbidden City, the Temple of Heaven and Yu Garden, but remembers
+              mostly that they were good for photos.
+            </li>
+            <li>
+              She enjoys games and achievement; shy in real life, happy to make friends online.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote-pair">
+        <blockquote>
+          “Traditional architecture may need more scientific knowledge than I expect; I would look
+          for an accessible introduction first.”
+        </blockquote>
+        <blockquote>
+          “I have no time to visit the site, and when I do, I only walk through it—I would rather
+          experience the beauty of ancient buildings without leaving home.”
+        </blockquote>
+      </div>
+      <p class="portfolio-caption">
+        Interview statements are translated and condensed from the original project portfolio for
+        this web presentation.
       </p>
     </div>
-    <div class="research-signal-grid">
-      <article>
-        <strong>79%</strong><p>
-          accepted the claim that traditional timber buildings are built without a single
-          nail—memorable folklore replacing structural understanding.
-        </p>
-      </article>
-      <article>
-        <strong>63%</strong><p>learned through documentaries or popular-science programmes.</p>
-      </article>
-      <article>
-        <strong>61%</strong><p>
-          through museums or exhibitions; books and offline visits were used less consistently.
-        </p>
-      </article>
-      <article>
-        <strong>60%</strong><p>
-          had met access restrictions around historic buildings, maintenance or protected interiors.
-        </p>
-      </article>
-    </div>
-    <div class="research-signal-grid research-signal-grid--mini">
-      <article>
-        <strong>27%</strong><p>
-          could correctly identify a specific traditional building and explain something about it.
-        </p>
-      </article>
-      <article>
-        <strong>33%</strong><p>
-          were misled by modern imitations of ancient architecture into misunderstanding the real
-          thing.
-        </p>
-      </article>
-      <article>
-        <strong>40%</strong><p>
-          carried strong impressions from Japanese and Korean building imagery rather than local
-          heritage.
-        </p>
-      </article>
-    </div>
-    <p class="portfolio-caption">
-      Questionnaire snapshot: play happens mostly on mobile (phone 67% · PC 41% · tablet 34% ·
-      console 11% · others 7%), which shaped the multi-platform brief from the start.
-    </p>
-    <div class="persona-card">
-      <div class="persona-card__identity">
-        <small>Persona</small>
-        <h3>钱采薇 (Qian Caiwei)</h3>
-        <p class="persona-card__role">Leisure traveller · Game enthusiast</p>
-        <dl>
-          <div><dt>Gender</dt><dd>Female</dd></div>
-          <div><dt>Age</dt><dd>21</dd></div>
-          <div><dt>Occupation</dt><dd>University student</dd></div>
-          <div><dt>Location</dt><dd>Tianjin</dd></div>
-        </dl>
-        <ul class="persona-card__traits">
-          <li>Quiet</li><li>Shy</li><li>Plenty of free time</li><li>Home-oriented</li>
-        </ul>
-      </div>
-      <div class="persona-card__voice">
-        <small>What she said</small>
-        <blockquote>
-          “A game could let me understand the building by making it myself, rather than only reading
-          an explanation—even as if I had travelled to the site.”
-        </blockquote>
-        <ul>
-          <li>Attracted by the Tang-style scenes of a TV series, she collected books on Tang
-            architecture—then fell asleep after two pages.</li>
-          <li>She has visited the Forbidden City, the Temple of Heaven and Yu Garden, but remembers
-            mostly that they were good for photos.</li>
-          <li>She enjoys games and achievement; shy in real life, happy to make friends online.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="quote-pair">
-      <blockquote>
-        “Traditional architecture may need more scientific knowledge than I expect; I would look for
-        an accessible introduction first.”
-      </blockquote>
-      <blockquote>
-        “I have no time to visit the site, and when I do, I only walk through it—I would rather
-        experience the beauty of ancient buildings without leaving home.”
-      </blockquote>
-    </div>
-    <p class="portfolio-caption">
-      Interview statements are translated and condensed from the original project portfolio for this
-      web presentation.
-    </p>
-    </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>The Core Move: Knowledge Becomes Rules of Play</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Core Move: Knowledge Becomes Rules of Play" />
     <p class="portfolio-statement">Turn architectural knowledge into rules of play.</p>
     <p class="portfolio-copy portfolio-copy--flush">
       The opportunity was not to explain buildings better. It was to turn architectural knowledge
@@ -231,76 +220,74 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       themselves. Instead of treating a traditional building as a façade to recognize, the design
       lets players take it apart and build it again: guided assembly teaches, free creation extends.
     </p>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-    <div class="portfolio-section__head"><h2>Why Minecraft</h2></div>
-    <p class="portfolio-copy portfolio-copy--flush">
-      Popular science is usually one-way: watch, read, listen. The audience stays passive and the
-      learning stays shallow. Serious games flip that—knowledge is generated by doing, and skill
-      grows through play.
-    </p>
-    <div class="reason-grid">
-      <article>
-        <span>01</span><h3>Construction grammar</h3><p>
-          Blocks, modular components and spatial rules turn structure into something players can
-          manipulate directly.
-        </p>
-      </article>
-      <article>
-        <span>02</span><h3>Low entry, high ceiling</h3><p>
-          Suitable for every age above ten—80% of children play Minecraft in multiplayer mode—and
-          still deep enough for elaborate buildings and long-term mastery.
-        </p>
-      </article>
-      <article>
-        <span>03</span><h3>A culture of circulation</h3><p>
-          141 million active players, 500,000 concurrent, education edition in 115 countries, 201
-          billion views—maps, mods and tutorials already move through this community.
-        </p>
-      </article>
+      <PortfolioSectionHeader title="Why Minecraft" />
+      <p class="portfolio-copy portfolio-copy--flush">
+        Popular science is usually one-way: watch, read, listen. The audience stays passive and the
+        learning stays shallow. Serious games flip that—knowledge is generated by doing, and skill
+        grows through play.
+      </p>
+      <div class="reason-grid">
+        <article>
+          <span>01</span><h3>Construction grammar</h3><p>
+            Blocks, modular components and spatial rules turn structure into something players can
+            manipulate directly.
+          </p>
+        </article>
+        <article>
+          <span>02</span><h3>Low entry, high ceiling</h3><p>
+            Suitable for every age above ten—80% of children play Minecraft in multiplayer mode—and
+            still deep enough for elaborate buildings and long-term mastery.
+          </p>
+        </article>
+        <article>
+          <span>03</span><h3>A culture of circulation</h3><p>
+            141 million active players, 500,000 concurrent, education edition in 115 countries, 201
+            billion views—maps, mods and tutorials already move through this community.
+          </p>
+        </article>
+      </div>
+      <h3 class="portfolio-subhead">Where other serious games stopped</h3>
+      <div class="toolchain-grid toolchain-grid--four">
+        <article>
+          <h3>Construction & city sims</h3><p>
+            Cities: Skylines, SimCity, Tropico—deep systems, but heavy rules and little heritage
+            content.
+          </p>
+        </article>
+        <article>
+          <h3>Sandbox creation</h3><p>
+            Minecraft, Terraria, LEGO Worlds, Roblox—huge freedom and communities, but no
+            architectural knowledge built in.
+          </p>
+        </article>
+        <article>
+          <h3>Interactive science</h3><p>
+            Craft-first titles such as 匠木 (mortise-and-tenon assembly), 重檐 (roof framing) and
+            江南百景图 (The Legend of Jiangnan)—thematically right, yet small platforms and limited
+            play depth.
+          </p>
+        </article>
+        <article>
+          <h3>The gap</h3><p>
+            Current serious games suffer from weak interaction, heavy mechanics and small platforms.
+            Minecraft is the base with both reach and adaptability.
+          </p>
+        </article>
+      </div>
+      <p class="portfolio-copy">
+        The proposal adapts rather than replaces Minecraft. The base game supplies movement,
+        building and multiplayer conventions; Minetrarchi adds architectural components, guided
+        tasks, knowledge feedback, assets, progression and a service layer.
+      </p>
     </div>
-    <h3 class="portfolio-subhead">Where other serious games stopped</h3>
-    <div class="toolchain-grid toolchain-grid--four">
-      <article>
-        <h3>Construction & city sims</h3><p>
-          Cities: Skylines, SimCity, Tropico—deep systems, but heavy rules and little heritage
-          content.
-        </p>
-      </article>
-      <article>
-        <h3>Sandbox creation</h3><p>
-          Minecraft, Terraria, LEGO Worlds, Roblox—huge freedom and communities, but no architectural
-          knowledge built in.
-        </p>
-      </article>
-      <article>
-        <h3>Interactive science</h3><p>
-          Craft-first titles such as 匠木 (mortise-and-tenon assembly), 重檐 (roof framing) and
-          江南百景图 (The Legend of Jiangnan)—thematically right, yet small platforms and limited
-          play depth.
-        </p>
-      </article>
-      <article>
-        <h3>The gap</h3><p>
-          Current serious games suffer from weak interaction, heavy mechanics and small platforms.
-          Minecraft is the base with both reach and adaptability.
-        </p>
-      </article>
-    </div>
-    <p class="portfolio-copy">
-      The proposal adapts rather than replaces Minecraft. The base game supplies movement, building
-      and multiplayer conventions; Minetrarchi adds architectural components, guided tasks,
-      knowledge feedback, assets, progression and a service layer.
-    </p>
-    </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>Three Spaces Form One Learning Loop</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Three Spaces Form One Learning Loop" />
     <div class="world-grid world-grid--three">
       <article>
         <small>Guided world</small><h3>Artisan Continent<br /><em>工匠大陆</em></h3><p>
@@ -390,9 +377,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="value-grid">
       <article>
         <small>Social value</small><h3>Pass heritage forward</h3><p>
-          Promote the intangible heritage of 榫卯 (mortise-and-tenon) joinery, cultural identity
-          and confidence, and
-          architecture education.
+          Promote the intangible heritage of 榫卯 (mortise-and-tenon) joinery, cultural identity and
+          confidence, and architecture education.
         </p>
       </article>
       <article>
@@ -419,108 +405,110 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       opportunities, knowledge interaction and deeper learning connect the game to real places,
       media, communities and experience stores.
     </p>
-    <figure class="project-figure project-figure--white project-figure--titled">
+    <ProjectFigure class="project-figure--white project-figure--titled">
       <div class="project-figure__inner">
         <h3 class="project-figure__title">Game Architecture & Value Network</h3>
         <div class="project-figure__duo">
-          <img
+          <ResponsiveImage
             src="/pictures/work/minetrarchi/m06a.png"
             alt="Game architecture diagram: core gameplay and six systems"
             loading="lazy"
           />
-          <img
+          <ResponsiveImage
             src="/pictures/work/minetrarchi/m06b.png"
             alt="Value network and service design map"
             loading="lazy"
           />
         </div>
       </div>
-    </figure>
-  </section>
+    </ProjectFigure>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-    <div class="portfolio-section__head">
-      <h2>A Tutorial Is a Construction Sequence</h2>
-    </div>
-    <p class="portfolio-statement portfolio-statement--small">
-      The original flow turns a one-bay hall into a sequence of situated decisions rather than a
-      diagram to memorize.
-    </p>
-    <div class="construction-steps">
-      <article>
-        <span>01</span><h3>Set the plinth</h3><p>
-          Read the footprint, position and proportion of the base.
-        </p>
-      </article>
-      <article>
-        <span>02</span><h3>Mark the column grid</h3><p>
-          Place reference points before placing components.
-        </p>
-      </article>
-      <article>
-        <span>03</span><h3>Raise columns correctly</h3><p>
-          Ghost guides show location and orientation; the system catches hollow or misassembled
-          columns.
-        </p>
-      </article>
-      <article>
-        <span>04</span><h3>Connect the frame</h3><p>
-          Beams and bracket sets are introduced as load-bearing relations, not decoration.
-        </p>
-      </article>
-      <article>
-        <span>05</span><h3>Complete the roof</h3><p>
-          Players finish the structural and enclosure sequence across roughly fifteen guided steps.
-        </p>
-      </article>
-      <article>
-        <span>∞</span><h3>Use the knowledge</h3><p>
-          The completed building, assets and experience move into the free-building loop.
-        </p>
-      </article>
-    </div>
-    <div class="guide-dialogue">
-      <div class="guide-dialogue__head">
-        <small>7.2 · Onboarding · Opening script</small>
-        <strong>“Welcome to Minetrarchi, Xixi — you are now a builder.”</strong>
+      <PortfolioSectionHeader title="A Tutorial Is a Construction Sequence" />
+      <p class="portfolio-statement portfolio-statement--small">
+        The original flow turns a one-bay hall into a sequence of situated decisions rather than a
+        diagram to memorize.
+      </p>
+      <div class="construction-steps">
+        <article>
+          <span>01</span><h3>Set the plinth</h3><p>
+            Read the footprint, position and proportion of the base.
+          </p>
+        </article>
+        <article>
+          <span>02</span><h3>Mark the column grid</h3><p>
+            Place reference points before placing components.
+          </p>
+        </article>
+        <article>
+          <span>03</span><h3>Raise columns correctly</h3><p>
+            Ghost guides show location and orientation; the system catches hollow or misassembled
+            columns.
+          </p>
+        </article>
+        <article>
+          <span>04</span><h3>Connect the frame</h3><p>
+            Beams and bracket sets are introduced as load-bearing relations, not decoration.
+          </p>
+        </article>
+        <article>
+          <span>05</span><h3>Complete the roof</h3><p>
+            Players finish the structural and enclosure sequence across roughly fifteen guided
+            steps.
+          </p>
+        </article>
+        <article>
+          <span>∞</span><h3>Use the knowledge</h3><p>
+            The completed building, assets and experience move into the free-building loop.
+          </p>
+        </article>
       </div>
-      <ul>
-        <li>Go to Artisan Continent (工匠大陆), where the wisdom of master builders is kept—learn
-          the knowledge boards you love, then use them to recreate or create.</li>
-        <li>We also hope you become a Master Builder and reach Navigator's Realm (领航者之境), the
-          final chapter.</li>
-        <li>For builders we have also created Dawn Plain (晨曦之原), a community for sharing
-          assets.</li>
-        <li>Your Minetrarchi journey begins now. Have a pleasant trip!</li>
-      </ul>
-      <p class="guide-dialogue__aside">
-        Q: Why does a column get damp? A: Moisture in the soil rises as vapour. Set the column on a
-        plinth stone (柱础), away from the ground, and it stays dry—knowledge hides in every
-        correction.
+      <div class="guide-dialogue">
+        <div class="guide-dialogue__head">
+          <small>7.2 · Onboarding · Opening script</small>
+          <strong>“Welcome to Minetrarchi, Xixi — you are now a builder.”</strong>
+        </div>
+        <ul>
+          <li>
+            Go to Artisan Continent (工匠大陆), where the wisdom of master builders is kept—learn
+            the knowledge boards you love, then use them to recreate or create.
+          </li>
+          <li>
+            We also hope you become a Master Builder and reach Navigator's Realm (领航者之境), the
+            final chapter.
+          </li>
+          <li>
+            For builders we have also created Dawn Plain (晨曦之原), a community for sharing assets.
+          </li>
+          <li>Your Minetrarchi journey begins now. Have a pleasant trip!</li>
+        </ul>
+        <p class="guide-dialogue__aside">
+          Q: Why does a column get damp? A: Moisture in the soil rises as vapour. Set the column on
+          a plinth stone (柱础), away from the ground, and it stays dry—knowledge hides in every
+          correction.
+        </p>
+      </div>
+      <ProjectFigure class="project-figure--scroll">
+        <div class="project-figure__stage" data-drag-scroll>
+          <ResponsiveImage
+            src="/pictures/work/minetrarchi/m07.png"
+            alt="Fifteen-step guided building journey"
+          />
+        </div>
+        <figcaption>STEP 1–15 tutorial flow · scroll horizontally to view.</figcaption>
+      </ProjectFigure>
+      <p class="portfolio-copy">
+        The interface holds game and knowledge together: immediate building guidance, architectural
+        explanations, a miniature map, material inventory, task steps and light social presence—
+        without splitting the player away from the act of making.
       </p>
     </div>
-    <figure class="project-figure project-figure--scroll">
-      <div class="project-figure__stage">
-        <img
-          src="/pictures/work/minetrarchi/m07.png"
-          alt="Fifteen-step guided building journey"
-        />
-      </div>
-      <figcaption>STEP 1–15 tutorial flow · scroll horizontally to view.</figcaption>
-    </figure>
-    <p class="portfolio-copy">
-      The interface holds game and knowledge together: immediate building guidance, architectural
-      explanations, a miniature map, material inventory, task steps and light social presence—
-      without splitting the player away from the act of making.
-    </p>
-    </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>The Interface Keeps Game and Knowledge Together</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Interface Keeps Game and Knowledge Together" />
     <p class="portfolio-copy portfolio-copy--flush">
       The interface references Minecraft and makes two moves. It changes the art style to lower the
       UI's presence and raise immersion in the scene. It adjusts the layout to fit the new
@@ -547,8 +535,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </article>
       <article>
         <small>Artisan Continent · Tasks</small><h3>Learn by challenge</h3><p>
-          Story tasks of increasing difficulty, monthly limited challenges, and the ultimate
-          chapter that creates new boards.
+          Story tasks of increasing difficulty, monthly limited challenges, and the ultimate chapter
+          that creates new boards.
         </p>
       </article>
       <article>
@@ -566,38 +554,60 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     </div>
     <h3 class="portfolio-subhead">Interface screens</h3>
     <div class="placeholder-grid placeholder-grid--six">
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08a.png" alt="Home interface" loading="lazy" />
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08a.png"
+          alt="Home interface"
+          loading="lazy"
+        />
         <figcaption>Home</figcaption>
-      </figure>
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08b.png" alt="Main interface" loading="lazy" />
+      </ProjectFigure>
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08b.png"
+          alt="Main interface"
+          loading="lazy"
+        />
         <figcaption>Main</figcaption>
-      </figure>
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08c.png" alt="Backstage interface" loading="lazy" />
+      </ProjectFigure>
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08c.png"
+          alt="Backstage interface"
+          loading="lazy"
+        />
         <figcaption>Backstage</figcaption>
-      </figure>
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08d.png" alt="Artisan Continent interface" loading="lazy" />
+      </ProjectFigure>
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08d.png"
+          alt="Artisan Continent interface"
+          loading="lazy"
+        />
         <figcaption>Artisan Continent</figcaption>
-      </figure>
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08e.png" alt="Asset Library interface" loading="lazy" />
+      </ProjectFigure>
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08e.png"
+          alt="Asset Library interface"
+          loading="lazy"
+        />
         <figcaption>Asset Library</figcaption>
-      </figure>
-      <figure class="project-figure project-figure--item">
-        <img src="/pictures/work/minetrarchi/m08f.png" alt="Dawn Plain interface" loading="lazy" />
+      </ProjectFigure>
+      <ProjectFigure class="project-figure--item">
+        <ResponsiveImage
+          src="/pictures/work/minetrarchi/m08f.png"
+          alt="Dawn Plain interface"
+          loading="lazy"
+        />
         <figcaption>Dawn Plain</figcaption>
-      </figure>
+      </ProjectFigure>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--split">
+  <PortfolioSection class="portfolio-section--split">
     <div>
-      <div class="portfolio-section__head">
-        <h2>One Structure, Three Input Languages</h2>
-      </div>
+      <PortfolioSectionHeader title="One Structure, Three Input Languages" />
       <p class="portfolio-statement portfolio-statement--small">
         The same actions map across PC, touch and VR—not as three separate products, but as three
         ways to inhabit the same building system.
@@ -621,25 +631,23 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </p>
       </article>
     </div>
-    <figure class="project-figure project-figure--white project-figure--titled">
+    <ProjectFigure class="project-figure--white project-figure--titled">
       <div class="project-figure__inner">
         <h3 class="project-figure__title">Three Input Languages</h3>
-        <img
+        <ResponsiveImage
           src="/pictures/work/minetrarchi/m09.png"
           alt="Three-terminal interaction diagrams: PC, touch and VR"
           loading="lazy"
         />
       </div>
-    </figure>
-  </section>
+    </ProjectFigure>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>Beyond the Game: A Cultural Loop</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Beyond the Game: A Cultural Loop" />
     <p class="portfolio-statement portfolio-statement--small">
-      The design is built to leave the screen—scenic areas, events, models and communities keep
-      the knowledge circulating.
+      The design is built to leave the screen—scenic areas, events, models and communities keep the
+      knowledge circulating.
     </p>
     <div class="promotion-grid">
       <article>
@@ -650,8 +658,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </article>
       <article>
         <small>Challenge events</small><h3>Challenge culture</h3><p>
-          Join the global building challenges of Minecraft Education and cross-cooperate with
-          scenic areas and architecture museums.
+          Join the global building challenges of Minecraft Education and cross-cooperate with scenic
+          areas and architecture museums.
         </p>
       </article>
       <article>
@@ -662,14 +670,14 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </article>
       <article>
         <small>Miniature models</small><h3>Print the building</h3><p>
-          Partner with 3D-printing services to give winners free prints and create miniature
-          display models for scenic areas.
+          Partner with 3D-printing services to give winners free prints and create miniature display
+          models for scenic areas.
         </p>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--closing">
+  <PortfolioSection class="portfolio-section--closing">
     <div class="portfolio-section__label">What this is, and what it isn't</div>
     <p class="portfolio-statement portfolio-statement--small">
       Minetrarchi is a complete game-system, interface and service-design proposition—not a shipped
@@ -678,30 +686,36 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       understanding better than the media it replaces is the question the concept now needs a
       prototype to answer.
     </p>
-  </section>
+  </PortfolioSection>
 
   <script is:inline>
     (function () {
-      var stage = document.querySelector('.project-figure__stage');
+      var stage = document.querySelector('[data-drag-scroll]');
       if (!stage) return;
-      var pressed = false;
       var startX = 0;
       var startScroll = 0;
-      stage.addEventListener('mousedown', function (e) {
-        pressed = true;
+      var pointerId = null;
+      stage.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'touch' || e.button !== 0) return;
+        pointerId = e.pointerId;
         startX = e.clientX;
         startScroll = stage.scrollLeft;
         stage.classList.add('is-dragging');
+        stage.setPointerCapture(e.pointerId);
         e.preventDefault();
       });
-      window.addEventListener('mousemove', function (e) {
-        if (!pressed) return;
+      stage.addEventListener('pointermove', function (e) {
+        if (pointerId !== e.pointerId) return;
         stage.scrollLeft = startScroll - (e.clientX - startX);
       });
-      window.addEventListener('mouseup', function () {
-        pressed = false;
+      function release(e) {
+        if (pointerId !== e.pointerId) return;
+        if (stage.hasPointerCapture(e.pointerId)) stage.releasePointerCapture(e.pointerId);
+        pointerId = null;
         stage.classList.remove('is-dragging');
-      });
+      }
+      stage.addEventListener('pointerup', release);
+      stage.addEventListener('pointercancel', release);
     })();
   </script>
 </ProjectLayout>

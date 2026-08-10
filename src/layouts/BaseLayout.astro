@@ -1,16 +1,20 @@
 ---
 import DevScrollKeeper from '../components/DevScrollKeeper.astro';
+import ImageLightbox from '../components/ImageLightbox.astro';
+import YouTubeLoader from '../components/YouTubeLoader.astro';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  lang?: string;
 }
 
 const {
   title = 'Tung‘s',
   description = 'The personal website of Tung Wang, an interdisciplinary researcher and designer.',
   image,
+  lang = 'en',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
@@ -19,7 +23,7 @@ const isDev = import.meta.env.DEV;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,6 +52,8 @@ const isDev = import.meta.env.DEV;
   </head>
   <body>
     <slot />
+    <ImageLightbox />
+    <YouTubeLoader />
     <script is:inline>
       document.addEventListener('contextmenu', (event) => {
         if (event.target instanceof HTMLImageElement) event.preventDefault();
@@ -55,40 +61,6 @@ const isDev = import.meta.env.DEV;
       document.addEventListener('dragstart', (event) => {
         if (event.target instanceof HTMLImageElement) event.preventDefault();
       });
-
-      // Anchor jumps: clear the sticky nav, and re-correct while lazy images
-      // load (they have no reserved height and shift the target downward).
-      (() => {
-        const navOffset = () => {
-          const raw = getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height');
-          return (Number.parseFloat(raw) || 0) + 16;
-        };
-        const findTarget = () => {
-          const id = decodeURIComponent(location.hash.slice(1));
-          return id ? document.getElementById(id) : null;
-        };
-        const jump = (behavior) => {
-          const el = findTarget();
-          if (!el) return;
-          const top = window.scrollY + el.getBoundingClientRect().top - navOffset();
-          window.scrollTo({ top: Math.max(0, top), behavior });
-        };
-        if (location.hash.length > 1) {
-          [0, 150, 500, 1200, 2500].forEach((delay) => setTimeout(() => jump('auto'), delay));
-          window.addEventListener('load', () => jump('auto'), { once: true });
-          if (findTarget()) {
-            let timer = 0;
-            const correct = () => {
-              clearTimeout(timer);
-              timer = setTimeout(() => jump('auto'), 60);
-            };
-            document.querySelectorAll('img').forEach((img) => {
-              if (!img.complete) img.addEventListener('load', correct, { once: true });
-            });
-          }
-        }
-        window.addEventListener('hashchange', () => jump('smooth'));
-      })();
     </script>
   </body>
 </html>

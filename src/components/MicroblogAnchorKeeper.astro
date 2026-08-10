@@ -1,0 +1,128 @@
+<script is:inline>
+  (() => {
+    let stopCurrentLock = () => {};
+
+    const readHashTarget = () => {
+      if (location.hash.length < 2) return null;
+
+      try {
+        return document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      } catch {
+        return null;
+      }
+    };
+
+    const startLock = () => {
+      stopCurrentLock();
+
+      const archive = document.querySelector('.microblog-archive');
+      const target = readHashTarget();
+      if (!(archive instanceof HTMLElement) || !(target instanceof HTMLElement) || !archive.contains(target)) {
+        return;
+      }
+
+      let active = true;
+      let correctionFrame = 0;
+      const removers = [];
+      const previousScrollRestoration = history.scrollRestoration;
+      history.scrollRestoration = 'manual';
+      document.documentElement.dataset.microblogAnchorLock = '';
+
+      const topGuide = () => {
+        const navigation = document.querySelector('.page-nav');
+        const navigationBottom = navigation instanceof HTMLElement
+          ? navigation.getBoundingClientRect().bottom
+          : Number.parseFloat(
+              getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+            ) || 0;
+        let guide = navigationBottom + 16;
+
+        const languageBar = archive.querySelector('.microblog-archive__language');
+        if (languageBar instanceof HTMLElement && getComputedStyle(languageBar).position === 'sticky') {
+          const barRect = languageBar.getBoundingClientRect();
+          const stickyTop = Number.parseFloat(getComputedStyle(languageBar).top);
+          const isStuck = Number.isFinite(stickyTop) && barRect.top <= stickyTop + 2;
+
+          if (isStuck && barRect.bottom > navigationBottom) {
+            guide = Math.max(guide, barRect.bottom + 12);
+          }
+        }
+
+        return guide;
+      };
+
+      const correct = () => {
+        if (!active || !document.contains(target)) return;
+        const delta = target.getBoundingClientRect().top - topGuide();
+        if (Math.abs(delta) > 0.5) {
+          window.scrollBy({ top: delta, left: 0, behavior: 'auto' });
+        }
+      };
+
+      const scheduleCorrection = () => {
+        if (!active || correctionFrame) return;
+        correctionFrame = requestAnimationFrame(() => {
+          correctionFrame = 0;
+          correct();
+        });
+      };
+
+      const stop = () => {
+        if (!active) return;
+        active = false;
+        if (correctionFrame) cancelAnimationFrame(correctionFrame);
+        resizeObserver.disconnect();
+        removers.splice(0).forEach((remove) => remove());
+        document.documentElement.removeAttribute('data-microblog-anchor-lock');
+        history.scrollRestoration = previousScrollRestoration;
+      };
+      stopCurrentLock = stop;
+
+      const resizeObserver = new ResizeObserver(scheduleCorrection);
+      resizeObserver.observe(archive);
+
+      const cancelEvents = [
+        ['wheel', { passive: true }],
+        ['touchstart', { passive: true }],
+        ['pointerdown', { passive: true }],
+        ['keydown', {}],
+      ];
+      cancelEvents.forEach(([type, options]) => {
+        window.addEventListener(type, stop, { ...options, once: true });
+        removers.push(() => window.removeEventListener(type, stop, options));
+      });
+
+      archive.querySelectorAll('img').forEach((image) => {
+        const imagePrecedesTarget = Boolean(
+          image.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING,
+        );
+        if (!imagePrecedesTarget || image.complete) return;
+
+        image.addEventListener('load', scheduleCorrection, { once: true });
+        image.addEventListener('error', scheduleCorrection, { once: true });
+        removers.push(() => {
+          image.removeEventListener('load', scheduleCorrection);
+          image.removeEventListener('error', scheduleCorrection);
+        });
+      });
+
+      window.addEventListener('load', scheduleCorrection, { once: true });
+      removers.push(() => window.removeEventListener('load', scheduleCorrection));
+      document.fonts?.ready.then(scheduleCorrection);
+
+      requestAnimationFrame(() => {
+        correct();
+        requestAnimationFrame(correct);
+      });
+    };
+
+    window.addEventListener('hashchange', startLock);
+    startLock();
+  })();
+</script>
+
+<style is:global>
+  html[data-microblog-anchor-lock] {
+    scroll-behavior: auto !important;
+  }
+</style>

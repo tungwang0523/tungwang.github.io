@@ -1,0 +1,951 @@
+@use 'foundation' as *;
+
+/* ---------- Portfolio image slots & text versions (Minetrarchi / ExpoCraft) ---------- */
+
+/* Image slots: leave empty, annotate what will go there */
+
+.portfolio-section--lead > .project-placeholder,
+.portfolio-section--lead > .placeholder-grid,
+.portfolio-section--lead > .project-figure,
+.portfolio-section--lead > .memory-timeline,
+.portfolio-section--split > .project-placeholder,
+.portfolio-section--split > .project-figure {
+  grid-column: 1 / -1;
+}
+
+.project-placeholder--gallery {
+  min-height: 220px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.placeholder-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+
+  &--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  &--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  &--six {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media screen and (max-width: 900px) {
+    &--four {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    &--two,
+    &--four,
+    &--six {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.project-placeholder--gallery-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 12px;
+  min-height: 170px;
+  margin-top: 0;
+  padding: clamp(16px, 2vw, 24px);
+
+  span {
+    font-size: 10px;
+  }
+
+  strong {
+    max-width: 22ch;
+    font-size: clamp(17px, 1.7vw, 22px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  em {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+/* PDF-preview figures: image on a light panel with a small caption */
+
+.project-figure {
+  margin: clamp(28px, 4vw, 48px) 0 0;
+  padding: clamp(10px, 1.5vw, 18px);
+  background: #d8d4d1;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+
+  &--item {
+    margin: 0;
+    padding: clamp(8px, 1.2vw, 14px);
+    background: #f0f0f0;
+
+    figcaption {
+      margin-top: 8px;
+    }
+  }
+}
+
+/* Figure galleries for small course-work portfolios */
+
+.figure-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+
+  figure {
+    margin: 0;
+    padding: clamp(8px, 1.2vw, 14px);
+    background: #d8d4d1;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+
+  &--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Uniform figure grid: every image renders at the same size and ratio */
+
+.figure-row--uniform {
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+}
+
+.figure-row--portrait {
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+}
+
+.figure-row--wide {
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+}
+
+.figure--match-first img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1179 / 958;
+  object-fit: cover;
+}
+
+/* Full-width slide sections: title, panel-free figure at page width,
+   translated content below */
+
+.slide-section {
+  margin: clamp(80px, 12vw, 150px) 0;
+
+  &__title {
+    margin: 0;
+    font-family: $title-font;
+    font-size: clamp(24px, 3vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  &__figure {
+    margin: clamp(24px, 4vw, 48px) 0 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__body {
+    margin: clamp(24px, 4vw, 48px) 0 0;
+
+    > p {
+      max-width: 72ch;
+      margin: 0 0 16px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+}
+
+.slide-section__body > .portfolio-section__label {
+  margin: clamp(34px, 5vw, 56px) 0 14px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.slide-section__body > .portfolio-section__label + .portfolio-copy,
+.slide-section__body > .portfolio-section__label + .method-architecture {
+  margin-top: 0;
+}
+
+.method-architecture--duo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  article:only-child {
+    grid-column: 1 / -1;
+  }
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.method-architecture--stacked {
+  grid-template-columns: 1fr;
+  gap: 12px;
+  background: transparent;
+
+  article {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+    min-height: 0;
+    padding: clamp(22px, 3vw, 34px);
+  }
+
+  .stack-no {
+    display: grid;
+    width: 44px;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    background: $title-color;
+    color: #ffffff;
+    font-family: $title-font;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  h3 {
+    margin: 0 0 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+}
+
+.sensor-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+
+  figure {
+    margin: 0;
+    padding: clamp(8px, 1.2vw, 14px);
+    background: rgba(233, 230, 228, 0.1);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolio-section--dark .project-figure {
+  background: rgba(233, 230, 228, 0.1);
+}
+
+.portfolio-section--dark .figure-row figure {
+  background: rgba(233, 230, 228, 0.1);
+}
+
+.project-figure--white {
+  background: #ffffff;
+}
+
+/* Full-bleed white panels: background reaches both browser edges,
+   content stays within the page width */
+
+.project-figure--white.project-figure--titled {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Titled white panels: title on top, images inset with white margins */
+
+.project-figure--titled {
+  padding: clamp(24px, 3.5vw, 48px) 0;
+
+  .project-figure__inner {
+    max-width: var(--page-content-width);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 54px);
+  }
+
+  .project-figure__title {
+    margin: 0 0 clamp(18px, 2vw, 26px);
+    font-family: $title-font;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: clamp(14px, 2vw, 22px);
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+
+  .project-figure__duo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 24px);
+  }
+
+  @media screen and (max-width: 620px) {
+    .project-figure__duo {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* Expo memory timeline: text version of the intro photo strip */
+
+.memory-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+
+  article {
+    display: flex;
+    min-height: 240px;
+    flex-direction: column;
+    padding: clamp(20px, 2.4vw, 32px);
+    background: #d8d4d1;
+  }
+
+  small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  h3 {
+    margin: 20px 0 0;
+    font-family: $title-font;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    margin: 18px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Full-bleed video band directly below the hero */
+
+.portfolio-section--video {
+  margin: 0 calc(50% - 50vw) clamp(28px, 5vw, 64px);
+  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 54px);
+  padding-bottom: 0;
+  background: #121418;
+  color: $blog-bg;
+}
+
+.video-band__title {
+  max-width: var(--page-content-width);
+  margin: 0 auto clamp(18px, 2vw, 26px);
+  font-family: $title-font;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: $blog-bg;
+}
+
+/* Full-bleed image strip at the very bottom of the video band */
+.video-band__bottom {
+  display: block;
+  width: 100vw;
+  max-width: none;
+  height: auto;
+  margin: clamp(28px, 4vw, 48px) calc(50% - 50vw) 0;
+}
+
+/* Rank progression: designed strip replacing a long caption */
+
+.rank-strip {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: clamp(28px, 4vw, 48px);
+
+  article {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+    padding: clamp(18px, 2.4vw, 30px);
+    background: $title-color;
+    color: $blog-bg;
+  }
+
+  article small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  article strong {
+    font-family: $title-font;
+    font-size: clamp(24px, 2.6vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  article span {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  &__arrow {
+    align-self: center;
+    font-family: $title-font;
+    font-size: 26px;
+    opacity: 0.5;
+  }
+
+  @media screen and (max-width: 620px) {
+    flex-direction: column;
+
+    &__arrow {
+      align-self: center;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+/* Wide screenshot strips: taller display, scroll horizontally inside the panel */
+
+.project-figure--scroll {
+  .project-figure__stage {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    img {
+      display: block;
+      width: auto;
+      max-width: none;
+      height: clamp(440px, 44vw, 620px);
+      object-fit: contain;
+    }
+  }
+}
+
+/* Section sub-heading used before text-version grids */
+
+.portfolio-subhead {
+  margin: clamp(54px, 7vw, 90px) 0 18px;
+  font-family: $title-font;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* PEST analysis as a text version of the original diagram */
+
+.pest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+
+  article {
+    display: flex;
+    min-height: 320px;
+    flex-direction: column;
+    padding: clamp(22px, 2.6vw, 34px);
+    background: #d8d4d1;
+  }
+
+  small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 20px 0 0;
+    font-family: $title-font;
+    font-size: clamp(19px, 1.9vw, 25px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 18px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Second row of research signals: smaller numbers, three columns */
+
+.research-signal-grid--mini {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(28px, 4vw, 48px);
+
+  article {
+    min-height: 210px;
+  }
+
+  strong {
+    font-size: clamp(34px, 4.4vw, 56px);
+  }
+
+  p {
+    margin-top: 44px;
+  }
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Vertical rhythm fixes: keep grids, subheads and closings breathing */
+
+.portfolio-section--dark .reason-grid {
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.portfolio-section--closing .portfolio-statement {
+  margin-top: clamp(24px, 3vw, 40px);
+}
+
+/* Persona card: text version of the original user-persona figure */
+
+.persona-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(28px, 5vw, 72px);
+  margin-top: clamp(48px, 7vw, 84px);
+  padding: clamp(28px, 4.5vw, 56px);
+  background: rgba(233, 230, 228, 0.1);
+
+  small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  h3 {
+    margin: 20px 0 0;
+    font-family: $title-font;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  &__role {
+    margin: 14px 0 0;
+    font-size: 14px;
+    opacity: 0.72;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
+    margin: 34px 0 0;
+  }
+
+  dt {
+    margin-bottom: 4px;
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  &__traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 30px 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 8px 12px;
+      border: 1px solid rgba(233, 230, 228, 0.35);
+      border-radius: 999px;
+      font-size: 12px;
+    }
+  }
+
+  &__voice {
+    display: flex;
+    flex-direction: column;
+
+    blockquote {
+      margin: 20px 0 0;
+      font-family: $title-font;
+      font-size: clamp(21px, 2.4vw, 30px);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    ul {
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      margin-top: 12px;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.55;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.55em;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Competitor landscape: four-column text version */
+
+.toolchain-grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  h3 {
+    margin-bottom: 48px;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 460px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep tool names and system titles from overflowing narrow cards */
+
+.toolchain-grid h3 {
+  overflow-wrap: break-word;
+}
+
+.portfolio-page--mine .method-architecture h3,
+.portfolio-page--expo .method-architecture h3 {
+  font-size: clamp(25px, 2.7vw, 36px);
+}
+
+/* Three learning spaces instead of two */
+
+.world-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  article {
+    min-height: 400px;
+  }
+
+  h3 {
+    margin-top: 56px;
+    min-height: clamp(72px, 8vw, 108px);
+    font-size: clamp(27px, 2.8vw, 36px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    overflow-wrap: break-word;
+
+    em {
+      font-size: 0.52em;
+    }
+  }
+
+  p {
+    max-width: 34ch;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Opening-script dialogue: text version of the in-game guidance */
+
+.guide-dialogue {
+  margin-top: clamp(34px, 5vw, 64px);
+  padding: clamp(26px, 4vw, 48px);
+  background: rgba(233, 230, 228, 0.1);
+
+  &__head {
+    small {
+      font-family: $title-font;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    strong {
+      display: block;
+      margin-top: 18px;
+      font-family: $title-font;
+      font-size: clamp(20px, 2.4vw, 30px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  ul {
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    margin-top: 14px;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.6;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.5em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: currentColor;
+      opacity: 0.7;
+    }
+  }
+
+  &__aside {
+    margin: 26px 0 0;
+    padding: 18px 22px;
+    border-left: 2px solid currentColor;
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.85;
+  }
+}
+
+/* Six interface descriptions: text version of the interface gallery */
+
+.interface-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(34px, 5vw, 64px);
+
+  article {
+    display: flex;
+    min-height: 250px;
+    flex-direction: column;
+    padding: clamp(22px, 2.6vw, 34px);
+    background: #d8d4d1;
+  }
+
+  small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 20px 0 0;
+    font-family: $title-font;
+    font-size: clamp(21px, 2.2vw, 28px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    margin: 18px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cultural-loop promotion cards: text version */
+
+.promotion-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(34px, 5vw, 64px);
+
+  article {
+    display: flex;
+    min-height: 280px;
+    flex-direction: column;
+    padding: clamp(22px, 2.6vw, 34px);
+    background: #d8d4d1;
+  }
+
+  small {
+    font-family: $title-font;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 20px 0 0;
+    font-family: $title-font;
+    font-size: clamp(21px, 2.2vw, 28px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    margin: 18px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}

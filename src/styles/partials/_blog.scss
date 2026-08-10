@@ -1,0 +1,300 @@
+@use 'foundation' as *;
+
+/* ---------- Blog index cards ---------- */
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-post-page .page-title {
+  max-width: 18ch;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.04;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  line-break: strict;
+}
+
+.blog-post-page .prose img[data-blog-image] {
+  display: block;
+  width: auto;
+  max-width: min(100%, 480px);
+  height: auto;
+  max-height: 480px;
+  margin: 1.6em 0;
+  object-fit: contain;
+  cursor: zoom-in;
+}
+
+.blog-post-page .prose img[data-blog-image].has-blog-caption {
+  margin-bottom: 0;
+}
+
+.blog-image-caption {
+  display: block;
+  width: fit-content;
+  max-width: min(100%, 480px);
+  margin: 8px 0 1.6em;
+  color: $subtitle-color;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.blog-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  width: min(100%, 480px);
+  margin: 1.6em 0;
+
+  &__item,
+  &__media {
+    display: block;
+    min-width: 0;
+  }
+
+  &__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .blog-image-caption {
+    width: 100%;
+    margin: 6px 0 10px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+}
+
+.blog-post-page .prose .blog-image-grid img[data-blog-image] {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  object-fit: cover;
+}
+
+.blog-post-page .prose img[data-blog-image]:focus-visible {
+  outline: 2px solid $title-color;
+  outline-offset: 4px;
+}
+
+.post-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  padding: 28px 0;
+  text-decoration: none;
+  color: inherit;
+
+  &__cover img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__meta {
+    font-size: 13px;
+    font-family: $italic-font;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    font-family: $title-font;
+    font-weight: 600;
+    font-size: clamp(22px, 2vw, 26px);
+    letter-spacing: 0;
+    line-height: 1.28;
+    margin: 0 0 12px;
+    color: $title-color;
+    overflow-wrap: anywhere;
+    line-break: strict;
+
+    span {
+      font-family: $italic-font;
+      font-style: italic;
+      font-weight: 400;
+    }
+  }
+
+  &__excerpt {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    max-width: 60ch;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    font-family: $italic-font;
+    font-style: italic;
+    color: $subtitle-color;
+
+    span:before,
+    a:before {
+      content: '#';
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Post detail extras ---------- */
+
+.post-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  font-family: $italic-font;
+  font-style: italic;
+  color: $subtitle-color;
+  margin-top: 18px;
+}
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid $border-color;
+
+  a {
+    min-width: 0;
+    text-decoration: none;
+    color: $subtitle-color;
+
+    span {
+      display: block;
+      font-family: $italic-font;
+      font-style: italic;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    strong {
+      display: block;
+      font-family: $title-font;
+      font-weight: 500;
+      font-size: clamp(16px, 1.5vw, 18px);
+      letter-spacing: 0;
+      line-height: 1.25;
+      color: $title-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .post-nav__next {
+    text-align: right;
+  }
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+    .post-nav__next {
+      text-align: left;
+    }
+  }
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+
+  a {
+    border: 1px solid $border-color;
+    padding: 6px 14px;
+    text-decoration: none;
+    color: $subtitle-color;
+    font-size: 14px;
+
+    &:before {
+      content: '#';
+    }
+
+    &:hover {
+      background: $body-bg;
+      color: $blog-bg;
+      border-color: $body-bg;
+    }
+  }
+}
+
+/* ---------- Contact form ---------- */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 32px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-family: $italic-font;
+    font-style: italic;
+  }
+
+  input,
+  textarea {
+    font-family: $subtitle-font;
+    font-size: 16px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid $border-color;
+    padding: 10px 0;
+    color: $title-color;
+
+    &:focus {
+      border-bottom-color: $title-color;
+    }
+  }
+
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  button {
+    align-self: flex-start;
+    font-family: $title-font;
+    font-weight: 600;
+    font-size: 16px;
+    background: $body-bg;
+    color: $blog-bg;
+    border: 0;
+    padding: 14px 28px;
+    cursor: pointer;
+    letter-spacing: -0.3px;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import MicroblogEntry from '../components/MicroblogEntry.astro';
 import MicroblogLanguageToggle from '../components/MicroblogLanguageToggle.astro';
+import MicroblogAnchorKeeper from '../components/MicroblogAnchorKeeper.astro';
 
 const rawEntries = (await getCollection('microblog', ({ data }) => !data.draft)).sort(
   (a, b) => +b.data.date - +a.data.date,
@@ -20,9 +21,11 @@ const entries = await Promise.all(
   eyebrow="Fragments"
   description="Short notes, images, links, and things still in motion."
   pageTitle="Tung‘s Microblog"
+  lang="zh-CN"
 >
   <div class="microblog-archive" data-microblog-scope data-language="zh">
     <div class="microblog-archive__language"><MicroblogLanguageToggle /></div>
     {entries.map((entry) => <MicroblogEntry entry={entry} Content={entry.Content} />)}
   </div>
+  <MicroblogAnchorKeeper />
 </PageLayout>

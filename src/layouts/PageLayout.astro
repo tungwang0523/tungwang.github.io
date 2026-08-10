@@ -15,9 +15,10 @@ interface Props {
   heroImage?: string;
   pageTitle?: string;
   pageClass?: string;
+  lang?: string;
 }
 
-const { title, description, heroImage, pageTitle, pageClass } = Astro.props;
+const { title, description, heroImage, pageTitle, pageClass, lang = 'en' } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
@@ -36,7 +37,7 @@ const heroSrcset = heroImage
   : undefined;
 ---
 
-<BaseLayout title={headTitle} description={description} image={heroImage}>
+<BaseLayout title={headTitle} description={description} image={heroImage} lang={lang}>
   <div class:list={['page', pageClass]}>
     <header class="page-nav">
       <div class="page-nav__inner">

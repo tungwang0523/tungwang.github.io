@@ -1,0 +1,246 @@
+@use 'foundation' as *;
+
+/* ---------- Subpage layout (PageLayout) ---------- */
+
+.page {
+  --page-content-width: 920px;
+  --page-nav-height: 75px;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: $blog-bg;
+  color: $subtitle-color;
+}
+
+@media screen and (max-width: 560px) {
+  .page {
+    --page-nav-height: 102px;
+  }
+}
+
+.page-nav {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  display: block;
+  padding: 0;
+  border-bottom: 1px solid $border-color;
+  background-color: $blog-bg;
+  font-family: $subtitle-font;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: var(--page-nav-height);
+    max-width: var(--page-content-width);
+    margin: 0 auto;
+    padding: 24px clamp(20px, 4vw, 32px);
+  }
+
+  &__brand {
+    font-family: $title-font;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -1px;
+    color: $title-color;
+    text-decoration: none;
+
+    span {
+      font-family: $italic-font;
+      font-style: italic;
+      font-weight: 400;
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+
+    a {
+      color: $subtitle-color;
+      text-decoration: none;
+      font-size: 17px;
+      letter-spacing: -0.3px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    &__inner {
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    nav {
+      gap: clamp(8px, 3vw, 18px);
+      flex-wrap: nowrap;
+      justify-content: center;
+
+      a {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.page-main {
+  flex: 1;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 80px) clamp(20px, 4vw, 32px);
+}
+
+.page-body {
+  width: 100%;
+}
+
+.page-hero {
+  margin: 0 0 clamp(32px, 5vw, 56px);
+
+  img {
+    width: 100%;
+    height: clamp(220px, 40vh, 420px);
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.page-head {
+  padding-bottom: 28px;
+  margin-bottom: 40px;
+}
+
+.page-eyebrow {
+  font-family: $italic-font;
+  font-style: italic;
+  font-size: 18px;
+  margin-bottom: 14px;
+  color: $subtitle-color;
+}
+
+.page-title {
+  font-family: $title-font;
+  font-weight: 700;
+  font-size: clamp(52px, 8vw, 104px);
+  letter-spacing: clamp(-6px, -0.45vw, -3px);
+  line-height: 0.86;
+  margin: 0;
+  color: $title-color;
+}
+
+.page-deck {
+  font-size: 20px;
+  line-height: 1.45;
+  max-width: 55ch;
+  margin: 0;
+  color: $subtitle-color;
+}
+
+/* ---------- Prose (markdown article body) ---------- */
+
+.prose {
+  min-width: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  color: $subtitle-color;
+  max-width: 65ch;
+  overflow-wrap: break-word;
+
+  > * + * {
+    margin-top: 1.1em;
+  }
+
+  h2 {
+    font-family: $title-font;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: -1px;
+    margin-top: 1.6em;
+    color: $title-color;
+  }
+
+  h3 {
+    font-family: $title-font;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    margin-top: 1.4em;
+    color: $title-color;
+  }
+
+  a {
+    color: $title-color;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 5;
+  }
+
+  blockquote {
+    font-family: $italic-font;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.6;
+    border-left: 1px solid $border-color;
+    padding-left: 20px;
+    margin: 1.6em 0;
+    color: $title-color;
+  }
+
+  code {
+    font-family: $title-font;
+    font-size: 0.92em;
+    background: rgba(18, 20, 24, 0.06);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  pre {
+    background: $body-bg;
+    color: $blog-bg;
+    padding: 20px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.55;
+
+    code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+  }
+
+  img {
+    width: 100%;
+    margin: 1.6em 0;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.4em;
+
+    li + li {
+      margin-top: 0.5em;
+    }
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid $border-color;
+    margin: 2em 0;
+  }
+}

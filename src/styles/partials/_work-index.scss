@@ -1,0 +1,246 @@
+@use 'foundation' as *;
+
+/* ---------- Work index ---------- */
+
+.page--work {
+  --page-content-width: 1120px;
+
+  .page-main {
+    max-width: var(--page-content-width);
+  }
+
+  .page-head {
+    margin-bottom: clamp(28px, 5vw, 56px);
+  }
+}
+
+.work-intro {
+  max-width: 62ch;
+  margin: 0 0 clamp(56px, 9vw, 110px);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.28;
+  letter-spacing: -0.04em;
+}
+
+.work-index {
+  display: grid;
+  gap: clamp(28px, 5vw, 64px);
+  grid-auto-rows: 1fr;
+}
+
+.work-band {
+  position: relative;
+  height: clamp(400px, 46vw, 600px);
+  overflow: hidden;
+  color: #ffffff;
+
+  &--research {
+    background-color: #002fa7;
+  }
+  &--mine {
+    background-color: #c93028;
+  }
+  &--expo {
+    background-color: #1e7a46;
+  }
+  &--seeds {
+    background-color: #6d28d9;
+  }
+  &--roof {
+    background-color: #546e7a;
+  }
+  &--robotaxi {
+    background-color: #c2410c;
+  }
+}
+
+.work-project {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: stretch;
+  height: 100%;
+  padding: 0 clamp(20px, 4vw, 54px);
+  color: inherit;
+  text-decoration: none;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(60px, 8vw, 104px) 0 clamp(28px, 4vw, 48px);
+  }
+
+  &__number {
+    font-family: $title-font;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  h2 {
+    margin: clamp(18px, 3vw, 34px) 0 18px;
+    font-family: $title-font;
+    font-size: clamp(46px, 5vw, 72px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+
+  p {
+    max-width: 44ch;
+    margin: 0 0 22px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  &__meta {
+    margin-top: auto;
+    font-family: $title-font;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__role {
+    margin: 0 0 18px;
+    font-family: $title-font;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  &__media {
+    position: relative;
+    align-self: stretch;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+  }
+
+  &:hover .work-project__media img {
+    transform: scale(1.02);
+  }
+}
+
+/* Field of Seeds & Rooftop Garden cards: solid colour block on the left,
+   image filling the right column edge to edge */
+
+.work-band--seeds .work-project__media img,
+.work-band--roof .work-project__media img,
+.work-band--robotaxi .work-project__media img {
+  object-fit: cover;
+}
+
+.work-band--seeds .work-project,
+.work-band--roof .work-project,
+.work-band--robotaxi .work-project {
+  padding-right: 0;
+}
+
+/* ExpoCraft block: the figure pins to the block's right and bottom edges and
+   starts level with the project title's top edge. */
+.work-band--expo .work-project {
+  position: relative;
+}
+
+.work-band--expo .work-project__body {
+  position: relative;
+  z-index: 1;
+}
+
+.work-band--expo .work-project__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(25%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 15%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 15%);
+
+  img {
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .work-band {
+    height: auto;
+  }
+
+  .work-project {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+
+    &__body {
+      padding: clamp(40px, 8vw, 64px) clamp(20px, 4vw, 54px) clamp(30px, 4vw, 44px);
+    }
+
+    &__media {
+      order: -1;
+      width: 100%;
+      min-width: 0;
+      aspect-ratio: 16 / 10;
+
+      img {
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .work-band--mine .work-project__media {
+    aspect-ratio: auto;
+    height: clamp(300px, 78vw, 480px);
+
+    img {
+      object-fit: contain;
+      object-position: bottom;
+    }
+  }
+
+  .work-band--mine .work-project__body {
+    position: relative;
+    z-index: 1;
+    margin-top: calc(-1 * clamp(48px, 10vw, 80px));
+  }
+
+  .work-band--seeds .work-project__media img,
+  .work-band--roof .work-project__media img,
+  .work-band--robotaxi .work-project__media img {
+    object-fit: cover;
+  }
+
+  .work-band--expo .work-project {
+    grid-template-rows: auto 1fr;
+  }
+
+  .work-band--expo .work-project__media {
+    position: relative;
+    order: 0;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    aspect-ratio: auto;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+
+    img {
+      object-fit: contain;
+      object-position: bottom;
+    }
+  }
+}

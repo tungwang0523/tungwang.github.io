@@ -1,0 +1,51 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  poster?: string;
+}
+
+const { videoId, title, poster } = Astro.props;
+
+if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+  throw new Error(`Invalid YouTube video ID: ${videoId}`);
+}
+
+const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+const posterUrl = poster ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const fallbackPosterUrl = poster ? undefined : `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+---
+
+<div
+  class="youtube-embed-lite"
+  data-youtube-embed
+  data-video-id={videoId}
+  data-video-title={title}
+>
+  <div class="youtube-embed-lite__stage">
+    <img
+      class="youtube-embed-lite__poster"
+      src={posterUrl}
+      data-youtube-poster
+      data-fallback-src={fallbackPosterUrl}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      referrerpolicy="no-referrer"
+    />
+    <button class="youtube-embed-lite__play" type="button" aria-label={`Play ${title}`}>
+      <span class="youtube-embed-lite__play-icon" aria-hidden="true"></span>
+      <span>Play video</span>
+    </button>
+  </div>
+  <p class="youtube-embed-lite__external">
+    If the player is unavailable,
+    <a href={watchUrl} target="_blank" rel="noreferrer">open it on YouTube ↗</a>
+  </p>
+  <noscript>
+    <p class="youtube-embed-lite__noscript">
+      JavaScript is required for the embedded player.
+      <a href={watchUrl} target="_blank" rel="noreferrer">Watch on YouTube ↗</a>
+    </p>
+  </noscript>
+</div>

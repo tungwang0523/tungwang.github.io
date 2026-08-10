@@ -18,12 +18,14 @@
 
   const setMicroblogLanguage = (scope: HTMLElement, language: MicroblogLanguage) => {
     scope.dataset.language = language;
+    scope.lang = language === 'en' ? 'en' : 'zh-CN';
     scope.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((option) => {
       option.setAttribute('aria-pressed', String(option.dataset.languageOption === language));
     });
     updateMicroblogLinks(scope, language);
 
     if (window.location.pathname.startsWith('/microblog')) {
+      document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
       const url = new URL(window.location.href);
       if (language === 'en') url.searchParams.set('lang', 'en');
       else url.searchParams.delete('lang');

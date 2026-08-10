@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
 ---
 
 <PageLayout
@@ -21,7 +22,12 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__meta">Research through Design · 2025–Present</span>
         </div>
         <div class="work-project__media">
-          <img src="/pictures/research_white.png" alt="Between Strangers — a symbolic point suspended in a light field" />
+          <ResponsiveImage
+            src="/pictures/research_white.png"
+            alt="Between Strangers — a symbolic point suspended in a light field"
+            sizes="(max-width: 760px) calc(100vw - 40px), 50vw"
+            priority
+          />
         </div>
       </a>
     </div>
@@ -41,7 +47,10 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__meta">Game & Interface Design · Earlier Work</span>
         </div>
         <div class="work-project__media">
-          <img src="/pictures/work/minetrarchi/m-hero.png" alt="Minetrarchi — exploded axonometric of a traditional timber building" />
+          <ResponsiveImage
+            src="/pictures/work/minetrarchi/m-hero.png"
+            alt="Minetrarchi — exploded axonometric of a traditional timber building"
+          />
         </div>
       </a>
     </div>
@@ -58,7 +67,10 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__meta">Digital Reconstruction · Ongoing</span>
         </div>
         <div class="work-project__media">
-          <img src="/pictures/work/expocraft/e-hero.png" alt="ExpoCraft — rebuilt Expo site in Minecraft" />
+          <ResponsiveImage
+            src="/pictures/work/expocraft/e-hero.png"
+            alt="ExpoCraft — rebuilt Expo site in Minecraft"
+          />
         </div>
       </a>
     </div>
@@ -69,8 +81,8 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__number">04</span>
           <h2>The Field of Seeds</h2>
           <p>
-            A physical-computing installation of light dandelions returning to the lawn where
-            Expo 2010's Seed Cathedral once stood.
+            A physical-computing installation of light dandelions returning to the lawn where Expo
+            2010's Seed Cathedral once stood.
           </p>
           <span class="work-project__role"
             >Role — topic, concept, form & circuit design · with Li Tinghao & Xu Xuanzhi</span
@@ -78,7 +90,7 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__meta">Physical Media & Computing · Course Work</span>
         </div>
         <div class="work-project__media">
-          <img
+          <ResponsiveImage
             src="/pictures/work/field-of-seeds/fos-hero.png"
             alt="The Field of Seeds — a light dandelion field"
           />
@@ -92,13 +104,13 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__number">05</span>
           <h2>Rooftop Garden</h2>
           <p>
-            An interactive projection proposal that keeps a typhoon's leftover—the fallen iron
-            roof of Weixin Hall—as a canvas for passersby.
+            An interactive projection proposal that keeps a typhoon's leftover—the fallen iron roof
+            of Weixin Hall—as a canvas for passersby.
           </p>
           <span class="work-project__meta">Digital Media Art · Course Proposal</span>
         </div>
         <div class="work-project__media">
-          <img
+          <ResponsiveImage
             src="/pictures/work/rooftop-garden/cover.png"
             alt="Rooftop Garden — the fallen roof in the atrium"
           />
@@ -112,8 +124,8 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__number">06</span>
           <h2>The Empathetic Robotaxi</h2>
           <p>
-            An autonomous robotaxi cabin that earns passenger trust by making the vehicle's
-            effort feelable—through a pet-like persona, touch, voice and light.
+            An autonomous robotaxi cabin that earns passenger trust by making the vehicle's effort
+            feelable—through a pet-like persona, touch, voice and light.
           </p>
           <span class="work-project__role"
             >Role — topic, concept, persona & journey, IA & HMI · with Li Tinghao</span
@@ -121,7 +133,7 @@ import PageLayout from '../layouts/PageLayout.astro';
           <span class="work-project__meta">Interaction Design · Course Work</span>
         </div>
         <div class="work-project__media">
-          <img
+          <ResponsiveImage
             src="/pictures/work/robotaxi-cabin/cabin.png"
             alt="The Empathetic Robotaxi — cabin"
           />

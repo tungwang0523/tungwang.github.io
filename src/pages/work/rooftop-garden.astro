@@ -1,5 +1,11 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import FigureRow from '../../components/portfolio/FigureRow.astro';
+import PortfolioSection from '../../components/portfolio/PortfolioSection.astro';
+import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionHeader.astro';
+import ProjectFigure from '../../components/portfolio/ProjectFigure.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 ---
 
 <ProjectLayout
@@ -13,16 +19,19 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/robotaxi-cabin"
   nextTitle="The Empathetic Robotaxi"
 >
-  <section class="project-hero project-hero--roof">
-    <img
+  <ProjectHero class="project-hero--roof">
+    <ResponsiveImage
       src="/pictures/work/rooftop-garden/rg-hero.png"
       alt="The fallen iron roof in the atrium of Weixin Hall"
+      priority
     />
-    <p>The roof stayed with the building for fourteen years. Then a storm moved it into the atrium.</p>
-  </section>
+    <p>
+      The roof stayed with the building for fourteen years. Then a storm moved it into the atrium.
+    </p>
+  </ProjectHero>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>The Storm Left Something Behind</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Storm Left Something Behind" />
     <p class="portfolio-copy portfolio-copy--flush">
       During the 2024 Mid-Autumn holiday, typhoon Bebinca made landfall in Shanghai—the strongest
       typhoon to hit the city since 1949. It tore the iron roof of the car photography studio off
@@ -33,18 +42,18 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       passing by. Compared with clearing the remnant away, this project asks what it could become
       instead.
     </p>
-    <figure class="project-figure project-figure--white">
-      <img
+    <ProjectFigure class="project-figure--white">
+      <ResponsiveImage
         src="/pictures/work/rooftop-garden/rg-p3-1.png"
         alt="Weixin Hall, School of Art and Communication, Tongji University"
       />
       <figcaption>Weixin Hall · background photo by Hengzhong Lv.</figcaption>
-    </figure>
-  </section>
+    </ProjectFigure>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Fourteen Years of Memory</h2></div>
+      <PortfolioSectionHeader title="Fourteen Years of Memory" />
       <p class="portfolio-copy portfolio-copy--flush">
         The iron roof had silently accompanied the students of Weixin Hall for fourteen years.
         Instead of paying the high cost of removal, the proposal lets the building component keep
@@ -64,8 +73,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
           <small>II · Memory retention</small>
           <h3>A component that stays</h3>
           <p>
-            The roof accompanied the school for fourteen years; the memory can keep working in a
-            new role.
+            The roof accompanied the school for fourteen years; the memory can keep working in a new
+            role.
           </p>
           <b>Keep the remnant</b>
         </article>
@@ -83,39 +92,39 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         The roof was later cleared away; this document remains a proposal for what could have been.
       </p>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Spatial Analysis</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Spatial Analysis" />
     <p class="portfolio-copy portfolio-copy--flush">
       The installation sits in the atrium south of the college library. The audience walks and
       interacts along the first-floor corridor; the camera and projector face the roof remnant in
       the atrium below.
     </p>
-    <figure class="project-figure project-figure--white">
-      <img
+    <ProjectFigure class="project-figure--white">
+      <ResponsiveImage
         src="/pictures/work/rooftop-garden/rg-p4-1.png"
         alt="Spatial analysis: installation position and viewing position in Weixin Hall"
       />
       <figcaption>Installation & viewing positions.</figcaption>
-    </figure>
-  </section>
+    </ProjectFigure>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>The Interaction: A Flower Shadow</h2></div>
+      <PortfolioSectionHeader title="The Interaction: A Flower Shadow" />
       <p class="portfolio-copy portfolio-copy--flush">
         A camera watches the first-floor corridor. When a passerby walks through the interaction
         area, the computer extracts their silhouette in real time and projects a flower-composed
         human shadow onto the fallen roof in the atrium.
       </p>
-      <figure class="project-figure">
-      <img
-        src="/pictures/work/rooftop-garden/rg-p5-1.png"
-        alt="Interaction diagram: camera on the corridor, projection on the roof remnant"
-      />
-      <figcaption>Interaction diagram · flower shadow rendered with Grok.</figcaption>
-    </figure>
+      <ProjectFigure>
+        <ResponsiveImage
+          src="/pictures/work/rooftop-garden/rg-p5-1.png"
+          alt="Interaction diagram: camera on the corridor, projection on the roof remnant"
+        />
+        <figcaption>Interaction diagram · flower shadow rendered with Grok.</figcaption>
+      </ProjectFigure>
       <p class="portfolio-copy portfolio-copy--flush">
         The person appears inside the roof remnant, as if they had become part of the garden the
         roof once covered. The most beautiful flowers in the building meet the most spirited people
@@ -126,10 +135,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         abstract sculpture.
       </p>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Technical Notes</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Technical Notes" />
     <div class="method-architecture method-architecture--light">
       <article>
         <small>01</small>
@@ -143,45 +152,47 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <article>
         <small>02</small>
         <h3>Silhouette extraction</h3>
-        <p>
-          The camera's live image is processed to extract the passerby's overall outline.
-        </p>
+        <p>The camera's live image is processed to extract the passerby's overall outline.</p>
         <b>Computer vision</b>
       </article>
       <article>
         <small>03</small>
         <h3>Flower-image generation</h3>
-        <p>
-          The extracted outline is turned into a moving figure composed of flowers.
-        </p>
+        <p>The extracted outline is turned into a moving figure composed of flowers.</p>
         <b>Image generation</b>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>References</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="References" />
     <p class="portfolio-copy portfolio-copy--flush">
       The design grew from a photograph taken on 20 September 2024, the day the roof fell, and from
       the architectural documentation and on-site survey of Weixin Hall.
     </p>
-    <div class="figure-row figure-row--two">
+    <FigureRow class="figure-row--two">
       <figure>
-        <img src="/pictures/work/rooftop-garden/rg-p8-1.png" alt="The author's photograph of the fallen roof" />
+        <ResponsiveImage
+          src="/pictures/work/rooftop-garden/rg-p8-1.png"
+          alt="The author's photograph of the fallen roof"
+        />
         <figcaption>The author's photograph, 20 September 2024 · design inspiration.</figcaption>
       </figure>
       <figure class="figure--match-first">
-        <img src="/pictures/work/rooftop-garden/rg-p9-1.png" alt="Architectural documentation of Weixin Hall" />
+        <ResponsiveImage
+          src="/pictures/work/rooftop-garden/rg-p9-1.png"
+          alt="Architectural documentation of Weixin Hall"
+        />
         <figcaption>Architectural documentation of Weixin Hall.</figcaption>
       </figure>
-    </div>
-  </section>
+    </FigureRow>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--closing">
+  <PortfolioSection class="portfolio-section--closing">
     <div class="portfolio-section__label">What this is</div>
     <p class="portfolio-statement">
       A proposal that keeps an accident as memory—rather than erasing it—by making the building's
       people visible on the very piece the storm moved.
     </p>
-  </section>
+  </PortfolioSection>
 </ProjectLayout>

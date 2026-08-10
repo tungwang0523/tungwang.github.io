@@ -3,12 +3,17 @@ import mdx from '@astrojs/mdx';
 import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import rehypeImageLoading from './src/plugins/rehype-image-loading.mjs';
+import rehypeBlogImages from './src/plugins/rehype-blog-images.mjs';
+import rehypeYouTubeEmbeds from './src/plugins/rehype-youtube-embeds.mjs';
 
 export default defineConfig({
   site: 'https://tung.mockingbird.team',
   trailingSlash: 'ignore',
   integrations: [mdx(), sitemap()],
   markdown: {
-    processor: unified({ rehypePlugins: [rehypeImageLoading] }),
+    // Image structure is finalized at build time; the browser only handles interaction.
+    processor: unified({
+      rehypePlugins: [rehypeImageLoading, rehypeYouTubeEmbeds, rehypeBlogImages],
+    }),
   },
 });

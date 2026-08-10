@@ -1,5 +1,29 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import FigureRow from '../../components/portfolio/FigureRow.astro';
+import PortfolioSection from '../../components/portfolio/PortfolioSection.astro';
+import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionHeader.astro';
+import ProjectFigure from '../../components/portfolio/ProjectFigure.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import { cloudflareRemoteImage } from '../../utils/cloudflare-image.mjs';
+
+const fieldBackdrop = import.meta.env.PROD
+  ? cloudflareRemoteImage('/pictures/work/field-of-seeds/fos-p5-1.png', {
+      width: 1920,
+      fit: 'cover',
+      quality: 85,
+      format: 'auto',
+    })
+  : '/pictures/work/field-of-seeds/fos-p5-1.png';
+const fieldClosingBackdrop = import.meta.env.PROD
+  ? cloudflareRemoteImage('/pictures/work/field-of-seeds/fos-hero.png', {
+      width: 1920,
+      fit: 'cover',
+      quality: 85,
+      format: 'auto',
+    })
+  : '/pictures/work/field-of-seeds/fos-hero.png';
 ---
 
 <ProjectLayout
@@ -14,37 +38,38 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/rooftop-garden"
   nextTitle="Rooftop Garden"
 >
-  <section class="project-hero project-hero--seeds">
-    <img
+  <ProjectHero class="project-hero--seeds">
+    <ResponsiveImage
       src="/pictures/work/field-of-seeds/fos-hero.png"
       alt="A field of light dandelions"
+      priority
     />
     <p>The Seed Cathedral was dismantled. The memory stayed in the ground.</p>
-  </section>
+  </ProjectHero>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>The Seed Cathedral, Gone</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Seed Cathedral, Gone" />
     <p class="portfolio-copy portfolio-copy--flush">
       With its concept and form, the UK Pavilion's Seed Cathedral became one of the most memorable
-      images of Expo 2010 Shanghai, leaving a unique impression on the city. After the Expo
-      closed, the pavilion was dismantled, and its site is now a lawn.
+      images of Expo 2010 Shanghai, leaving a unique impression on the city. After the Expo closed,
+      the pavilion was dismantled, and its site is now a lawn.
     </p>
     <p class="portfolio-copy portfolio-copy--flush">
       This project makes a small attempt on that patch of green—so the city's Expo memory can keep
       spreading.
     </p>
-    <figure class="project-figure project-figure--white">
-      <img
+    <ProjectFigure class="project-figure--white">
+      <ResponsiveImage
         src="/pictures/work/field-of-seeds/fos-p2-1.png"
         alt="The UK Pavilion, the Seed Cathedral, Expo 2010 Shanghai"
       />
       <figcaption>The UK Pavilion — the Seed Cathedral — Expo 2010 Shanghai.</figcaption>
-    </figure>
-  </section>
+    </ProjectFigure>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>The Site</h2></div>
+      <PortfolioSectionHeader title="The Site" />
       <p class="portfolio-copy portfolio-copy--flush">
         The former Expo C zone is now Expo Culture Park—the only large green park in Shanghai's
         central urban area, still serving the city for rest and landscape.
@@ -53,25 +78,31 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         The former UK Pavilion site lies between the Shanghai Italy Center (former Italy Pavilion)
         and the Rodin Art Center (former France Pavilion): a riverside artificial lawn with trees.
       </p>
-      <div class="figure-row figure-row--two">
+      <FigureRow class="figure-row--two">
         <figure>
-          <img src="/pictures/work/field-of-seeds/fos-p3-1.png" alt="Expo Culture Park, former Expo C zone" />
+          <ResponsiveImage
+            src="/pictures/work/field-of-seeds/fos-p3-1.png"
+            alt="Expo Culture Park, former Expo C zone"
+          />
           <figcaption>Expo Culture Park, on the former Expo C zone.</figcaption>
         </figure>
         <figure>
-          <img src="/pictures/work/field-of-seeds/fos-p4-1.png" alt="The former UK Pavilion site, a riverside lawn" />
+          <ResponsiveImage
+            src="/pictures/work/field-of-seeds/fos-p4-1.png"
+            alt="The former UK Pavilion site, a riverside lawn"
+          />
           <figcaption>The former UK Pavilion site, now a riverside lawn.</figcaption>
         </figure>
-      </div>
+      </FigureRow>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section
-    class="portfolio-section portfolio-section--backdrop"
-    style="background-image: url('/pictures/work/field-of-seeds/fos-p5-1.png')"
+  <PortfolioSection
+    class="portfolio-section--backdrop"
+    style={`background-image: url('${fieldBackdrop}')`}
   >
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Design Highlights</h2></div>
+      <PortfolioSectionHeader title="Design Highlights" />
       <div class="method-architecture">
         <article>
           <small>I · Installation</small>
@@ -95,55 +126,56 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <article>
           <small>III · Participation</small>
           <h3>Walk in and light up</h3>
-          <p>
-            Beyond the wind, people can approach a dandelion and light it themselves.
-          </p>
+          <p>Beyond the wind, people can approach a dandelion and light it themselves.</p>
           <b>Presence</b>
         </article>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>The Light Dandelion</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Light Dandelion" />
     <p class="portfolio-copy portfolio-copy--flush">
-      Each light dandelion is a central white LED inside a 3D-printed porous core and a
-      translucent shell. When lit, light passes through the porous core and lands on the shell,
-      where the array of bright rectangular patches mimics dandelion seed heads.
+      Each light dandelion is a central white LED inside a 3D-printed porous core and a translucent
+      shell. When lit, light passes through the porous core and lands on the shell, where the array
+      of bright rectangular patches mimics dandelion seed heads.
     </p>
-    <div class="figure-row figure-row--portrait">
+    <FigureRow class="figure-row--portrait">
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p6-2.png" alt="Model design draft" />
+        <ResponsiveImage
+          src="/pictures/work/field-of-seeds/fos-p6-2.png"
+          alt="Model design draft"
+        />
         <figcaption>Model design draft.</figcaption>
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p6-1.png" alt="Light effect" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p6-1.png" alt="Light effect" />
         <figcaption>Light effect.</figcaption>
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p6-3.png" alt="Prototype" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p6-3.png" alt="Prototype" />
         <figcaption>Single-unit prototype.</figcaption>
       </figure>
-    </div>
-    <div class="figure-row figure-row--uniform">
+    </FigureRow>
+    <FigureRow class="figure-row--uniform">
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p7-1.png" alt="Field render 1" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p7-1.png" alt="Field render 1" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p8-1.png" alt="Field render 2" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p8-1.png" alt="Field render 2" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p9-1.png" alt="Field render 3" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p9-1.png" alt="Field render 3" />
       </figure>
-    </div>
-  </section>
+    </FigureRow>
+  </PortfolioSection>
 
-  <section
-    class="portfolio-section portfolio-section--backdrop portfolio-section--backdrop--spaced"
-    style="background-image: url('/pictures/work/field-of-seeds/fos-hero.png')"
+  <PortfolioSection
+    class="portfolio-section--backdrop portfolio-section--backdrop--spaced"
+    style={`background-image: url('${fieldClosingBackdrop}')`}
   >
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Wind and Presence</h2></div>
+      <PortfolioSectionHeader title="Wind and Presence" />
       <p class="portfolio-copy portfolio-copy--flush">
         The device uses an Arduino UNO board to control the lights.
       </p>
@@ -153,52 +185,55 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         sends a signal and the “light dandelion” lights up.
       </p>
       <p class="portfolio-copy portfolio-copy--flush">
-        The “light dandelions” are arranged in an array across the former UK Pavilion site. When
-        the wind blows, the whole “dandelion field” flickers with the wind's rhythm; participants
-        in the field can also strengthen their presence in the field through light.
+        The “light dandelions” are arranged in an array across the former UK Pavilion site. When the
+        wind blows, the whole “dandelion field” flickers with the wind's rhythm; participants in the
+        field can also strengthen their presence in the field through light.
       </p>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Making</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Making" />
     <p class="portfolio-copy portfolio-copy--flush">
       The prototype combines a 3D-printed porous core and translucent shell, a flexible metal stand
       and wire supports, felt, artificial turf, a foam base, white LEDs, an infrared sensor, a tilt
       sensor, an Arduino UNO, a breadboard and wires.
     </p>
-    <div class="figure-row figure-row--uniform">
+    <FigureRow class="figure-row--uniform">
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p12-1.png" alt="The team assembling the base" />
+        <ResponsiveImage
+          src="/pictures/work/field-of-seeds/fos-p12-1.png"
+          alt="The team assembling the base"
+        />
         <figcaption>The team assembling the base</figcaption>
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p13-1.png" alt="Material 1" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p13-1.png" alt="Material 1" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p13-2.png" alt="Material 2" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p13-2.png" alt="Material 2" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p13-3.png" alt="Material 3" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p13-3.png" alt="Material 3" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p13-4.png" alt="Material 4" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p13-4.png" alt="Material 4" />
       </figure>
       <figure>
-        <img src="/pictures/work/field-of-seeds/fos-p13-5.png" alt="Material 5" />
+        <ResponsiveImage src="/pictures/work/field-of-seeds/fos-p13-5.png" alt="Material 5" />
       </figure>
-    </div>
-  </section>
+    </FigureRow>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--closing">
+  <PortfolioSection class="portfolio-section--closing">
     <div class="portfolio-section__label">What this is</div>
     <p class="portfolio-statement">
-      A small field of light where a pavilion once stood—keeping the city's Expo memory alive in
-      its only central green park.
+      A small field of light where a pavilion once stood—keeping the city's Expo memory alive in its
+      only central green park.
     </p>
     <p class="portfolio-caption">
       The Field of Seeds was made with Li Tinghao and Xu Xuanzhi for the Physical Media and
       Computing course.
     </p>
-  </section>
+  </PortfolioSection>
 </ProjectLayout>

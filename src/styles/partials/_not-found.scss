@@ -1,0 +1,36 @@
+@use 'foundation' as *;
+
+/* ---------- 404 ---------- */
+
+.not-found {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+
+  &__code {
+    font-family: $title-font;
+    font-weight: 700;
+    font-size: clamp(120px, 28vw, 320px);
+    letter-spacing: -8px;
+    line-height: 1;
+    color: $title-color;
+  }
+
+  &__title {
+    font-family: $italic-font;
+    font-style: italic;
+    font-size: 28px;
+    margin: 8px 0 24px;
+  }
+
+  a {
+    color: $title-color;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}

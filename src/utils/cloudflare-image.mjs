@@ -1,4 +1,19 @@
 const IMAGE_HOST = 'img.mockingbird.team';
+const SITE_ORIGIN = 'https://tung.mockingbird.team';
+const IMAGE_ORIGIN = `https://${IMAGE_HOST}`;
+
+const serializeOptions = (options = {}) => {
+  const parameters = [];
+  const orderedKeys = ['width', 'height', 'fit', 'quality', 'format', 'dpr', 'anim'];
+
+  for (const key of orderedKeys) {
+    const value = options[key];
+    if (value === undefined || value === null || value === '') continue;
+    parameters.push(`${key}=${value}`);
+  }
+
+  return parameters;
+};
 
 export const isCloudflareImage = (source) => {
   if (typeof source !== 'string' || source.length === 0) return false;
@@ -15,18 +30,32 @@ export const cloudflareImage = (source, options = {}) => {
   if (!isCloudflareImage(source)) return source;
 
   const url = new URL(source);
-  const parameters = [];
-  const orderedKeys = ['width', 'height', 'fit', 'quality', 'format', 'dpr', 'anim'];
-
-  for (const key of orderedKeys) {
-    const value = options[key];
-    if (value === undefined || value === null || value === '') continue;
-    parameters.push(`${key}=${value}`);
-  }
+  const parameters = serializeOptions(options);
 
   if (parameters.length === 0) return source;
 
   return `${url.origin}/cdn-cgi/image/${parameters.join(',')}${url.pathname}${url.search}`;
+};
+
+export const isLocalSiteImage = (source) =>
+  typeof source === 'string' && source.startsWith('/pictures/');
+
+export const cloudflareRemoteImage = (source, options = {}) => {
+  if (!isLocalSiteImage(source)) return source;
+
+  const parameters = serializeOptions(options);
+  if (parameters.length === 0) return source;
+
+  const sourceUrl = new URL(source, SITE_ORIGIN);
+  return `${IMAGE_ORIGIN}/cdn-cgi/image/${parameters.join(',')}/${sourceUrl.href}`;
+};
+
+export const cloudflareRemoteSrcset = (source, widths, options = {}) => {
+  if (!isLocalSiteImage(source)) return undefined;
+
+  return widths
+    .map((width) => `${cloudflareRemoteImage(source, { ...options, width })} ${width}w`)
+    .join(', ');
 };
 
 export const cloudflareSrcset = (source, widths, options = {}) => {

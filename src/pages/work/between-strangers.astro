@@ -1,5 +1,7 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 ---
 
 <ProjectLayout
@@ -13,15 +15,19 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/minetrarchi"
   nextTitle="Minetrarchi"
 >
-  <section class="project-hero project-hero--research">
-    <img src="/pictures/research_white.png" alt="A symbolic point suspended in a light field" />
+  <ProjectHero class="project-hero--research">
+    <ResponsiveImage
+      src="/pictures/research_white.png"
+      alt="A symbolic point suspended in a light field"
+      priority
+    />
     <div class="project-hero__inner">
       <p>
         An underground corridor. A stranger’s gaze lands on you for two seconds. What just
         happened—and what could a design say about it?
       </p>
     </div>
-  </section>
+  </ProjectHero>
 
   <section class="case-section case-opening">
     <p class="case-label">01 · The design problem</p>
@@ -120,7 +126,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     </div>
     <div class="early-gallery" aria-label="Early direction visuals">
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/early-boundary.png"
           alt="A large transparent bubble surrounding a person as a semi-permeable boundary"
           loading="lazy"
@@ -128,7 +134,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <figcaption>Personal boundary as a semi-permeable bubble.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/early-gaze-object.png"
           alt="A small glowing bubble materialized where two gazes meet"
           loading="lazy"
@@ -136,7 +142,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <figcaption>Gaze contact as a materialized object.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/early-ripple.png"
           alt="Concentric ground ripples carrying the echo of an interaction"
           loading="lazy"
@@ -340,7 +346,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </article>
     </div>
     <figure class="evidence-figure">
-      <img
+      <ResponsiveImage
         src="/pictures/work/between-strangers/evidenceside.png"
         alt="Evidence-Side Image-Schematic System: the directed-path and contact backbone, the conditional bounded-access branch, and the attached quality, visibility, and detection modules"
         loading="lazy"
@@ -455,7 +461,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       aria-label="Design-side state sequence: baseline, gaze formation, return gaze, contact, withdrawal, and restoration"
     >
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside1.png"
           alt="Baseline: only the two participant domains remain"
           loading="lazy"
@@ -463,7 +469,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <figcaption>Baseline—only the two domains remain. No gaze object is visible.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside2.png"
           alt="A gaze forms: an object appears at a boundary and travels between"
           loading="lazy"
@@ -473,7 +479,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside3.png"
           alt="Return gaze: a second object appears from the opposite side"
           loading="lazy"
@@ -481,7 +487,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <figcaption>Return gaze—a second object appears from the opposite side.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside4.png"
           alt="Contact: the two objects merge into one relation object"
           loading="lazy"
@@ -489,7 +495,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <figcaption>Contact—the two objects merge. Contact is present, nothing more.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside5.png"
           alt="Withdrawal: the object splits and the withdrawing one returns"
           loading="lazy"
@@ -499,7 +505,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/designside1.png"
           alt="Restored: the imagery returns to its baseline"
           loading="lazy"
@@ -522,11 +528,13 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <h3 class="case-subheading">Three Possible Carriers</h3>
     <div class="carrier-rows">
       <figure class="carrier-row">
-        <img
-          src="/pictures/work/between-strangers/carrier-membrane.png"
-          alt="Membrane–Bubble visual carrier: transparent domains and bubble-like gaze objects"
-          loading="lazy"
-        />
+        <div class="carrier-row__visual">
+          <ResponsiveImage
+            src="/pictures/work/between-strangers/carrier-membrane.png"
+            alt="Membrane–Bubble visual carrier: transparent domains and bubble-like gaze objects"
+            loading="lazy"
+          />
+        </div>
         <figcaption class="carrier-row__panel">
           <h3>Membrane–Bubble</h3>
           <p>
@@ -536,11 +544,13 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </figcaption>
       </figure>
       <figure class="carrier-row">
-        <img
-          src="/pictures/work/between-strangers/carrier-wireframe.png"
-          alt="Wireframe–Ring visual carrier: outlined domains and hollow ring gaze objects"
-          loading="lazy"
-        />
+        <div class="carrier-row__visual">
+          <ResponsiveImage
+            src="/pictures/work/between-strangers/carrier-wireframe.png"
+            alt="Wireframe–Ring visual carrier: outlined domains and hollow ring gaze objects"
+            loading="lazy"
+          />
+        </div>
         <figcaption class="carrier-row__panel">
           <h3>Wireframe–Ring</h3>
           <p>
@@ -550,11 +560,13 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </figcaption>
       </figure>
       <figure class="carrier-row">
-        <img
-          src="/pictures/work/between-strangers/carrier-field.png"
-          alt="Field–Condensation visual carrier: particle-field domains and condensing gaze objects"
-          loading="lazy"
-        />
+        <div class="carrier-row__visual">
+          <ResponsiveImage
+            src="/pictures/work/between-strangers/carrier-field.png"
+            alt="Field–Condensation visual carrier: particle-field domains and condensing gaze objects"
+            loading="lazy"
+          />
+        </div>
         <figcaption class="carrier-row__panel">
           <h3>Field–Condensation</h3>
           <p>
@@ -580,21 +592,21 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <h3 class="case-subheading">The Proposition: Membrane–Bubble</h3>
     <div class="membrane-gallery">
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/membrane-domain.png"
           alt="A transparent membrane surrounding a person in an underground passage"
           loading="lazy"
         /><figcaption>A gazer-side membrane establishes the visible domain.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/membrane-emergence.png"
           alt="A localized deformation forming on a transparent membrane"
           loading="lazy"
         /><figcaption>A local deformation marks where an event object begins.</figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/membrane-object.png"
           alt="A transparent bubble emerging from a membrane"
           loading="lazy"
@@ -603,7 +615,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </figcaption>
       </figure>
       <figure>
-        <img
+        <ResponsiveImage
           src="/pictures/work/between-strangers/membrane-contact.png"
           alt="Two transparent bubbles merging into a reciprocal relation object"
           loading="lazy"

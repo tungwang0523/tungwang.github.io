@@ -1,5 +1,10 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PortfolioSection from '../../components/portfolio/PortfolioSection.astro';
+import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionHeader.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
 ---
 
 <ProjectLayout
@@ -13,58 +18,31 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/field-of-seeds"
   nextTitle="The Field of Seeds"
 >
-  <section class="project-hero project-hero--expo">
-    <img
+  <ProjectHero class="project-hero--expo">
+    <ResponsiveImage
       class="project-hero__figure"
       src="/pictures/work/expocraft/e-hero.png"
       alt="Rebuilt Expo site in Minecraft: Expo Axis and Culture Center"
+      priority
     />
     <p>What survives when a city designed for six months disappears?</p>
-  </section>
+  </ProjectHero>
 
-  <script is:inline>
-    (function () {
-      function setHeroHeight() {
-        var h1 = document.querySelector('.portfolio-identity h1');
-        var hero = document.querySelector('.project-hero--expo');
-        if (!h1 || !hero) return;
-        var img = hero.querySelector('.project-hero__figure');
-        if (!img || !img.naturalWidth) return;
-        var hr = hero.getBoundingClientRect();
-        var rise = hr.top - h1.getBoundingClientRect().bottom;
-        // Full-bleed width, kept at its natural aspect ratio so the figure is
-        // never cropped. If that natural height would push its top above the
-        // title's bottom edge, extend the hero band downward to fit it whole.
-        var imageHeight = window.innerWidth * img.naturalHeight / img.naturalWidth;
-        var required = Math.max(0, imageHeight - Math.max(0, rise));
-        hero.style.minHeight = required > hr.height ? required + 'px' : '';
-      }
-      setHeroHeight();
-      window.addEventListener('resize', setHeroHeight);
-      window.addEventListener('load', setHeroHeight);
-    })();
-  </script>
-
-  <section class="portfolio-section portfolio-section--video">
+  <PortfolioSection class="portfolio-section--video">
     <h3 class="video-band__title">Video Presentation</h3>
-    <div class="video-embed">
-      <iframe
-        src="https://www.youtube.com/embed/tFwcQXr1ZQg"
-        title="ExpoCraft — reconstruction in Minecraft"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    </div>
-    <img
+    <YouTubeEmbed
+      videoId="tFwcQXr1ZQg"
+      title="ExpoCraft — reconstruction in Minecraft"
+      poster="/pictures/work/expocraft/video-cover.png"
+    />
+    <ResponsiveImage
       class="video-band__bottom"
       src="/pictures/work/expocraft/video-bottom.png"
       alt="ExpoCraft site panorama"
     />
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--lead">
+  <PortfolioSection class="portfolio-section--lead">
     <div class="portfolio-section__label">The child who toured a city online</div>
     <div>
       <p class="portfolio-statement">
@@ -76,10 +54,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         then—I never got to see it, and that became the greatest sorrow of my childhood.
       </p>
       <p class="portfolio-copy portfolio-copy--flush">
-        What I had instead was the online Expo: the first world exposition to put itself on the
-        web, with <em>Future City</em>, a game that rebuilt the whole site in 3D and let you walk
-        through it. That was the first time I understood that a real place could continue to exist
-        as a navigable digital world.
+        What I had instead was the online Expo: the first world exposition to put itself on the web,
+        with <em>Future City</em>, a game that rebuilt the whole site in 3D and let you walk through
+        it. That was the first time I understood that a real place could continue to exist as a
+        navigable digital world.
       </p>
       <p class="portfolio-copy portfolio-copy--flush">
         Since I first touched Minecraft in 2012 I have spent more than a decade building in
@@ -100,8 +78,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <small>2010 · Online Expo & Future City</small>
         <h3>A virtual twin</h3>
         <p>
-          <em>Future City</em> rebuilds the whole site in 3D and lets you walk through it before
-          the real park disappears.
+          <em>Future City</em> rebuilds the whole site in 3D and lets you walk through it before the real
+          park disappears.
         </p>
       </article>
       <article>
@@ -121,10 +99,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </p>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>A City Designed to Vanish</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="A City Designed to Vanish" />
     <p class="portfolio-statement">A world exposition is an archive built to vanish.</p>
     <p class="portfolio-copy portfolio-copy--flush">
       A world exposition is a large global exhibition that showcases the achievements of nations,
@@ -143,24 +121,24 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       And it was built to last six months. When it closed, buildings were dismantled and websites
       decayed—the official online exhibition on EXPO.CN was permanently shut down in June 2026. The
       complete spatial experience, the sequence of pavilions, distances and adjacencies, became
-      harder and harder to recover. Photographs preserved individual buildings. Nobody preserved
-      the whole.
+      harder and harder to recover. Photographs preserved individual buildings. Nobody preserved the
+      whole.
     </p>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>The Decision: Rebuild It</h2></div>
+      <PortfolioSectionHeader title="The Decision: Rebuild It" />
       <p class="portfolio-copy portfolio-copy--flush">
         The ambition began as a childhood wish; the discipline that followed is the real
         contribution. A reconstruction of a vanished place is a claim about what was there, and the
         only way to make that claim trustworthy is to make every block answer to a source.
       </p>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Before a Block, a Source</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Before a Block, a Source" />
     <div class="archive-grid archive-grid--detailed">
       <article>
         <b>Official record</b><p>
@@ -193,13 +171,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </p>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head">
-        <h2>Reconstruction Is a Chain of Translation</h2>
-      </div>
+      <PortfolioSectionHeader title="Reconstruction Is a Chain of Translation" />
       <div class="expo-workflow">
         <span>Find</span><span>Verify</span><span>Locate</span><span>Measure</span><span>Model</span
         ><span>Convert</span><span>Build</span><span>Compare</span><span>Revise</span>
@@ -232,12 +208,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </article>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head">
-      <h2>The Archive Has Three Horizons</h2>
-    </div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="The Archive Has Three Horizons" />
     <div class="method-architecture method-architecture--light">
       <article>
         <small>Stage I</small><h3>Reconstruct the site</h3><p>
@@ -294,9 +268,9 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       The site map is more than navigation. It is the index that connects a building's coordinate,
       sector, country or function, evidence package, reconstruction status and revision history.
     </p>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--closing expo-closing">
+  <PortfolioSection class="portfolio-section--closing expo-closing">
     <div>
       <div class="portfolio-section__label">What this is, and what it isn't</div>
       <p class="portfolio-statement">
@@ -318,5 +292,5 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </p>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 </ProjectLayout>

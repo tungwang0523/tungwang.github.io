@@ -1,0 +1,57 @@
+@use 'foundation' as *;
+
+.site-footer {
+  border-top: 1px solid $border-color;
+  background-color: $blog-bg;
+  margin-top: auto;
+
+  &__inner {
+    max-width: var(--page-content-width, 1200px);
+    margin: 0 auto;
+    padding: 40px clamp(20px, 4vw, 64px);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 18px;
+    }
+  }
+
+  &__brand {
+    font-family: $title-font;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -1px;
+    color: $title-color;
+
+    span {
+      font-family: $italic-font;
+      font-style: italic;
+      font-weight: 400;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    a {
+      color: $subtitle-color;
+      text-decoration: none;
+      font-size: 15px;
+    }
+  }
+
+  &__meta {
+    font-size: 13px;
+    color: $subtitle-color;
+    font-family: $italic-font;
+    font-style: italic;
+  }
+}

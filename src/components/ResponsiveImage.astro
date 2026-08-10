@@ -1,0 +1,94 @@
+---
+import sharp from 'sharp';
+import path from 'node:path';
+import {
+  cloudflareRemoteImage,
+  cloudflareRemoteSrcset,
+  isLocalSiteImage,
+} from '../utils/cloudflare-image.mjs';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number | string;
+  height?: number | string;
+  widths?: number[];
+  sizes?: string;
+  quality?: number;
+  priority?: boolean;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'sync' | 'async' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  [key: string]: unknown;
+}
+
+const metadataCache = new Map<string, ReturnType<typeof sharp.prototype.metadata>>();
+
+const readMetadata = (source: string) => {
+  const cached = metadataCache.get(source);
+  if (cached) return cached;
+
+  const filePath = path.join(process.cwd(), 'public', source.replace(/^\//, ''));
+  const metadata = sharp(filePath).metadata();
+  metadataCache.set(source, metadata);
+  return metadata;
+};
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  widths = [480, 960, 1440, 1920],
+  sizes,
+  quality = 85,
+  priority = false,
+  loading,
+  decoding = 'async',
+  fetchpriority,
+  ...attributes
+} = Astro.props;
+
+const localImage = isLocalSiteImage(src);
+const rasterImage = localImage && !src.toLowerCase().endsWith('.svg');
+const metadata = rasterImage ? await readMetadata(src) : undefined;
+const intrinsicWidth = width ?? metadata?.width;
+const intrinsicHeight = height ?? metadata?.height;
+const availableWidths = metadata?.width
+  ? widths.filter((candidate) => candidate <= metadata.width!)
+  : widths;
+
+if (metadata?.width) {
+  const largestRequestedWidth = Math.max(...widths);
+  const largestUsefulWidth = Math.min(metadata.width, largestRequestedWidth);
+  if (!availableWidths.includes(largestUsefulWidth)) availableWidths.push(largestUsefulWidth);
+  availableWidths.sort((left, right) => left - right);
+}
+
+const productionTransform = import.meta.env.PROD && rasterImage;
+const fallbackWidth = Math.min(priority ? 1920 : 960, metadata?.width ?? (priority ? 1920 : 960));
+const imageOptions = { fit: 'scale-down', quality, format: 'auto' };
+const renderedSource = productionTransform
+  ? cloudflareRemoteImage(src, { ...imageOptions, width: fallbackWidth })
+  : src;
+const renderedSrcset = productionTransform
+  ? cloudflareRemoteSrcset(src, availableWidths, imageOptions)
+  : undefined;
+const renderedSizes = renderedSrcset
+  ? (sizes ?? (priority ? '100vw' : 'auto, (max-width: 800px) calc(100vw - 40px), 1180px'))
+  : undefined;
+---
+
+<img
+  src={renderedSource}
+  srcset={renderedSrcset}
+  sizes={renderedSizes}
+  alt={alt}
+  width={intrinsicWidth}
+  height={intrinsicHeight}
+  loading={loading ?? (priority ? 'eager' : 'lazy')}
+  decoding={decoding}
+  fetchpriority={fetchpriority ?? (priority ? 'high' : undefined)}
+  {...attributes}
+/>

@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import BlogImageEnhancer from '../../components/BlogImageEnhancer.astro';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
@@ -32,6 +31,7 @@ const fmt = (d: Date) =>
   heroImage={post.data.cover}
   pageTitle={`${post.data.title} - Tung‘s Blog`}
   pageClass="blog-page blog-post-page"
+  lang="zh-CN"
 >
   <div class="post-meta">
     <span>{post.data.author}</span>
@@ -51,11 +51,9 @@ const fmt = (d: Date) =>
 
   <hr style="border:0;border-top:1px solid #94918f;margin:32px 0;" />
 
-  <div class="prose">
+  <div class="prose" data-lightbox-scope>
     <Content />
   </div>
-
-  <BlogImageEnhancer />
 
   <nav class="post-nav" aria-label="Adjacent essays">
     {

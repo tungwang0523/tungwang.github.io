@@ -1,5 +1,10 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import FigureRow from '../../components/portfolio/FigureRow.astro';
+import PortfolioSection from '../../components/portfolio/PortfolioSection.astro';
+import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionHeader.astro';
+import ProjectHero from '../../components/portfolio/ProjectHero.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 ---
 
 <ProjectLayout
@@ -14,16 +19,13 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
   nextHref="/work/between-strangers"
   nextTitle="Between Strangers"
 >
-  <section class="project-hero project-hero--robotaxi">
-    <img
-      src="/pictures/work/robotaxi-cabin/cabin.png"
-      alt="Robotaxi cabin"
-    />
+  <ProjectHero class="project-hero--robotaxi">
+    <ResponsiveImage src="/pictures/work/robotaxi-cabin/cabin.png" alt="Robotaxi cabin" priority />
     <p>The car is not a machine that drives you. It is a companion that tries.</p>
-  </section>
+  </ProjectHero>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Trust Is the Design Problem</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Trust Is the Design Problem" />
     <p class="portfolio-copy portfolio-copy--flush">
       Passengers of autonomous vehicles receive too little information about the vehicle's
       surroundings and performance. This information asymmetry makes them anxious: they worry the
@@ -83,11 +85,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <b>Healing mode</b>
       </article>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark portfolio-section--compact">
+  <PortfolioSection class="portfolio-section--dark portfolio-section--compact">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Questionnaire</h2></div>
+      <PortfolioSectionHeader title="Questionnaire" />
       <p class="portfolio-copy portfolio-copy--flush">
         A survey asked different groups about their experience with today's taxis and their view of
         driverless robotaxis.
@@ -133,18 +135,18 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </div>
       <h3 class="portfolio-subhead">Willingness</h3>
       <p class="portfolio-copy portfolio-copy--flush">
-        Roughly half of the respondents were willing to try a robotaxi; the rest were interested
-        but cautious, uncertain, or unwilling.
+        Roughly half of the respondents were willing to try a robotaxi; the rest were interested but
+        cautious, uncertain, or unwilling.
       </p>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--compact">
-    <div class="portfolio-section__head"><h2>Persona: Zhang Hong</h2></div>
+  <PortfolioSection class="portfolio-section--compact">
+    <PortfolioSectionHeader title="Persona: Zhang Hong" />
     <div class="slide-section">
       <h3 class="slide-section__title">User Positioning</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-9.png" alt="User positioning" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-9.png" alt="User positioning" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-copy portfolio-copy--flush">
@@ -153,8 +155,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         <p class="portfolio-section__label">User positioning</p>
         <p class="portfolio-copy portfolio-copy--flush">
           A young user willing to try new things. He commutes by taxi, mainly for commuting and
-          business; his schedule is tight and he has a strong sense of time; his rides are long
-          and often caught in traffic.
+          business; his schedule is tight and he has a strong sense of time; his rides are long and
+          often caught in traffic.
         </p>
       </div>
     </div>
@@ -224,8 +226,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>Experience</small>
             <h3>Arrive without drama</h3>
             <p>
-              Arrive at the airport without scares — and feel that the taxi empathizes with him
-              and is trying.
+              Arrive at the airport without scares — and feel that the taxi empathizes with him and
+              is trying.
             </p>
             <b>Empathy</b>
           </article>
@@ -262,7 +264,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">The Key-Path Journey</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-14.png" alt="Key-path journey map" />
+        <ResponsiveImage
+          src="/pictures/work/robotaxi-cabin/slide-14.png"
+          alt="Key-path journey map"
+        />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">The journey in three stages</p>
@@ -271,9 +276,9 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>Stage 1 · Boarding</small>
             <h3>Trusting the car to drive</h3>
             <p>
-              Behavior: confirms the route and destination; watches the car drive; does
-              non-driving tasks. Emotion: anticipation. Trust: doubts whether the autonomous
-              vehicle can drive safely.
+              Behavior: confirms the route and destination; watches the car drive; does non-driving
+              tasks. Emotion: anticipation. Trust: doubts whether the autonomous vehicle can drive
+              safely.
             </p>
             <b>Doubt</b>
           </article>
@@ -281,9 +286,9 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>Stage 2 · Mid-jam</small>
             <h3>Trusting the car to be on time</h3>
             <p>
-              Behavior: keeps monitoring the traffic; judges the cause and expected delay;
-              replans the schedule; tries alternate routes. Emotion: disappointment, doubt,
-              anxiety. Trust: doubts on-time arrival; cannot feel the car's empathy.
+              Behavior: keeps monitoring the traffic; judges the cause and expected delay; replans
+              the schedule; tries alternate routes. Emotion: disappointment, doubt, anxiety. Trust:
+              doubts on-time arrival; cannot feel the car's empathy.
             </p>
             <b>Anxiety</b>
           </article>
@@ -331,91 +336,94 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         </div>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Information Architecture</h2></div>
-    <p class="portfolio-copy portfolio-copy--flush">
-      The cabin information is layered by urgency. The first layer: speed, basic safety, arrival
-      time, next maneuver, destination distance. The second layer: more detailed safety and
-      route information. The third layer: internal component states, destination
-      recommendations and coordination with the dispatch backend.
-    </p>
-    <div class="slide-section">
-      <h3 class="slide-section__title">Information Architecture &amp; Layout</h3>
-      <figure class="slide-section__figure">
-        <img
-          src="/pictures/work/robotaxi-cabin/slide-16.png"
-          alt="Information architecture and layout design"
-        />
-      </figure>
-      <div class="slide-section__body">
-        <p class="portfolio-section__label">Emotional interaction system</p>
-        <div class="method-architecture">
-          <article>
-            <small>01</small>
-            <h3>Virtual persona</h3>
-            <p>Voice and touch interaction with the virtual persona.</p>
-            <b>Dialogue</b>
-          </article>
-          <article>
-            <small>02</small>
-            <h3>Real-time emotion monitoring</h3>
-            <p>Monitors the passenger's emotional state in real time.</p>
-            <b>Sense</b>
-          </article>
-          <article>
-            <small>03</small>
-            <h3>Task-based empathy</h3>
-            <p>Empathy understanding built on the passenger's task and context.</p>
-            <b>Understand</b>
-          </article>
-        </div>
-        <p class="portfolio-section__label">Three layers of information</p>
-        <div class="method-architecture">
-          <article>
-            <small>Layer 1</small>
-            <h3>Core status</h3>
-            <p>
-              Speed, basic safety and perception of the surroundings, whether the ride is safe,
-              battery level; arrival time, next maneuver, destination distance, whether the
-              arrival is on time.
-            </p>
-            <b>At a glance</b>
-          </article>
-          <article>
-            <small>Layer 2</small>
-            <h3>Detail on demand</h3>
-            <p>
-              More detailed safety information such as exterior damage; route choices and
-              per-section driving conditions; destination status and recommendations.
-            </p>
-            <b>On request</b>
-          </article>
-          <article>
-            <small>Layer 3</small>
-            <h3>Internal state</h3>
-            <p>Component-level states such as battery temperature and tire pressure.</p>
-            <b>Deep system</b>
-          </article>
+      <PortfolioSectionHeader title="Information Architecture" />
+      <p class="portfolio-copy portfolio-copy--flush">
+        The cabin information is layered by urgency. The first layer: speed, basic safety, arrival
+        time, next maneuver, destination distance. The second layer: more detailed safety and route
+        information. The third layer: internal component states, destination recommendations and
+        coordination with the dispatch backend.
+      </p>
+      <div class="slide-section">
+        <h3 class="slide-section__title">Information Architecture &amp; Layout</h3>
+        <figure class="slide-section__figure">
+          <ResponsiveImage
+            src="/pictures/work/robotaxi-cabin/slide-16.png"
+            alt="Information architecture and layout design"
+          />
+        </figure>
+        <div class="slide-section__body">
+          <p class="portfolio-section__label">Emotional interaction system</p>
+          <div class="method-architecture">
+            <article>
+              <small>01</small>
+              <h3>Virtual persona</h3>
+              <p>Voice and touch interaction with the virtual persona.</p>
+              <b>Dialogue</b>
+            </article>
+            <article>
+              <small>02</small>
+              <h3>Real-time emotion monitoring</h3>
+              <p>Monitors the passenger's emotional state in real time.</p>
+              <b>Sense</b>
+            </article>
+            <article>
+              <small>03</small>
+              <h3>Task-based empathy</h3>
+              <p>Empathy understanding built on the passenger's task and context.</p>
+              <b>Understand</b>
+            </article>
+          </div>
+          <p class="portfolio-section__label">Three layers of information</p>
+          <div class="method-architecture">
+            <article>
+              <small>Layer 1</small>
+              <h3>Core status</h3>
+              <p>
+                Speed, basic safety and perception of the surroundings, whether the ride is safe,
+                battery level; arrival time, next maneuver, destination distance, whether the
+                arrival is on time.
+              </p>
+              <b>At a glance</b>
+            </article>
+            <article>
+              <small>Layer 2</small>
+              <h3>Detail on demand</h3>
+              <p>
+                More detailed safety information such as exterior damage; route choices and
+                per-section driving conditions; destination status and recommendations.
+              </p>
+              <b>On request</b>
+            </article>
+            <article>
+              <small>Layer 3</small>
+              <h3>Internal state</h3>
+              <p>Component-level states such as battery temperature and tire pressure.</p>
+              <b>Deep system</b>
+            </article>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>An Empathetic Vehicle</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="An Empathetic Vehicle" />
     <p class="portfolio-copy portfolio-copy--flush">
       The core move is to treat the vehicle as a living companion rather than a control panel.
-      Passengers tap the touchable leather to wake the car's persona, talk to it, and read its
-      state through a minimal kaomoji-like face and ambient light across the windshield.
+      Passengers tap the touchable leather to wake the car's persona, talk to it, and read its state
+      through a minimal kaomoji-like face and ambient light across the windshield.
     </p>
     <div class="slide-section">
       <h3 class="slide-section__title">Interaction Design</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-17.png" alt="Interaction design" />
+        <ResponsiveImage
+          src="/pictures/work/robotaxi-cabin/slide-17.png"
+          alt="Interaction design"
+        />
       </figure>
       <div class="slide-section__body">
         <div class="method-architecture method-architecture--light method-architecture--stacked">
@@ -461,7 +469,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">The Vehicle Persona</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-18.png" alt="The empathetic vehicle persona" />
+        <ResponsiveImage
+          src="/pictures/work/robotaxi-cabin/slide-18.png"
+          alt="The empathetic vehicle persona"
+        />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-copy portfolio-copy--flush">Pet-like interaction design.</p>
@@ -482,9 +493,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <div>
               <h3>Natural tactile interaction</h3>
               <p>
-                Embodied touch enters the human–vehicle relationship, mimicking how people
-                naturally interact with pets, building closeness and strengthening trust in the
-                vehicle.
+                Embodied touch enters the human–vehicle relationship, mimicking how people naturally
+                interact with pets, building closeness and strengthening trust in the vehicle.
               </p>
             </div>
           </article>
@@ -493,8 +503,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <div>
               <h3>Bionic natural response</h3>
               <p>
-                When the passenger interacts by touch, the vehicle's expressions, sounds and
-                lights respond subtly—simulating emotional exchange between a person and a pet.
+                When the passenger interacts by touch, the vehicle's expressions, sounds and lights
+                respond subtly—simulating emotional exchange between a person and a pet.
               </p>
             </div>
           </article>
@@ -503,18 +513,18 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <div>
               <h3>Gamified interaction in specific scenarios</h3>
               <p>
-                In specific scenarios, tactile play with the vehicle improves the passenger's
-                mood, deepens the human–vehicle bond and strengthens empathy-trust in the vehicle.
+                In specific scenarios, tactile play with the vehicle improves the passenger's mood,
+                deepens the human–vehicle bond and strengthens empathy-trust in the vehicle.
               </p>
             </div>
           </article>
         </div>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section">
-    <div class="portfolio-section__head"><h2>Validation Scenarios</h2></div>
+  <PortfolioSection>
+    <PortfolioSectionHeader title="Validation Scenarios" />
     <p class="portfolio-copy portfolio-copy--flush">
       The concept is walked through six scenarios on the journey to the airport: normal driving;
       congestion I (the car explains the accident and replans the route); congestion II (the car
@@ -526,7 +536,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Normal Driving</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-22.png" alt="Normal driving" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-22.png" alt="Normal driving" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -540,11 +550,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <h3>Welcomes and reassures</h3>
             <p>
               “Welcome, passenger ending in 1234. Destination: Shanghai Hongqiao International
-              Airport. Estimated arrival in 24 minutes — 30 km in total.” · (The passenger taps
-              the phone on the NFC pad) Asks for the last digits of the phone number. · “I know
-              you are taking flight CA0001 to Beijing. I will dynamically replan the route based
-              on your flight. Trust me — I will get you there on time.” · (In an emergency)
-              “I am about to make an urgent turn to avoid danger. Please hold on.”
+              Airport. Estimated arrival in 24 minutes — 30 km in total.” · (The passenger taps the
+              phone on the NFC pad) Asks for the last digits of the phone number. · “I know you are
+              taking flight CA0001 to Beijing. I will dynamically replan the route based on your
+              flight. Trust me — I will get you there on time.” · (In an emergency) “I am about to
+              make an urgent turn to avoid danger. Please hold on.”
             </p>
             <b>Car behavior</b>
           </article>
@@ -561,7 +571,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Congestion I — The Car Explains</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-23.png" alt="Congestion I" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-23.png" alt="Congestion I" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -576,8 +586,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <h3>Explains and promises</h3>
             <p>
               (The passenger pats and asks what is wrong) Explains the situation — “There is a
-              sudden accident ahead; the passage time is expected to be about 20 minutes. Trust me
-              — I will dynamically replan the route to get you there on time.”
+              sudden accident ahead; the passage time is expected to be about 20 minutes. Trust me —
+              I will dynamically replan the route to get you there on time.”
             </p>
             <b>Car behavior</b>
           </article>
@@ -594,7 +604,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Congestion II — Play to Clear Obstacles</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-24.png" alt="Congestion II" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-24.png" alt="Congestion II" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -608,10 +618,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>The car</small>
             <h3>Monitors and plays</h3>
             <p>
-              Detects the passenger's emotional change. · Plays music to ease the mood. · Engages
-              in gamified interaction — “Don't worry, trust me, I will get you there on time.”
-              · “The accident ahead is being handled — stroke the panel and clear the obstacles
-              with me! When they are cleared, the road ahead will open.”
+              Detects the passenger's emotional change. · Plays music to ease the mood. · Engages in
+              gamified interaction — “Don't worry, trust me, I will get you there on time.” · “The
+              accident ahead is being handled — stroke the panel and clear the obstacles with me!
+              When they are cleared, the road ahead will open.”
             </p>
             <b>Car behavior</b>
           </article>
@@ -631,7 +641,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Congestion II · Continued</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-25.png" alt="Congestion II, continued" />
+        <ResponsiveImage
+          src="/pictures/work/robotaxi-cabin/slide-25.png"
+          alt="Congestion II, continued"
+        />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -645,10 +658,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>The car</small>
             <h3>Monitors and plays</h3>
             <p>
-              Detects the passenger's emotional change. · Plays music to ease the mood. · Engages
-              in gamified interaction — “Don't worry, trust me, I will get you there on time.”
-              · “The accident ahead is being handled — stroke the panel and clear the obstacles
-              with me! When they are cleared, the road ahead will open.”
+              Detects the passenger's emotional change. · Plays music to ease the mood. · Engages in
+              gamified interaction — “Don't worry, trust me, I will get you there on time.” · “The
+              accident ahead is being handled — stroke the panel and clear the obstacles with me!
+              When they are cleared, the road ahead will open.”
             </p>
             <b>Car behavior</b>
           </article>
@@ -668,7 +681,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Congestion III — Leaving the Jam</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-26.png" alt="Congestion III" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-26.png" alt="Congestion III" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -691,7 +704,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Urgent Driving I — Showing the Effort</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-27.png" alt="Urgent driving I" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-27.png" alt="Urgent driving I" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -704,8 +717,8 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>The car</small>
             <h3>Shows the effort</h3>
             <p>
-              After receiving the request or detecting the passenger's state — changes the lights
-              · plays the engine sound.
+              After receiving the request or detecting the passenger's state — changes the lights ·
+              plays the engine sound.
             </p>
             <b>Car behavior</b>
           </article>
@@ -716,7 +729,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <div class="slide-section">
       <h3 class="slide-section__title">Urgent Driving II · Continued</h3>
       <figure class="slide-section__figure">
-        <img src="/pictures/work/robotaxi-cabin/slide-28.png" alt="Urgent driving II" />
+        <ResponsiveImage src="/pictures/work/robotaxi-cabin/slide-28.png" alt="Urgent driving II" />
       </figure>
       <div class="slide-section__body">
         <p class="portfolio-section__label">Overview</p>
@@ -729,57 +742,69 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
             <small>The car</small>
             <h3>Shows the effort</h3>
             <p>
-              After receiving the request or detecting the passenger's state — changes the lights
-              · plays the engine sound.
+              After receiving the request or detecting the passenger's state — changes the lights ·
+              plays the engine sound.
             </p>
             <b>Car behavior</b>
           </article>
         </div>
       </div>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--dark">
+  <PortfolioSection class="portfolio-section--dark">
     <div class="portfolio-section__inner">
-      <div class="portfolio-section__head"><h2>Evaluation</h2></div>
+      <PortfolioSectionHeader title="Evaluation" />
       <p class="portfolio-copy portfolio-copy--flush">
         The design was evaluated through a cognitive walkthrough, followed by usability tests with
         trust, SART, SUS and acceptance scales.
       </p>
-      <div class="figure-row figure-row--two figure-row--wide">
+      <FigureRow class="figure-row--two figure-row--wide">
         <figure>
-          <img src="/pictures/work/robotaxi-cabin/rt-p30-2.png" alt="Cognitive walkthrough 1" />
+          <ResponsiveImage
+            src="/pictures/work/robotaxi-cabin/rt-p30-2.png"
+            alt="Cognitive walkthrough 1"
+          />
           <figcaption>Cognitive walkthrough.</figcaption>
         </figure>
         <figure>
-          <img src="/pictures/work/robotaxi-cabin/rt-p30-4.png" alt="Cognitive walkthrough 2" />
+          <ResponsiveImage
+            src="/pictures/work/robotaxi-cabin/rt-p30-4.png"
+            alt="Cognitive walkthrough 2"
+          />
           <figcaption>Cognitive walkthrough.</figcaption>
         </figure>
-      </div>
+      </FigureRow>
       <h3 class="portfolio-subhead">Results</h3>
       <p class="portfolio-copy portfolio-copy--flush">
         Compared with a lifeless HMI, the empathetic cabin reduces the abruptness of situational
         changes, keeps passengers alert and improves situational awareness (SART). Passengers find
-        the vehicle's behavior easier to understand and trust its information and decisions
-        (trust scale), although some feel less familiar with the more complex system. Usability
-        improves, especially independent use without professional help (SUS), and acceptance is
+        the vehicle's behavior easier to understand and trust its information and decisions (trust
+        scale), although some feel less familiar with the more complex system. Usability improves,
+        especially independent use without professional help (SUS), and acceptance is
         higher—passengers form more positive emotions, find the vehicle more effective, and see a
         real need for the system.
       </p>
-      <div class="figure-row figure-row--two">
+      <FigureRow class="figure-row--two">
         <figure>
-          <img src="/pictures/work/robotaxi-cabin/rt-p33-1.png" alt="Usability test process 1" />
+          <ResponsiveImage
+            src="/pictures/work/robotaxi-cabin/rt-p33-1.png"
+            alt="Usability test process 1"
+          />
           <figcaption>Usability test session.</figcaption>
         </figure>
         <figure>
-          <img src="/pictures/work/robotaxi-cabin/rt-p33-2.png" alt="Usability test process 2" />
+          <ResponsiveImage
+            src="/pictures/work/robotaxi-cabin/rt-p33-2.png"
+            alt="Usability test process 2"
+          />
           <figcaption>Usability test session.</figcaption>
         </figure>
-      </div>
+      </FigureRow>
     </div>
-  </section>
+  </PortfolioSection>
 
-  <section class="portfolio-section portfolio-section--closing">
+  <PortfolioSection class="portfolio-section--closing">
     <div class="portfolio-section__label">What this is</div>
     <p class="portfolio-statement">
       A cabin HMI that treats the autonomous vehicle as an empathetic companion—making its effort
@@ -789,5 +814,5 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       The Empathetic Robotaxi was designed with Li Tinghao for the Interaction Design course,
       supervised by Prof. You Fang.
     </p>
-  </section>
+  </PortfolioSection>
 </ProjectLayout>

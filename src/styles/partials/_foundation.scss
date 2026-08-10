@@ -1,0 +1,117 @@
+@use 'sass:color';
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Italic-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Variable.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Variable.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Italic-Variable.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tung Sans CJK';
+  src: url('/fonts/NotoSansSC-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tung Serif CJK';
+  src: url('/fonts/NotoSerifSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tung Serif CJK';
+  src: url('/fonts/NotoSerifSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--page-nav-height, 0px) + 16px);
+}
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+a {
+  color: inherit;
+}
+
+$title-font: 'Space Grotesk', 'Tung Sans CJK', sans-serif;
+$subtitle-font: 'Inter', 'Tung Sans CJK', sans-serif;
+$italic-font: 'Playfair Display', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
+$blog-bg: #e9e6e4;
+$body-bg: #121418;
+$title-color: #121418;
+$subtitle-color: #161419;
+$border-color: #94918f;
+
+body {
+  background-color: $blog-bg;
+  display: flex;
+  font-family: $subtitle-font;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  font-weight: 400;
+  min-height: 100vh;
+  margin: 0;
+}

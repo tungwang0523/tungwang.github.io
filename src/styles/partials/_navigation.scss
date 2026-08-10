@@ -1,0 +1,198 @@
+@use 'foundation' as *;
+
+/* ---------- Hamburger / mobile menu ---------- */
+
+.menu-mobile-bar {
+  display: none;
+
+  @media screen and (max-width: 1030px) {
+    position: fixed;
+    z-index: 55;
+    inset: 0 0 auto;
+    display: block;
+    height: 64px;
+    background: $blog-bg;
+  }
+
+  &__brand {
+    display: none;
+
+    @media screen and (max-width: 768px) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      color: $title-color;
+      font-family: $title-font;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      text-decoration: none;
+      opacity: 0;
+      transform: translate(-50%, calc(-50% + 5px));
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+      pointer-events: none;
+
+      &.is-visible {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-mobile-bar__brand {
+    transition: none;
+  }
+}
+
+/* Minimal hamburger icon: bare bars, animates to an X. */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 18px;
+  left: 24px;
+  z-index: 60;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: $subtitle-color;
+
+  @media screen and (max-width: 1030px) {
+    display: inline-block;
+  }
+
+  &__bar {
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform 0.25s ease,
+      opacity 0.2s ease,
+      top 0.25s ease;
+  }
+
+  &__bar:nth-of-type(1) {
+    top: 4px;
+  }
+  &__bar:nth-of-type(2) {
+    top: 13px;
+  }
+  &__bar:nth-of-type(3) {
+    top: 22px;
+  }
+
+  &.is-open {
+    .menu-toggle__bar:nth-of-type(1) {
+      top: 13px;
+      transform: rotate(45deg);
+    }
+    .menu-toggle__bar:nth-of-type(2) {
+      opacity: 0;
+    }
+    .menu-toggle__bar:nth-of-type(3) {
+      top: 13px;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ---------- Mobile sizing tweaks ---------- */
+
+@media screen and (max-width: 1030px) {
+  /* The vw-based menu font-size collapses to nothing once the menu becomes
+     a drawer — anchor it back to readable sizes. */
+  .blog .blog-menu.mention {
+    font-size: 18px;
+  }
+
+  .is-menu .blog-menu.mention {
+    margin-top: 32px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  .blog {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    overflow: visible;
+    padding: 80px 0 40px;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+  }
+
+  .microblog-sidebar .site-marquee {
+    width: calc(100% + 40px);
+  }
+
+  [data-featured-next] {
+    display: none !important;
+  }
+
+  /* On phones each featured article scrolls in the normal page flow */
+  .blog-header-container {
+    overflow: visible;
+    height: auto;
+    scroll-snap-type: none;
+    border-right: 0;
+
+    & > * {
+      min-height: 0;
+      padding-top: clamp(28px, 6vw, 48px);
+    }
+  }
+
+  .blog-big__title {
+    font-size: 48px;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+
+  .blog-article img {
+    height: auto;
+    max-height: 50vh;
+  }
+
+  .blog-article h2 {
+    font-size: 22px;
+  }
+
+  .blog-article a {
+    font-size: 20px;
+  }
+}
+
+/* Smooth scroll for in-page nav */
+:root {
+  --page-nav-height: 75px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--page-nav-height) + 16px);
+}
+
+@media screen and (max-width: 560px) {
+  :root {
+    --page-nav-height: 102px;
+  }
+}

@@ -12,6 +12,13 @@ const {
 } = Astro.props;
 ---
 
-<marquee width="100%" direction="left">
-  {items.map((text) => <span>{text}</span>)}
-</marquee>
+<div class="site-marquee" aria-label={items.join('. ')}>
+  <div class="site-marquee__track">
+    <div class="site-marquee__group">
+      {items.map((text) => <span>{text}</span>)}
+    </div>
+    <div class="site-marquee__group" aria-hidden="true">
+      {items.map((text) => <span>{text}</span>)}
+    </div>
+  </div>
+</div>
