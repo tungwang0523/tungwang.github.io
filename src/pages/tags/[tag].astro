@@ -6,6 +6,7 @@ import {
   cloudflareSrcset,
   imagePresets,
 } from '../../utils/cloudflare-image.mjs';
+import { formatSiteDate } from '../../utils/date';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -24,8 +25,6 @@ export async function getStaticPaths() {
 }
 
 const { tag, posts } = Astro.props;
-const fmt = (d: Date) =>
-  `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
 const coverImage = (source: string) => cloudflareImage(source, {
   width: 640,
   fit: 'scale-down',
@@ -64,7 +63,7 @@ const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.li
           </div>
           <div>
             <div class="post-card__meta">
-              {fmt(post.data.date)} · {post.data.author}
+              {formatSiteDate(post.data.date)} · {post.data.author}
             </div>
             <h2 class="post-card__title">{post.data.bigTitle}</h2>
             <p class="post-card__excerpt">{post.data.excerpt}</p>

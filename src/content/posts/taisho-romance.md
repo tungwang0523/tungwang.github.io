@@ -4,12 +4,11 @@ bigTitle: '日本大正时期的社会繁荣——《大正浪漫》读后感'
 headline: '日本大正时期的社会繁荣——《大正浪漫》读后感'
 excerpt: '通过YOASOBI的火热歌曲《大正浪漫》，我回溯到同名原小说，并回望昙花一现的日本大正时期的社会繁荣。'
 author: 'Tung Wang'
-readTime: '11 Min Read'
 date: 2022-03-17
 cover: 'https://img.mockingbird.team/images/2026/08/b76cb5a60fa0f54c132c1cf8e858ea60.webp'
 featured: false
 pageNumber: '读书笔记'
-tags: ["读书笔记", "大正浪漫", "日本"]
+tags: ['读书笔记', '历史', '日本']
 draft: false
 ---
 > 本文用简体中文书写。

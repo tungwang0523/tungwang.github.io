@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import {
+  cloudflareImage,
+  cloudflareSrcset,
+  imagePresets,
+} from '../utils/cloudflare-image.mjs';
+import { calculateReadingTime } from '../utils/reading-time';
+import { formatSiteDate } from '../utils/date';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const headline = post.data.emphasis
+  ? post.data.headline.replace('{emphasis}', `__${post.data.emphasis}__`)
+  : post.data.headline;
+const parts = headline.split('__');
+const readTime = calculateReadingTime(post.body);
+const cover = cloudflareImage(post.data.cover, {
+  width: 640,
+  fit: 'scale-down',
+  quality: imagePresets.listing.quality,
+  format: 'auto',
+});
+const srcset = cloudflareSrcset(post.data.cover, imagePresets.listing.widths, {
+  fit: 'scale-down',
+  quality: imagePresets.listing.quality,
+  format: 'auto',
+});
+---
+
+<a class="post-card" href={`/blog/${post.id}`}>
+  <div class="post-card__cover">
+    <img
+      src={cover}
+      srcset={srcset}
+      sizes={imagePresets.listing.sizes}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div>
+    <div class="post-card__meta">
+      {formatSiteDate(post.data.date)} · {post.data.author} · {readTime}
+    </div>
+    <h2 class="post-card__title">
+      {parts.map((part, index) => (index % 2 === 1 ? <span>{part}</span> : <>{part}</>))}
+    </h2>
+    <p class="post-card__excerpt">{post.data.excerpt}</p>
+    {
+      post.data.tags.length > 0 && (
+        <div class="post-card__tags">
+          {post.data.tags.map((tag) => <span>{tag}</span>)}
+        </div>
+      )
+    }
+  </div>
+</a>

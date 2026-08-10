@@ -63,10 +63,6 @@
   font-display: swap;
 }
 
-[id] {
-  scroll-margin-top: calc(var(--page-nav-height, 0px) + 16px);
-}
-
 * {
   outline: none;
   box-sizing: border-box;

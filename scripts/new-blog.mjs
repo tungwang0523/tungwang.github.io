@@ -25,7 +25,6 @@ bigTitle: 'Untitled'
 headline: 'Untitled'
 excerpt: 'A short summary of this post.'
 author: 'Tung Wang'
-readTime: '5 Min Read'
 date: ${date}
 cover: '/hero.jpeg'
 featured: false

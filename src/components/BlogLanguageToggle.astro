@@ -1,0 +1,80 @@
+---
+interface Props {
+  current?: 'zh' | 'en';
+  zhHref?: string;
+  enHref?: string;
+}
+
+const { current = 'zh', zhHref, enHref } = Astro.props;
+const linked = Boolean(zhHref || enHref);
+---
+
+<div class="blog-language" role="group" aria-label="Blog language">
+  {
+    linked ? (
+      <>
+        {zhHref ? (
+          <a class="blog-language__zh" href={zhHref} aria-current={current === 'zh' ? 'page' : undefined}>中文</a>
+        ) : (
+          <span class="blog-language__zh" aria-disabled="true">中文</span>
+        )}
+        <i aria-hidden="true">/</i>
+        {enHref ? (
+          <a href={enHref} aria-current={current === 'en' ? 'page' : undefined}>EN</a>
+        ) : (
+          <span aria-disabled="true">EN</span>
+        )}
+      </>
+    ) : (
+      <>
+        <button class="blog-language__zh" type="button" data-blog-language-option="zh" aria-pressed="true">中文</button>
+        <i aria-hidden="true">/</i>
+        <button type="button" data-blog-language-option="en" aria-pressed="false">EN</button>
+      </>
+    )
+  }
+</div>
+
+{
+  !linked && (
+    <script>
+      type BlogLanguage = 'zh' | 'en';
+
+      const setBlogLanguage = (scope: HTMLElement, language: BlogLanguage) => {
+        scope.dataset.blogLanguage = language;
+        document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
+        scope.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.blogLanguageOption === language));
+        });
+        document
+          .querySelectorAll<HTMLAnchorElement>('.page-nav a[href^="/blog"], .site-footer__nav a[href^="/blog"]')
+          .forEach((anchor) => {
+            anchor.href = language === 'en' ? '/blog?lang=en' : '/blog';
+          });
+
+        const url = new URL(window.location.href);
+        if (language === 'en') url.searchParams.set('lang', 'en');
+        else url.searchParams.delete('lang');
+        window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+      };
+
+      const initialiseBlogLanguage = () => {
+        document.querySelectorAll<HTMLElement>('[data-blog-language-scope]').forEach((scope) => {
+          if (scope.dataset.blogLanguageReady === 'true') return;
+          scope.dataset.blogLanguageReady = 'true';
+          const language: BlogLanguage = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
+          setBlogLanguage(scope, language);
+
+          scope.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
+            button.addEventListener('click', () => {
+              setBlogLanguage(scope, button.dataset.blogLanguageOption === 'en' ? 'en' : 'zh');
+            });
+          });
+        });
+      };
+
+      initialiseBlogLanguage();
+      document.addEventListener('astro:page-load', initialiseBlogLanguage);
+    </script>
+  )
+}

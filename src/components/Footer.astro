@@ -1,5 +1,10 @@
 ---
+interface Props {
+  blogHref?: string;
+}
+
 const year = new Date().getFullYear();
+const { blogHref = '/blog' } = Astro.props;
 ---
 
 <footer class="site-footer">
@@ -9,7 +14,7 @@ const year = new Date().getFullYear();
       <a href="/">Home</a>
       <a href="/academic">Research</a>
       <a href="/work">Work</a>
-      <a href="/blog">Blog</a>
+      <a href={blogHref}>Blog</a>
       <a href="/microblog">Microblog</a>
       <a href="/rss.xml">RSS</a>
     </nav>

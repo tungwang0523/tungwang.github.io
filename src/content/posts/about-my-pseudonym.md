@@ -4,12 +4,11 @@ bigTitle: '我为什么要叫嘲鸫？'
 headline: '我为什么要叫嘲鸫？'
 excerpt: '我为什么要叫嘲鸫？'
 author: 'Tung Wang'
-readTime: '1 Min Read'
 date: 2020-03-03
-cover: '/hero.jpeg'
+cover: 'https://img.mockingbird.team/images/2026/08/f1e158f967adb888ff4e447d8bf5ba76.webp'
 featured: false
 pageNumber: '嘲鸫杂谈'
-tags: ["杂谈"]
+tags: ['随笔', '自述']
 draft: false
 ---
 > 本文用简体中文书写。

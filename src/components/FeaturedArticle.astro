@@ -1,4 +1,6 @@
 ---
+import { formatSiteDate } from '../utils/date';
+
 interface Props {
   bigTitle: string;
   date?: Date;
@@ -31,15 +33,7 @@ const {
   imageFetchPriority = 'low',
 } = Astro.props;
 
-const formatted = dateLabel ?? (date
-  ? new Intl.DateTimeFormat('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    })
-      .format(date)
-      .replaceAll('/', '.')
-  : '');
+const formatted = dateLabel ?? (date ? formatSiteDate(date) : '');
 
 const parts = emphasis ? headline.split('{emphasis}') : [headline];
 ---

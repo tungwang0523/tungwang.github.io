@@ -4,22 +4,20 @@ bigTitle: '漫游在上海街头 —— 2020/08 上海游记'
 headline: '漫游在上海街头 —— 2020/08 上海游记'
 excerpt: '我在2020年7月底和8月初在上海旅行。'
 author: 'Tung Wang'
-readTime: '24 Min Read'
 date: 2020-08-15
 cover: 'https://img.mockingbird.team/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
 featured: false
 pageNumber: '旅行日志'
-tags: ["游记", "上海", "摄影"]
+tags: ['游记', '城市', '上海']
 draft: false
 ---
 > 本文用简体中文书写。
 
-<article class="message message-immersive is-primary">
-<div class="message-body">
-<i class="fas fa-pen"></i>
-</i>    本游记尚未完成，正在持续更新中。</a>
-</div>
-</article>
+> 2026年8月10日笔者按：
+> 
+> 本文最后一次更新在北京时间 2021年12月24日 22:20，之后一直停更，没有意外的话后续也不会有更新计划了。毕竟我已经在上海住了两年有余了，且这次旅行已经过去六年了。
+>
+> 本文观点不代表本人现在的观点。
 
 # DAY 1
 一大早，我就从巴彦淖尔出发，坐火车到呼和浩特，从呼和浩特白塔国际机场起飞。
@@ -806,19 +804,5 @@ draft: false
 ![](https://user-assets.sxlcdn.com/images/786672/FoKwt6C84KVuDxTxuJ3VhWe8A1NY.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
 
 台风快要登陆了，天也阴了下来。
-
-<article class="message is-info"><div class="message-header">
-更新信息
-</div><div class="message-body">
-本游记正在持续更新
-
-最后更新时间 2021/12/20 22:00
-
-最后修改时间 2021/12/24 22:20
-
-2021/12/19 本游记从旧博客站点迁移至本博客站点
-
-本游记预计于2022年2月完成
-</div></article>
 
 本推文中若无特别的出处说明，版权均归作者所有，其中部分图片作者已经授权图库商售卖。这些照片未经许可禁止商用，转载时必须显要地表明作者和出处。若版权受到侵害，作者及其授权图库商拥有通过法律手段追究赔偿的权利。

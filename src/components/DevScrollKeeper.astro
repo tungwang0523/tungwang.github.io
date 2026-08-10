@@ -23,7 +23,6 @@
         document.documentElement.removeAttribute('data-dev-anchor-hidden');
         return;
       }
-
       const blockSelector = ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > p, :scope > blockquote, :scope > ul, :scope > ol, :scope > pre, :scope > .blog-image-grid';
       const blocks = Array.from(article.querySelectorAll(blockSelector));
       let updateFrame = 0;

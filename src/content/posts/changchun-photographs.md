@@ -4,12 +4,11 @@ bigTitle: '在长春我拍过哪些好看的照片？'
 headline: '在长春我拍过哪些好看的照片？'
 excerpt: '在长春我拍过哪些好看的照片？'
 author: 'Tung Wang'
-readTime: '5 Min Read'
 date: 2021-10-27
 cover: 'https://picx.zhimg.com/v2-1f067171da34de88b014958ed388e967.jpg?source=2c26e567'
 featured: false
 pageNumber: 'Journal'
-tags: []
+tags: ['摄影', '城市', '长春']
 draft: false
 ---
 

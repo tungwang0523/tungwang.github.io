@@ -4,12 +4,11 @@ bigTitle: '吉林大学大学生摄影比赛一等奖——风云基础楼'
 headline: '吉林大学大学生摄影比赛一等奖——风云基础楼'
 excerpt: '这幅摄影作品《风云基础楼》有幸在2021年底获得了第四届吉林大学大学生校园摄影大赛的一等奖。在本日志中，我将会分享关于这张照片的很多故事。'
 author: 'Tung Wang'
-readTime: '5 Min Read'
 date: 2021-12-16
 cover: 'https://img.mockingbird.team/images/2026/08/f7a415619c782f8183d4e51d570e0b64.webp'
 featured: false
 pageNumber: '摄影日志'
-tags: ["摄影", "比赛", "长春", "伪满洲国国务院旧址", "历史建筑"]
+tags: ['摄影', '建筑', '长春']
 draft: false
 ---
 > 本文用简体中文书写。

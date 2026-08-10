@@ -794,9 +794,25 @@
   }
 
   &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     font-family: $italic-font;
     font-style: italic;
     font-size: 30px;
+
+    &__arrow {
+      flex: 0 0 1em;
+      width: 1em;
+      height: 1em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transform: translateY(0.02em);
+    }
   }
 }
 

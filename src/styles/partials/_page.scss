@@ -90,7 +90,7 @@
 .page-main {
   flex: 1;
   width: 100%;
-  max-width: 920px;
+  max-width: var(--page-content-width);
   margin: 0 auto;
   padding: clamp(32px, 6vw, 80px) clamp(20px, 4vw, 32px);
 }

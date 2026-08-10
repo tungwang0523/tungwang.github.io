@@ -1,34 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import {
-  cloudflareImage,
-  cloudflareSrcset,
-  imagePresets,
-} from '../../utils/cloudflare-image.mjs';
+import BlogLanguageToggle from '../../components/BlogLanguageToggle.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => +b.data.date - +a.data.date,
 );
+const postsZh = posts.filter((post) => post.data.lang === 'zh');
+const postsEn = posts.filter((post) => post.data.lang === 'en');
 
-const fmt = (d: Date) =>
-  `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
-
-const renderHeadline = (headline: string, emphasis?: string) => {
-  if (!emphasis) return headline;
-  return headline.replace('{emphasis}', `__${emphasis}__`);
-};
-const coverImage = (source: string) => cloudflareImage(source, {
-  width: 640,
-  fit: 'scale-down',
-  quality: imagePresets.listing.quality,
-  format: 'auto',
-});
-const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.listing.widths, {
-  fit: 'scale-down',
-  quality: imagePresets.listing.quality,
-  format: 'auto',
-});
 ---
 
 <PageLayout
@@ -39,41 +20,17 @@ const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.li
   pageClass="blog-page"
   lang="zh-CN"
 >
-  <div class="post-list">
-    {
-      posts.map((post) => {
-        const parts = renderHeadline(post.data.headline, post.data.emphasis).split('__');
-        return (
-          <a class="post-card" href={`/blog/${post.id}`}>
-            <div class="post-card__cover">
-              <img
-                src={coverImage(post.data.cover)}
-                srcset={coverSrcset(post.data.cover)}
-                sizes={imagePresets.listing.sizes}
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div>
-              <div class="post-card__meta">
-                {fmt(post.data.date)} · {post.data.author} · {post.data.readTime}
-              </div>
-              <h2 class="post-card__title">
-                {parts.map((part, i) => (i % 2 === 1 ? <span>{part}</span> : <>{part}</>))}
-              </h2>
-              <p class="post-card__excerpt">{post.data.excerpt}</p>
-              {post.data.tags.length > 0 && (
-                <div class="post-card__tags">
-                  {post.data.tags.map((tag) => (
-                    <span>{tag}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </a>
-        );
-      })
-    }
+  <div class="blog-index" data-blog-language-scope data-blog-language="zh">
+    <div class="blog-index__language"><BlogLanguageToggle /></div>
+    <section data-blog-language-panel="zh" aria-label="中文文章">
+      <div class="post-list">
+        {postsZh.map((post) => <BlogPostCard post={post} />)}
+      </div>
+    </section>
+    <section data-blog-language-panel="en" aria-label="English posts">
+      <div class="post-list">
+        {postsEn.map((post) => <BlogPostCard post={post} />)}
+      </div>
+    </section>
   </div>
 </PageLayout>

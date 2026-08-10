@@ -7,6 +7,7 @@ interface Props {
   cta?: string;
   ctaEn?: string;
   href?: string;
+  showArrow?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   cta = 'Explore',
   ctaEn = cta,
   href,
+  showArrow = false,
 } = Astro.props;
 ---
 
@@ -33,6 +35,11 @@ const {
       )}
       <div class="circle-footer">
         <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+        {showArrow && (
+          <svg class="circle-footer__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 5l14 14M5 19h14V5" />
+          </svg>
+        )}
       </div>
     </a>
   ) : (
@@ -47,6 +54,11 @@ const {
       )}
       <div class="circle-footer">
         <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+        {showArrow && (
+          <svg class="circle-footer__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 5l14 14M5 19h14V5" />
+          </svg>
+        )}
       </div>
     </div>
   )

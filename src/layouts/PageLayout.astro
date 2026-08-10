@@ -16,9 +16,10 @@ interface Props {
   pageTitle?: string;
   pageClass?: string;
   lang?: string;
+  blogHref?: string;
 }
 
-const { title, description, heroImage, pageTitle, pageClass, lang = 'en' } = Astro.props;
+const { title, description, heroImage, pageTitle, pageClass, lang = 'en', blogHref = '/blog' } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
@@ -45,7 +46,7 @@ const heroSrcset = heroImage
         <nav aria-label="Primary">
           <a href="/academic">Research</a>
         <a href="/work">Work</a>
-        <a href="/blog">Blog</a>
+        <a href={blogHref}>Blog</a>
         <a href="/microblog">Microblog</a>
       </nav>
       </div>
@@ -77,6 +78,6 @@ const heroSrcset = heroImage
       </div>
     </main>
 
-    <Footer />
+    <Footer blogHref={blogHref} />
   </div>
 </BaseLayout>

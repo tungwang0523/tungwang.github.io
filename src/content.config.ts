@@ -10,7 +10,6 @@ const posts = defineCollection({
     headline: z.string(),
     excerpt: z.string(),
     author: z.string(),
-    readTime: z.string().default('5 Min Read'),
     date: z.coerce.date(),
     cover: z.union([
       z.string().url(),
@@ -20,6 +19,8 @@ const posts = defineCollection({
     pageNumber: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    lang: z.enum(['zh', 'en']).default('zh'),
+    translationKey: z.string().optional(),
   }),
 });
 
