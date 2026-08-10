@@ -91,6 +91,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
 
         let currentId = '';
         let frame = 0;
+        let navigationRequest = 0;
 
         const updateDesktopFades = () => {
           if (!desktopToc || !desktopList) return;
@@ -161,10 +162,46 @@ const label = lang === 'en' ? 'Contents' : '目录';
             const target = id ? document.getElementById(id) : null;
             if (!target) return;
             event.preventDefault();
-            target.scrollIntoView({ behavior: 'auto', block: 'start' });
-            window.history.replaceState({}, '', `#${id}`);
-            if (mobileToc) mobileToc.open = false;
-            requestUpdate();
+
+            const request = ++navigationRequest;
+            const mobileVisible = Boolean(
+              mobileToc && getComputedStyle(mobileToc).display !== 'none',
+            );
+            if (mobileVisible && mobileToc) mobileToc.open = false;
+
+            const navigate = () => {
+              if (request !== navigationRequest) return;
+              const navigationHeight = Number.parseFloat(
+                getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+              ) || 0;
+              const collapsedTocHeight = mobileVisible && mobileToc
+                ? mobileToc.querySelector('summary')?.getBoundingClientRect().height ?? 0
+                : 0;
+              const top = window.scrollY + target.getBoundingClientRect().top
+                - navigationHeight
+                - collapsedTocHeight
+                - 16;
+
+              document.documentElement.dataset.tocNavigating = '';
+              window.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'auto' });
+              window.history.replaceState(window.history.state, '', `#${id}`);
+              currentId = '';
+              requestUpdate();
+
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  if (request === navigationRequest) {
+                    document.documentElement.removeAttribute('data-toc-navigating');
+                  }
+                });
+              });
+            };
+
+            if (mobileVisible) {
+              window.requestAnimationFrame(() => window.requestAnimationFrame(navigate));
+            } else {
+              navigate();
+            }
           });
         });
 
@@ -187,3 +224,9 @@ const label = lang === 'en' ? 'Contents' : '目录';
     </script>
   )
 }
+
+<style is:global>
+  html[data-toc-navigating] {
+    scroll-behavior: auto !important;
+  }
+</style>
