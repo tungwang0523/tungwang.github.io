@@ -811,7 +811,7 @@ The moment I reached the river, Skytree appeared on the opposite bank. I had see
 
 Half past six came, and my friend showed no sign of starting. I finally asked what the delay was and only then remembered that Japan is one hour ahead of China: it was still half past five there. With an hour to spare, I went next door to Sensōji.
 
-The two younger labmates had visited Sensōji as well. Over dinner that night, they showed me things bought at the temple and along Nakamise. Both had purchased water-sound bells. The ones here were gold, unlike the pink bell I bought the year before at the Tale of Genji Museum in Uji. Perhaps these were sold as omamori, which would explain why one of them was reluctant to show hers. They had also bought several dolls called Yukio. 　　　,　　　　　　.　　　　　　　　　　　,　　　　　　　　　　　　　　,　　　　.　　　　,　　　　,　　　　—　　　,　　　　　　　　　　　　. I thought the Yukio dolls were adorable and imagined buying one myself when I reached Sensōji,　　,　　.
+The two younger labmates had visited Sensōji as well. Over dinner that night, they showed me things bought at the temple and along Nakamise. Both had purchased water-sound bells. The ones here were gold, unlike the pink bell I bought the year before at the Tale of Genji Museum in Uji. Perhaps these were sold as omamori, which would explain why one of them was reluctant to show hers. They had also bought several dolls called Yukio. I thought the Yukio dolls were adorable and imagined buying one myself when I reached Sensōji.
 
 Unfortunately, I arrived too late. Every shop along Nakamise had closed. “Is there ever a time when Sensōji has nobody in it?” one of them had asked. This, apparently, was that time.
 
@@ -833,7 +833,7 @@ I asked ChatGPT whether it was acceptable to draw again at Sensōji. It said tha
 
 Before the temple’s Kannondō, I was forced to switch on my camera and complete the online meeting.
 
-Leaving Sensōji, 　　　　　　　　　　　　　　　　　　　　　.　　　,　　　　　　　　　,　　　　　　　　　　　,　　　　　　: “　　　　”.　　　　　　　　　　?　　　　　　　　　　. Alas.
+I left Sensōji. Alas.
 
 Every journey contains moments of unhappiness, even misery. Today is your birthday by the lunar calendar, I reminded myself. What should I eat for dinner?
 

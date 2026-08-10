@@ -300,6 +300,11 @@
     }
   }
 
+  .blog-post-page.has-blog-toc .prose :is(h1, h2, h3) {
+    /* Global scroll-padding already reserves the page navigation and 16px gap. */
+    scroll-margin-top: 48px;
+  }
+
   .blog-toc--desktop {
     display: none;
   }

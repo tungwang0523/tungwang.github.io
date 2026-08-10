@@ -80,6 +80,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
           .filter((heading): heading is HTMLElement => heading instanceof HTMLElement);
         const currentLabel = article.querySelector<HTMLElement>('[data-toc-current]');
         const mobileToc = article.querySelector<HTMLDetailsElement>('[data-blog-toc-mobile]');
+        const mobileSummary = mobileToc?.querySelector<HTMLElement>('summary');
         const mobileList = mobileToc?.querySelector<HTMLOListElement>('nav ol');
         const desktopToc = article.querySelector<HTMLElement>('[data-blog-toc-desktop]');
         const desktopList = desktopToc?.querySelector<HTMLOListElement>('[data-blog-toc-list]');
@@ -122,20 +123,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
           updateDesktopFades();
         };
 
-        const update = () => {
-          frame = 0;
-          const navigationHeight = Number.parseFloat(
-            getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
-          ) || 0;
-          const threshold = navigationHeight + 40;
-          updateMobileStickyState(navigationHeight);
-          let active = headings[0];
-
-          for (const heading of headings) {
-            if (heading.getBoundingClientRect().top <= threshold) active = heading;
-            else break;
-          }
-
+        const setActive = (active: HTMLElement) => {
           if (active.id === currentId) return;
           currentId = active.id;
 
@@ -149,6 +137,44 @@ const label = lang === 'en' ? 'Contents' : '目录';
             const activeIndex = ids.indexOf(currentId);
             followActiveDesktopItem(activeIndex);
           }
+        };
+
+        const update = () => {
+          frame = 0;
+          const navigationHeight = Number.parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+          ) || 0;
+          const mobileVisible = Boolean(
+            mobileToc && getComputedStyle(mobileToc).display !== 'none',
+          );
+          updateMobileStickyState(navigationHeight);
+          // On mobile, the reading line is always the lower rule of the TOC bar.
+          // Reading it directly avoids falling back to the page-navigation rule
+          // when sticky-position detection differs by a fractional CSS pixel.
+          const threshold = mobileVisible && mobileSummary
+            ? mobileSummary.getBoundingClientRect().bottom + 16
+            : navigationHeight + 40;
+
+          let active = headings[0];
+
+          for (const heading of headings) {
+            if (heading.getBoundingClientRect().top <= threshold + 2) active = heading;
+            else break;
+          }
+
+          // The final headings cannot always reach the reading line because the
+          // document has no more content below them. At the page end, use the
+          // last heading that has entered the viewport instead.
+          const atDocumentEnd = window.innerHeight + window.scrollY
+            >= document.documentElement.scrollHeight - 2;
+          if (atDocumentEnd) {
+            const lastEnteredHeading = [...headings]
+              .reverse()
+              .find((heading) => heading.getBoundingClientRect().top < window.innerHeight);
+            if (lastEnteredHeading) active = lastEnteredHeading;
+          }
+
+          setActive(active);
         };
 
         const requestUpdate = () => {
@@ -167,38 +193,26 @@ const label = lang === 'en' ? 'Contents' : '目录';
             const mobileVisible = Boolean(
               mobileToc && getComputedStyle(mobileToc).display !== 'none',
             );
-            if (mobileVisible && mobileToc) mobileToc.open = false;
 
             const navigate = () => {
               if (request !== navigationRequest) return;
-              const navigationHeight = Number.parseFloat(
-                getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
-              ) || 0;
-              const collapsedTocHeight = mobileVisible && mobileToc
-                ? mobileToc.querySelector('summary')?.getBoundingClientRect().height ?? 0
-                : 0;
-              const top = window.scrollY + target.getBoundingClientRect().top
-                - navigationHeight
-                - collapsedTocHeight
-                - 16;
-
-              document.documentElement.dataset.tocNavigating = '';
-              window.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'auto' });
+              const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                ? 'auto'
+                : 'smooth';
+              target.scrollIntoView({ behavior, block: 'start' });
               window.history.replaceState(window.history.state, '', `#${id}`);
-              currentId = '';
               requestUpdate();
-
-              window.requestAnimationFrame(() => {
-                window.requestAnimationFrame(() => {
-                  if (request === navigationRequest) {
-                    document.documentElement.removeAttribute('data-toc-navigating');
-                  }
-                });
-              });
             };
 
-            if (mobileVisible) {
+            const navigateAfterLayout = () => {
               window.requestAnimationFrame(() => window.requestAnimationFrame(navigate));
+            };
+
+            if (mobileVisible && mobileToc?.open) {
+              mobileToc.addEventListener('toggle', navigateAfterLayout, { once: true });
+              mobileToc.open = false;
+            } else if (mobileVisible) {
+              navigateAfterLayout();
             } else {
               navigate();
             }
@@ -224,9 +238,3 @@ const label = lang === 'en' ? 'Contents' : '目录';
     </script>
   )
 }
-
-<style is:global>
-  html[data-toc-navigating] {
-    scroll-behavior: auto !important;
-  }
-</style>
