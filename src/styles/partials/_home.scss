@@ -180,6 +180,9 @@
   &-header {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
   }
 
   &-article {
@@ -330,15 +333,25 @@
 }
 
 .featured-content {
+  flex: 1 1 auto;
   min-height: 0;
 
+  &__media {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
   &__image {
-    flex: 0 0 auto;
     display: block;
-    width: 100%;
+    width: auto;
     height: auto !important;
-    max-height: none !important;
+    max-width: 100%;
+    max-height: 100% !important;
     object-fit: contain !important;
+    object-position: left top;
   }
 
   &__image[data-section='research'] {

@@ -44,15 +44,17 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
     <div class="blog-menu small-title date">{formatted}</div>
   </div>
   <div class="blog-article featured-content">
-    <img
-      class="featured-content__image"
-      src={cover}
-      alt={bigTitle}
-      loading={imageLoading}
-      decoding="async"
-      fetchpriority={imageFetchPriority}
-      data-section={bigTitle.toLowerCase()}
-    />
+    <div class="featured-content__media">
+      <img
+        class="featured-content__image"
+        src={cover}
+        alt={bigTitle}
+        loading={imageLoading}
+        decoding="async"
+        fetchpriority={imageFetchPriority}
+        data-section={bigTitle.toLowerCase()}
+      />
+    </div>
     <div class="featured-content__copy">
       <h2>
         {
