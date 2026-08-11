@@ -93,6 +93,10 @@ const label = lang === 'en' ? 'Contents' : '目录';
         let currentId = '';
         let frame = 0;
         let navigationRequest = 0;
+        let navigationTarget: HTMLElement | null = null;
+        let correctionStart = 0;
+        let correctionUntil = 0;
+        let correctionFrame = 0;
 
         const updateDesktopFades = () => {
           if (!desktopToc || !desktopList) return;
@@ -182,6 +186,44 @@ const label = lang === 'en' ? 'Contents' : '目录';
           frame = window.requestAnimationFrame(update);
         };
 
+        const readingLine = () => {
+          const navigationHeight = Number.parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+          ) || 0;
+          const mobileVisible = Boolean(
+            mobileToc && getComputedStyle(mobileToc).display !== 'none',
+          );
+          return mobileVisible && mobileSummary
+            ? mobileSummary.getBoundingClientRect().bottom + 16
+            : navigationHeight + 40;
+        };
+
+        const correctNavigationPosition = () => {
+          correctionFrame = 0;
+          if (!navigationTarget || performance.now() > correctionUntil) {
+            navigationTarget = null;
+            return;
+          }
+          // Do not interrupt the initial smooth movement. Once it has normally
+          // settled, compensate for fonts and lazy images expanding above it.
+          if (performance.now() - correctionStart < 650) return;
+          const offset = navigationTarget.getBoundingClientRect().top - readingLine();
+          if (Math.abs(offset) > 2) {
+            window.scrollBy({ top: offset, left: 0, behavior: 'auto' });
+          }
+          requestUpdate();
+        };
+
+        const requestPositionCorrection = () => {
+          if (!navigationTarget || correctionFrame) return;
+          correctionFrame = window.requestAnimationFrame(correctNavigationPosition);
+        };
+
+        const cancelPositionCorrection = () => {
+          navigationTarget = null;
+          correctionUntil = 0;
+        };
+
         links.forEach((link) => {
           link.addEventListener('click', (event) => {
             const id = link.dataset.tocLink;
@@ -199,9 +241,17 @@ const label = lang === 'en' ? 'Contents' : '目录';
               const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
                 ? 'auto'
                 : 'smooth';
+              navigationTarget = target;
+              correctionStart = performance.now();
+              correctionUntil = correctionStart + 12000;
               target.scrollIntoView({ behavior, block: 'start' });
               window.history.replaceState(window.history.state, '', `#${id}`);
               requestUpdate();
+              [700, 1200, 2200, 4000, 7000, 11000].forEach((delay) => {
+                window.setTimeout(() => {
+                  if (request === navigationRequest) requestPositionCorrection();
+                }, delay);
+              });
             };
 
             const navigateAfterLayout = () => {
@@ -217,6 +267,16 @@ const label = lang === 'en' ? 'Contents' : '目录';
               navigate();
             }
           });
+        });
+
+        const articleResizeObserver = new ResizeObserver(requestPositionCorrection);
+        articleResizeObserver.observe(article);
+        window.addEventListener('wheel', cancelPositionCorrection, { passive: true });
+        window.addEventListener('touchstart', cancelPositionCorrection, { passive: true });
+        window.addEventListener('keydown', (event) => {
+          if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+            cancelPositionCorrection();
+          }
         });
 
         window.addEventListener('scroll', requestUpdate, { passive: true });

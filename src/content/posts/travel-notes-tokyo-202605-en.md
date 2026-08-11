@@ -833,7 +833,16 @@ I asked ChatGPT whether it was acceptable to draw again at Sensōji. It said tha
 
 Before the temple’s Kannondō, I was forced to switch on my camera and complete the online meeting.
 
-I left Sensōji. Alas.
+I left Sensōji.
+
+> Inside the wall, a swing; outside, the road.<br/>
+> A passerby beyond the wall, a laughing girl within.<br/>
+> Her laughter fades; her voice grows still.<br/>
+> The tender-hearted is left troubled by the heartless.
+>
+> — Su Shi, “Butterflies in Love with Flowers: A Spring Scene”
+
+Alas.
 
 Every journey contains moments of unhappiness, even misery. Today is your birthday by the lunar calendar, I reminded myself. What should I eat for dinner?
 
