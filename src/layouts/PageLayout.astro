@@ -14,6 +14,7 @@ interface Props {
   lang?: string;
   blogHref?: string;
   canonicalUrl?: string;
+  navigationOrigin?: string;
 }
 
 const {
@@ -25,7 +26,10 @@ const {
   lang = 'en',
   blogHref = '/blog',
   canonicalUrl,
+  navigationOrigin = '',
 } = Astro.props;
+const navigationBase = navigationOrigin.replace(/\/$/, '');
+const siteHref = (path: string) => `${navigationBase}${path}`;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
@@ -54,12 +58,12 @@ const heroSrcset = heroImage
   <div class:list={['page', pageClass]}>
     <header class="page-nav">
       <div class="page-nav__inner">
-        <a class="page-nav__brand" href="/">Tung’s</a>
+        <a class="page-nav__brand" href={siteHref('/')}>Tung’s</a>
         <nav aria-label="Primary">
           <a href="https://cv.tung.mockingbird.team/">Research</a>
-          <a href="/work">Work</a>
-          <a href={blogHref}>Blog</a>
-          <a href="/microblog">Microblog</a>
+          <a href={siteHref('/work')}>Work</a>
+          <a href={siteHref(blogHref)}>Blog</a>
+          <a href={siteHref('/microblog')}>Microblog</a>
         </nav>
       </div>
     </header>
@@ -90,6 +94,6 @@ const heroSrcset = heroImage
       </div>
     </main>
 
-    <Footer blogHref={blogHref} />
+    <Footer blogHref={blogHref} navigationOrigin={navigationOrigin} />
   </div>
 </BaseLayout>

@@ -1,22 +1,25 @@
 ---
 interface Props {
   blogHref?: string;
+  navigationOrigin?: string;
 }
 
 const year = new Date().getFullYear();
-const { blogHref = '/blog' } = Astro.props;
+const { blogHref = '/blog', navigationOrigin = '' } = Astro.props;
+const navigationBase = navigationOrigin.replace(/\/$/, '');
+const siteHref = (path: string) => `${navigationBase}${path}`;
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__brand">Tung’s</div>
     <nav class="site-footer__nav" aria-label="Footer">
-      <a href="/">Home</a>
+      <a href={siteHref('/')}>Home</a>
       <a href="https://cv.tung.mockingbird.team/">Research</a>
-      <a href="/work">Work</a>
-      <a href={blogHref}>Blog</a>
-      <a href="/microblog">Microblog</a>
-      <a href="/rss.xml">RSS</a>
+      <a href={siteHref('/work')}>Work</a>
+      <a href={siteHref(blogHref)}>Blog</a>
+      <a href={siteHref('/microblog')}>Microblog</a>
+      <a href={siteHref('/rss.xml')}>RSS</a>
     </nav>
     <div class="site-footer__meta">© {year} Tung Wang.</div>
   </div>
