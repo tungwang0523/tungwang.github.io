@@ -780,24 +780,24 @@
 
 .cv-interest-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
   padding: 0;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
 
   li {
     display: flex;
-    align-items: flex-end;
-    min-height: clamp(100px, 8vw, 112px);
-    padding: clamp(20px, 2vw, 24px);
+    align-items: flex-start;
+    min-height: 88px;
+    padding: 16px;
     background: rgba(18, 20, 24, 0.055);
     color: $title-color;
     font-family: $title-font;
-    font-size: clamp(18px, 1.6vw, 20px);
+    font-size: clamp(15px, 1.35vw, 18px);
     font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.5px;
+    line-height: 1.12;
+    letter-spacing: -0.35px;
     transition:
       background-color 0.2s ease,
       color 0.2s ease;
@@ -810,11 +810,16 @@
     }
   }
 
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 820px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media screen and (max-width: 520px) {
     grid-template-columns: 1fr;
 
     li {
-      min-height: 112px;
+      min-height: 58px;
+      padding: 14px 16px;
     }
   }
 }
