@@ -9,6 +9,7 @@ interface Props {
   image?: string;
   lang?: string;
   canonicalUrl?: string;
+  rootClass?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   image,
   lang = 'en',
   canonicalUrl,
+  rootClass,
 } = Astro.props;
 
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
@@ -25,7 +27,7 @@ const isDev = import.meta.env.DEV;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class={rootClass}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -52,7 +54,7 @@ const isDev = import.meta.env.DEV;
     <title>{title}</title>
     {isDev && <DevScrollKeeper />}
   </head>
-  <body>
+  <body class={rootClass}>
     <slot />
     <ImageLightbox />
     <YouTubeLoader />
