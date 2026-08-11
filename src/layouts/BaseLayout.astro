@@ -52,6 +52,28 @@ const isDev = import.meta.env.DEV;
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <title>{title}</title>
+    {
+      rootClass === 'home-page' && (
+        <script is:inline>
+          (() => {
+            const updateHomeViewportHeight = () => {
+              const height = window.visualViewport?.height ?? window.innerHeight;
+              document.documentElement.style.setProperty(
+                '--home-viewport-height',
+                `${Math.round(height)}px`,
+              );
+            };
+
+            updateHomeViewportHeight();
+            window.visualViewport?.addEventListener('resize', updateHomeViewportHeight);
+            window.addEventListener('resize', updateHomeViewportHeight);
+            window.addEventListener('orientationchange', () => {
+              window.setTimeout(updateHomeViewportHeight, 120);
+            });
+          })();
+        </script>
+      )
+    }
     {isDev && <DevScrollKeeper />}
   </head>
   <body class={rootClass}>
