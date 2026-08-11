@@ -182,8 +182,11 @@ body.menu-open {
   }
 
   body.home-page {
-    position: fixed;
-    inset: 0;
+    /* iOS Chrome offsets a fixed root body by the dynamic browser chrome
+       (54px on the measured device), even though visualViewport.offsetTop is
+       reported as zero. Keep the root in normal flow so the homepage starts
+       at the visual viewport origin. */
+    position: relative;
   }
 
   body {
