@@ -103,6 +103,10 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
           Microblog
         </button>
       </nav>
+      <div class="mobile-featured__swipe-hint" data-featured-swipe-hint aria-hidden="true">
+        <span>Swipe left</span>
+        <i><b></b></i>
+      </div>
     </section>
   </div>
 </BaseLayout>
@@ -115,6 +119,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     const track = featured.querySelector<HTMLElement>('[data-featured-track]');
     const wordTrack = featured.querySelector<HTMLElement>('[data-featured-word-track]');
     const currentTitle = featured.querySelector<HTMLElement>('[data-featured-title-current]');
+    const swipeHint = featured.querySelector<HTMLElement>('[data-featured-swipe-hint]');
     const buttons = Array.from(
       featured.querySelectorAll<HTMLButtonElement>('[data-featured-index]'),
     );
@@ -125,6 +130,19 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     let wheelAccumulator = 0;
     let wheelGestureActive = false;
     let wheelEndTimer: number | undefined;
+    let hintTimer: number | undefined;
+    let touchStartX: number | null = null;
+    let touchStartY: number | null = null;
+    let touchHintShown = false;
+
+    const showSwipeHint = () => {
+      if (!swipeHint || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.clearTimeout(hintTimer);
+      swipeHint.classList.remove('is-visible');
+      void swipeHint.offsetWidth;
+      swipeHint.classList.add('is-visible');
+      hintTimer = window.setTimeout(() => swipeHint.classList.remove('is-visible'), 1650);
+    };
 
     const update = () => {
       frame = 0;
@@ -190,11 +208,58 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
 
         wheelGestureActive = true;
         const currentIndex = Math.round(track.scrollLeft / (track.clientWidth || 1));
+        if (currentIndex === 0) {
+          showSwipeHint();
+          return;
+        }
         const direction = wheelAccumulator > 0 ? 1 : -1;
         const nextIndex = Math.max(0, Math.min(buttons.length - 1, currentIndex + direction));
         buttons[nextIndex]?.click();
       },
       { passive: false },
+    );
+
+    track.addEventListener(
+      'touchstart',
+      (event) => {
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        touchHintShown = false;
+      },
+      { passive: true },
+    );
+
+    track.addEventListener(
+      'touchmove',
+      (event) => {
+        if (
+          activeIndex !== 0 ||
+          touchHintShown ||
+          touchStartX === null ||
+          touchStartY === null
+        )
+          return;
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        const distanceX = touch.clientX - touchStartX;
+        const distanceY = touch.clientY - touchStartY;
+        if (Math.abs(distanceY) < 20 || Math.abs(distanceY) <= Math.abs(distanceX) * 1.15) return;
+        touchHintShown = true;
+        showSwipeHint();
+      },
+      { passive: true },
+    );
+
+    track.addEventListener(
+      'touchend',
+      () => {
+        touchStartX = null;
+        touchStartY = null;
+        touchHintShown = false;
+      },
+      { passive: true },
     );
 
     buttons.forEach((button, index) => {

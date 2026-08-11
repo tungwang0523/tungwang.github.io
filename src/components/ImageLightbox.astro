@@ -351,7 +351,11 @@
 
     close?.addEventListener('click', hide);
     dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) hide();
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('.microblog-lightbox__image')) return;
+      if (target.closest('.microblog-lightbox__nav')) return;
+      hide();
     });
     dialog.addEventListener('cancel', (event) => {
       event.preventDefault();
