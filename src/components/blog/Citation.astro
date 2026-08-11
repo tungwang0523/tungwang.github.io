@@ -1,0 +1,10 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const target = `reference-${id}`;
+---
+
+<a class="blog-citation" href={`#${target}`} aria-label={`Go to reference ${id}`}><slot /></a>

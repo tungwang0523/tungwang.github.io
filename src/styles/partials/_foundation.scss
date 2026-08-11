@@ -103,13 +103,16 @@ a {
 
 $title-font: 'Space Grotesk', 'Tung Sans CJK', sans-serif;
 $subtitle-font: 'Inter', 'Tung Sans CJK', sans-serif;
-$italic-font: 'Playfair Display', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
+$home-editorial-font: 'Playfair Display', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
+$blog-serif-font: 'STIX Two Text', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
 $blog-bg: #e9e6e4;
 $body-bg: #121418;
 $title-color: #121418;
 $subtitle-color: #161419;
 $border-color: #94918f;
 $panel-bg: color.mix($body-bg, $blog-bg, 5.5%);
+$mono-font: ui-monospace, 'SFMono-Regular', 'SF Mono', Menlo, Monaco, Consolas,
+  'Liberation Mono', monospace;
 
 body {
   background-color: $blog-bg;

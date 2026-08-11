@@ -8,9 +8,6 @@ interface Entry {
   id: string;
   data: {
     date: Date;
-    type: 'note' | 'image' | 'quote' | 'link';
-    image?: string;
-    alt?: string;
     images?: Array<{ src: string; alt: string }>;
     translation: string;
     imageTextEn?: Array<{ page: number; text: string[] }>;
@@ -19,7 +16,6 @@ interface Entry {
     commentEn?: string;
     location?: string;
     locationEn?: string;
-    tags: string[];
     link?: string;
     linkLabel?: string;
     linkLabelEn?: string;
@@ -45,7 +41,12 @@ const {
 } = Astro.props;
 ---
 
-<aside class="blog-part right-blog microblog-sidebar" aria-label="Latest microblog entries" data-microblog-scope data-language="zh">
+<aside
+  class="blog-part right-blog microblog-sidebar"
+  aria-label="Latest microblog entries"
+  data-microblog-scope
+  data-language="zh"
+>
   <div class="microblog-sidebar__sticky-head">
     <Marquee items={announcements} />
     <div class="blog-right-title-container">
@@ -54,20 +55,20 @@ const {
     </div>
   </div>
   <div class="blog-right microblog-feed">
+    {entries.map((entry) => <MicroblogEntry entry={entry} Content={entry.Content} compact />)}
     {
-      entries.map((entry) => <MicroblogEntry entry={entry} Content={entry.Content} compact />)
+      archiveEntryId && (
+        <Circle
+          href={`/microblog#${archiveEntryId}`}
+          title="Earlier Notes"
+          titleEn="Earlier Notes"
+          subtitle=""
+          subtitleEn=""
+          cta="View All"
+          ctaEn="View All"
+          showArrow
+        />
+      )
     }
-    {archiveEntryId && (
-      <Circle
-        href={`/microblog#${archiveEntryId}`}
-        title="Earlier Notes"
-        titleEn="Earlier Notes"
-        subtitle=""
-        subtitleEn=""
-        cta="View All"
-        ctaEn="View All"
-        showArrow
-      />
-    )}
   </div>
 </aside>

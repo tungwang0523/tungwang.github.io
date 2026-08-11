@@ -3,11 +3,22 @@ import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import BlogLanguageToggle from '../../components/BlogLanguageToggle.astro';
 import BlogTableOfContents from '../../components/BlogTableOfContents.astro';
+import Bibliography from '../../components/blog/Bibliography.astro';
+import BlogFigure from '../../components/blog/BlogFigure.astro';
+import BlogGallery from '../../components/blog/BlogGallery.astro';
+import Callout from '../../components/blog/Callout.astro';
+import Citation from '../../components/blog/Citation.astro';
+import ImageCompare from '../../components/blog/ImageCompare.astro';
+import PullQuote from '../../components/blog/PullQuote.astro';
+import Sidenote from '../../components/blog/Sidenote.astro';
+import VideoBlock from '../../components/blog/VideoBlock.astro';
 import { calculateReadingTime } from '../../utils/reading-time';
 import { formatSiteDate } from '../../utils/date';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  const posts = (
+    await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft)
+  ).sort(
     (a, b) => +b.data.date - +a.data.date,
   );
 
@@ -36,20 +47,40 @@ export async function getStaticPaths() {
 
 const { post, prev, next, translation } = Astro.props;
 const { Content, headings } = await render(post);
-const hasTableOfContents = headings.filter(
-  (heading) => heading.depth >= 1 && heading.depth <= 3 && heading.text.trim().length > 0,
-).length >= 3;
+const mdxComponents = {
+  Bibliography,
+  BlogFigure,
+  BlogGallery,
+  Callout,
+  Citation,
+  ImageCompare,
+  PullQuote,
+  Sidenote,
+  VideoBlock,
+};
+const hasTableOfContents =
+  headings.filter(
+    (heading) => heading.depth >= 1 && heading.depth <= 3 && heading.text.trim().length > 0,
+  ).length >= 3;
 const isEnglish = post.data.lang === 'en';
 const readTime = calculateReadingTime(post.body);
-const zhHref = isEnglish && translation ? `/blog/${translation.id}` : !isEnglish ? `/blog/${post.id}` : undefined;
-const enHref = !isEnglish && translation ? `/blog/${translation.id}` : isEnglish ? `/blog/${post.id}` : undefined;
-
+const zhHref =
+  isEnglish && translation
+    ? `/blog/${translation.id}`
+    : !isEnglish
+      ? `/blog/${post.id}`
+      : undefined;
+const enHref =
+  !isEnglish && translation
+    ? `/blog/${translation.id}`
+    : isEnglish
+      ? `/blog/${post.id}`
+      : undefined;
 ---
 
 <PageLayout
-  title={post.data.bigTitle}
+  title={post.data.title}
   description={post.data.excerpt}
-  eyebrow={post.data.pageNumber ?? 'Essay'}
   heroImage={post.data.cover}
   pageTitle={`${post.data.title} - Tung‘s Blog`}
   pageClass={`blog-page blog-post-page${hasTableOfContents ? ' has-blog-toc' : ''}`}
@@ -84,7 +115,7 @@ const enHref = !isEnglish && translation ? `/blog/${translation.id}` : isEnglish
   <div class="blog-post-layout">
     <BlogTableOfContents headings={headings} lang={post.data.lang} />
     <div class="prose" data-lightbox-scope>
-      <Content />
+      <Content components={mdxComponents} />
     </div>
   </div>
 
@@ -93,7 +124,7 @@ const enHref = !isEnglish && translation ? `/blog/${translation.id}` : isEnglish
       prev ? (
         <a class="post-nav__prev" href={`/blog/${prev.id}`}>
           <span>{isEnglish ? '← Previous' : '← 上一篇'}</span>
-          <strong>{prev.data.bigTitle}</strong>
+          <strong>{prev.data.title}</strong>
         </a>
       ) : (
         <span />
@@ -103,7 +134,7 @@ const enHref = !isEnglish && translation ? `/blog/${translation.id}` : isEnglish
       next ? (
         <a class="post-nav__next" href={`/blog/${next.id}`}>
           <span>{isEnglish ? 'Next →' : '下一篇 →'}</span>
-          <strong>{next.data.bigTitle}</strong>
+          <strong>{next.data.title}</strong>
         </a>
       ) : (
         <span />

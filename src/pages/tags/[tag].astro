@@ -1,11 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import {
-  cloudflareImage,
-  cloudflareSrcset,
-  imagePresets,
-} from '../../utils/cloudflare-image.mjs';
+import { cloudflareImage, cloudflareSrcset, imagePresets } from '../../utils/cloudflare-image.mjs';
 import { formatSiteDate } from '../../utils/date';
 
 export async function getStaticPaths() {
@@ -25,17 +21,19 @@ export async function getStaticPaths() {
 }
 
 const { tag, posts } = Astro.props;
-const coverImage = (source: string) => cloudflareImage(source, {
-  width: 640,
-  fit: 'scale-down',
-  quality: imagePresets.listing.quality,
-  format: 'auto',
-});
-const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.listing.widths, {
-  fit: 'scale-down',
-  quality: imagePresets.listing.quality,
-  format: 'auto',
-});
+const coverImage = (source: string) =>
+  cloudflareImage(source, {
+    width: 640,
+    fit: 'scale-down',
+    quality: imagePresets.listing.quality,
+    format: 'auto',
+  });
+const coverSrcset = (source: string) =>
+  cloudflareSrcset(source, imagePresets.listing.widths, {
+    fit: 'scale-down',
+    quality: imagePresets.listing.quality,
+    format: 'auto',
+  });
 ---
 
 <PageLayout
@@ -65,7 +63,7 @@ const coverSrcset = (source: string) => cloudflareSrcset(source, imagePresets.li
             <div class="post-card__meta">
               {formatSiteDate(post.data.date)} · {post.data.author}
             </div>
-            <h2 class="post-card__title">{post.data.bigTitle}</h2>
+            <h2 class="post-card__title">{post.data.title}</h2>
             <p class="post-card__excerpt">{post.data.excerpt}</p>
           </div>
         </a>

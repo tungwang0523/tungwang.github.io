@@ -1,15 +1,13 @@
 ---
 title: '被遗忘的建筑——长春建国忠灵庙、长春东本愿寺'
-bigTitle: '被遗忘的建筑——长春建国忠灵庙、长春东本愿寺'
-headline: '被遗忘的建筑——长春建国忠灵庙、长春东本愿寺'
 excerpt: '长春有两处建筑隐藏在废墟或者居民区中，不是很容易被人们发现。我在2021年3月21日从学校出来去长春的小巷里面寻找这两处被遗忘的历史建筑。'
 author: 'Tung Wang'
 date: 2021-03-21
 cover: 'https://img.mockingbird.team/images/2026/08/8581e4e95e7d38e1fffb866e99191d95.webp'
 featured: false
-pageNumber: '摄影日志'
 tags: ['建筑', '历史', '长春']
 draft: false
+lang: zh
 ---
 > 本文用简体中文书写。
 

@@ -35,7 +35,6 @@ export async function GET(context: APIContext) {
       pubDate: entry.data.date,
       description: text.slice(0, 280) || 'A microblog note.',
       link: '/microblog',
-      categories: entry.data.tags,
     };
   });
 

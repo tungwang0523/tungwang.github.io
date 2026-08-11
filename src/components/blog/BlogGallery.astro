@@ -1,0 +1,12 @@
+---
+interface Props {
+  columns?: 2 | 3;
+  label?: string;
+}
+
+const { columns = 3, label = 'Image gallery' } = Astro.props;
+---
+
+<div class:list={['blog-gallery', `blog-gallery--${columns}`]} role="group" aria-label={label}>
+  <slot />
+</div>

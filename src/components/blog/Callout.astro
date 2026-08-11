@@ -1,0 +1,18 @@
+---
+interface Props {
+  type?: 'note' | 'context' | 'warning';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+const fallbackTitle = {
+  note: 'Note',
+  context: 'Context',
+  warning: 'Warning',
+}[type];
+---
+
+<aside class:list={['blog-callout', `blog-callout--${type}`]} role="note">
+  <strong class="blog-callout__label">{title ?? fallbackTitle}</strong>
+  <div class="blog-callout__body"><slot /></div>
+</aside>

@@ -21,16 +21,14 @@ try {
   const date = new Date().toISOString().slice(0, 10);
   const content = `---
 title: 'Untitled'
-bigTitle: 'Untitled'
-headline: 'Untitled'
 excerpt: 'A short summary of this post.'
 author: 'Tung Wang'
 date: ${date}
 cover: '/hero.jpeg'
 featured: false
-pageNumber: 'Journal'
 tags: []
 draft: true
+lang: zh
 ---
 
 Start writing here.

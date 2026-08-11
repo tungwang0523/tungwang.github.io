@@ -272,8 +272,8 @@
     margin: 8px 0 8px;
 
     span {
-      font-family: $italic-font;
-      font-style: italic;
+      font-family: $title-font;
+      font-style: normal;
     }
   }
 
@@ -472,8 +472,8 @@
   font-size: 14px;
 
   span {
-    font-family: $italic-font;
-    font-style: italic;
+    font-family: $title-font;
+    font-style: normal;
   }
 }
 
@@ -582,7 +582,7 @@
   overflow: auto;
   height: calc(100% + 60px);
   .rounded {
-    font-style: italic;
+    font-style: normal;
     font-size: 18px;
     &:before {
       content: '';
@@ -597,7 +597,7 @@
 
 .blog-right-title {
   font-size: 25px;
-  font-family: $italic-font;
+  font-family: $home-editorial-font;
   font-style: italic;
 }
 

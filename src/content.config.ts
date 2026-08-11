@@ -5,9 +5,7 @@ const posts = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: z.object({
     title: z.string(),
-    bigTitle: z.string(),
-    emphasis: z.string().optional(),
-    headline: z.string(),
+    listTitle: z.string().optional(),
     excerpt: z.string(),
     author: z.string(),
     date: z.coerce.date(),
@@ -16,7 +14,6 @@ const posts = defineCollection({
       z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
     ]),
     featured: z.boolean().default(false),
-    pageNumber: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     lang: z.enum(['zh', 'en']).default('zh'),
@@ -38,13 +35,6 @@ const microblog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/microblog' }),
   schema: z.object({
     date: z.coerce.date(),
-    type: z.enum(['note', 'image', 'quote', 'link']).default('note'),
-    image: z
-      .union([
-        z.string().url(),
-        z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
-      ])
-      .optional(),
     images: z
       .array(
         z.object({
@@ -57,7 +47,6 @@ const microblog = defineCollection({
       )
       .max(9)
       .optional(),
-    alt: z.string().optional(),
     translation: z.string().default(''),
     imageTextEn: z
       .array(
@@ -79,7 +68,6 @@ const microblog = defineCollection({
     commentEn: z.string().optional(),
     location: z.string().optional(),
     locationEn: z.string().optional(),
-    tags: z.array(z.string()).default([]),
     link: z.string().url().optional(),
     linkLabel: z.string().optional(),
     linkLabelEn: z.string().optional(),

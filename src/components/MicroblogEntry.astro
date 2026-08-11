@@ -6,9 +6,6 @@ interface Props {
     id: string;
     data: {
       date: Date;
-      type: 'note' | 'image' | 'quote' | 'link';
-      image?: string;
-      alt?: string;
       images?: Array<{ src: string; alt: string }>;
       translation: string;
       imageTextEn?: Array<{ page: number; text: string[] }>;
@@ -17,7 +14,6 @@ interface Props {
       commentEn?: string;
       location?: string;
       locationEn?: string;
-      tags: string[];
       link?: string;
       linkLabel?: string;
       linkLabelEn?: string;
@@ -96,7 +92,7 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
 ---
 
 <article
-  class:list={['microblog-entry', `microblog-entry--${entry.data.type}`, { 'is-compact': compact }]}
+  class:list={['microblog-entry', { 'is-compact': compact }]}
   id={entry.id}
   data-lightbox-scope
 >
@@ -185,31 +181,6 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
       )
     }
     {
-      gallery.length === 0 && entry.data.image && (
-        <button
-          class="microblog-entry__image microblog-entry__image--single"
-          type="button"
-          data-lightbox-image
-          data-lightbox-tooltip
-          data-lightbox-src={lightboxImage(entry.data.image)}
-          data-lightbox-mobile-src={mobileLightboxImage(entry.data.image)}
-          data-alt={entry.data.alt ?? ''}
-          data-caption-zh={imageCaption('zh', 1)}
-          data-caption-en={imageCaption('en', 1)}
-          aria-label="View full image"
-        >
-          <img
-            src={singleImage(entry.data.image)}
-            srcset={singleSrcset(entry.data.image)}
-            sizes={singleSizes}
-            alt={entry.data.alt ?? ''}
-            loading="lazy"
-            decoding="async"
-          />
-        </button>
-      )
-    }
-    {
       (entry.data.comment || entry.data.commentEn) && (
         <div class="microblog-entry__comment" data-copy-language="zh">
           <span aria-hidden="true">“</span>
@@ -248,13 +219,10 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
       )
     }
     {
-      (entry.data.location || entry.data.tags.length > 0) && (
+      entry.data.location && (
         <div class="microblog-entry__footer">
           {entry.data.location && <span data-copy-language="zh">{entry.data.location}</span>}
           {entry.data.locationEn && <span data-copy-language="en">{entry.data.locationEn}</span>}
-          {entry.data.tags.map((tag) => (
-            <span>#{tag}</span>
-          ))}
         </div>
       )
     }

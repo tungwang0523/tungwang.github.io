@@ -1,15 +1,13 @@
 ---
 title: '漫游在上海街头 —— 2020/08 上海游记'
-bigTitle: '漫游在上海街头 —— 2020/08 上海游记'
-headline: '漫游在上海街头 —— 2020/08 上海游记'
 excerpt: '我在2020年7月底和8月初在上海旅行。'
 author: 'Tung Wang'
 date: 2020-08-15
 cover: 'https://img.mockingbird.team/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
 featured: false
-pageNumber: '旅行日志'
 tags: ['游记', '城市', '上海']
 draft: false
+lang: zh
 ---
 > 本文用简体中文书写。
 

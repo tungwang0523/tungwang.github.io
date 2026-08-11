@@ -1,0 +1,612 @@
+---
+title: '写作与排版实验室'
+listTitle: '一篇用来检验本站长文、图片与注释系统的示例文章。'
+excerpt: '从基础 Markdown 到可控图片、图集、图注、来源与边注：本站现有写作能力的集中演示。'
+author: 'Tung Wang'
+date: 2026-08-12
+cover: '/pictures/writing.png'
+featured: false
+tags: ['站务', '写作']
+draft: true
+lang: 'zh'
+---
+
+> 本文不是一篇正式文章，而是一间排版实验室。它集中展示本站目前支持的写作元素，并给未来的文章提供可以直接复制的写法。
+
+Markdown 适合保持文字的清洁，MDX 则只在图片尺寸、组合关系和边注等需要明确设计意图的地方介入。两者可以写在同一篇文章里。
+
+下面的代码就是本文实际使用的 frontmatter；`listTitle` 和 `translationKey` 只在需要时添加：
+
+```yaml
+---
+title: '写作与排版实验室'
+listTitle: '一篇用来检验本站长文、图片与注释系统的示例文章。'
+excerpt: '从基础 Markdown 到可控图片、图集、图注、来源与边注：本站现有写作能力的集中演示。'
+author: 'Tung Wang'
+date: 2026-08-12
+cover: '/pictures/writing.png'
+featured: false
+tags: ['站务', '写作']
+draft: false
+lang: 'zh'
+---
+```
+
+使用自定义组件时只需把文章后缀改成 `.mdx`，直接书写组件即可；Blog 页面已经统一注册全部组件，不需要在每篇文章开头重复 `import`。
+
+普通段落之间用一个空行分隔。行尾保留两个空格  
+可以得到一次明确但不分段的换行；需要更直观地书写时，也可以使用 `<br />`。<br />这一句由 HTML 换行。
+
+```md
+普通段落之间用一个空行分隔。行尾保留两个空格  
+可以得到一次明确但不分段的换行；需要更直观地书写时，也可以使用 `<br />`。<br />这一句由 HTML 换行。
+```
+
+# 一级标题：文章内的最高层级
+
+一级标题适合文章内部极少数需要重新建立阅读起点的部分。页面顶部的文章标题仍是整页最高层级，因此正文中不宜频繁使用一级标题。
+
+## 二级标题：文字层级
+
+一篇长文首先需要稳定的阅读节奏。普通正文可以包含 **加粗文字**、_强调文字_、**_加粗且强调_**、~~被删除的文字~~、[行内链接](https://tung.mockingbird.team)、[引用式链接][site]，以及像 `layout="wide"` 这样的行内代码。裸网址也会自动成为链接：https://mockingbird.team。
+
+反斜杠可以显示原本具有语法作用的字符，例如 \*星号\*、\# 井号与 \[方括号\]。
+
+[site]: https://tung.mockingbird.team 'Tung’s'
+
+行内链接把地址直接写在正文里；引用式链接把地址集中定义。两者最终生成的网页链接相同，引用式写法更适合多次复用同一地址。
+
+```md
+一篇长文首先需要稳定的阅读节奏。普通正文可以包含 **加粗文字**、_强调文字_、**_加粗且强调_**、~~被删除的文字~~、[行内链接](https://tung.mockingbird.team)、[引用式链接][site]，以及像 `layout="wide"` 这样的行内代码。裸网址也会自动成为链接：https://mockingbird.team。
+
+反斜杠可以显示原本具有语法作用的字符，例如 \*星号\*、\# 井号与 \[方括号\]。
+
+[site]: https://tung.mockingbird.team 'Tung’s'
+```
+
+<Sidenote label="边注">
+  边注用来补充一条值得保留、但放进正文会打断叙事的信息。桌面端让正文环绕它，窄屏则自然落回文流。
+</Sidenote>
+
+这一段特意接在边注之后。边注不是正文的另一个标题，也不是必须阅读的脚注；它更像作者在页边轻声补上的一句话。
+
+```mdx
+<Sidenote label="边注">
+  边注用来补充一条值得保留、但放进正文会打断叙事的信息。桌面端让正文环绕它，窄屏则自然落回文流。
+</Sidenote>
+```
+
+### 三级标题：一个叙事单元
+
+三级标题适合区分一个章节里的不同动作或视角。再往下的标题仍然可用，但应该节制。
+
+#### 四级标题：一个局部问题
+
+四级标题仍然承担可见的结构作用。
+
+##### 五级标题：一个操作步骤
+
+五级标题更接近段内标签。
+
+###### 六级标题：微小的分类标记
+
+六级标题最轻，也最不适合承载长句。
+
+```md
+# 一级标题：文章内的最高层级
+## 二级标题：文字层级
+### 三级标题：一个叙事单元
+#### 四级标题：一个局部问题
+##### 五级标题：一个操作步骤
+###### 六级标题：微小的分类标记
+```
+
+## 列表、任务与表格
+
+无序列表可以保持信息的松散关系：
+
+- 从一个观察开始；
+- 保留材料中的犹豫；
+- 在下结论以前先组织证据。
+  - 子项可以解释条件；
+  - 也可以列出例外。
+
+```md
+- 从一个观察开始；
+- 保留材料中的犹豫；
+- 在下结论以前先组织证据。
+  - 子项可以解释条件；
+  - 也可以列出例外。
+```
+
+有序列表适合真正存在先后关系的流程：
+
+1. 写下正文；
+2. 插入图片和图注；
+3. 在发布前检查移动端。
+
+```md
+1. 写下正文；
+2. 插入图片和图注；
+3. 在发布前检查移动端。
+```
+
+定义式关系目前用普通列表表达；Markdown 的重点是保持源文件可读，而不是复制文字处理软件的每一种控件。
+
+任务列表则适合临时维护文章：
+
+- [x] 完成初稿
+- [x] 核对图片来源
+- [ ] 发布前删除这条提醒
+
+```md
+- [x] 完成初稿
+- [x] 核对图片来源
+- [ ] 发布前删除这条提醒
+```
+
+| 元素 | 适合表达         | 不应承担     |
+| ---- | ---------------- | ------------ |
+| 正文 | 连续的叙事与论证 | 大量并列参数 |
+| 表格 | 稳定的横向比较   | 情绪与节奏   |
+| 边注 | 可跳过的补充信息 | 关键结论     |
+
+```md
+| 元素 | 适合表达 | 不应承担 |
+| --- | --- | --- |
+| 正文 | 连续的叙事与论证 | 大量并列参数 |
+| 表格 | 稳定的横向比较 | 情绪与节奏 |
+| 边注 | 可跳过的补充信息 | 关键结论 |
+```
+
+## 引用、代码与补充内容
+
+> 好的引用不是把正文放大一遍，而是在阅读节奏中打开另一种声音。
+
+> 引用也可以包含多个段落。
+>
+> - 包含列表；
+> - 或继续嵌套组织材料。
+
+```md
+> 好的引用不是把正文放大一遍，而是在阅读节奏中打开另一种声音。
+
+> 引用也可以包含多个段落。
+>
+> - 包含列表；
+> - 或继续嵌套组织材料。
+```
+
+代码块保留等宽结构，并允许横向滚动：
+
+```js
+const image = {
+  layout: 'wide',
+  caption: '图注负责解释图像，而不是重复替代文本。',
+  credit: 'Tung Wang',
+};
+```
+
+代码块本身使用围栏语法；围栏后的语言名用于语义标记和未来的语法高亮：
+
+````md
+```js
+const image = {
+  layout: 'wide',
+  caption: '图注负责解释图像，而不是重复替代文本。',
+  credit: 'Tung Wang',
+};
+```
+````
+
+<details>
+  <summary>展开一段次要材料</summary>
+  这里适合放较长的补充记录、方法细节或不希望默认占据篇幅的文本。它由原生 HTML 提供，不需要额外组件。
+</details>
+
+```html
+<details>
+  <summary>展开一段次要材料</summary>
+  这里适合放较长的补充记录、方法细节或不希望默认占据篇幅的文本。它由原生 HTML 提供，不需要额外组件。
+</details>
+```
+
+原生 HTML 可用于少量 Markdown 没有直接语法的行内元素，例如 <mark>标记文字</mark>、H<sub>2</sub>O、x<sup>2</sup> 与键盘按键 <kbd>⌘</kbd> + <kbd>K</kbd>。这类写法应只在确实需要时使用。
+
+```html
+原生 HTML 可用于少量 Markdown 没有直接语法的行内元素，例如 <mark>标记文字</mark>、H<sub>2</sub>O、x<sup>2</sup> 与键盘按键 <kbd>⌘</kbd> + <kbd>K</kbd>。这类写法应只在确实需要时使用。
+```
+
+## 提示块与拉引文
+
+提示块用于不会折叠、又不应混进连续正文的信息。三种类型表达不同功能，而不是单纯更换颜色。
+
+<Callout type="note" title="写作提示">
+  普通提示记录读者可能需要立即知道的补充条件。
+</Callout>
+
+<Callout type="context" title="语境">
+  语境块适合交代一段历史背景、概念来源，或面向另一文化背景读者的解释。
+</Callout>
+
+<Callout type="warning" title="注意">
+  警示块只用于确实可能造成误解、数据丢失或操作风险的内容。
+</Callout>
+
+```mdx
+<Callout type="note" title="写作提示">
+  普通提示记录读者可能需要立即知道的补充条件。
+</Callout>
+
+<Callout type="context" title="语境">
+  语境块适合交代一段历史背景、概念来源，或面向另一文化背景读者的解释。
+</Callout>
+
+<Callout type="warning" title="注意">
+  警示块只用于确实可能造成误解、数据丢失或操作风险的内容。
+</Callout>
+```
+
+拉引文不是引用资料，而是从作者自己的文章中抽出一句话，形成一次视觉停顿。
+
+<PullQuote attribution="Tung Wang">
+  排版不是把每一种内容装饰得不同，而是让不同关系在阅读中变得可辨认。
+</PullQuote>
+
+```mdx
+<PullQuote attribution="Tung Wang">
+  排版不是把每一种内容装饰得不同，而是让不同关系在阅读中变得可辨认。
+</PullQuote>
+```
+
+## 数学公式
+
+行内公式可以直接写在句子里，例如质能关系 $E = mc^2$；独立公式使用两个美元符号包围：
+
+$$
+L = \frac{1}{2}\rho v^2 S C_L
+$$
+
+```md
+行内公式：$E = mc^2$
+
+$$
+L = \frac{1}{2}\rho v^2 S C_L
+$$
+```
+
+公式由 KaTeX 在构建阶段渲染，发布后的页面不需要再加载客户端公式脚本。
+
+## 文内引用与参考文献
+
+文内引用通过稳定的引用键指向文末条目，例如 image schema 的讨论可追溯至 <Citation id="johnson-1987">Johnson, 1987</Citation>。显示文字可以按中文或英文文章的引用规范自由书写，引用键则保持不变。
+
+<Bibliography
+  title="参考文献"
+  entries={[
+    {
+      id: 'johnson-1987',
+      text: 'Johnson, M. (1987). The Body in the Mind: The Bodily Basis of Meaning, Imagination, and Reason. University of Chicago Press.',
+      url: 'https://press.uchicago.edu/ucp/books/book/chicago/B/bo3617992.html',
+    },
+  ]}
+/>
+
+```mdx
+文内引用通过稳定的引用键指向文末条目，例如 image schema 的讨论可追溯至 <Citation id="johnson-1987">Johnson, 1987</Citation>。显示文字可以按中文或英文文章的引用规范自由书写，引用键则保持不变。
+
+<Bibliography
+  title="参考文献"
+  entries={[
+    {
+      id: 'johnson-1987',
+      text: 'Johnson, M. (1987). The Body in the Mind: The Bodily Basis of Meaning, Imagination, and Reason. University of Chicago Press.',
+      url: 'https://press.uchicago.edu/ucp/books/book/chicago/B/bo3617992.html',
+    },
+  ]}
+/>
+```
+
+## 普通 Markdown 图片
+
+最常用的图片不需要组件。替代文本写在方括号中，标题写在链接后的引号中；标题会成为图片下方的图注，点击图片仍可打开灯箱。
+
+![关系对象形成的示意图](/pictures/work/between-strangers/membrane-object.png '普通 Markdown 图片：title 被显示为图注')
+
+```md
+![关系对象形成的示意图](/pictures/work/between-strangers/membrane-object.png '普通 Markdown 图片：title 被显示为图注')
+```
+
+连续放置两张或更多 Markdown 图片时，网站会自动组成九宫格式图集。这里演示三张连续图片：
+
+![关系域](/pictures/work/between-strangers/membrane-domain.png '关系域')
+![关系对象出现](/pictures/work/between-strangers/membrane-emergence.png '关系对象出现')
+![关系对象接触](/pictures/work/between-strangers/membrane-contact.png '关系对象接触')
+
+连续写下图片，中间不插入正文，就会自动形成不限行数的三列网格：
+
+```md
+![关系域](/pictures/work/between-strangers/membrane-domain.png '关系域')
+![关系对象出现](/pictures/work/between-strangers/membrane-emergence.png '关系对象出现')
+![关系对象接触](/pictures/work/between-strangers/membrane-contact.png '关系对象接触')
+```
+
+## 一张图片可以有不同角色
+
+普通图片的最大宽度与目前 Blog 图片一致，保留原始比例，不进行内部裁切。
+
+<BlogFigure
+  src="/pictures/work/between-strangers/membrane-object.png"
+  alt="膜与关系对象的视觉研究图"
+  caption="普通尺寸：图片保持自身比例，适合嵌入连续阅读。"
+  credit="Between Strangers · Tung Wang"
+/>
+
+```mdx
+<BlogFigure
+  src="/pictures/work/between-strangers/membrane-object.png"
+  alt="膜与关系对象的视觉研究图"
+  caption="普通尺寸：图片保持自身比例，适合嵌入连续阅读。"
+  credit="Between Strangers · Tung Wang"
+/>
+```
+
+`wide` 让图片占满文章栏，适合需要阅读局部关系的图。
+
+<BlogFigure
+  src="/pictures/work/between-strangers/designside5.png"
+  alt="设计侧关系系统图"
+  caption="宽图：复杂图示获得更多横向空间。"
+  credit="Between Strangers · Tung Wang"
+  layout="wide"
+/>
+
+```mdx
+<BlogFigure
+  src="/pictures/work/between-strangers/designside5.png"
+  alt="设计侧关系系统图"
+  caption="宽图：复杂图示获得更多横向空间。"
+  credit="Between Strangers · Tung Wang"
+  layout="wide"
+/>
+```
+
+`panorama` 明确规定一个横向窗口。只有作者选择 `cover` 时才会裁切；图片永远不会被非等比例拉伸。
+
+<BlogFigure
+  src="/pictures/work/expocraft/e-hero.png"
+  alt="Expocraft 项目的 Minecraft 城市景观"
+  caption="横幅：用于建立章节气氛，也可以通过 position 调整裁切重心。"
+  credit="Expocraft · Tung Wang"
+  layout="panorama"
+  ratio="panorama"
+  fit="cover"
+  position="center 58%"
+/>
+
+```mdx
+<BlogFigure
+  src="/pictures/work/expocraft/e-hero.png"
+  alt="Expocraft 项目的 Minecraft 城市景观"
+  caption="横幅：用于建立章节气氛，也可以通过 position 调整裁切重心。"
+  credit="Expocraft · Tung Wang"
+  layout="panorama"
+  ratio="panorama"
+  fit="cover"
+  position="center 58%"
+/>
+```
+
+竖图采用更窄的栏宽，避免在桌面端显得笨重。
+
+<BlogFigure
+  src="/pictures/work/field-of-seeds/fos-p10-3.png"
+  alt="Field of Seeds 项目中的界面图"
+  caption="竖向尺寸：限制视觉体量，但不改变原图比例。"
+  credit="Field of Seeds · Tung Wang"
+  layout="portrait"
+/>
+
+```mdx
+<BlogFigure
+  src="/pictures/work/field-of-seeds/fos-p10-3.png"
+  alt="Field of Seeds 项目中的界面图"
+  caption="竖向尺寸：限制视觉体量，但不改变原图比例。"
+  credit="Field of Seeds · Tung Wang"
+  layout="portrait"
+/>
+```
+
+## 图集与可控裁切
+
+两栏图集适合比较。下面两张图都使用正方形窗口和 `contain`，所以完整画面仍然可见，空余部分由浅色块承接。
+
+<BlogGallery columns={2} label="两栏对照图集">
+  <BlogFigure
+    src="/pictures/work/between-strangers/carrier-field.png"
+    alt="场域候选视觉载体"
+    caption="Field carrier"
+    ratio="square"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/carrier-membrane.png"
+    alt="膜候选视觉载体"
+    caption="Membrane carrier"
+    ratio="square"
+  />
+</BlogGallery>
+
+```mdx
+<BlogGallery columns={2} label="两栏对照图集">
+  <BlogFigure
+    src="/pictures/work/between-strangers/carrier-field.png"
+    alt="场域候选视觉载体"
+    caption="Field carrier"
+    ratio="square"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/carrier-membrane.png"
+    alt="膜候选视觉载体"
+    caption="Membrane carrier"
+    ratio="square"
+  />
+</BlogGallery>
+```
+
+三栏图集适合序列。这里明确选择 `cover`，因此图像会在正方形窗口中等比例裁切；点击任意图片后，可以在同一篇文章的全部图片之间切换。
+
+<BlogGallery columns={3} label="三栏过程图集">
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-domain.png"
+    alt="关系域状态"
+    caption="Domain"
+    ratio="square"
+    fit="cover"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-emergence.png"
+    alt="关系对象出现"
+    caption="Emergence"
+    ratio="square"
+    fit="cover"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-contact.png"
+    alt="关系对象接触"
+    caption="Contact"
+    ratio="square"
+    fit="cover"
+  />
+</BlogGallery>
+
+```mdx
+<BlogGallery columns={3} label="三栏过程图集">
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-domain.png"
+    alt="关系域状态"
+    caption="Domain"
+    ratio="square"
+    fit="cover"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-emergence.png"
+    alt="关系对象出现"
+    caption="Emergence"
+    ratio="square"
+    fit="cover"
+  />
+  <BlogFigure
+    src="/pictures/work/between-strangers/membrane-contact.png"
+    alt="关系对象接触"
+    caption="Contact"
+    ratio="square"
+    fit="cover"
+  />
+</BlogGallery>
+```
+
+图注回答“这张图是什么或为何在这里”，来源则单独记录作者、项目或出处。替代文本仍只服务于无法看见图片的读者，不再被迫兼任图注。
+
+## 图片对比
+
+对比滑块用于同一对象的前后版本、历史与现状或两种处理方式。两张图片始终在同一画框中等比例显示，不会发生非等比例拉伸。
+
+<ImageCompare
+  beforeSrc="/pictures/work/between-strangers/carrier-field.png"
+  afterSrc="/pictures/work/between-strangers/carrier-membrane.png"
+  beforeAlt="以场域表现凝视关系的候选方案"
+  afterAlt="以对象表现凝视关系的候选方案"
+  beforeLabel="Field"
+  afterLabel="Object"
+  caption="拖动中线，比较同一关系语法的两种视觉载体。"
+  ratio="16 / 9"
+  fit="contain"
+/>
+
+```mdx
+<ImageCompare
+  beforeSrc="/pictures/work/between-strangers/carrier-field.png"
+  afterSrc="/pictures/work/between-strangers/carrier-membrane.png"
+  beforeAlt="以场域表现凝视关系的候选方案"
+  afterAlt="以对象表现凝视关系的候选方案"
+  beforeLabel="Field"
+  afterLabel="Object"
+  caption="拖动中线，比较同一关系语法的两种视觉载体。"
+  ratio="16 / 9"
+  fit="contain"
+/>
+```
+
+## 视频
+
+当一个 YouTube 链接独占一个段落时，网站会把它转换成轻量播放器；只有点击播放后才加载正式 iframe。
+
+[YouTube 嵌入示例](https://www.youtube.com/watch?v=jNQXAC9IVRw)
+
+```md
+[YouTube 嵌入示例](https://www.youtube.com/watch?v=jNQXAC9IVRw)
+```
+
+统一的视频块还支持 Bilibili、Vimeo，以及本站、R2或其他服务器上的 MP4、WebM 直链。下面的直链示例与未来上传到 R2 的本地视频使用完全相同的播放器。
+
+<VideoBlock
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  title="直链视频播放示例"
+  caption="MP4直链示例；也可换成 /videos/example.mp4 或 R2 地址。"
+  credit="MDN · CC0 sample"
+/>
+
+```mdx
+<VideoBlock
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  title="直链视频播放示例"
+  caption="MP4直链示例；也可换成 /videos/example.mp4 或 R2 地址。"
+  credit="MDN · CC0 sample"
+/>
+```
+
+其他来源只需替换 `src`；以下是独立的变体写法，并非上方实例的源码：
+
+```mdx
+{/* 本地文件、R2、MP4或WebM直链可以按需增加封面 */}
+<VideoBlock src="/videos/example.mp4" title="视频标题" poster="/pictures/video-cover.png" />
+
+{/* YouTube */}
+<VideoBlock src="https://www.youtube.com/watch?v=VIDEO_ID" title="视频标题" />
+
+{/* Bilibili标准BV链接 */}
+<VideoBlock src="https://www.bilibili.com/video/BVxxxxxxxxxx" title="视频标题" />
+
+{/* Vimeo */}
+<VideoBlock src="https://vimeo.com/123456789" title="视频标题" />
+```
+
+## 脚注与文章收束
+
+脚注适合出处和延伸说明，而不是用来藏关键论点。这个句子后面有一条简短脚注。[^writing]
+
+另一条脚注可以包含链接与更长的补充信息。[^source]
+
+```md
+脚注适合出处和延伸说明，而不是用来藏关键论点。这个句子后面有一条简短脚注。[^writing]
+
+另一条脚注可以包含链接与更长的补充信息。[^source]
+
+[^writing]: 本例中的标题、列表、表格、任务列表和脚注仍是标准 Markdown / GFM 写法。
+
+[^source]: 图片示例来自本站已有作品页面；正式文章仍应为外部材料提供可追溯的原始来源。
+```
+
+---
+
+分隔线的写法是单独一行三个短横：
+
+```md
+---
+```
+
+这套功能的原则很简单：让普通内容继续用普通 Markdown；只有当作者确实需要控制图片的角色、组合或旁支信息时，才使用组件。自由度来自少量清晰的选择，而不是越来越多彼此重叠的语法。
+
+[^writing]: 本例中的标题、列表、表格、任务列表和脚注仍是标准 Markdown / GFM 写法。
+
+[^source]: 图片示例来自本站已有作品页面；正式文章仍应为外部材料提供可追溯的原始来源。

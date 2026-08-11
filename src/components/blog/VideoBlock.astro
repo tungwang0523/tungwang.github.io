@@ -1,0 +1,94 @@
+---
+import YouTubeEmbed from '../YouTubeEmbed.astro';
+
+interface Props {
+  src: string;
+  title: string;
+  poster?: string;
+  caption?: string;
+  credit?: string;
+  provider?: 'auto' | 'youtube' | 'bilibili' | 'vimeo' | 'file';
+  ratio?: string;
+}
+
+const {
+  src,
+  title,
+  poster,
+  caption,
+  credit,
+  provider = 'auto',
+  ratio = '16 / 9',
+} = Astro.props;
+
+const parseUrl = (value: string) => {
+  try { return new URL(value, Astro.url); } catch { return null; }
+};
+const url = parseUrl(src);
+const host = url?.hostname.replace(/^www\./, '') ?? '';
+const youtubeId = (() => {
+  if (!url) return null;
+  if (host === 'youtu.be') return url.pathname.split('/').filter(Boolean)[0] ?? null;
+  if (host === 'youtube.com' || host === 'm.youtube.com') {
+    if (url.pathname === '/watch') return url.searchParams.get('v');
+    if (url.pathname.startsWith('/shorts/') || url.pathname.startsWith('/embed/')) {
+      return url.pathname.split('/').filter(Boolean)[1] ?? null;
+    }
+  }
+  return null;
+})();
+const bilibiliId = url?.pathname.match(/\/(BV[A-Za-z0-9]+)/)?.[1] ?? null;
+const vimeoId = host.endsWith('vimeo.com') ? url?.pathname.match(/\/(\d+)/)?.[1] ?? null : null;
+const resolvedProvider = provider !== 'auto'
+  ? provider
+  : youtubeId
+    ? 'youtube'
+    : bilibiliId && host.endsWith('bilibili.com')
+      ? 'bilibili'
+      : vimeoId
+        ? 'vimeo'
+        : 'file';
+
+if (resolvedProvider === 'youtube' && (!youtubeId || !/^[A-Za-z0-9_-]{11}$/.test(youtubeId))) {
+  throw new Error(`Invalid YouTube URL: ${src}`);
+}
+if (resolvedProvider === 'bilibili' && !bilibiliId) throw new Error(`Invalid Bilibili URL: ${src}`);
+if (resolvedProvider === 'vimeo' && !vimeoId) throw new Error(`Invalid Vimeo URL: ${src}`);
+
+const embedUrl = resolvedProvider === 'bilibili'
+  ? `https://player.bilibili.com/player.html?bvid=${bilibiliId}&autoplay=0`
+  : resolvedProvider === 'vimeo'
+    ? `https://player.vimeo.com/video/${vimeoId}?dnt=1`
+    : undefined;
+const providerLabel = resolvedProvider === 'bilibili' ? 'Bilibili' : resolvedProvider === 'vimeo' ? 'Vimeo' : 'Video';
+---
+
+{
+  resolvedProvider === 'youtube' ? (
+    <YouTubeEmbed videoId={youtubeId!} title={title} poster={poster} />
+  ) : (
+    <figure class="blog-video">
+      <div class="blog-video__stage" style={`--video-ratio: ${ratio};`}>
+        {resolvedProvider === 'file' ? (
+          <video controls preload="metadata" poster={poster} playsinline src={src}>
+            Your browser does not support embedded video.
+          </video>
+        ) : (
+          <iframe
+            src={embedUrl}
+            title={title}
+            loading="lazy"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"
+          />
+        )}
+      </div>
+      <figcaption>
+        <span>{caption ?? title}</span>
+        {credit && <cite>{credit}</cite>}
+        {resolvedProvider !== 'file' && <a href={src} target="_blank" rel="noreferrer">Open on {providerLabel} ↗</a>}
+      </figcaption>
+    </figure>
+  )
+}

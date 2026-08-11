@@ -1,0 +1,59 @@
+---
+import ResponsiveImage from '../ResponsiveImage.astro';
+
+interface Props {
+  beforeSrc: string;
+  afterSrc: string;
+  beforeAlt: string;
+  afterAlt: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  caption?: string;
+  position?: number;
+  ratio?: string;
+  fit?: 'cover' | 'contain';
+}
+
+const {
+  beforeSrc,
+  afterSrc,
+  beforeAlt,
+  afterAlt,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  caption,
+  position = 50,
+  ratio = '4 / 3',
+  fit = 'cover',
+} = Astro.props;
+const start = Math.min(100, Math.max(0, position));
+---
+
+<figure class:list={['blog-compare', `blog-compare--${fit}`]} data-image-compare style={`--compare-position: ${start}%; --compare-ratio: ${ratio};`}>
+  <div class="blog-compare__stage">
+    <ResponsiveImage class="blog-compare__image blog-compare__image--before" src={beforeSrc} alt={beforeAlt} sizes="(max-width: 900px) calc(100vw - 40px), 650px" />
+    <ResponsiveImage class="blog-compare__image blog-compare__image--after" src={afterSrc} alt={afterAlt} sizes="(max-width: 900px) calc(100vw - 40px), 650px" />
+    <span class="blog-compare__label blog-compare__label--before">{beforeLabel}</span>
+    <span class="blog-compare__label blog-compare__label--after">{afterLabel}</span>
+    <span class="blog-compare__divider" aria-hidden="true"><i></i></span>
+    <input type="range" min="0" max="100" value={start} aria-label={`Compare ${beforeLabel} and ${afterLabel}`} data-image-compare-control />
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script is:inline>
+  (() => {
+    const initialise = (root = document) => {
+      root.querySelectorAll('[data-image-compare]:not([data-image-compare-ready])').forEach((comparison) => {
+        comparison.dataset.imageCompareReady = '';
+        const control = comparison.querySelector('[data-image-compare-control]');
+        if (!(control instanceof HTMLInputElement)) return;
+        const update = () => comparison.style.setProperty('--compare-position', `${control.value}%`);
+        control.addEventListener('input', update);
+        update();
+      });
+    };
+    initialise();
+    document.addEventListener('astro:page-load', () => initialise());
+  })();
+</script>

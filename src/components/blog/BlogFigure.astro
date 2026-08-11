@@ -1,0 +1,101 @@
+---
+import {
+  cloudflareImage,
+  cloudflareSrcset,
+  imagePresets,
+  isCloudflareImage,
+} from '../../utils/cloudflare-image.mjs';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  layout?: 'normal' | 'wide' | 'portrait' | 'panorama';
+  ratio?: 'natural' | 'square' | 'portrait' | 'panorama';
+  fit?: 'contain' | 'cover';
+  position?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  credit,
+  layout = 'normal',
+  ratio = 'natural',
+  fit = 'contain',
+  position = 'center',
+} = Astro.props;
+
+const remote = isCloudflareImage(src);
+const widths = [320, 480, 960, 1440];
+const displayWidth =
+  layout === 'normal' || layout === 'portrait' ? 480 : 720;
+const renderedSrc = remote
+  ? cloudflareImage(src, {
+      width: displayWidth,
+      fit: 'scale-down',
+      quality: imagePresets.article.quality,
+      format: 'auto',
+    })
+  : src;
+const renderedSrcset = remote
+  ? cloudflareSrcset(src, widths, {
+      fit: 'scale-down',
+      quality: imagePresets.article.quality,
+      format: 'auto',
+    })
+  : undefined;
+const lightboxSrc = remote
+  ? cloudflareImage(src, { ...imagePresets.lightbox, fit: 'scale-down', format: 'auto' })
+  : src;
+const lightboxMobileSrc = remote
+  ? cloudflareImage(src, { ...imagePresets.lightboxMobile, fit: 'scale-down', format: 'auto' })
+  : src;
+const captionItems = [caption, credit ? `Image: ${credit}` : undefined].filter(Boolean);
+const hasCaption = Boolean(caption || credit);
+const sizes =
+  layout === 'wide' || layout === 'panorama'
+    ? '(max-width: 900px) calc(100vw - 40px), 650px'
+    : '(max-width: 560px) calc(100vw - 40px), 480px';
+---
+
+<figure
+  class:list={[
+    'blog-figure',
+    `blog-figure--${layout}`,
+    `blog-figure--ratio-${ratio}`,
+    `blog-figure--fit-${fit}`,
+  ]}
+>
+  <span class="blog-figure__media">
+    <img
+      src={renderedSrc}
+      srcset={renderedSrcset}
+      sizes={renderedSrcset ? sizes : undefined}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      draggable="false"
+      style={`object-position: ${position}`}
+      data-lightbox-image
+      data-lightbox-tooltip={hasCaption ? '' : undefined}
+      data-lightbox-src={lightboxSrc}
+      data-lightbox-mobile-src={lightboxMobileSrc}
+      data-original-src={src}
+      data-caption={captionItems.length ? JSON.stringify(captionItems) : undefined}
+      tabindex="0"
+      role="button"
+      aria-label={caption ? `View image: ${caption}` : 'View full-size image'}
+    />
+  </span>
+  {
+    hasCaption && (
+      <figcaption class="blog-figure__caption">
+        {caption && <span>{caption}</span>}
+        {credit && <cite>{credit}</cite>}
+      </figcaption>
+    )
+  }
+</figure>

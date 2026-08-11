@@ -4,9 +4,9 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import BlogLanguageToggle from '../../components/BlogLanguageToggle.astro';
 import BlogPostCard from '../../components/BlogPostCard.astro';
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
-  (a, b) => +b.data.date - +a.data.date,
-);
+const posts = (
+  await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft)
+).sort((a, b) => +b.data.date - +a.data.date);
 const postsZh = posts.filter((post) => post.data.lang === 'zh');
 const postsEn = posts.filter((post) => post.data.lang === 'en');
 

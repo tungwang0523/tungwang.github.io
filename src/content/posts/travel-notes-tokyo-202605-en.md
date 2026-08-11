@@ -1,13 +1,10 @@
 ---
 title: 'My First Day at Twenty-Four Began in a Tokyo That Never Sleeps — Tokyo Travel Notes, May 2026'
-bigTitle: 'My First Day at Twenty-Four Began in a Tokyo That Never Sleeps — Tokyo Travel Notes, May 2026'
-headline: 'My First Day at Twenty-Four Began in a Tokyo That Never Sleeps — Tokyo Travel Notes, May 2026'
 excerpt: 'My first day at twenty-four began in a Tokyo that never sleeps.'
 author: 'Tung Wang'
 date: 2026-08-10
 cover: 'https://img.mockingbird.team/images/2026/08/e8392f622be2b6c7f6e1f62be77dcd28.webp'
 featured: false
-pageNumber: 'Mockingbird Notes'
 tags: ['Travel Notes', 'Cities', 'Tokyo', 'Kamakura']
 draft: false
 lang: en

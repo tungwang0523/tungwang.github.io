@@ -1,15 +1,13 @@
 ---
 title: '长春有什么值得一看的建筑？'
-bigTitle: '长春有什么值得一看的建筑？'
-headline: '长春有什么值得一看的建筑？'
 excerpt: '长春有两处建筑隐藏在废墟或者居民区中，不是很容易被人们发现。'
 author: 'Tung Wang'
 date: 2021-03-21
 cover: 'https://pica.zhimg.com/v2-206d962784b141f4cc272a02175b1337.jpg?source=2c26e567'
 featured: false
-pageNumber: 'Journal'
 tags: ['建筑', '历史', '长春']
 draft: false
+lang: zh
 ---
 
 > 作者为本人，作为回答发布在知乎问题：“长春有什么值得一看的建筑？”[知乎原文](https://www.zhihu.com/question/54173967/answer/1792116749)

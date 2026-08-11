@@ -1,15 +1,13 @@
 ---
 title: '《动漫化的长春》系列作'
-bigTitle: '《动漫化的长春》系列作'
-headline: '《动漫化的长春》系列作'
 excerpt: '在此系列作品中，我试图用摄影与绘画结合的方式绘制长春的历史建筑与城市风貌，挖掘长春的城市文化底蕴。'
 author: 'Tung Wang'
 date: 2021-12-21
 cover: 'https://img.mockingbird.team/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp'
 featured: false
-pageNumber: '摄影日志'
 tags: ['创作', '插画', '建筑', '长春']
 draft: false
+lang: zh
 ---
 > 本文用简体中文书写。
 

@@ -798,8 +798,8 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-family: $italic-font;
-    font-style: italic;
+    font-family: $title-font;
+    font-style: normal;
     font-size: 30px;
 
     &__arrow {
@@ -814,6 +814,11 @@
       transform: translateY(0.02em);
     }
   }
+}
+
+.microblog-sidebar .circle-footer {
+  font-family: $home-editorial-font;
+  font-style: italic;
 }
 
 .blog-is-sticky {

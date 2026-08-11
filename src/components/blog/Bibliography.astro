@@ -1,0 +1,33 @@
+---
+interface Entry {
+  id: string;
+  text: string;
+  url?: string;
+  doi?: string;
+}
+
+interface Props {
+  entries: Entry[];
+  title?: string;
+}
+
+const { entries, title = 'References' } = Astro.props;
+---
+
+<section class="blog-bibliography" aria-labelledby="blog-bibliography-title">
+  <h2 id="blog-bibliography-title">{title}</h2>
+  <ol>
+    {
+      entries.map((entry) => (
+        <li id={`reference-${entry.id}`}>
+          <span>{entry.text}</span>
+          {entry.doi ? (
+            <a href={`https://doi.org/${entry.doi}`} target="_blank" rel="noreferrer">doi:{entry.doi}</a>
+          ) : entry.url ? (
+            <a href={entry.url} target="_blank" rel="noreferrer">Source ↗</a>
+          ) : null}
+        </li>
+      ))
+    }
+  </ol>
+</section>
