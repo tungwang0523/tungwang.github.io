@@ -3,6 +3,7 @@ interface MenuItem {
   label: string;
   href: string;
   external?: boolean;
+  cvSite?: boolean;
 }
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 
 const {
   items = [
-    { label: 'Research', href: 'https://cv.tung.mockingbird.team/' },
+    { label: 'Research', href: '/academic', cvSite: true },
     { label: 'Work', href: '/work' },
     { label: 'Blog', href: '/blog' },
     { label: 'Microblog', href: '/microblog' },
@@ -39,7 +40,7 @@ const {
 <div class="blog-part is-menu" id="primary-menu" data-menu>
   {
     items.map((item) => (
-      <a href={item.href} class="blog-menu">
+      <a href={item.href} class="blog-menu" data-cv-site-link={item.cvSite || undefined}>
         {item.label}
         {item.external && (
           <svg

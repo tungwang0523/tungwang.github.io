@@ -13,7 +13,7 @@ const { blogHref = '/blog', mainSiteNavigation = false } = Astro.props;
     <div class="site-footer__brand">Tung’s</div>
     <nav class="site-footer__nav" aria-label="Footer">
       <a href="/" data-main-site-link={mainSiteNavigation || undefined}>Home</a>
-      <a href="https://cv.tung.mockingbird.team/">Research</a>
+      <a href="/academic" data-cv-site-link>Research</a>
       <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
       <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
       <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>

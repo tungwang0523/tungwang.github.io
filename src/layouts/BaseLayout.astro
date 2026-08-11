@@ -57,6 +57,30 @@ const isDev = import.meta.env.DEV;
     <ImageLightbox />
     <YouTubeLoader />
     <script is:inline>
+      (() => {
+        const { hostname, protocol, port } = window.location;
+        const isLocal =
+          hostname === 'localhost' ||
+          hostname === '127.0.0.1' ||
+          hostname === '::1' ||
+          hostname.endsWith('.localhost') ||
+          hostname.endsWith('.vercel.app');
+
+        if (isLocal) return;
+
+        const cvPrefixes = ['cv.', 'academic.'];
+        const activePrefix = cvPrefixes.find((prefix) => hostname.startsWith(prefix));
+        const mainHostname = activePrefix
+          ? hostname.slice(activePrefix.length)
+          : hostname.replace(/^www\./, '');
+        const cvHostname = activePrefix ? hostname : `cv.${mainHostname}`;
+        const cvOrigin = `${protocol}//${cvHostname}${port ? `:${port}` : ''}`;
+
+        document.querySelectorAll('[data-cv-site-link]').forEach((link) => {
+          link.setAttribute('href', new URL('/', cvOrigin).href);
+        });
+      })();
+
       document.addEventListener('contextmenu', (event) => {
         if (event.target instanceof HTMLImageElement) event.preventDefault();
       });
