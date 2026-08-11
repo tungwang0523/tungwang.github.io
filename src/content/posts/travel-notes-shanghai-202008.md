@@ -14,7 +14,7 @@ draft: false
 > 本文用简体中文书写。
 
 > 2026年8月10日笔者按：
-> 
+>
 > 本文最后一次更新在北京时间 2021年12月24日 22:20，之后一直停更，没有意外的话后续也不会有更新计划了。毕竟我已经在上海住了两年有余了，且这次旅行已经过去六年了。
 >
 > 本文观点不代表本人现在的观点。
@@ -78,9 +78,7 @@ draft: false
 
 超大高清原图请参考： http://www.expomuseum.com/2010/map/expo2010map-large.jpg
 
-<article class="message is-danger"><div class="message-body">
-注意：本文誊写至该博客站点时此链接已失效
-</div></article>
+> 注意：本文誊写至该博客站点时此链接已失效
 
 ![](https://user-assets.sxlcdn.com/images/786672/Fv_erlcXGFKwptMzNvJ2OgKYGZL9.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
 
@@ -134,9 +132,9 @@ draft: false
 
 现在，我们依然可以访问网上世博会，游览十年前上海世博会的展馆：www.expo.cn
 
-<article class="message is-danger"><div class="message-body">
-注意：网上世博会运用了flash技术，请确认你的浏览器仍然支持flash。
-</div></article>
+> 2026年8月11日笔者按：这个在2010年世博会闭幕时号称“永不落幕”的网上世博会，大约在2026年6月底被现运营者（世博会博物馆）停止服务。笔者咨询后得到的回答是其应用的 flash 技术已经过期 —— 但该技术早在2020年底就已经过期。笔者猜测，这个网站可能是因为体制内类似于预算核查或者说老旧网站清理的专项运动中被关停的。总之，关于上海世博会的遗迹又消逝了，不是一点，是非常多。
+>
+> 注意：网上世博会运用了flash技术，请确认你的浏览器仍然支持flash。
 
 ![](https://user-assets.sxlcdn.com/images/786672/FjIJN12oMTm_PRZojhAL8EwnuSMZ.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
 
@@ -530,9 +528,7 @@ draft: false
 地铁 人民广场 站 → 地铁 10 号线 上海图书馆 站 → 淮海中路 → 湖南路 → 武康路 → 武康大楼 → 余庆路 → 广元路 → 衡山路 → 高安路 → 上海图书馆 → 地铁 10 号线 上海图书馆 站
 </div>
 
-<article class="message is-danger"><div class="message-body">
-本路线较复杂，推荐用地图辅助理解
-</div></article>
+> 本路线较复杂，推荐用地图辅助理解
 
 在写这段游记时，我辅助百度地图全景尽力找到下文地址所拍摄的精确地址。
 

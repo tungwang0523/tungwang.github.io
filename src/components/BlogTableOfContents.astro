@@ -98,6 +98,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
         let correctionUntil = 0;
         let correctionFrame = 0;
         let mobileTocAnimating = false;
+        let queuedMobileTocState: boolean | null = null;
 
         const updateDesktopFades = () => {
           if (!desktopToc || !desktopList) return;
@@ -226,7 +227,12 @@ const label = lang === 'en' ? 'Contents' : '目录';
         };
 
         const animateMobileToc = async (opening: boolean) => {
-          if (!mobileToc || !mobileList || mobileTocAnimating || mobileToc.open === opening) return;
+          if (!mobileToc || !mobileList) return;
+          if (mobileTocAnimating) {
+            queuedMobileTocState = opening;
+            return;
+          }
+          if (mobileToc.open === opening) return;
           const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           if (reducedMotion) {
             mobileToc.open = opening;
@@ -265,11 +271,22 @@ const label = lang === 'en' ? 'Contents' : '目录';
           delete mobileToc.dataset.tocClosing;
           mobileTocAnimating = false;
           updateMobileFades();
+
+          const queuedState = queuedMobileTocState;
+          queuedMobileTocState = null;
+          if (queuedState !== null && mobileToc.open !== queuedState) {
+            void animateMobileToc(queuedState);
+          }
         };
 
         mobileSummary?.addEventListener('click', (event) => {
           event.preventDefault();
           void animateMobileToc(!mobileToc?.open);
+        });
+
+        document.addEventListener('pointerdown', (event) => {
+          if (!mobileToc?.open || !(event.target instanceof Node)) return;
+          if (!mobileToc.contains(event.target)) void animateMobileToc(false);
         });
 
         links.forEach((link) => {
@@ -321,6 +338,11 @@ const label = lang === 'en' ? 'Contents' : '目录';
         window.addEventListener('wheel', cancelPositionCorrection, { passive: true });
         window.addEventListener('touchstart', cancelPositionCorrection, { passive: true });
         window.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && mobileToc?.open) {
+            event.preventDefault();
+            void animateMobileToc(false);
+            mobileSummary?.focus();
+          }
           if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
             cancelPositionCorrection();
           }

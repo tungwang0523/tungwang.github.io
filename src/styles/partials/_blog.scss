@@ -387,7 +387,7 @@
       width: calc(100% + 7px);
       max-height: min(58vh, 440px);
       margin-left: -7px;
-      padding: 8px 0 18px 7px;
+      padding: 8px 0 18px;
       box-sizing: border-box;
       overflow: hidden;
       border-bottom: 1px solid $border-color;
@@ -403,7 +403,8 @@
 
     ol {
       margin: 0;
-      padding: 0;
+      padding: 0 0 0 7px;
+      box-sizing: border-box;
       max-height: min(calc(58vh - 26px), 414px);
       overflow-y: auto;
       overscroll-behavior: contain;

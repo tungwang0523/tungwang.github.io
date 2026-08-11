@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   lang?: string;
+  canonicalUrl?: string;
 }
 
 const {
@@ -15,9 +16,10 @@ const {
   description = 'The personal website of Tung Wang, an interdisciplinary researcher and designer.',
   image,
   lang = 'en',
+  canonicalUrl,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : undefined;
 const isDev = import.meta.env.DEV;
 ---

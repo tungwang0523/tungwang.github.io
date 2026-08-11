@@ -145,6 +145,50 @@
   padding-right: 0;
 }
 
+@media screen and (min-width: 761px) and (max-width: 1030px) {
+  .work-band {
+    height: clamp(420px, 48vw, 500px);
+  }
+
+  .work-project {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: clamp(24px, 3vw, 36px);
+    padding-left: clamp(24px, 3vw, 36px);
+    padding-right: clamp(24px, 3vw, 36px);
+
+    &__body {
+      padding: clamp(40px, 5vw, 56px) 0 clamp(24px, 3vw, 36px);
+    }
+
+    h2 {
+      margin: clamp(16px, 2vw, 22px) 0 14px;
+      font-size: clamp(38px, 4.8vw, 50px);
+      line-height: 0.94;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    &__role {
+      margin-bottom: 14px;
+      font-size: 12px;
+    }
+
+    &__meta {
+      font-size: 12px;
+    }
+  }
+
+  .work-band--seeds .work-project,
+  .work-band--roof .work-project,
+  .work-band--robotaxi .work-project {
+    padding-right: 0;
+  }
+}
+
 /* ExpoCraft block: the figure pins to the block's right and bottom edges and
    starts level with the project title's top edge. */
 .work-band--expo .work-project {
