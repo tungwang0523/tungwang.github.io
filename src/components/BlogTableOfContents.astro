@@ -97,6 +97,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
         let correctionStart = 0;
         let correctionUntil = 0;
         let correctionFrame = 0;
+        let mobileTocAnimating = false;
 
         const updateDesktopFades = () => {
           if (!desktopToc || !desktopList) return;
@@ -224,6 +225,53 @@ const label = lang === 'en' ? 'Contents' : '目录';
           correctionUntil = 0;
         };
 
+        const animateMobileToc = async (opening: boolean) => {
+          if (!mobileToc || !mobileList || mobileTocAnimating || mobileToc.open === opening) return;
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reducedMotion) {
+            mobileToc.open = opening;
+            return;
+          }
+
+          mobileTocAnimating = true;
+          if (opening) mobileToc.open = true;
+          else mobileToc.dataset.tocClosing = '';
+
+          await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
+          const keyframes = opening
+            ? [
+                { clipPath: 'inset(0 0 100% 0)', opacity: 0, transform: 'translateY(-8px)' },
+                { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' },
+              ]
+            : [
+                { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' },
+                { clipPath: 'inset(0 0 100% 0)', opacity: 0, transform: 'translateY(-8px)' },
+              ];
+          const nav = mobileToc.querySelector<HTMLElement>('nav');
+          const animation = nav?.animate(keyframes, {
+            duration: 190,
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            fill: 'both',
+          });
+          await animation?.finished.catch(() => undefined);
+
+          if (!opening) {
+            mobileToc.open = false;
+            // WebKit may otherwise cancel the animation before it has applied
+            // the closed details layout, briefly restoring the full nav height.
+            void mobileToc.getBoundingClientRect().height;
+          }
+          animation?.cancel();
+          delete mobileToc.dataset.tocClosing;
+          mobileTocAnimating = false;
+          updateMobileFades();
+        };
+
+        mobileSummary?.addEventListener('click', (event) => {
+          event.preventDefault();
+          void animateMobileToc(!mobileToc?.open);
+        });
+
         links.forEach((link) => {
           link.addEventListener('click', (event) => {
             const id = link.dataset.tocLink;
@@ -259,8 +307,7 @@ const label = lang === 'en' ? 'Contents' : '目录';
             };
 
             if (mobileVisible && mobileToc?.open) {
-              mobileToc.addEventListener('toggle', navigateAfterLayout, { once: true });
-              mobileToc.open = false;
+              void animateMobileToc(false).then(navigateAfterLayout);
             } else if (mobileVisible) {
               navigateAfterLayout();
             } else {
