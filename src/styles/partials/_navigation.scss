@@ -11,7 +11,7 @@
     inset: 0 0 auto;
     display: block;
     height: 64px;
-    background: $blog-bg;
+    background: $panel-bg;
   }
 
   &__brand {
@@ -22,13 +22,16 @@
       top: 50%;
       left: 50%;
       display: block;
-      color: $title-color;
+      padding: 7px 11px;
+      background: $title-color;
+      color: $blog-bg;
       font-family: $title-font;
       font-size: 22px;
       font-weight: 700;
       letter-spacing: -1px;
       line-height: 1;
       text-decoration: none;
+      cursor: default;
       opacity: 0;
       transform: translate(-50%, calc(-50% + 5px));
       transition:

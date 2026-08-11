@@ -26,9 +26,9 @@
   top: 0;
   display: block;
   padding: 0;
-  border-bottom: 1px solid $border-color;
-  background-color: $blog-bg;
-  font-family: $subtitle-font;
+  border-bottom: 0;
+  background-color: $panel-bg;
+  font-family: $title-font;
 
   &__inner {
     display: flex;
@@ -58,13 +58,26 @@
 
   nav {
     display: flex;
+    align-items: center;
     gap: 28px;
 
-    a {
+    a,
+    .page-nav__current {
       color: $subtitle-color;
       text-decoration: none;
       font-size: 17px;
       letter-spacing: -0.3px;
+    }
+
+    .page-nav__current {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      background: $title-color;
+      color: $blog-bg;
+      font-weight: 400;
+      line-height: 1;
+      cursor: default;
     }
   }
 
@@ -80,7 +93,8 @@
       flex-wrap: nowrap;
       justify-content: center;
 
-      a {
+      a,
+      .page-nav__current {
         font-size: 15px;
       }
     }

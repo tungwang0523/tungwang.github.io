@@ -97,6 +97,7 @@ $body-bg: #121418;
 $title-color: #121418;
 $subtitle-color: #161419;
 $border-color: #94918f;
+$panel-bg: color.mix($body-bg, $blog-bg, 5.5%);
 
 body {
   background-color: $blog-bg;

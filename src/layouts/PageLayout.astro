@@ -15,6 +15,7 @@ interface Props {
   blogHref?: string;
   canonicalUrl?: string;
   mainSiteNavigation?: boolean;
+  activeSection?: 'research' | 'work' | 'blog' | 'microblog';
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   blogHref = '/blog',
   canonicalUrl,
   mainSiteNavigation = false,
+  activeSection,
 } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const heroSrc = heroImage
@@ -60,10 +62,34 @@ const heroSrcset = heroImage
           >Tung’s</a
         >
         <nav aria-label="Primary">
-          <a href="/academic" data-cv-site-link>Research</a>
-          <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
-          <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
-          <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+          {
+            activeSection === 'research' ? (
+              <span class="page-nav__current" aria-current="page">Research</span>
+            ) : (
+              <a href="/academic" data-cv-site-link>Research</a>
+            )
+          }
+          {
+            activeSection === 'work' ? (
+              <span class="page-nav__current" aria-current="page">Work</span>
+            ) : (
+              <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+            )
+          }
+          {
+            activeSection === 'blog' ? (
+              <span class="page-nav__current" aria-current="page">Blog</span>
+            ) : (
+              <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
+            )
+          }
+          {
+            activeSection === 'microblog' ? (
+              <span class="page-nav__current" aria-current="page">Microblog</span>
+            ) : (
+              <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+            )
+          }
         </nav>
       </div>
     </header>
@@ -94,7 +120,11 @@ const heroSrcset = heroImage
       </div>
     </main>
 
-    <Footer blogHref={blogHref} mainSiteNavigation={mainSiteNavigation} />
+    <Footer
+      blogHref={blogHref}
+      mainSiteNavigation={mainSiteNavigation}
+      activeSection={activeSection}
+    />
   </div>
 </BaseLayout>
 

@@ -1,9 +1,10 @@
 @use 'foundation' as *;
 
 .site-footer {
-  border-top: 1px solid $border-color;
-  background-color: $blog-bg;
+  border-top: 0;
+  background-color: $panel-bg;
   margin-top: auto;
+  font-family: $title-font;
 
   &__inner {
     max-width: var(--page-content-width, 1200px);
@@ -37,21 +38,34 @@
 
   &__nav {
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 24px;
 
-    a {
+    a,
+    .site-footer__current {
       color: $subtitle-color;
       text-decoration: none;
       font-size: 15px;
+    }
+
+    .site-footer__current {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      background: $title-color;
+      color: $blog-bg;
+      font-weight: 400;
+      line-height: 1;
+      cursor: default;
     }
   }
 
   &__meta {
     font-size: 13px;
     color: $subtitle-color;
-    font-family: $italic-font;
-    font-style: italic;
+    font-family: $title-font;
+    font-style: normal;
   }
 }

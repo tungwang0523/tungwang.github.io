@@ -170,6 +170,7 @@ const [primaryProject, ...otherProjects] = projects;
   pageClass="page--research"
   canonicalUrl="https://cv.tung.mockingbird.team/"
   mainSiteNavigation
+  activeSection="research"
 >
   <div class="cv-web">
     <section class="cv-web__profile" aria-label="Academic profile">
@@ -357,11 +358,15 @@ const [primaryProject, ...otherProjects] = projects;
     </section>
 
     <section class="cv-web__closing" aria-label="Academic links">
-      <p>Curriculum Vitae · Publications · Research Collaboration</p>
-      <div>
-        <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
-        <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
-        <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer">ORCID ↗</a>
+      <div class="cv-web__closing-inner">
+        <p>Curriculum Vitae · Publications · Research Collaboration</p>
+        <div>
+          <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
+          <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
+            >ORCID ↗</a
+          >
+          <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
+        </div>
       </div>
     </section>
   </div>
