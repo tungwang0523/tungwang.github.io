@@ -34,11 +34,13 @@ const {
 } = Astro.props;
 
 const formatted = dateLabel ?? (date ? formatSiteDate(date) : '');
+const sectionId = bigTitle.toLowerCase();
+const compactCover = sectionId === 'writing' ? '/pictures/writing_small.png' : undefined;
 
 const parts = emphasis ? headline.split('{emphasis}') : [headline];
 ---
 
-<div class="blog-header">
+<div class="blog-header" data-section={sectionId}>
   <div class="blog-article header-article">
     <div class="blog-big__title">{bigTitle}</div>
     <div class="blog-menu small-title date">{formatted}</div>
@@ -52,7 +54,9 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
         loading={imageLoading}
         decoding="async"
         fetchpriority={imageFetchPriority}
-        data-section={bigTitle.toLowerCase()}
+        data-section={sectionId}
+        data-full-src={cover}
+        data-compact-src={compactCover}
       />
     </div>
     <div class="featured-content__copy">
@@ -98,6 +102,89 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
 </div>
 
 <script>
+  const scheduleWorkCrop = (() => {
+    let frame = 0;
+
+    return (header: HTMLElement) => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const content = header.querySelector<HTMLElement>('.featured-content');
+        const media = header.querySelector<HTMLElement>('.featured-content__media');
+        const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+        if (!content || !media || !copy) return;
+
+        const imageWidth = media.clientWidth;
+        if (!imageWidth) return;
+
+        // work.png is a 4:3 canvas built from six exact 512px-high rows.
+        const rowHeight = (imageWidth * 3) / 4 / 6;
+        const availableHeight = Math.max(0, content.clientHeight - copy.offsetHeight);
+        const rowCount = Math.max(2, Math.min(6, Math.floor(availableHeight / rowHeight)));
+        const firstVisibleRow = Math.floor((6 - rowCount) / 2);
+
+        media.dataset.workCrop = 'true';
+        media.style.setProperty('--work-crop-height', `${rowCount * rowHeight}px`);
+        media.style.setProperty('--work-first-row', String(firstVisibleRow));
+      });
+    };
+  })();
+
+  document
+    .querySelectorAll<HTMLElement>(".blog-header[data-section='works']")
+    .forEach((header) => {
+      if (header.dataset.workCropReady === 'true') return;
+      header.dataset.workCropReady = 'true';
+
+      const observer = new ResizeObserver(() => scheduleWorkCrop(header));
+      observer.observe(header);
+      const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+      if (copy) observer.observe(copy);
+      scheduleWorkCrop(header);
+    });
+
+  const scheduleWritingArtwork = (() => {
+    let frame = 0;
+
+    return (header: HTMLElement) => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const content = header.querySelector<HTMLElement>('.featured-content');
+        const media = header.querySelector<HTMLElement>('.featured-content__media');
+        const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+        const image = header.querySelector<HTMLImageElement>('.featured-content__image');
+        if (!content || !media || !copy || !image) return;
+
+        const fullSource = image.dataset.fullSrc;
+        const compactSource = image.dataset.compactSrc;
+        const imageWidth = media.clientWidth;
+        if (!fullSource || !compactSource || !imageWidth) return;
+
+        const availableHeight = Math.max(0, content.clientHeight - copy.offsetHeight);
+        const fullArtworkHeight = (imageWidth * 3) / 4;
+        const useCompactArtwork = availableHeight < fullArtworkHeight;
+        const nextSource = useCompactArtwork ? compactSource : fullSource;
+
+        if (image.getAttribute('src') !== nextSource) image.src = nextSource;
+        header.dataset.artwork = useCompactArtwork ? 'compact' : 'full';
+      });
+    };
+  })();
+
+  document
+    .querySelectorAll<HTMLElement>(".blog-header[data-section='writing']")
+    .forEach((header) => {
+      if (header.dataset.writingArtworkReady === 'true') return;
+      header.dataset.writingArtworkReady = 'true';
+
+      const observer = new ResizeObserver(() => scheduleWritingArtwork(header));
+      observer.observe(header);
+      const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+      if (copy) observer.observe(copy);
+      scheduleWritingArtwork(header);
+    });
+
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     const button = target.closest<HTMLButtonElement>('[data-featured-next]');
