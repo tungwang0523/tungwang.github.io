@@ -2931,7 +2931,8 @@
 .portfolio-page--narrative .project-hero--research img {
   display: block;
   max-width: var(--page-content-width);
-  margin: 0 auto;
+  margin: 0;
+  object-position: left center;
 }
 
 .portfolio-page--narrative .project-hero--research::after {
@@ -2992,6 +2993,8 @@
    Klein Blue applies to surfaces (blocks), text stays dark. */
 
 .portfolio-page--narrative {
+  --mobile-page-nav-bg: #002fa7;
+  --mobile-page-nav-color: #ffffff;
   background: #ffffff;
   font-family: $title-font;
 

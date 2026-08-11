@@ -318,24 +318,24 @@
     margin: 0 0 28px;
     background: $blog-bg;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      border-bottom: 1px solid $border-color;
-      pointer-events: none;
-    }
+    &[data-toc-stuck='true'] {
+      isolation: isolate;
+      background: $panel-bg;
 
-    &[data-toc-stuck='true']::after {
-      left: 50%;
-      width: 100vw;
-      transform: translateX(-50%);
-    }
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        inset: 0 auto 0 50%;
+        width: 100vw;
+        background: $panel-bg;
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
 
-    &[open]::after {
-      opacity: 0;
+      nav {
+        background: $panel-bg;
+      }
     }
 
     summary {
@@ -390,7 +390,6 @@
       padding: 8px 0 18px;
       box-sizing: border-box;
       overflow: hidden;
-      border-bottom: 1px solid $border-color;
       background: $blog-bg;
       scrollbar-width: none;
       transform-origin: top;

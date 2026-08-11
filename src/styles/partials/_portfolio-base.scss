@@ -5,6 +5,8 @@
 .portfolio-page {
   --page-content-width: 1240px;
   --project-red: #c93028;
+  --mobile-page-nav-bg: #{$panel-bg};
+  --mobile-page-nav-color: #{$title-color};
   background: #e9e6e4;
 
   .page-nav__inner,
@@ -18,18 +20,41 @@
 }
 .portfolio-page--mine {
   --next-theme: #1e7a46;
+  --mobile-page-nav-bg: #c93028;
+  --mobile-page-nav-color: #ffffff;
 }
 .portfolio-page--expo {
   --next-theme: #6d28d9;
+  --mobile-page-nav-bg: #1e7a46;
+  --mobile-page-nav-color: #ffffff;
 }
 .portfolio-page--seeds {
   --next-theme: #546e7a;
+  --mobile-page-nav-bg: #6d28d9;
+  --mobile-page-nav-color: #ffffff;
 }
 .portfolio-page--roof {
   --next-theme: #c2410c;
+  --mobile-page-nav-bg: #546e7a;
+  --mobile-page-nav-color: #ffffff;
 }
 .portfolio-page--robotaxi {
   --next-theme: #002fa7;
+  --mobile-page-nav-bg: #c2410c;
+  --mobile-page-nav-color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio-page {
+    .menu-mobile-bar {
+      background: var(--mobile-page-nav-bg);
+    }
+
+    .menu-mobile-bar__brand,
+    .menu-toggle {
+      color: var(--mobile-page-nav-color);
+    }
+  }
 }
 
 .portfolio-page .site-footer {

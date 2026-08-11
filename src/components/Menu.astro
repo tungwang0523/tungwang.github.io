@@ -1,32 +1,79 @@
 ---
+import Marquee from './Marquee.astro';
+
+type Section = 'home' | 'research' | 'work' | 'blog' | 'microblog';
+
 interface MenuItem {
+  section?: Section;
   label: string;
   href: string;
   external?: boolean;
   cvSite?: boolean;
+  mainSite?: boolean;
 }
 
 interface Props {
   items?: MenuItem[];
+  activeSection?: Section;
+  mobileOnly?: boolean;
+  mainSiteNavigation?: boolean;
+  blogHref?: string;
+  marqueeItems?: string[];
+  showIdentity?: boolean;
+  showHome?: boolean;
 }
 
 const {
-  items = [
-    { label: 'Research', href: '/academic', cvSite: true },
-    { label: 'Work', href: '/work' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Microblog', href: '/microblog' },
-  ],
+  items,
+  activeSection,
+  mobileOnly = false,
+  mainSiteNavigation = false,
+  blogHref = '/blog',
+  marqueeItems = [],
+  showIdentity = false,
+  showHome = true,
 } = Astro.props;
+
+const allMenuItems: MenuItem[] =
+  items ??
+  [
+    { section: 'home', label: 'Home', href: '/', mainSite: true },
+    { section: 'research', label: 'Research', href: '/academic', cvSite: true },
+    { section: 'work', label: 'Work', href: '/work', mainSite: true },
+    { section: 'blog', label: 'Blog', href: blogHref, mainSite: true },
+    { section: 'microblog', label: 'Microblog', href: '/microblog', mainSite: true },
+  ];
+const menuItems = showHome
+  ? allMenuItems
+  : allMenuItems.filter((item) => item.section !== 'home');
 ---
 
-<div class="menu-mobile-bar">
-  <span class="menu-mobile-bar__brand" aria-current="page" data-mobile-brand>Tung’s</span>
+<div
+  class:list={[
+    'menu-mobile-bar',
+    mobileOnly && 'menu-mobile-only',
+    marqueeItems.length > 0 && 'menu-mobile-bar--has-marquee',
+  ]}
+>
+  <a
+    href="/"
+    class:list={['menu-mobile-bar__brand', mobileOnly && 'is-visible']}
+    aria-label="Home"
+    data-main-site-link={mainSiteNavigation || undefined}
+    data-mobile-brand>Tung’s</a
+  >
+  {
+    marqueeItems.length > 0 && (
+      <div class="menu-mobile-bar__marquee">
+        <Marquee items={marqueeItems} />
+      </div>
+    )
+  }
 </div>
 
 <button
   type="button"
-  class="menu-toggle"
+  class:list={['menu-toggle', mobileOnly && 'menu-mobile-only']}
   aria-label="Open menu"
   aria-controls="primary-menu"
   aria-expanded="false"
@@ -37,47 +84,79 @@ const {
   <span class="menu-toggle__bar"></span>
 </button>
 
-<div class="blog-part is-menu" id="primary-menu" data-menu>
+<div
+  class:list={['blog-part', 'is-menu', mobileOnly && 'menu-mobile-only']}
+  id="primary-menu"
+  data-menu
+>
   {
-    items.map((item) => (
-      <a href={item.href} class="blog-menu" data-cv-site-link={item.cvSite || undefined}>
-        {item.label}
-        {item.external && (
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-width=".7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-arrow-up-right"
-            viewBox="0 0 24 24"
-          >
-            <path d="M7 17L17 7M7 7h10v10" />
-          </svg>
-        )}
-      </a>
-    ))
+    menuItems.map((item) =>
+      item.section === activeSection ? (
+        <span
+          class:list={[
+            'blog-menu',
+            'menu-current',
+            item.section === 'home' && !mobileOnly && 'menu-home-item',
+          ]}
+          aria-current="page"
+        >
+          {item.label}
+        </span>
+      ) : (
+        <a
+          href={item.href}
+          class:list={['blog-menu', item.section === 'home' && !mobileOnly && 'menu-home-item']}
+          data-cv-site-link={item.cvSite || undefined}
+          data-main-site-link={(mainSiteNavigation && item.mainSite) || undefined}
+        >
+          {item.label}
+          {item.external && (
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width=".7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-arrow-up-right"
+              viewBox="0 0 24 24"
+            >
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          )}
+        </a>
+      ),
+    )
   }
-  <div class="blog-menu mention">
-    <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
-    <span class="mention__name">Tung Wang</span>
-    <small class="mention__role">
-      Founder of <a href="https://mockingbird.team" target="_blank" rel="noreferrer"
-        >Mockingbird Studio</a
-      >
-    </small>
-    <span class="mention__details">
-      <small>Greetings from Shanghai</small>
-      <small>© 2026 Tung Wang</small>
-    </span>
-  </div>
+  {
+    showIdentity ? (
+      <div class="blog-menu mention">
+        <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
+        <span class="mention__name">Tung Wang</span>
+        <small class="mention__role">
+          Founder of <a href="https://mockingbird.team" target="_blank" rel="noreferrer">
+            Mockingbird Studio
+          </a>
+        </small>
+        <span class="mention__details">
+          <small>Greetings from Shanghai</small>
+          <small>© 2026 Tung Wang</small>
+        </span>
+      </div>
+    ) : mobileOnly ? (
+      <div class="blog-menu mention mention--mark-only" aria-hidden="true">
+        <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
+      </div>
+    ) : null
+  }
 </div>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.querySelector<HTMLElement>('[data-menu]');
   const mobileBrand = document.querySelector<HTMLElement>('[data-mobile-brand]');
-  const identityTitle = document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
+  const identityTitle =
+    document.querySelector<HTMLElement>('[data-mobile-identity]') ??
+    document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
 
   const setOpen = (open: boolean) => {
     if (!toggle || !menu) return;

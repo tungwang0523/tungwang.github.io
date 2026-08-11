@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import Menu from '../components/Menu.astro';
 
 interface Props {
   title: string;
@@ -31,6 +32,7 @@ const {
 
 <BaseLayout title={`${title} - Tung‘s Work`} description={description}>
   <div class:list={['page', 'portfolio-page', projectClass]}>
+    <Menu mobileOnly />
     <header class="page-nav">
       <div class="page-nav__inner">
         <a class="page-nav__brand" href="/">Tung’s</a>

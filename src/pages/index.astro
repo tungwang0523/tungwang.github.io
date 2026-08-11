@@ -14,6 +14,10 @@ const sixMonthsAgo = new Date();
 sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 const recentMicroblogEntries = microblogEntries.filter((entry) => entry.data.date >= sixMonthsAgo);
 const archiveEntry = microblogEntries.find((entry) => entry.data.date < sixMonthsAgo);
+const announcements = [
+  'I’m applying for PhD programmes. If you’re looking for a doctoral student, I’d love to hear from you.',
+  'Not a PhD supervisor? I’m also looking for a girlfriend. If you’d like to date me, I’d love to hear from you too.',
+];
 const microblog = await Promise.all(
   recentMicroblogEntries.map(async (entry) => {
     const { Content } = await render(entry);
@@ -22,6 +26,7 @@ const microblog = await Promise.all(
 );
 
 sections.sort((a, b) => a.data.order - b.data.order);
+const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : title);
 ---
 
 <BaseLayout
@@ -30,7 +35,7 @@ sections.sort((a, b) => a.data.order - b.data.order);
   lang="zh-CN"
 >
   <div class="blog">
-    <Menu />
+    <Menu activeSection="home" marqueeItems={announcements} showIdentity showHome={false} />
     <StickyHeader
       title="Tung’s"
       pinnedLabel=""
@@ -38,27 +43,181 @@ sections.sort((a, b) => a.data.order - b.data.order);
       pageContext={['A', 'Curious', 'Creator']}
     />
 
-    <div class="blog-header-container">
-      {
-        sections.map((section, index) => (
-          <FeaturedArticle
-            bigTitle={section.data.bigTitle}
-            dateLabel={section.data.label}
-            emphasis={section.data.emphasis}
-            headline={section.data.headline}
-            cover={section.data.cover}
-            author={section.data.metaLeft}
-            readTime={section.data.metaRight}
-            excerpt={section.data.excerpt}
-            href={section.data.href}
-            hasNext={index < sections.length - 1}
-            imageLoading={index === 0 ? 'eager' : 'lazy'}
-            imageFetchPriority={index === 0 ? 'high' : 'low'}
-          />
-        ))
-      }
-    </div>
+    <section class="mobile-featured" aria-label="Featured sections" data-mobile-featured>
+      <h1 class="mobile-featured__title" data-mobile-identity>
+        <span class="mobile-featured__brand">Tung’s</span>
+        <span class="mobile-featured__word-window" aria-hidden="true">
+          <span class="mobile-featured__word-track" data-featured-word-track>
+            {sections.map((section) => <span>{mobileSectionLabel(section.data.bigTitle)}</span>)}
+            <span>Microblog</span>
+          </span>
+        </span>
+        <span class="visually-hidden" data-featured-title-current>
+          {sections[0] ? mobileSectionLabel(sections[0].data.bigTitle) : ''}
+        </span>
+      </h1>
 
-    <Sidebar entries={microblog} archiveEntryId={archiveEntry?.id} />
+      <div class="mobile-featured__track" data-featured-track>
+        <div class="blog-header-container">
+          {
+            sections.map((section, index) => (
+              <FeaturedArticle
+                bigTitle={section.data.bigTitle}
+                dateLabel={section.data.label}
+                emphasis={section.data.emphasis}
+                headline={section.data.headline}
+                cover={section.data.cover}
+                author={section.data.metaLeft}
+                readTime={section.data.metaRight}
+                excerpt={section.data.excerpt}
+                href={section.data.href}
+                hasNext={index < sections.length - 1}
+                imageLoading={index === 0 ? 'eager' : 'lazy'}
+                imageFetchPriority={index === 0 ? 'high' : 'low'}
+              />
+            ))
+          }
+        </div>
+
+        <Sidebar
+          entries={microblog}
+          archiveEntryId={archiveEntry?.id}
+          announcements={announcements}
+        />
+      </div>
+
+      <nav class="mobile-featured__nav" aria-label="Choose a featured section">
+        {
+          sections.map((section, index) => (
+            <button
+              type="button"
+              data-featured-index={index}
+              aria-pressed={index === 0 ? 'true' : 'false'}
+            >
+              {mobileSectionLabel(section.data.bigTitle)}
+            </button>
+          ))
+        }
+        <button type="button" data-featured-index={sections.length} aria-pressed="false">
+          Microblog
+        </button>
+      </nav>
+    </section>
   </div>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-mobile-featured]').forEach((featured) => {
+    if (featured.dataset.featuredReady === 'true') return;
+    featured.dataset.featuredReady = 'true';
+
+    const track = featured.querySelector<HTMLElement>('[data-featured-track]');
+    const wordTrack = featured.querySelector<HTMLElement>('[data-featured-word-track]');
+    const currentTitle = featured.querySelector<HTMLElement>('[data-featured-title-current]');
+    const buttons = Array.from(
+      featured.querySelectorAll<HTMLButtonElement>('[data-featured-index]'),
+    );
+    if (!track || !wordTrack || buttons.length === 0) return;
+
+    let frame = 0;
+    let activeIndex = 0;
+    let wheelAccumulator = 0;
+    let wheelGestureActive = false;
+    let wheelEndTimer: number | undefined;
+
+    const update = () => {
+      frame = 0;
+      const panelWidth = track.clientWidth || 1;
+      const progress = Math.max(0, Math.min(buttons.length - 1, track.scrollLeft / panelWidth));
+      const nextIndex = Math.round(progress);
+
+      wordTrack.style.setProperty('--featured-progress', String(progress));
+
+      if (nextIndex !== activeIndex) {
+        activeIndex = nextIndex;
+        buttons.forEach((button, index) =>
+          button.setAttribute('aria-pressed', String(index === activeIndex)),
+        );
+        if (currentTitle) currentTitle.textContent = buttons[activeIndex]?.textContent ?? '';
+      }
+    };
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (!frame) frame = window.requestAnimationFrame(update);
+      },
+      { passive: true },
+    );
+
+    track.addEventListener(
+      'wheel',
+      (event) => {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+        const target = event.target;
+        const microblogFeed =
+          target instanceof Element ? target.closest<HTMLElement>('.microblog-feed') : null;
+        if (microblogFeed) {
+          const movingDown = event.deltaY > 0;
+          const canScrollDown =
+            microblogFeed.scrollTop + microblogFeed.clientHeight < microblogFeed.scrollHeight - 1;
+          const canScrollUp = microblogFeed.scrollTop > 1;
+          if ((movingDown && canScrollDown) || (!movingDown && canScrollUp)) return;
+        }
+
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+
+        window.clearTimeout(wheelEndTimer);
+        wheelEndTimer = window.setTimeout(() => {
+          wheelAccumulator = 0;
+          wheelGestureActive = false;
+        }, 180);
+
+        if (wheelGestureActive) return;
+
+        const normalizedDelta =
+          event.deltaMode === WheelEvent.DOM_DELTA_LINE
+            ? event.deltaY * 16
+            : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+              ? event.deltaY * track.clientHeight
+              : event.deltaY;
+        wheelAccumulator += normalizedDelta;
+
+        if (Math.abs(wheelAccumulator) < 24) return;
+
+        wheelGestureActive = true;
+        const currentIndex = Math.round(track.scrollLeft / (track.clientWidth || 1));
+        const direction = wheelAccumulator > 0 ? 1 : -1;
+        const nextIndex = Math.max(0, Math.min(buttons.length - 1, currentIndex + direction));
+        buttons[nextIndex]?.click();
+      },
+      { passive: false },
+    );
+
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        track.scrollTo({
+          left: index * track.clientWidth,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'auto'
+            : 'smooth',
+        });
+      });
+    });
+
+    featured.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      const direction = event.key === 'ArrowRight' ? 1 : -1;
+      const nextIndex = Math.max(0, Math.min(buttons.length - 1, activeIndex + direction));
+      if (nextIndex === activeIndex) return;
+      event.preventDefault();
+      buttons[nextIndex]?.click();
+      buttons[nextIndex]?.focus();
+    });
+
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  });
+</script>

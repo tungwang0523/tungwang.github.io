@@ -14,9 +14,10 @@
   color: $subtitle-color;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 768px) {
   .page {
-    --page-nav-height: 102px;
+    --page-nav-height: 64px;
+    padding-top: var(--page-nav-height);
   }
 }
 
@@ -81,23 +82,8 @@
     }
   }
 
-  @media screen and (max-width: 560px) {
-    &__inner {
-      flex-direction: column;
-      gap: 12px;
-      padding: 20px;
-    }
-
-    nav {
-      gap: clamp(8px, 3vw, 18px);
-      flex-wrap: nowrap;
-      justify-content: center;
-
-      a,
-      .page-nav__current {
-        font-size: 15px;
-      }
-    }
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 }
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import Menu from '../components/Menu.astro';
 import { cloudflareImage, cloudflareSrcset, imagePresets } from '../utils/cloudflare-image.mjs';
 
 interface Props {
@@ -56,6 +57,12 @@ const heroSrcset = heroImage
   canonicalUrl={canonicalUrl}
 >
   <div class:list={['page', pageClass]}>
+    <Menu
+      mobileOnly
+      activeSection={activeSection}
+      mainSiteNavigation={mainSiteNavigation}
+      blogHref={blogHref}
+    />
     <header class="page-nav">
       <div class="page-nav__inner">
         <a class="page-nav__brand" href="/" data-main-site-link={mainSiteNavigation || undefined}

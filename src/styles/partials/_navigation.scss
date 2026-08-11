@@ -20,20 +20,21 @@
     @media screen and (max-width: 768px) {
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 72px;
       display: block;
-      padding: 7px 11px;
-      background: $title-color;
-      color: $blog-bg;
+      width: max-content;
+      padding: 0;
+      background: transparent;
+      color: $title-color;
       font-family: $title-font;
       font-size: 22px;
       font-weight: 700;
       letter-spacing: -1px;
       line-height: 1;
       text-decoration: none;
-      cursor: default;
+      cursor: pointer;
       opacity: 0;
-      transform: translate(-50%, calc(-50% + 5px));
+      transform: translateY(calc(-50% + 5px));
       transition:
         opacity 180ms ease,
         transform 180ms ease;
@@ -41,10 +42,20 @@
 
       &.is-visible {
         opacity: 1;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
         pointer-events: auto;
       }
     }
+  }
+
+  &__marquee {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1030px) {
+  .menu-mobile-bar {
+    background: transparent;
   }
 }
 
@@ -112,6 +123,39 @@
 
 body.menu-open {
   overflow: hidden;
+
+  .menu-mobile-bar {
+    background: transparent;
+  }
+
+  .menu-mobile-bar__brand {
+    visibility: hidden;
+  }
+
+  .menu-toggle {
+    color: $subtitle-color;
+  }
+}
+
+.menu-home-item {
+  display: none;
+}
+
+.is-menu .menu-current {
+  width: max-content;
+  padding: 7px 11px;
+  background: $title-color;
+  color: $blog-bg;
+  line-height: 1;
+  cursor: default;
+}
+
+@media screen and (min-width: 769px) {
+  .menu-mobile-bar.menu-mobile-only,
+  .menu-toggle.menu-mobile-only,
+  .is-menu.menu-mobile-only {
+    display: none;
+  }
 }
 
 /* ---------- Mobile sizing tweaks ---------- */
@@ -134,13 +178,115 @@ body.menu-open {
   }
 
   .blog {
-    height: auto;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
     max-height: none;
-    overflow: visible;
-    padding: 80px 0 40px;
+    overflow: hidden;
+    padding: 64px 0 0;
     grid-template-columns: 100%;
-    grid-template-rows: auto auto;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .blog-is-sticky {
+    display: none;
+  }
+
+  .menu-mobile-bar--has-marquee {
+    background: transparent;
+
+    .menu-mobile-bar__brand {
+      display: none;
+    }
+  }
+
+  .menu-mobile-bar__marquee {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    left: 72px;
+    display: block;
+    overflow: hidden;
+    transform: translateY(-50%);
+
+    .site-marquee {
+      width: 100%;
+      margin: 0;
+      padding: 5px 0;
+      background: transparent;
+      color: $title-color;
+      font-size: 20px;
+      opacity: 0.28;
+
+      span::before {
+        background-color: currentColor;
+      }
+    }
+  }
+
+  body.menu-open .menu-mobile-bar__marquee {
+    visibility: hidden;
+  }
+
+  .menu-home-item {
+    display: flex;
+  }
+
+  .is-menu.menu-mobile-only {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 28px 28px;
+    border-right: 0;
+    background-color: $blog-bg;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    > .blog-menu {
+      display: flex;
+      align-items: center;
+      color: $subtitle-color;
+      font-family: $subtitle-font;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+
+      & + .blog-menu {
+        margin-top: 24px;
+      }
+
+      &.menu-current {
+        align-self: flex-start;
+        width: auto;
+        margin-left: -12px;
+        padding: 8px 12px;
+        background: $title-color;
+        color: $blog-bg;
+      }
+    }
+
+    > .blog-menu.mention {
+      margin-top: auto;
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 18px;
+      line-height: 1.2;
+
+      &.mention--mark-only .mention__mark {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .is-menu .blog-menu.mention {
+    margin-top: auto;
   }
 
   .microblog-sidebar .site-marquee {
@@ -151,16 +297,171 @@ body.menu-open {
     display: none !important;
   }
 
-  /* On phones each featured article scrolls in the normal page flow */
+  .mobile-featured {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    width: 100%;
+    height: calc(100dvh - 64px);
+    min-height: 0;
+    overflow: hidden;
+
+    &__title {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      align-items: start;
+      gap: 0.22em;
+      min-width: 0;
+      margin: 0;
+      padding: clamp(18px, 5vw, 26px) 20px clamp(12px, 3vw, 18px);
+      font-family: $title-font;
+      font-size: clamp(38px, 11.5vw, 52px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+    }
+
+    &__word-window {
+      min-width: 0;
+      padding-bottom: 0.12em;
+      overflow: hidden;
+    }
+
+    &__word-track {
+      --featured-progress: 0;
+      display: flex;
+      width: 400%;
+      line-height: inherit;
+      transform: translateX(calc(var(--featured-progress) * -25%));
+      will-change: transform;
+
+      > span {
+        flex: 0 0 25%;
+        min-width: 0;
+        white-space: nowrap;
+      }
+    }
+
+    &__track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x pan-y;
+    }
+
+    &__nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px 20px 18px;
+
+      button {
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: $title-color;
+        font-family: $title-font;
+        font-size: clamp(10px, 2.9vw, 13px);
+        font-weight: 500;
+        line-height: 1;
+        text-align: left;
+        opacity: 0.28;
+        cursor: pointer;
+        transition: opacity 160ms ease;
+
+        &[aria-pressed='true'] {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  /* The desktop vertical editorial column becomes one horizontal mobile stage. */
   .blog-header-container {
-    overflow: visible;
-    height: auto;
-    scroll-snap-type: none;
+    display: contents;
     border-right: 0;
 
-    & > * {
+    & > .blog-header {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
       min-height: 0;
-      padding-top: clamp(28px, 6vw, 48px);
+      overflow: hidden;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+  }
+
+  .blog-header-container .header-article {
+    display: none;
+  }
+
+  .blog-header-container .featured-content {
+    height: 100%;
+    padding: 0 20px;
+
+    &__copy {
+      padding-top: clamp(14px, 3vh, 24px);
+
+      h2 {
+        margin-bottom: 8px;
+        font-size: clamp(21px, 6vw, 26px);
+      }
+
+      p {
+        margin-bottom: 10px;
+        font-size: clamp(13px, 3.7vw, 15px);
+        line-height: 1.32;
+      }
+    }
+
+    &__actions {
+      padding-top: 10px;
+      padding-bottom: 2px;
+    }
+  }
+
+  .mobile-featured__track > .microblog-sidebar {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: 0 20px;
+
+    .microblog-sidebar__sticky-head {
+      position: static;
+      flex: 0 0 auto;
+    }
+
+    .site-marquee {
+      display: none;
+    }
+
+    .blog-right-title-container {
+      justify-content: flex-end;
+      margin-bottom: 14px;
+      padding-top: 12px;
+      padding-bottom: 14px;
+    }
+
+    .blog-right-title {
+      display: none;
+    }
+
+    .microblog-feed {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      padding-bottom: 40px;
     }
   }
 
@@ -172,7 +473,7 @@ body.menu-open {
 
   .blog-article img {
     height: auto;
-    max-height: 50vh;
+    max-height: 100%;
   }
 
   .blog-article h2 {
@@ -194,8 +495,8 @@ html {
   scroll-padding-top: calc(var(--page-nav-height) + 16px);
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 768px) {
   :root {
-    --page-nav-height: 102px;
+    --page-nav-height: 64px;
   }
 }

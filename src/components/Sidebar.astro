@@ -31,19 +31,23 @@ interface Props {
   entries: Entry[];
   heading?: string;
   archiveEntryId?: string;
+  announcements?: string[];
 }
 
-const { entries, heading = 'Microblog', archiveEntryId } = Astro.props;
+const {
+  entries,
+  heading = 'Microblog',
+  archiveEntryId,
+  announcements = [
+    'I’m applying for PhD programmes. If you’re looking for a doctoral student, I’d love to hear from you.',
+    'Not a PhD supervisor? I’m also looking for a girlfriend. If you’d like to date me, I’d love to hear from you too.',
+  ],
+} = Astro.props;
 ---
 
 <aside class="blog-part right-blog microblog-sidebar" aria-label="Latest microblog entries" data-microblog-scope data-language="zh">
   <div class="microblog-sidebar__sticky-head">
-    <Marquee
-      items={[
-        'I’m applying for PhD programmes. If you’re looking for a doctoral student, I’d love to hear from you.',
-        'Not a PhD supervisor? I’m also looking for a girlfriend. If you’d like to date me, I’d love to hear from you too.',
-      ]}
-    />
+    <Marquee items={announcements} />
     <div class="blog-right-title-container">
       <div class="blog-right-title">{heading}</div>
       <MicroblogLanguageToggle />
