@@ -1,15 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "^/$",
       "has": [
         {
           "type": "host",
-          "value": "cv.tung.mockingbird.team"
+          "value": "cv\\.tung\\.mockingbird\\.team"
         }
       ],
-      "destination": "/academic"
+      "dest": "/academic/index.html",
+      "override": true
     }
   ]
 }
