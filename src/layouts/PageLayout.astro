@@ -14,7 +14,7 @@ interface Props {
   lang?: string;
   blogHref?: string;
   canonicalUrl?: string;
-  navigationOrigin?: string;
+  mainSiteNavigation?: boolean;
 }
 
 const {
@@ -26,10 +26,8 @@ const {
   lang = 'en',
   blogHref = '/blog',
   canonicalUrl,
-  navigationOrigin = '',
+  mainSiteNavigation = false,
 } = Astro.props;
-const navigationBase = navigationOrigin.replace(/\/$/, '');
-const siteHref = (path: string) => `${navigationBase}${path}`;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
@@ -58,12 +56,14 @@ const heroSrcset = heroImage
   <div class:list={['page', pageClass]}>
     <header class="page-nav">
       <div class="page-nav__inner">
-        <a class="page-nav__brand" href={siteHref('/')}>Tung’s</a>
+        <a class="page-nav__brand" href="/" data-main-site-link={mainSiteNavigation || undefined}
+          >Tung’s</a
+        >
         <nav aria-label="Primary">
           <a href="https://cv.tung.mockingbird.team/">Research</a>
-          <a href={siteHref('/work')}>Work</a>
-          <a href={siteHref(blogHref)}>Blog</a>
-          <a href={siteHref('/microblog')}>Microblog</a>
+          <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+          <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
+          <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
         </nav>
       </div>
     </header>
@@ -94,6 +94,27 @@ const heroSrcset = heroImage
       </div>
     </main>
 
-    <Footer blogHref={blogHref} navigationOrigin={navigationOrigin} />
+    <Footer blogHref={blogHref} mainSiteNavigation={mainSiteNavigation} />
   </div>
 </BaseLayout>
+
+{
+  mainSiteNavigation && (
+    <script is:inline>
+      (() => {
+        const prefixes = ['cv.', 'academic.'];
+        const prefix = prefixes.find((value) => window.location.hostname.startsWith(value));
+        if (!prefix) return;
+
+        const hostname = window.location.hostname.slice(prefix.length);
+        const port = window.location.port ? `:${window.location.port}` : '';
+        const origin = `${window.location.protocol}//${hostname}${port}`;
+
+        document.querySelectorAll('[data-main-site-link]').forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href?.startsWith('/')) link.setAttribute('href', new URL(href, origin).href);
+        });
+      })();
+    </script>
+  )
+}

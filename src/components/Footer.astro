@@ -1,25 +1,23 @@
 ---
 interface Props {
   blogHref?: string;
-  navigationOrigin?: string;
+  mainSiteNavigation?: boolean;
 }
 
 const year = new Date().getFullYear();
-const { blogHref = '/blog', navigationOrigin = '' } = Astro.props;
-const navigationBase = navigationOrigin.replace(/\/$/, '');
-const siteHref = (path: string) => `${navigationBase}${path}`;
+const { blogHref = '/blog', mainSiteNavigation = false } = Astro.props;
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__brand">Tung’s</div>
     <nav class="site-footer__nav" aria-label="Footer">
-      <a href={siteHref('/')}>Home</a>
+      <a href="/" data-main-site-link={mainSiteNavigation || undefined}>Home</a>
       <a href="https://cv.tung.mockingbird.team/">Research</a>
-      <a href={siteHref('/work')}>Work</a>
-      <a href={siteHref(blogHref)}>Blog</a>
-      <a href={siteHref('/microblog')}>Microblog</a>
-      <a href={siteHref('/rss.xml')}>RSS</a>
+      <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+      <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
+      <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+      <a href="/rss.xml" data-main-site-link={mainSiteNavigation || undefined}>RSS</a>
     </nav>
     <div class="site-footer__meta">© {year} Tung Wang.</div>
   </div>
