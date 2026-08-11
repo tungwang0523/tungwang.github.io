@@ -386,6 +386,15 @@
       transform: rotate(180deg);
     }
 
+    &[open] nav {
+      box-shadow: 0 0 0 100vmax $blog-bg;
+      clip-path: inset(0 -100vmax);
+    }
+
+    &[open][data-toc-stuck='true'] nav {
+      box-shadow: 0 0 0 100vmax $panel-bg;
+    }
+
     nav {
       position: absolute;
       top: 100%;

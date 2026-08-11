@@ -246,12 +246,12 @@ const label = lang === 'en' ? 'Contents' : '目录';
           await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
           const keyframes = opening
             ? [
-                { clipPath: 'inset(0 0 100% 0)', opacity: 0, transform: 'translateY(-8px)' },
-                { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' },
+                { clipPath: 'inset(0 -100vmax 100% -100vmax)', opacity: 0, transform: 'translateY(-8px)' },
+                { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
               ]
             : [
-                { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' },
-                { clipPath: 'inset(0 0 100% 0)', opacity: 0, transform: 'translateY(-8px)' },
+                { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
+                { clipPath: 'inset(0 -100vmax 100% -100vmax)', opacity: 0, transform: 'translateY(-8px)' },
               ];
           const nav = mobileToc.querySelector<HTMLElement>('nav');
           const animation = nav?.animate(keyframes, {
