@@ -184,9 +184,13 @@ body.menu-open {
   body.home-page {
     /* iOS Chrome offsets a fixed root body by the dynamic browser chrome
        (54px on the measured device), even though visualViewport.offsetTop is
-       reported as zero. Keep the root in normal flow so the homepage starts
-       at the visual viewport origin. */
+       reported as zero. Its layout viewport also makes the global 100vh
+       min-height taller than the visual viewport; flex centering then creates
+       the same 54px offset. Keep the root in normal flow and pin its flex
+       layout to the visual viewport origin. */
     position: relative;
+    min-height: var(--home-viewport-height, 100dvh);
+    justify-content: flex-start;
   }
 
   body {
