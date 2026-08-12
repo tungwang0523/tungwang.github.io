@@ -32,6 +32,16 @@ const {
   activeSection,
 } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
+const mobileBrandExpanded =
+  activeSection === 'research'
+    ? 'Tung’s Research'
+    : activeSection === 'work'
+      ? 'Tung’s Work'
+      : activeSection === 'blog'
+        ? 'Tung’s Writing'
+        : activeSection === 'microblog'
+          ? 'Tung’s Microblog'
+          : undefined;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
       width: 960,
@@ -62,6 +72,8 @@ const heroSrcset = heroImage
       activeSection={activeSection}
       mainSiteNavigation={mainSiteNavigation}
       blogHref={blogHref}
+      mobileBrandExpanded={mobileBrandExpanded}
+      mobileBrandExpandedAlways={activeSection === 'research'}
     />
     <header class="page-nav">
       <div class="page-nav__inner">
@@ -119,7 +131,7 @@ const heroSrcset = heroImage
       }
 
       <section class="page-head">
-        <h1 class="page-title">{title}</h1>
+        <h1 class="page-title" data-mobile-brand-title>{title}</h1>
       </section>
 
       <div class="page-body">

@@ -21,6 +21,8 @@ interface Props {
   marqueeItems?: string[];
   showIdentity?: boolean;
   showHome?: boolean;
+  mobileBrandExpanded?: string;
+  mobileBrandExpandedAlways?: boolean;
 }
 
 const {
@@ -32,6 +34,8 @@ const {
   marqueeItems = [],
   showIdentity = false,
   showHome = true,
+  mobileBrandExpanded,
+  mobileBrandExpandedAlways = false,
 } = Astro.props;
 
 const allMenuItems: MenuItem[] =
@@ -60,7 +64,22 @@ const menuItems = showHome
     class:list={['menu-mobile-bar__brand', mobileOnly && 'is-visible']}
     aria-label="Home"
     data-main-site-link={mainSiteNavigation || undefined}
-    data-mobile-brand>Tung’s</a
+    data-mobile-brand
+    data-mobile-brand-expanded={mobileBrandExpanded || undefined}
+    data-mobile-brand-expanded-always={mobileBrandExpandedAlways || undefined}
+    data-mobile-brand-scroll-top={mobileBrandExpanded || undefined}
+  >
+    {
+      mobileBrandExpanded ? (
+        <>
+          <span class="menu-mobile-bar__brand-default">Tung’s</span>
+          <span class="menu-mobile-bar__brand-expanded">{mobileBrandExpanded}</span>
+        </>
+      ) : (
+        'Tung’s'
+      )
+    }
+  </a
   >
   {
     marqueeItems.length > 0 && (
@@ -154,9 +173,18 @@ const menuItems = showHome
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.querySelector<HTMLElement>('[data-menu]');
   const mobileBrand = document.querySelector<HTMLElement>('[data-mobile-brand]');
+  const mobileBrandTitle = document.querySelector<HTMLElement>('[data-mobile-brand-title]');
   const identityTitle =
     document.querySelector<HTMLElement>('[data-mobile-identity]') ??
     document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
+
+  if (mobileBrand?.dataset.mobileBrandScrollTop) {
+    mobileBrand.setAttribute('aria-label', 'Back to top');
+    mobileBrand.addEventListener('click', (event) => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   const setOpen = (open: boolean) => {
     if (!toggle || !menu) return;
@@ -178,7 +206,25 @@ const menuItems = showHome
     if (e.key === 'Escape') setOpen(false);
   });
 
-  if (mobileBrand && identityTitle) {
+  if (mobileBrand?.dataset.mobileBrandExpanded) {
+    const alwaysExpanded = mobileBrand.dataset.mobileBrandExpandedAlways === 'true';
+    const updateExpandedBrand = () => {
+      const titleHasPassed = mobileBrandTitle
+        ? mobileBrandTitle.getBoundingClientRect().bottom <= 64
+        : false;
+      mobileBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
+    };
+
+    updateExpandedBrand();
+
+    if (!alwaysExpanded && mobileBrandTitle) {
+      const expandedBrandObserver = new IntersectionObserver(updateExpandedBrand, {
+        rootMargin: '-64px 0px 0px',
+        threshold: 0,
+      });
+      expandedBrandObserver.observe(mobileBrandTitle);
+    }
+  } else if (mobileBrand && identityTitle) {
     const brandObserver = new IntersectionObserver(
       ([entry]) => mobileBrand.classList.toggle('is-visible', !entry.isIntersecting),
       { rootMargin: '-64px 0px 0px', threshold: 0 },

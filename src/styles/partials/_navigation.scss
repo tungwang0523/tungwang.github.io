@@ -45,6 +45,28 @@
         transform: translateY(-50%);
         pointer-events: auto;
       }
+
+      &-default,
+      &-expanded {
+        grid-area: 1 / 1;
+        transition: opacity 180ms ease;
+      }
+
+      &-expanded {
+        opacity: 0;
+      }
+
+      &:has(&-expanded) {
+        display: grid;
+      }
+
+      &.is-expanded &-default {
+        opacity: 0;
+      }
+
+      &.is-expanded &-expanded {
+        opacity: 1;
+      }
     }
   }
 
