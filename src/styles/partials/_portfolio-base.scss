@@ -429,6 +429,17 @@
   }
 }
 
+@media screen and (min-width: 721px) {
+  .project-hero--roof {
+    height: clamp(420px, 52vh, 580px);
+    min-height: 0;
+
+    img {
+      height: 76%;
+    }
+  }
+}
+
 .portfolio-section {
   margin: clamp(100px, 15vw, 190px) 0;
 
