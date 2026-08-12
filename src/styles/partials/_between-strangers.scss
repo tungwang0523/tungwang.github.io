@@ -2289,6 +2289,16 @@
 
 @media screen and (max-width: 620px) {
   .portfolio-page--narrative {
+    .project-hero__inner p {
+      right: clamp(20px, 4vw, 54px);
+      left: auto;
+      width: min(
+        21ch,
+        calc(100% - clamp(20px, 4vw, 54px) - clamp(20px, 4vw, 54px))
+      );
+      max-width: none;
+    }
+
     .case-section {
       margin-top: 86px;
       margin-bottom: 86px;

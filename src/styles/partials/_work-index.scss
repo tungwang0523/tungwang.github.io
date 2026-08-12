@@ -302,6 +302,10 @@
     padding-bottom: clamp(18px, 3vw, 24px);
   }
 
+  .work-band--expo .work-project__meta {
+    margin-top: 0;
+  }
+
   .work-band--expo .work-project__media {
     position: relative;
     order: 0;
