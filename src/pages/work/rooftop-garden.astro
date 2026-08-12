@@ -20,11 +20,13 @@ import ResponsiveImage from '../../components/ResponsiveImage.astro';
   nextTitle="The Empathetic Robotaxi"
 >
   <ProjectHero class="project-hero--roof">
-    <ResponsiveImage
-      src="/pictures/work/rooftop-garden/rg-hero.png"
-      alt="The fallen iron roof in the atrium of Weixin Hall"
-      priority
-    />
+    <div class="project-hero--roof__frame">
+      <ResponsiveImage
+        src="/pictures/work/rooftop-garden/rg-hero.png"
+        alt="The fallen iron roof in the atrium of Weixin Hall"
+        priority
+      />
+    </div>
     <p>
       The roof stayed with the building for fourteen years. Then a storm moved it into the atrium.
     </p>
