@@ -12,7 +12,7 @@ import sharp from 'sharp';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const cacheRoot = join(root, '.gallery-cache');
-const localR2ConfigPath = join(cacheRoot, 'r2.json');
+const localR2ConfigPaths = [join(root, 'gallery-r2-config.json'), join(cacheRoot, 'r2.json')];
 const sourceRoot = join(cacheRoot, 'source');
 const exportDatabase = join(cacheRoot, 'osxphotos.db');
 const manifestPath = join(root, 'src/data/gallery.json');
@@ -135,7 +135,8 @@ const loadR2Config = async () => {
     return { ...environmentConfig, source: 'environment variables' };
   }
 
-  if (await pathExists(localR2ConfigPath)) {
+  for (const localR2ConfigPath of localR2ConfigPaths) {
+    if (!(await pathExists(localR2ConfigPath))) continue;
     const local = JSON.parse(await readFile(localR2ConfigPath, 'utf8'));
     const copiedPicGo = local?.picBed?.['aws-s3'];
     const config = copiedPicGo
@@ -176,7 +177,7 @@ const loadR2Config = async () => {
   }
 
   throw new Error(
-    'No complete R2 configuration was found in .gallery-cache/r2.json, PicGo, or GALLERY_R2_* environment variables.',
+    'No complete R2 configuration was found in gallery-r2-config.json, PicGo, or GALLERY_R2_* environment variables.',
   );
 };
 

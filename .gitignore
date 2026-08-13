@@ -18,6 +18,7 @@ pnpm-debug.log*
 .env.*
 !.env.example
 .gallery-cache/
+gallery-r2-config.json
 
 # editor / OS
 .DS_Store
