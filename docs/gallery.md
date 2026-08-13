@@ -34,7 +34,8 @@ The manager can also import an ordinary folder on macOS by selecting **Folder**.
 
 1. Pull the latest website repository and run `npm ci` if dependencies are not
    present on that computer.
-2. Configure PicGo on Windows with the same R2 bucket used on the Mac.
+2. Make sure the local `.gallery-cache/r2.json` created on the Mac has finished
+   syncing through OneDrive. PicGo is not required on Windows.
 3. Run `npm run gallery`.
 4. Select **Folder**, click **Choose…**, and select the folder containing the
    original photographs.
@@ -51,6 +52,11 @@ The manager automatically reads the existing PicGo S3/R2 configuration from:
 - macOS: `~/Library/Application Support/picgo/data.json`
 - Windows: `%APPDATA%\picgo\data.json`
 - PicGo CLI fallback: `~/.picgo/config.json`
+
+It can also read `.gallery-cache/r2.json`. This ignored local file is useful
+when the project itself is synchronized privately between the Mac and Windows
+through OneDrive. It contains credentials in plain text: keep the project
+private, never commit the file, and remove it before sharing the project folder.
 
 Alternatively, the following local environment variables can be supplied:
 

@@ -12,6 +12,7 @@ import sharp from 'sharp';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const cacheRoot = join(root, '.gallery-cache');
+const localR2ConfigPath = join(cacheRoot, 'r2.json');
 const sourceRoot = join(cacheRoot, 'source');
 const exportDatabase = join(cacheRoot, 'osxphotos.db');
 const manifestPath = join(root, 'src/data/gallery.json');
@@ -134,6 +135,30 @@ const loadR2Config = async () => {
     return { ...environmentConfig, source: 'environment variables' };
   }
 
+  if (await pathExists(localR2ConfigPath)) {
+    const local = JSON.parse(await readFile(localR2ConfigPath, 'utf8'));
+    const copiedPicGo = local?.picBed?.['aws-s3'];
+    const config = copiedPicGo
+      ? {
+          endpoint: copiedPicGo.endpoint,
+          bucket: copiedPicGo.bucketName,
+          accessKeyId: copiedPicGo.accessKeyID,
+          secretAccessKey: copiedPicGo.secretAccessKey,
+          forcePathStyle: Boolean(copiedPicGo.pathStyleAccess),
+        }
+      : local;
+    if (config?.endpoint && config?.bucket && config?.accessKeyId && config?.secretAccessKey) {
+      return {
+        endpoint: config.endpoint,
+        bucket: config.bucket,
+        accessKeyId: config.accessKeyId,
+        secretAccessKey: config.secretAccessKey,
+        forcePathStyle: Boolean(config.forcePathStyle),
+        source: localR2ConfigPath,
+      };
+    }
+  }
+
   for (const configPath of picgoConfigPaths) {
     if (!(await pathExists(configPath))) continue;
     const picgo = JSON.parse(await readFile(configPath, 'utf8'));
@@ -151,7 +176,7 @@ const loadR2Config = async () => {
   }
 
   throw new Error(
-    'No complete R2 configuration was found in PicGo or GALLERY_R2_* environment variables.',
+    'No complete R2 configuration was found in .gallery-cache/r2.json, PicGo, or GALLERY_R2_* environment variables.',
   );
 };
 
