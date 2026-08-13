@@ -17,7 +17,9 @@ Original photographs remain local. They are never uploaded to R2.
 
 1. In Photos, create an album named `Website Gallery` and add photographs to it.
 2. Open **System Settings → Privacy & Security → Full Disk Access**.
-3. Enable the terminal application used to run the website, then restart it.
+3. Enable the application that actually runs the command: **Visual Studio
+   Code** when using its integrated terminal, or **Terminal/iTerm** when using
+   that application. Fully quit and reopen it afterward.
 4. Run `npm run gallery` and leave **Apple Photos album** selected.
 5. Choose whether display images receive the site mark, then start the sync.
 
@@ -63,6 +65,23 @@ GALLERY_PUBLIC_ORIGIN=https://img.mockingbird.team   # optional
 
 Credentials are never copied into the repository or exposed to the public
 Gallery page.
+
+## Titles, places, and descriptions
+
+The import creates editable metadata fields in `src/data/gallery.json`:
+
+```json
+{
+  "title": { "zh": "", "en": "Optional English title" },
+  "caption": { "zh": "", "en": "Longer lightbox description" },
+  "location": { "zh": "", "en": "Yangpu District, Shanghai" }
+}
+```
+
+The archive view uses the optional English title, English county/district or
+municipality-level place, exact date, and camera model. The longer caption and
+complete technical EXIF remain available in the lightbox. If `title` is absent,
+older entries may use `caption` as the title for compatibility.
 
 ## Publishing safely from two computers
 

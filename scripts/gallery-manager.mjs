@@ -17,6 +17,7 @@ const exportDatabase = join(cacheRoot, 'osxphotos.db');
 const manifestPath = join(root, 'src/data/gallery.json');
 const adminPath = join(root, 'tools/gallery-admin/index.html');
 const watermarkPath = join(root, 'public/pictures/watermark.png');
+const osxphotosCrashLogPath = join(root, 'osxphotos_crash.log');
 const hostPlatform = platform();
 const picgoConfigPaths = [
   hostPlatform === 'darwin'
@@ -354,18 +355,27 @@ const runCommand = (command, args) =>
       stderr += chunk.toString();
     });
     child.on('error', reject);
-    child.on('close', (code) => {
+    child.on('close', async (code) => {
       if (code === 0) resolveCommand();
-      else if (stderr.includes('PermissionError') || stderr.includes('Operation not permitted')) {
+      else {
+        const crashLog = await readFile(osxphotosCrashLogPath, 'utf8').catch(() => '');
+        const diagnostic = `${stderr}\n${crashLog}`;
+        if (
+          diagnostic.includes('PermissionError') ||
+          diagnostic.includes('Operation not permitted')
+        ) {
+          reject(
+            new Error(
+              'macOS denied access to the Photos database. In System Settings → Privacy & Security → Full Disk Access, enable the app that runs this command (Visual Studio Code when using its integrated terminal, or Terminal/iTerm when using that app), fully quit and reopen it, then run the Gallery manager again.',
+            ),
+          );
+          return;
+        }
         reject(
           new Error(
-            'macOS denied access to Photos. Enable Full Disk Access for Terminal in System Settings → Privacy & Security, then restart the manager.',
-          ),
-        );
-      } else {
-        reject(
-          new Error(
-            stderr.trim().split('\n').at(-1) || `${basename(command)} exited with code ${code}.`,
+            stderr.trim().split('\n').at(-1) ||
+              crashLog.match(/^Error: (.+)$/m)?.[1] ||
+              `${basename(command)} exited with code ${code}.`,
           ),
         );
       }
@@ -400,10 +410,20 @@ const chooseFolder = async () => {
   if (hostPlatform === 'win32') {
     const script = [
       'Add-Type -AssemblyName System.Windows.Forms',
+      '$owner = New-Object System.Windows.Forms.Form',
+      '$owner.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen',
+      '$owner.Size = New-Object System.Drawing.Size(1, 1)',
+      '$owner.ShowInTaskbar = $false',
+      '$owner.TopMost = $true',
+      '$owner.Show()',
+      '$owner.Activate()',
       '$dialog = New-Object System.Windows.Forms.FolderBrowserDialog',
       '$dialog.Description = "Choose a folder of photographs"',
       '$dialog.ShowNewFolderButton = $false',
-      'if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {',
+      '$result = $dialog.ShowDialog($owner)',
+      '$owner.Close()',
+      '$owner.Dispose()',
+      'if ($result -eq [System.Windows.Forms.DialogResult]::OK) {',
       '  [Console]::OutputEncoding = [System.Text.Encoding]::UTF8',
       '  Write-Output $dialog.SelectedPath',
       '} else { exit 2 }',
@@ -411,7 +431,6 @@ const chooseFolder = async () => {
     return captureCommand('powershell.exe', [
       '-NoLogo',
       '-NoProfile',
-      '-NonInteractive',
       '-STA',
       '-Command',
       script,
@@ -484,6 +503,7 @@ const processPhoto = async (path, options, r2, client, manifest, manifestIds, cl
     width: derivatives.width,
     height: derivatives.height,
     ...(technical.takenAt ? { takenAt: technical.takenAt } : {}),
+    title: { zh: '', en: '' },
     caption: { zh: '', en: '' },
     location: { zh: '', en: '' },
     tags: [],

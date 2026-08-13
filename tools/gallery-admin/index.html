@@ -332,6 +332,8 @@
 
       pickFolder.addEventListener('click', async () => {
         pickFolder.disabled = true;
+        const previousLabel = pickFolder.textContent;
+        pickFolder.textContent = 'CHOOSING…';
         try {
           const response = await fetch('/api/pick-folder', { method: 'POST' });
           const data = await response.json();
@@ -341,6 +343,7 @@
           log.textContent = error instanceof Error ? error.message : String(error);
         } finally {
           pickFolder.disabled = false;
+          pickFolder.textContent = previousLabel;
         }
       });
 

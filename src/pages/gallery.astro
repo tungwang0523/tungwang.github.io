@@ -9,6 +9,7 @@ interface GalleryPhoto {
   width: number;
   height: number;
   takenAt?: string;
+  title?: { zh?: string; en?: string };
   caption?: { zh?: string; en?: string };
   location?: { zh?: string; en?: string };
   tags?: string[];
@@ -28,12 +29,29 @@ const photos = (galleryData as GalleryPhoto[])
   .filter((photo) => !photo.draft)
   .sort((a, b) => (b.takenAt ?? '').localeCompare(a.takenAt ?? ''));
 
-const formatDate = (value?: string) => {
+const parsedDate = (value?: string) => {
   if (!value) return undefined;
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return undefined;
+  return Number.isNaN(date.getTime()) ? undefined : date;
+};
+
+const formatDate = (value?: string) => {
+  const date = parsedDate(value);
+  if (!date) return undefined;
   return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
 };
+
+const years = new Map<string, GalleryPhoto[]>();
+photos.forEach((photo) => {
+  const date = parsedDate(photo.takenAt);
+  const year = date ? String(date.getFullYear()) : 'Undated';
+  const group = years.get(year) ?? [];
+  group.push(photo);
+  years.set(year, group);
+});
+
+const titleFor = (photo: GalleryPhoto) =>
+  photo.title?.en || photo.title?.zh || photo.caption?.en || photo.caption?.zh;
 
 const technicalLine = (photo: GalleryPhoto) =>
   [
@@ -47,8 +65,9 @@ const technicalLine = (photo: GalleryPhoto) =>
 
 const captionItems = (photo: GalleryPhoto) =>
   [
-    photo.caption?.zh,
-    [photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · '),
+    titleFor(photo),
+    photo.title && (photo.caption?.en || photo.caption?.zh),
+    [photo.location?.en, formatDate(photo.takenAt)].filter(Boolean).join(' · '),
     [photo.exif?.camera, photo.exif?.lens].filter(Boolean).join(' · '),
     technicalLine(photo),
   ].filter((item): item is string => Boolean(item));
@@ -64,46 +83,67 @@ const captionItems = (photo: GalleryPhoto) =>
 >
   {
     photos.length > 0 ? (
-      <div class="gallery-wall" data-lightbox-scope data-gallery-wall>
-        {photos.map((photo) => {
-          const caption = captionItems(photo);
-          return (
-            <figure
-              class="gallery-photo"
-              style={`--gallery-ratio:${photo.width}/${photo.height}`}
-              data-gallery-photo
-            >
-              <button
-                class="gallery-photo__button"
-                type="button"
-                data-lightbox-image
-                data-lightbox-src={photo.src}
-                data-lightbox-mobile-src={photo.src}
-                data-caption={JSON.stringify(caption)}
-                data-alt={photo.caption?.zh || 'Photograph by Tung Wang'}
-                aria-label={photo.caption?.zh ? `View ${photo.caption.zh}` : 'View photograph'}
-              >
-                <img
-                  src={photo.thumb}
-                  width={photo.width}
-                  height={photo.height}
-                  alt={photo.caption?.zh || ''}
-                  loading="lazy"
-                  decoding="async"
-                  draggable="false"
-                />
-                <span class="gallery-photo__overlay" aria-hidden="true">
-                  {technicalLine(photo) && <span>{technicalLine(photo)}</span>}
-                  {[photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · ') && (
-                    <span>
-                      {[photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · ')}
-                    </span>
-                  )}
-                </span>
-              </button>
-            </figure>
-          );
-        })}
+      <div class="gallery-archive" data-lightbox-scope>
+        {Array.from(years).map(([year, yearPhotos]) => (
+          <section class="gallery-year" aria-labelledby={`gallery-year-${year}`}>
+            <header class="gallery-year__header">
+              <h1 id={`gallery-year-${year}`}>{year}</h1>
+              <span>
+                {yearPhotos.length} photograph{yearPhotos.length === 1 ? '' : 's'}
+              </span>
+            </header>
+
+            <div class="gallery-wall" data-gallery-wall>
+              {yearPhotos.map((photo) => {
+                const caption = captionItems(photo);
+                const title = titleFor(photo);
+                const location = photo.location?.en;
+                const date = formatDate(photo.takenAt);
+                return (
+                  <figure
+                    class="gallery-photo"
+                    data-gallery-photo
+                    data-gallery-ratio={photo.width / photo.height}
+                  >
+                    <button
+                      class="gallery-photo__button"
+                      type="button"
+                      data-lightbox-image
+                      data-lightbox-src={photo.src}
+                      data-lightbox-mobile-src={photo.src}
+                      data-caption={JSON.stringify(caption)}
+                      data-alt={title || 'Photograph by Tung Wang'}
+                      aria-label={title ? `View ${title}` : 'View photograph'}
+                    >
+                      <img
+                        src={photo.thumb}
+                        width={photo.width}
+                        height={photo.height}
+                        alt={title || ''}
+                        loading="lazy"
+                        decoding="async"
+                        draggable="false"
+                      />
+                    </button>
+                    <figcaption>
+                      {title && <strong>{title}</strong>}
+                      {(location || date) && (
+                        <span class="gallery-photo__place-date">
+                          {location && <span>{location}</span>}
+                          {location && date && <i aria-hidden="true">·</i>}
+                          {date && <time datetime={photo.takenAt}>{date}</time>}
+                        </span>
+                      )}
+                      {photo.exif?.camera && (
+                        <span class="gallery-photo__camera">{photo.exif.camera}</span>
+                      )}
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </section>
+        ))}
       </div>
     ) : (
       <div class="gallery-empty">
@@ -115,30 +155,57 @@ const captionItems = (photo: GalleryPhoto) =>
 </PageLayout>
 
 <script>
-  const wall = document.querySelector<HTMLElement>('[data-gallery-wall]');
-  if (wall) {
+  document.querySelectorAll<HTMLElement>('[data-gallery-wall]').forEach((wall) => {
     const photos = Array.from(wall.querySelectorAll<HTMLElement>('[data-gallery-photo]'));
     let frame = 0;
+
     const layout = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
         const styles = getComputedStyle(wall);
-        const row = Number.parseFloat(styles.gridAutoRows) || 4;
-        const gap = Number.parseFloat(styles.rowGap) || 12;
-        photos.forEach((photo) => photo.style.removeProperty('grid-row-end'));
-        const spans = photos.map((photo) =>
-          Math.max(1, Math.ceil((photo.getBoundingClientRect().height + gap) / (row + gap))),
-        );
-        photos.forEach((photo, index) => {
-          photo.style.gridRowEnd = `span ${spans[index]}`;
+        const available =
+          wall.clientWidth -
+          (Number.parseFloat(styles.paddingLeft) || 0) -
+          (Number.parseFloat(styles.paddingRight) || 0);
+        if (!available) return;
+
+        const gap = Number.parseFloat(styles.columnGap) || 4;
+        const viewportWidth = window.innerWidth;
+        const target = viewportWidth <= 620 ? 128 : viewportWidth <= 1030 ? 180 : 250;
+        const rows: Array<{ items: HTMLElement[]; ratio: number }> = [];
+        let items: HTMLElement[] = [];
+        let ratio = 0;
+
+        photos.forEach((photo) => {
+          const photoRatio = Number.parseFloat(photo.dataset.galleryRatio || '1') || 1;
+          items.push(photo);
+          ratio += photoRatio;
+          if (ratio * target + gap * (items.length - 1) >= available) {
+            rows.push({ items, ratio });
+            items = [];
+            ratio = 0;
+          }
+        });
+        if (items.length) rows.push({ items, ratio });
+
+        rows.forEach((row, rowIndex) => {
+          const complete =
+            rowIndex < rows.length - 1 ||
+            row.ratio * target + gap * (row.items.length - 1) >= available;
+          const height = complete
+            ? (available - gap * (row.items.length - 1)) / row.ratio
+            : Math.min(target, (available - gap * (row.items.length - 1)) / row.ratio);
+
+          row.items.forEach((photo) => {
+            const photoRatio = Number.parseFloat(photo.dataset.galleryRatio || '1') || 1;
+            photo.style.flexBasis = `${photoRatio * height}px`;
+          });
         });
       });
     };
+
     const observer = new ResizeObserver(layout);
     observer.observe(wall);
-    wall.querySelectorAll('img').forEach((image) => {
-      if (!image.complete) image.addEventListener('load', layout, { once: true });
-    });
     layout();
-  }
+  });
 </script>
