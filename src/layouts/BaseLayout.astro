@@ -55,6 +55,79 @@ const isDev = import.meta.env.DEV;
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const websiteId = 'c34be2b1-006c-48bc-9249-fcf0712c144d';
+        const productionHosts = new Set([
+          'tung.mockingbird.team',
+          'cv.tung.mockingbird.team',
+        ]);
+        const optOutKey = 'tungs-analytics-disabled';
+        const optOutCookie = `${optOutKey}=true`;
+        const url = new URL(window.location.href);
+        const preference = url.searchParams.get('analytics');
+
+        if (preference === 'off') {
+          localStorage.setItem(optOutKey, 'true');
+          document.cookie = `${optOutCookie}; Max-Age=31536000; Path=/; Domain=.tung.mockingbird.team; SameSite=Lax; Secure`;
+        }
+        if (preference === 'on') {
+          localStorage.removeItem(optOutKey);
+          document.cookie = `${optOutKey}=; Max-Age=0; Path=/; Domain=.tung.mockingbird.team; SameSite=Lax; Secure`;
+        }
+
+        if (preference === 'off' || preference === 'on') {
+          url.searchParams.delete('analytics');
+          history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
+        }
+
+        if (
+          !productionHosts.has(window.location.hostname) ||
+          localStorage.getItem(optOutKey) === 'true' ||
+          document.cookie.split('; ').includes(optOutCookie)
+        ) {
+          return;
+        }
+
+        const tracker = document.createElement('script');
+        tracker.defer = true;
+        tracker.src = '/stats/script.js';
+        tracker.dataset.websiteId = websiteId;
+        tracker.dataset.domains = [...productionHosts].join(',');
+        document.head.appendChild(tracker);
+
+        let activeStartedAt = document.visibilityState === 'visible' ? performance.now() : null;
+        let activeMilliseconds = 0;
+        let lastReportedSecond = 0;
+
+        const updateActiveTime = () => {
+          if (activeStartedAt === null) return;
+          activeMilliseconds += performance.now() - activeStartedAt;
+          activeStartedAt = null;
+        };
+
+        const reportActiveTime = () => {
+          updateActiveTime();
+          const seconds = Math.round(activeMilliseconds / 1000);
+          if (seconds < 2 || seconds === lastReportedSecond || !window.umami?.track) return;
+
+          lastReportedSecond = seconds;
+          window.umami.track('page-engagement', {
+            path: window.location.pathname,
+            seconds,
+          });
+        };
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') {
+            reportActiveTime();
+          } else if (activeStartedAt === null) {
+            activeStartedAt = performance.now();
+          }
+        });
+        window.addEventListener('pagehide', reportActiveTime);
+      })();
+    </script>
     {
       rootClass === 'home-page' && (
         <script is:inline>
