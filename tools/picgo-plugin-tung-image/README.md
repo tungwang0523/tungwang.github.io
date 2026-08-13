@@ -23,7 +23,7 @@ the incorrect `Content-Encoding: base64` metadata produced by PicGo's Base64 pat
 Install the plugin dependency once:
 
 ```bash
-cd "/Users/tungwang/Library/CloudStorage/OneDrive-Personal/Library/Websites/Tung Wang/tools/picgo-plugin-tung-image"
+cd "/Users/tungwang/Websites/Tung Wang/tools/picgo-plugin-tung-image"
 npm install
 ```
 

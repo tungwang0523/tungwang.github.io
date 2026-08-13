@@ -3,7 +3,7 @@ const { basename, extname, resolve } = require('node:path');
 
 const pluginName = 'picgo-plugin-tung-image';
 const defaultWatermark =
-  '/Users/tungwang/Library/CloudStorage/OneDrive-Personal/Library/Websites/Tung Wang/public/pictures/watermark.png';
+  '/Users/tungwang/Websites/Tung Wang/public/pictures/watermark.png';
 let imageProcessor;
 
 function getImageProcessor() {
