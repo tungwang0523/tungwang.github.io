@@ -16,6 +16,7 @@
       stopCurrentLock();
 
       const archive = document.querySelector('.microblog-archive');
+      const scrollContainer = document.querySelector('.page--content-card');
       const target = readHashTarget();
       if (!(archive instanceof HTMLElement) || !(target instanceof HTMLElement) || !archive.contains(target)) {
         return;
@@ -55,7 +56,11 @@
         if (!active || !document.contains(target)) return;
         const delta = target.getBoundingClientRect().top - topGuide();
         if (Math.abs(delta) > 0.5) {
-          window.scrollBy({ top: delta, left: 0, behavior: 'auto' });
+          if (scrollContainer instanceof HTMLElement) {
+            scrollContainer.scrollBy({ top: delta, left: 0, behavior: 'auto' });
+          } else {
+            window.scrollBy({ top: delta, left: 0, behavior: 'auto' });
+          }
         }
       };
 

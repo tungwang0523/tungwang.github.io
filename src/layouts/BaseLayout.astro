@@ -31,8 +31,10 @@ const rootClasses = rootClass?.split(/\s+/) ?? [];
 const themeColor = rootClasses.includes('blog-paper')
   ? '#000000'
   : rootClasses.includes('home-page')
-    ? '#dddad9'
-    : '#e9e6e4';
+    ? '#e7e4e3'
+    : rootClasses.includes('content-card-page')
+      ? '#e7e4e3'
+      : '#f6f4f3';
 ---
 
 <!doctype html>

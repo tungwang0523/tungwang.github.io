@@ -179,6 +179,12 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
   const mobileBrand = document.querySelector<HTMLElement>('[data-mobile-brand]');
   const pageBrand = document.querySelector<HTMLElement>('[data-page-brand]');
   const mobileBrandTitle = document.querySelector<HTMLElement>('[data-mobile-brand-title]');
+  const pageScrollContainer = document.querySelector<HTMLElement>('.page--content-card');
+  const pageScrollTop = () => pageScrollContainer?.scrollTop ?? window.scrollY;
+  const scrollPageToTop = () =>
+    pageScrollContainer
+      ? pageScrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
+      : window.scrollTo({ top: 0, behavior: 'smooth' });
   const identityTitle =
     document.querySelector<HTMLElement>('[data-mobile-identity]') ??
     document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
@@ -187,19 +193,19 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
     const homeBeforeTitle = mobileBrand.dataset.mobileBrandHomeBeforeTitle === 'true';
     const homeAtTop = mobileBrand.dataset.mobileBrandHomeAtTop === 'true';
     mobileBrand.addEventListener('click', (event) => {
-      if (homeAtTop && window.scrollY <= 4) return;
+      if (homeAtTop && pageScrollTop() <= 4) return;
       if (homeBeforeTitle && !mobileBrand.classList.contains('is-expanded')) return;
       event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollPageToTop();
     });
   }
 
   if (pageBrand?.dataset.pageBrandExpanded) {
     pageBrand.addEventListener('click', (event) => {
-      if (pageBrand.dataset.pageBrandHomeAtTop === 'true' && window.scrollY <= 4) return;
+      if (pageBrand.dataset.pageBrandHomeAtTop === 'true' && pageScrollTop() <= 4) return;
       if (!pageBrand.classList.contains('is-expanded')) return;
       event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollPageToTop();
     });
   }
 

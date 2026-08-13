@@ -50,6 +50,12 @@ const {
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
 const isBlogPost = pageClass?.split(/\s+/).includes('blog-post-page') ?? false;
 const hasBlogToc = pageClass?.split(/\s+/).includes('has-blog-toc') ?? false;
+const rootClass = [
+  isBlogPost && `blog-paper${hasBlogToc ? ' blog-paper-has-toc' : ''}`,
+  contentCard && 'content-card-page',
+]
+  .filter(Boolean)
+  .join(' ');
 const hasAdaptiveSectionBrand = sectionLanding || contentCard;
 const mobileBrandExpanded =
   activeSection === 'research'
@@ -86,7 +92,7 @@ const heroSrcset = heroImage
   image={heroImage}
   lang={lang}
   canonicalUrl={canonicalUrl}
-  rootClass={isBlogPost ? `blog-paper${hasBlogToc ? ' blog-paper-has-toc' : ''}` : undefined}
+  rootClass={rootClass || undefined}
 >
   <div class:list={[
     'page',

@@ -1,18 +1,25 @@
 @use 'foundation' as *;
 
 .page--gallery {
-  --page-content-width: 1120px;
+  --page-content-width: 100%;
+  width: 100%;
+  max-width: none;
+  background: $panel-bg;
 
-  > .page-nav,
-  > .menu-mobile-bar {
-    background: rgba($panel-bg, 0.76);
-    -webkit-backdrop-filter: blur(20px) saturate(1.15);
-    backdrop-filter: blur(20px) saturate(1.15);
+  > .page-main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-right: clamp(20px, 3vw, 48px);
+    padding-left: clamp(20px, 3vw, 48px);
+    background: $body-bg;
+    color: $blog-bg;
   }
 
-  &.page--content-card {
-    --page-content-card-inset: clamp(28px, 4vw, 48px);
+  .page-title {
+    color: $blog-bg;
   }
+
 }
 
 .gallery-wall {
@@ -93,7 +100,7 @@
   span {
     margin-top: 12px;
     font-size: 13px;
-    color: color-mix(in srgb, $subtitle-color 62%, transparent);
+    color: color-mix(in srgb, $blog-bg 62%, transparent);
   }
 }
 
@@ -104,10 +111,6 @@
 }
 
 @media screen and (max-width: 620px) {
-  .page--gallery.page--content-card {
-    --page-content-card-inset: 24px;
-  }
-
   .gallery-wall {
     gap: 8px;
   }

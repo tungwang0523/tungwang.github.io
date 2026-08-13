@@ -12,7 +12,7 @@
   --mobile-menu-current-bg: var(--mobile-page-nav-color);
   --mobile-menu-current-color: var(--mobile-page-nav-bg);
   --mobile-menu-mark-filter: none;
-  background: #e9e6e4;
+  background: #f6f4f3;
 
   .page-nav__inner,
   .site-footer__inner {
@@ -528,7 +528,7 @@
 
   &--closing {
     padding: clamp(38px, 7vw, 80px);
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   @media screen and (max-width: 720px) {
@@ -643,10 +643,10 @@
   }
 
   &--inverse {
-    border-color: rgba(233, 230, 228, 0.45);
+    border-color: rgba(246, 244, 243, 0.45);
     background:
-      linear-gradient(90deg, transparent 49.9%, rgba(233, 230, 228, 0.18) 50%, transparent 50.1%),
-      linear-gradient(transparent 49.9%, rgba(233, 230, 228, 0.18) 50%, transparent 50.1%);
+      linear-gradient(90deg, transparent 49.9%, rgba(246, 244, 243, 0.18) 50%, transparent 50.1%),
+      linear-gradient(transparent 49.9%, rgba(246, 244, 243, 0.18) 50%, transparent 50.1%);
   }
 
   @media screen and (max-width: 620px) {
@@ -667,7 +667,7 @@
 
   article {
     padding: clamp(24px, 4vw, 48px);
-    background: #d8d4d1;
+    background: #e1dedc;
 
     &.is-current {
       background: $body-bg;
@@ -728,7 +728,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   margin-bottom: 34px;
-  background: rgba(233, 230, 228, 0.35);
+  background: rgba(246, 244, 243, 0.35);
 
   article {
     display: flex;
@@ -784,7 +784,7 @@
 }
 
 .translation-flow--inverse > span {
-  border-color: rgba(233, 230, 228, 0.5);
+  border-color: rgba(246, 244, 243, 0.5);
 }
 
 .project-overview-grid {
@@ -982,7 +982,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
-  background: rgba(233, 230, 228, 0.35);
+  background: rgba(246, 244, 243, 0.35);
 
   article {
     min-height: 250px;
@@ -1208,7 +1208,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   margin-top: 60px;
-  background: rgba(233, 230, 228, 0.35);
+  background: rgba(246, 244, 243, 0.35);
 
   article {
     min-height: 280px;
@@ -1271,7 +1271,7 @@
 .service-extensions {
   grid-template-columns: repeat(4, 1fr);
   margin-top: 0;
-  background: rgba(233, 230, 228, 0.35);
+  background: rgba(246, 244, 243, 0.35);
 
   article {
     min-height: 340px;
@@ -1322,7 +1322,7 @@
   article {
     min-height: 240px;
     padding: clamp(22px, 3vw, 36px);
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   b {
@@ -1341,7 +1341,7 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1px;
   margin-top: 28px;
-  background: rgba(233, 230, 228, 0.3);
+  background: rgba(246, 244, 243, 0.3);
 
   article {
     min-height: 230px;
@@ -1684,7 +1684,7 @@
 .state-sequence span {
   flex-basis: 135px;
   min-height: 94px;
-  border-color: rgba(233, 230, 228, 0.55);
+  border-color: rgba(246, 244, 243, 0.55);
   font-size: 12px;
 }
 
@@ -1872,7 +1872,7 @@
 
 .reason-grid {
   grid-template-columns: repeat(3, 1fr);
-  background: rgba(233, 230, 228, 0.3);
+  background: rgba(246, 244, 243, 0.3);
 
   article {
     color: $blog-bg;
@@ -2224,7 +2224,7 @@
     min-height: 250px;
     flex-direction: column;
     padding: clamp(20px, 2.4vw, 30px);
-    background: #d8d4d1;
+    background: #e1dedc;
 
     small {
       font-family: $title-font;
@@ -2324,10 +2324,10 @@
 
 .project-placeholder {
   border: 0;
-  background: #d8d4d1;
+  background: #e1dedc;
 
   &--inverse {
-    background: rgba(233, 230, 228, 0.1);
+    background: rgba(246, 244, 243, 0.1);
   }
 }
 
@@ -2337,7 +2337,7 @@
   div {
     padding: 22px;
     border-top: 0;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 }
 
@@ -2350,7 +2350,7 @@
 
   > * {
     border: 0;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   > * + * {
@@ -2361,7 +2361,7 @@
 .translation-flow--inverse > span,
 .portfolio-section--dark .expo-workflow > span,
 .portfolio-section--dark .state-sequence > span {
-  background: rgba(233, 230, 228, 0.1);
+  background: rgba(246, 244, 243, 0.1);
 }
 
 .metaphor-grid,
@@ -2402,7 +2402,7 @@
 .method-architecture--light article,
 .system-map article,
 .input-modes article {
-  background: #d8d4d1;
+  background: #e1dedc;
 }
 
 .portfolio-section--dark .method-architecture article,
@@ -2414,7 +2414,7 @@
 .portfolio-section--dark .construction-steps article,
 .portfolio-section--dark .projection-ledger article,
 .portfolio-section--dark .proposition-anatomy article {
-  background: rgba(233, 230, 228, 0.1);
+  background: rgba(246, 244, 243, 0.1);
   color: $blog-bg;
 }
 
@@ -2432,12 +2432,12 @@
   article:last-child {
     padding: clamp(24px, 4vw, 46px);
     border: 0;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 }
 
 .portfolio-section--dark .pathway-list article {
-  background: rgba(233, 230, 228, 0.1);
+  background: rgba(246, 244, 243, 0.1);
 }
 
 .research-signal-grid {
@@ -2454,7 +2454,7 @@
 
   article {
     border: 0;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 }
 
@@ -2463,7 +2463,7 @@
   background: transparent;
 
   div {
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 }
 
@@ -2473,7 +2473,7 @@
   div {
     padding: 22px;
     border-top: 0;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 }
 
@@ -2482,7 +2482,7 @@
 
   span {
     padding: 16px;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   i {
@@ -2494,7 +2494,7 @@
     background: #5b5b5b;
   }
   span:nth-child(3) i {
-    background: #989694;
+    background: #a9a6a4;
   }
   span:nth-child(4) i {
     border: 0;
@@ -2514,7 +2514,7 @@
   article {
     min-height: 250px;
     padding: clamp(26px, 3.4vw, 44px);
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   small,
@@ -2559,7 +2559,7 @@
     min-height: 190px;
     padding: clamp(24px, 3vw, 36px);
     flex-direction: column;
-    background: #d8d4d1;
+    background: #e1dedc;
   }
 
   > div {
@@ -2767,7 +2767,7 @@
   article {
     min-height: 190px;
     padding: clamp(24px, 3vw, 36px);
-    background: rgba(233, 230, 228, 0.1);
+    background: rgba(246, 244, 243, 0.1);
   }
 
   small,
