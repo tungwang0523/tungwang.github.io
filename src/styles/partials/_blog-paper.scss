@@ -17,6 +17,32 @@ html.blog-paper {
   background: #000000 !important;
 }
 
+html.blog-paper::before {
+  content: '';
+  position: fixed;
+  z-index: 24;
+  top: calc(var(--blog-paper-top) - var(--blog-paper-gap));
+  right: 0;
+  left: 0;
+  height: calc(var(--blog-paper-gap) + var(--blog-paper-radius));
+  background:
+    linear-gradient(#000000, #000000) left top / 100% var(--blog-paper-gap)
+      no-repeat,
+    radial-gradient(
+      circle at 100% 100%,
+      transparent var(--blog-paper-radius),
+      #000000 calc(var(--blog-paper-radius) + 0.5px)
+    ) left bottom / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
+    radial-gradient(
+      circle at 0 100%,
+      transparent var(--blog-paper-radius),
+      #000000 calc(var(--blog-paper-radius) + 0.5px)
+    ) right bottom / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat;
+  pointer-events: none;
+}
+
 html.blog-paper::after {
   content: '';
   position: fixed;
@@ -97,7 +123,9 @@ html.blog-paper::after {
     margin-bottom: var(--blog-paper-gap);
     padding-top: clamp(20px, 4vw, 32px);
     border-radius: var(--blog-paper-radius);
-    background: transparent;
+    background: $blog-bg;
+    background-clip: padding-box;
+    isolation: isolate;
   }
 
   .blog-post-page .page-hero,

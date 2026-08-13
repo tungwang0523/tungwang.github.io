@@ -13,6 +13,7 @@
   }
 
   &.page--content-card {
+    &::before,
     &::after,
     > .page-content-card-viewport,
     > .site-footer::before {
@@ -22,6 +23,8 @@
     &.page > .page-main {
       padding: 0;
       background: transparent;
+      overflow: visible;
+      isolation: auto;
     }
 
     &.page .page-head--in-brand {

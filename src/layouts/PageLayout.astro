@@ -18,7 +18,7 @@ interface Props {
   blogHref?: string;
   canonicalUrl?: string;
   mainSiteNavigation?: boolean;
-  activeSection?: 'research' | 'work' | 'blog' | 'microblog';
+  activeSection?: 'research' | 'work' | 'gallery' | 'blog' | 'microblog';
   sectionLanding?: boolean;
   contentCard?: boolean;
   headerLanguage?: 'blog' | 'microblog';
@@ -56,6 +56,8 @@ const mobileBrandExpanded =
     ? 'Tung’s Research'
     : activeSection === 'work'
       ? 'Tung’s Work'
+      : activeSection === 'gallery'
+        ? 'Tung’s Gallery'
       : activeSection === 'blog'
         ? 'Tung’s Blog'
         : activeSection === 'microblog'
@@ -172,6 +174,13 @@ const heroSrcset = heroImage
                 <span class="page-nav__current" aria-current="page">Microblog</span>
               ) : (
                 <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+              )
+            }
+            {
+              activeSection === 'gallery' ? (
+                <span class="page-nav__current" aria-current="page">Gallery</span>
+              ) : (
+                <a href="/gallery" data-main-site-link={mainSiteNavigation || undefined}>Gallery</a>
               )
             }
           </nav>

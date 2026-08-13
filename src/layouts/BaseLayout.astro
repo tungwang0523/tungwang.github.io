@@ -27,7 +27,12 @@ const {
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : undefined;
 const isDev = import.meta.env.DEV;
-const themeColor = rootClass?.split(/\s+/).includes('blog-paper') ? '#000000' : '#e9e6e4';
+const rootClasses = rootClass?.split(/\s+/) ?? [];
+const themeColor = rootClasses.includes('blog-paper')
+  ? '#000000'
+  : rootClasses.includes('home-page')
+    ? '#dddad9'
+    : '#e9e6e4';
 ---
 
 <!doctype html>

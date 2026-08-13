@@ -1,7 +1,7 @@
 ---
 import Marquee from './Marquee.astro';
 
-type Section = 'home' | 'research' | 'work' | 'blog' | 'microblog';
+type Section = 'home' | 'research' | 'work' | 'gallery' | 'blog' | 'microblog';
 
 interface MenuItem {
   section?: Section;
@@ -42,18 +42,15 @@ const {
   mobileBrandHomeAtTop = false,
 } = Astro.props;
 
-const allMenuItems: MenuItem[] =
-  items ??
-  [
-    { section: 'home', label: 'Home', href: '/', mainSite: true },
-    { section: 'research', label: 'Research', href: '/academic', cvSite: true },
-    { section: 'work', label: 'Work', href: '/work', mainSite: true },
-    { section: 'blog', label: 'Blog', href: blogHref, mainSite: true },
-    { section: 'microblog', label: 'Microblog', href: '/microblog', mainSite: true },
-  ];
-const menuItems = showHome
-  ? allMenuItems
-  : allMenuItems.filter((item) => item.section !== 'home');
+const allMenuItems: MenuItem[] = items ?? [
+  { section: 'home', label: 'Home', href: '/', mainSite: true },
+  { section: 'research', label: 'Research', href: '/academic', cvSite: true },
+  { section: 'work', label: 'Work', href: '/work', mainSite: true },
+  { section: 'blog', label: 'Blog', href: blogHref, mainSite: true },
+  { section: 'microblog', label: 'Microblog', href: '/microblog', mainSite: true },
+  { section: 'gallery', label: 'Gallery', href: '/gallery', mainSite: true },
+];
+const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.section !== 'home');
 ---
 
 <div
@@ -85,8 +82,7 @@ const menuItems = showHome
         'Tung’s'
       )
     }
-  </a
-  >
+  </a>
   {
     marqueeItems.length > 0 && (
       <div class="menu-mobile-bar__marquee">
@@ -159,7 +155,8 @@ const menuItems = showHome
         <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
         <span class="mention__name">Tung Wang</span>
         <small class="mention__role">
-          Founder of <a href="https://mockingbird.team" target="_blank" rel="noreferrer">
+          Founder of{' '}
+          <a href="https://mockingbird.team" target="_blank" rel="noreferrer">
             Mockingbird Studio
           </a>
         </small>
@@ -233,10 +230,9 @@ const menuItems = showHome
         ? mobileBrandTitle.getBoundingClientRect().bottom <= 64
         : false;
       mobileBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
-      mobileBrand.closest('.menu-mobile-bar')?.classList.toggle(
-        'is-title-passed',
-        alwaysExpanded || titleHasPassed,
-      );
+      mobileBrand
+        .closest('.menu-mobile-bar')
+        ?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
     };
 
     updateExpandedBrand();
@@ -263,10 +259,9 @@ const menuItems = showHome
         ? mobileBrandTitle.getBoundingClientRect().bottom <= -28
         : false;
       pageBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
-      pageBrand.closest('.page-nav')?.classList.toggle(
-        'is-title-passed',
-        alwaysExpanded || titleHasPassed,
-      );
+      pageBrand
+        .closest('.page-nav')
+        ?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
     };
 
     updateExpandedPageBrand();

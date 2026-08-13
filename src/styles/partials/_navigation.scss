@@ -196,10 +196,11 @@ body.menu-open {
   body.home-page {
     /* The first card begins 64px below the mobile stage plus the shared
        12px card gap. Centre the top-bar content in that entire interval. */
-    --home-mobile-card-edge: 76px;
+    --home-mobile-card-edge: 68px;
 
     width: 100%;
     height: var(--home-viewport-height, 100dvh);
+    background: $panel-bg;
     overflow: hidden;
     overscroll-behavior: none;
   }
@@ -356,7 +357,7 @@ body.menu-open {
     --mobile-featured-title-space: clamp(104px, 27vw, 120px);
 
     position: absolute;
-    inset: 64px 0 0;
+    inset: 56px 0 0;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
     width: 100%;
@@ -440,7 +441,7 @@ body.menu-open {
       gap: 0;
       /* Keep the labels centred between the last card and viewport while
          reclaiming height for the four content cards. */
-      padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px));
+      padding: 7px 20px calc(14px + env(safe-area-inset-bottom, 0px));
       background: $panel-bg;
 
       button {

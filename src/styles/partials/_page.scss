@@ -388,6 +388,32 @@ body.menu-open {
   isolation: isolate;
   background: $panel-bg;
 
+  /* Keep the upper corners visible after the real card top has scrolled out
+     of view. This frame also covers the gap below the fixed navigation. */
+  &::before {
+    content: '';
+    position: fixed;
+    z-index: 28;
+    top: var(--page-nav-height);
+    right: var(--page-content-card-edge);
+    left: var(--page-content-card-edge);
+    height: calc(var(--page-content-card-gap) + var(--page-content-card-radius));
+    background:
+      linear-gradient($panel-bg, $panel-bg) left top / 100%
+        var(--page-content-card-gap) no-repeat,
+      radial-gradient(
+        circle at 100% 100%,
+        transparent var(--page-content-card-radius),
+        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+      ) left bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+      radial-gradient(
+        circle at 0 100%,
+        transparent var(--page-content-card-radius),
+        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+      ) right bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
+    pointer-events: none;
+  }
+
   /* A shallow compositor overlay clips scrolling content at the two lower
      corners and across the field gap. It is only 26px high, avoiding the
      large fixed-gradient repaint cost of the previous implementation. */
@@ -439,7 +465,11 @@ body.menu-open {
     padding: var(--page-content-card-title-space) var(--page-content-card-inset)
       var(--page-content-card-inset);
     border-radius: var(--page-content-card-radius);
-    background: transparent;
+    background: $blog-bg;
+    background-clip: padding-box;
+    overflow: hidden;
+    overflow: clip;
+    isolation: isolate;
   }
 
   &.page .page-head {

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tung’s Gallery Manager</title>
+    <style>
+      @font-face {
+        font-family: Space;
+        src: url('http://127.0.0.1:4321/fonts/SpaceGrotesk-Variable.ttf');
+      }
+      @font-face {
+        font-family: Inter;
+        src: url('http://127.0.0.1:4321/fonts/Inter-Variable.ttf');
+      }
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        color: #121418;
+        background: #dcd9d6;
+        font-family: Inter, sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 12px;
+      }
+      main {
+        width: min(980px, 100%);
+        min-height: calc(100vh - 24px);
+        margin: auto;
+        padding: clamp(28px, 6vw, 64px);
+        border-radius: 14px;
+        background: #e9e6e4;
+      }
+      h1,
+      h2,
+      button,
+      label,
+      .status {
+        font-family: Space, sans-serif;
+      }
+      h1 {
+        max-width: 8ch;
+        margin: 0 0 clamp(56px, 10vw, 110px);
+        font-size: clamp(54px, 10vw, 112px);
+        line-height: 0.84;
+        letter-spacing: -0.07em;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .block {
+        padding: 24px;
+        border-radius: 12px;
+        background: #d5d2cf;
+      }
+      .block--dark {
+        background: #121418;
+        color: #e9e6e4;
+      }
+      h2 {
+        margin: 0 0 24px;
+        font-size: 20px;
+      }
+      label {
+        display: grid;
+        gap: 8px;
+        margin-top: 18px;
+        font-size: 13px;
+      }
+      input[type='text'],
+      input[type='number'] {
+        width: 100%;
+        padding: 12px 0;
+        border: 0;
+        border-bottom: 1px solid currentColor;
+        border-radius: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .check input {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        accent-color: #121418;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      button {
+        width: 100%;
+        margin-top: 28px;
+        padding: 15px 18px;
+        border: 0;
+        border-radius: 8px;
+        background: #121418;
+        color: #e9e6e4;
+        font-size: 15px;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.38;
+        cursor: wait;
+      }
+      .status {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 14px;
+      }
+      progress {
+        width: 100%;
+        height: 8px;
+        margin: 24px 0;
+        border: 0;
+        accent-color: #e9e6e4;
+      }
+      pre {
+        min-height: 250px;
+        max-height: 420px;
+        margin: 0;
+        overflow: auto;
+        color: #e9e6e4;
+        font:
+          11px/1.45 ui-monospace,
+          monospace;
+        white-space: pre-wrap;
+      }
+      .links {
+        display: flex;
+        gap: 18px;
+        margin-top: 24px;
+        font-family: Space, sans-serif;
+        font-size: 13px;
+      }
+      a {
+        color: inherit;
+      }
+      .hint {
+        margin: 24px 0 0;
+        font-size: 12px;
+        line-height: 1.45;
+        opacity: 0.7;
+      }
+      @media (max-width: 700px) {
+        body {
+          padding: 8px;
+        }
+        main {
+          min-height: calc(100vh - 16px);
+          padding: 28px 20px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          margin-bottom: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Gallery Manager</h1>
+      <div class="grid">
+        <section class="block">
+          <h2>IMPORT FROM PHOTOS</h2>
+          <label>Photos album<input id="album" type="text" value="Website Gallery" /></label>
+          <label class="check"
+            ><input id="watermark" type="checkbox" /> Add the site mark to display images</label
+          >
+          <div class="row" id="watermark-options" hidden>
+            <label
+              >Mark size<input
+                id="scale"
+                type="number"
+                min="0.03"
+                max="0.2"
+                step="0.005"
+                value="0.065"
+            /></label>
+            <label
+              >Opacity<input id="opacity" type="number" min="0.1" max="1" step="0.05" value="1"
+            /></label>
+          </div>
+          <button id="sync" type="button">SYNC, PROCESS & UPLOAD</button>
+          <p class="hint">
+            Only new originals are exported. Successfully uploaded temporary copies are removed; the
+            originals in Photos are never modified.
+          </p>
+          <div class="links">
+            <a href="http://127.0.0.1:4321/gallery" target="_blank">OPEN LOCAL GALLERY ↗</a>
+          </div>
+        </section>
+        <section class="block block--dark">
+          <div class="status"><span id="phase">CHECKING</span><span id="count">—</span></div>
+          <progress id="progress" max="1" value="0"></progress>
+          <pre id="log">Connecting to the local manager…</pre>
+        </section>
+      </div>
+    </main>
+    <script>
+      const sync = document.querySelector('#sync');
+      const album = document.querySelector('#album');
+      const watermark = document.querySelector('#watermark');
+      const options = document.querySelector('#watermark-options');
+      const scale = document.querySelector('#scale');
+      const opacity = document.querySelector('#opacity');
+      const phase = document.querySelector('#phase');
+      const count = document.querySelector('#count');
+      const progress = document.querySelector('#progress');
+      const log = document.querySelector('#log');
+      let timer;
+
+      watermark.addEventListener('change', () => {
+        options.hidden = !watermark.checked;
+      });
+
+      const render = (job, photoCount) => {
+        phase.textContent = String(job.phase || 'idle')
+          .replaceAll('-', ' ')
+          .toUpperCase();
+        count.textContent = job.total
+          ? `${job.current} / ${job.total}`
+          : `${photoCount ?? 0} ONLINE`;
+        progress.max = Math.max(1, job.total || 1);
+        progress.value = job.current || 0;
+        log.textContent = (job.logs || []).join('\n') || job.message || 'Ready.';
+        log.scrollTop = log.scrollHeight;
+        sync.disabled = Boolean(job.running);
+      };
+
+      const poll = async () => {
+        const response = await fetch('/api/status', { cache: 'no-store' });
+        const data = await response.json();
+        if (!data.hasOsxphotos || !data.hasR2 || !data.hasPhotosLibrary) {
+          sync.disabled = true;
+          log.textContent = [
+            data.hasOsxphotos ? '✓ osxphotos ready' : '× osxphotos is not installed',
+            data.hasR2 ? '✓ PicGo R2 configuration found' : '× PicGo R2 configuration not found',
+            data.hasPhotosLibrary ? '✓ Photos Library found' : '× Photos Library not found',
+          ].join('\n');
+          return;
+        }
+        render(data.job, data.photoCount);
+      };
+
+      sync.addEventListener('click', async () => {
+        sync.disabled = true;
+        const response = await fetch('/api/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            album: album.value,
+            watermark: watermark.checked,
+            watermarkScale: Number(scale.value),
+            watermarkOpacity: Number(opacity.value),
+          }),
+        });
+        if (!response.ok) {
+          const data = await response.json();
+          log.textContent = data.message || 'Could not start sync.';
+        }
+        await poll();
+      });
+
+      poll();
+      timer = window.setInterval(poll, 1000);
+    </script>
+  </body>
+</html>

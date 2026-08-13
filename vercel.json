@@ -1,19 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "^/$",
       "has": [
         {
           "type": "host",
-          "value": "cv\\.tung\\.mockingbird\\.team"
+          "value": "cv.tung.mockingbird.team"
         }
       ],
-      "destination": "/academic/index.html"
+      "dest": "/academic/index.html"
     },
+    { "handle": "filesystem" },
     {
-      "source": "/stats/:path*",
-      "destination": "https://cloud.umami.is/:path*"
+      "src": "^/stats/(.*)$",
+      "dest": "https://cloud.umami.is/$1"
     }
   ]
 }

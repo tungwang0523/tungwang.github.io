@@ -1,0 +1,144 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import galleryData from '../data/gallery.json';
+
+interface GalleryPhoto {
+  id: string;
+  src: string;
+  thumb: string;
+  width: number;
+  height: number;
+  takenAt?: string;
+  caption?: { zh?: string; en?: string };
+  location?: { zh?: string; en?: string };
+  tags?: string[];
+  exif?: {
+    camera?: string;
+    lens?: string;
+    focalLength?: string;
+    aperture?: string;
+    shutter?: string;
+    iso?: number;
+    exposureCompensation?: string;
+  };
+  draft?: boolean;
+}
+
+const photos = (galleryData as GalleryPhoto[])
+  .filter((photo) => !photo.draft)
+  .sort((a, b) => (b.takenAt ?? '').localeCompare(a.takenAt ?? ''));
+
+const formatDate = (value?: string) => {
+  if (!value) return undefined;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return undefined;
+  return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+};
+
+const technicalLine = (photo: GalleryPhoto) =>
+  [
+    photo.exif?.focalLength,
+    photo.exif?.aperture,
+    photo.exif?.shutter,
+    photo.exif?.iso ? `ISO ${photo.exif.iso}` : undefined,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
+const captionItems = (photo: GalleryPhoto) =>
+  [
+    photo.caption?.zh,
+    [photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · '),
+    [photo.exif?.camera, photo.exif?.lens].filter(Boolean).join(' · '),
+    technicalLine(photo),
+  ].filter((item): item is string => Boolean(item));
+---
+
+<PageLayout
+  title="Gallery"
+  description="Photography by Tung Wang."
+  pageTitle="Tung’s Gallery"
+  pageClass="page--gallery"
+  activeSection="gallery"
+  contentCard
+>
+  {
+    photos.length > 0 ? (
+      <div class="gallery-wall" data-lightbox-scope data-gallery-wall>
+        {photos.map((photo) => {
+          const caption = captionItems(photo);
+          return (
+            <figure
+              class="gallery-photo"
+              style={`--gallery-ratio:${photo.width}/${photo.height}`}
+              data-gallery-photo
+            >
+              <button
+                class="gallery-photo__button"
+                type="button"
+                data-lightbox-image
+                data-lightbox-src={photo.src}
+                data-lightbox-mobile-src={photo.src}
+                data-caption={JSON.stringify(caption)}
+                data-alt={photo.caption?.zh || 'Photograph by Tung Wang'}
+                aria-label={photo.caption?.zh ? `View ${photo.caption.zh}` : 'View photograph'}
+              >
+                <img
+                  src={photo.thumb}
+                  width={photo.width}
+                  height={photo.height}
+                  alt={photo.caption?.zh || ''}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                />
+                <span class="gallery-photo__overlay" aria-hidden="true">
+                  {technicalLine(photo) && <span>{technicalLine(photo)}</span>}
+                  {[photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · ') && (
+                    <span>
+                      {[photo.location?.zh, formatDate(photo.takenAt)].filter(Boolean).join(' · ')}
+                    </span>
+                  )}
+                </span>
+              </button>
+            </figure>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="gallery-empty">
+        <strong>THE ARCHIVE IS BEING DEVELOPED.</strong>
+        <span>Photographs will appear here as they are selected.</span>
+      </div>
+    )
+  }
+</PageLayout>
+
+<script>
+  const wall = document.querySelector<HTMLElement>('[data-gallery-wall]');
+  if (wall) {
+    const photos = Array.from(wall.querySelectorAll<HTMLElement>('[data-gallery-photo]'));
+    let frame = 0;
+    const layout = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const styles = getComputedStyle(wall);
+        const row = Number.parseFloat(styles.gridAutoRows) || 4;
+        const gap = Number.parseFloat(styles.rowGap) || 12;
+        photos.forEach((photo) => photo.style.removeProperty('grid-row-end'));
+        const spans = photos.map((photo) =>
+          Math.max(1, Math.ceil((photo.getBoundingClientRect().height + gap) / (row + gap))),
+        );
+        photos.forEach((photo, index) => {
+          photo.style.gridRowEnd = `span ${spans[index]}`;
+        });
+      });
+    };
+    const observer = new ResizeObserver(layout);
+    observer.observe(wall);
+    wall.querySelectorAll('img').forEach((image) => {
+      if (!image.complete) image.addEventListener('load', layout, { once: true });
+    });
+    layout();
+  }
+</script>
