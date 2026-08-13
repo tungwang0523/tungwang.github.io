@@ -1,43 +1,76 @@
 # Gallery workflow
 
-The Gallery is a single page backed by `src/data/gallery.json`. Public image
-derivatives live in the existing `tungwang-images` R2 bucket; originals remain
-in Apple Photos.
+The Gallery is one page backed by `src/data/gallery.json`. The same local
+manager and processing pipeline run on macOS and Windows:
 
-## One-time macOS setup
+```sh
+npm run gallery
+```
 
-1. In Photos, create an album named `Website Gallery`.
+The manager creates a maximum-2560 px display WebP and a 720 px thumbnail,
+extracts a safe EXIF subset, detects duplicates by the original file's SHA-256
+hash, uploads derivatives to R2, and updates the shared manifest.
+
+Original photographs remain local. They are never uploaded to R2.
+
+## macOS: import from Apple Photos
+
+1. In Photos, create an album named `Website Gallery` and add photographs to it.
 2. Open **System Settings → Privacy & Security → Full Disk Access**.
-3. Enable the terminal application used to run the website, then restart that
-   terminal.
+3. Enable the terminal application used to run the website, then restart it.
+4. Run `npm run gallery` and leave **Apple Photos album** selected.
+5. Choose whether display images receive the site mark, then start the sync.
 
-`osxphotos` is installed in `~/.local/bin` through `uv`. The Gallery manager
-uses that absolute path, so no shell PATH change is required.
+`osxphotos` is installed in `~/.local/bin`. It incrementally exports unmodified
+originals to `.gallery-cache/source`. After a derivative has uploaded
+successfully, the manager deletes only that temporary export and its sidecar.
+It never modifies or deletes anything inside Photos.
 
-## Daily use
+The manager can also import an ordinary folder on macOS by selecting **Folder**.
 
-1. Add photographs to the `Website Gallery` album in Photos.
-2. In the website directory, run `npm run gallery`.
-3. In the local manager, choose whether display images receive the site mark.
-4. Click **Sync, Process & Upload**.
-5. Run `npm run dev` to inspect `/gallery`.
-6. Commit and push `src/data/gallery.json` when the selection is ready.
+## Windows: import a folder directly
 
-The manager exports only unmodified originals that it has not processed
-before. It creates a 720 px thumbnail and a maximum-2560 px display WebP,
-uploads both to R2, extracts a safe subset of EXIF into the manifest, and then
-deletes only its temporary exported copy. It never modifies or deletes assets
-inside Photos.
+1. Pull the latest website repository and run `npm ci` if dependencies are not
+   present on that computer.
+2. Configure PicGo on Windows with the same R2 bucket used on the Mac.
+3. Run `npm run gallery`.
+4. Select **Folder**, click **Choose…**, and select the folder containing the
+   original photographs.
+5. Choose the watermark setting and start the sync.
 
-## Local state
+The folder is scanned recursively. Successfully processed files, duplicates,
+and failed files all remain untouched in their original locations. Quoted paths
+copied from Windows Explorer are accepted in the path field as well.
 
-`.gallery-cache/` contains the `osxphotos` incremental-export database and
-temporary source files. It is ignored by Git. Do not delete its export database
-unless the Photos selection needs to be treated as entirely new.
+## R2 configuration
 
-The manager reads the existing PicGo S3/R2 configuration locally from:
+The manager automatically reads the existing PicGo S3/R2 configuration from:
 
-`~/Library/Application Support/picgo/data.json`
+- macOS: `~/Library/Application Support/picgo/data.json`
+- Windows: `%APPDATA%\picgo\data.json`
+- PicGo CLI fallback: `~/.picgo/config.json`
+
+Alternatively, the following local environment variables can be supplied:
+
+```text
+GALLERY_R2_ENDPOINT
+GALLERY_R2_BUCKET
+GALLERY_R2_ACCESS_KEY_ID
+GALLERY_R2_SECRET_ACCESS_KEY
+GALLERY_R2_FORCE_PATH_STYLE=true   # optional
+GALLERY_PUBLIC_ORIGIN=https://img.mockingbird.team   # optional
+```
 
 Credentials are never copied into the repository or exposed to the public
 Gallery page.
+
+## Publishing safely from two computers
+
+Before importing, pull the latest `main` branch so the manager sees every photo
+already present in `src/data/gallery.json`. After checking `/gallery` locally,
+commit and push that manifest. If both computers import at once, reconcile the
+manifest before either side pushes.
+
+`.gallery-cache/` is local and ignored by Git. On macOS it includes the
+`osxphotos` incremental-export database; do not delete that database unless the
+Photos album should be treated as a fresh export.

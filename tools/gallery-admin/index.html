@@ -73,7 +73,8 @@
         font-size: 13px;
       }
       input[type='text'],
-      input[type='number'] {
+      input[type='number'],
+      select {
         width: 100%;
         padding: 12px 0;
         border: 0;
@@ -82,6 +83,10 @@
         background: transparent;
         color: inherit;
         font: inherit;
+      }
+      select {
+        appearance: none;
+        cursor: pointer;
       }
       .check {
         display: flex;
@@ -114,6 +119,21 @@
       button:disabled {
         opacity: 0.38;
         cursor: wait;
+      }
+      .folder-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 12px;
+      }
+      .folder-row button {
+        width: auto;
+        margin: 0;
+        padding: 12px 16px;
+        white-space: nowrap;
+      }
+      [hidden] {
+        display: none !important;
       }
       .status {
         display: flex;
@@ -177,8 +197,28 @@
       <h1>Gallery Manager</h1>
       <div class="grid">
         <section class="block">
-          <h2>IMPORT FROM PHOTOS</h2>
-          <label>Photos album<input id="album" type="text" value="Website Gallery" /></label>
+          <h2>IMPORT PHOTOGRAPHS</h2>
+          <label
+            >Source
+            <select id="source">
+              <option value="photos">Apple Photos album</option>
+              <option value="folder">Folder</option>
+            </select>
+          </label>
+          <div id="photos-source">
+            <label>Photos album<input id="album" type="text" value="Website Gallery" /></label>
+          </div>
+          <div id="folder-source" hidden>
+            <div class="folder-row">
+              <label
+                >Source folder<input
+                  id="folder"
+                  type="text"
+                  placeholder="Choose a folder or paste its full path"
+              /></label>
+              <button id="pick-folder" type="button">CHOOSE…</button>
+            </div>
+          </div>
           <label class="check"
             ><input id="watermark" type="checkbox" /> Add the site mark to display images</label
           >
@@ -198,8 +238,9 @@
           </div>
           <button id="sync" type="button">SYNC, PROCESS & UPLOAD</button>
           <p class="hint">
-            Only new originals are exported. Successfully uploaded temporary copies are removed; the
-            originals in Photos are never modified.
+            The same processing pipeline is used on macOS and Windows. Folder originals are never
+            changed or deleted; only temporary copies exported from Apple Photos are removed after a
+            successful upload.
           </p>
           <div class="links">
             <a href="http://127.0.0.1:4321/gallery" target="_blank">OPEN LOCAL GALLERY ↗</a>
@@ -214,7 +255,12 @@
     </main>
     <script>
       const sync = document.querySelector('#sync');
+      const source = document.querySelector('#source');
+      const photosSource = document.querySelector('#photos-source');
+      const folderSource = document.querySelector('#folder-source');
       const album = document.querySelector('#album');
+      const folder = document.querySelector('#folder');
+      const pickFolder = document.querySelector('#pick-folder');
       const watermark = document.querySelector('#watermark');
       const options = document.querySelector('#watermark-options');
       const scale = document.querySelector('#scale');
@@ -224,6 +270,30 @@
       const progress = document.querySelector('#progress');
       const log = document.querySelector('#log');
       let timer;
+      let status;
+
+      const updateSource = () => {
+        const fromFolder = source.value === 'folder';
+        photosSource.hidden = fromFolder;
+        folderSource.hidden = !fromFolder;
+        updateReadiness();
+      };
+
+      const blockers = () => {
+        if (!status) return ['Checking local configuration…'];
+        const messages = [];
+        if (!status.hasR2) messages.push('R2 configuration was not found');
+        if (source.value === 'photos') {
+          if (status.platform !== 'darwin') messages.push('Apple Photos import requires macOS');
+          if (!status.hasOsxphotos) messages.push('osxphotos is not installed');
+          if (!status.hasPhotosLibrary) messages.push('Photos Library was not found');
+        }
+        return messages;
+      };
+
+      const updateReadiness = () => {
+        sync.disabled = Boolean(status?.job?.running) || blockers().length > 0;
+      };
 
       watermark.addEventListener('change', () => {
         options.hidden = !watermark.checked;
@@ -240,23 +310,39 @@
         progress.value = job.current || 0;
         log.textContent = (job.logs || []).join('\n') || job.message || 'Ready.';
         log.scrollTop = log.scrollHeight;
-        sync.disabled = Boolean(job.running);
+        updateReadiness();
       };
 
       const poll = async () => {
         const response = await fetch('/api/status', { cache: 'no-store' });
         const data = await response.json();
-        if (!data.hasOsxphotos || !data.hasR2 || !data.hasPhotosLibrary) {
-          sync.disabled = true;
-          log.textContent = [
-            data.hasOsxphotos ? '✓ osxphotos ready' : '× osxphotos is not installed',
-            data.hasR2 ? '✓ PicGo R2 configuration found' : '× PicGo R2 configuration not found',
-            data.hasPhotosLibrary ? '✓ Photos Library found' : '× Photos Library not found',
-          ].join('\n');
-          return;
+        status = data;
+        if (data.platform !== 'darwin' && source.value === 'photos') {
+          source.value = 'folder';
+          updateSource();
         }
         render(data.job, data.photoCount);
+        const missing = blockers();
+        if (!data.job.running && !data.job.logs?.length && missing.length) {
+          log.textContent = missing.map((message) => `× ${message}`).join('\n');
+        }
       };
+
+      source.addEventListener('change', updateSource);
+
+      pickFolder.addEventListener('click', async () => {
+        pickFolder.disabled = true;
+        try {
+          const response = await fetch('/api/pick-folder', { method: 'POST' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || 'Could not choose a folder.');
+          folder.value = data.folder || '';
+        } catch (error) {
+          log.textContent = error instanceof Error ? error.message : String(error);
+        } finally {
+          pickFolder.disabled = false;
+        }
+      });
 
       sync.addEventListener('click', async () => {
         sync.disabled = true;
@@ -264,7 +350,9 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            source: source.value,
             album: album.value,
+            folder: folder.value,
             watermark: watermark.checked,
             watermarkScale: Number(scale.value),
             watermarkOpacity: Number(opacity.value),
@@ -278,6 +366,7 @@
       });
 
       poll();
+      updateSource();
       timer = window.setInterval(poll, 1000);
     </script>
   </body>

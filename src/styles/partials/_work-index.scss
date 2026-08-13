@@ -36,27 +36,16 @@
     display: none;
   }
 
-  > .page-nav .page-nav__inner,
-  > .site-footer .site-footer__inner {
-    width: var(--page-content-card-width);
-    max-width: none;
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  @media screen and (max-width: 1030px) {
-    > .menu-toggle {
-      left: var(--page-content-card-edge);
-    }
-
-    > .menu-mobile-bar .menu-mobile-bar__brand {
-      left: calc(var(--page-content-card-edge) + 48px);
-    }
-  }
-
-  @media screen and (max-width: 768px) {
+  /* Align the desktop navigation precisely with the Work canvas. Tablet and
+     mobile keep the site's standard navigation insets instead of inheriting
+     this page-specific full-width rule. */
+  @media screen and (min-width: 1031px) {
+    > .page-nav .page-nav__inner,
     > .site-footer .site-footer__inner {
       width: var(--page-content-card-width);
+      max-width: none;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 }

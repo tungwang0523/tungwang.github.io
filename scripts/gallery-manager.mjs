@@ -17,11 +17,22 @@ const exportDatabase = join(cacheRoot, 'osxphotos.db');
 const manifestPath = join(root, 'src/data/gallery.json');
 const adminPath = join(root, 'tools/gallery-admin/index.html');
 const watermarkPath = join(root, 'public/pictures/watermark.png');
-const picgoConfigPath = join(homedir(), 'Library/Application Support/picgo/data.json');
+const hostPlatform = platform();
+const picgoConfigPaths = [
+  hostPlatform === 'darwin'
+    ? join(homedir(), 'Library/Application Support/picgo/data.json')
+    : undefined,
+  hostPlatform === 'win32' && process.env.APPDATA
+    ? join(process.env.APPDATA, 'picgo/data.json')
+    : undefined,
+  join(homedir(), '.picgo/config.json'),
+].filter(Boolean);
 const osxphotosPath = join(homedir(), '.local/bin/osxphotos');
 const photosLibraryPath =
   process.env.PHOTOS_LIBRARY || join(homedir(), 'Pictures/Photos Library.photoslibrary');
-const publicImageOrigin = 'https://img.mockingbird.team';
+const publicImageOrigin = (
+  process.env.GALLERY_PUBLIC_ORIGIN || 'https://img.mockingbird.team'
+).replace(/\/$/, '');
 const port = Number.parseInt(process.env.GALLERY_PORT || '4177', 10);
 const supportedExtensions = new Set([
   '.jpg',
@@ -106,23 +117,41 @@ const saveManifest = (photos) => {
 };
 
 const loadR2Config = async () => {
-  const picgo = JSON.parse(await readFile(picgoConfigPath, 'utf8'));
-  const config = picgo?.picBed?.['aws-s3'];
-  if (
-    !config?.endpoint ||
-    !config?.bucketName ||
-    !config?.accessKeyID ||
-    !config?.secretAccessKey
-  ) {
-    throw new Error('The PicGo R2 configuration is incomplete.');
-  }
-  return {
-    endpoint: config.endpoint,
-    bucket: config.bucketName,
-    accessKeyId: config.accessKeyID,
-    secretAccessKey: config.secretAccessKey,
-    forcePathStyle: Boolean(config.pathStyleAccess),
+  const environmentConfig = {
+    endpoint: process.env.GALLERY_R2_ENDPOINT,
+    bucket: process.env.GALLERY_R2_BUCKET,
+    accessKeyId: process.env.GALLERY_R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.GALLERY_R2_SECRET_ACCESS_KEY,
+    forcePathStyle: process.env.GALLERY_R2_FORCE_PATH_STYLE === 'true',
   };
+  if (
+    environmentConfig.endpoint &&
+    environmentConfig.bucket &&
+    environmentConfig.accessKeyId &&
+    environmentConfig.secretAccessKey
+  ) {
+    return { ...environmentConfig, source: 'environment variables' };
+  }
+
+  for (const configPath of picgoConfigPaths) {
+    if (!(await pathExists(configPath))) continue;
+    const picgo = JSON.parse(await readFile(configPath, 'utf8'));
+    const config = picgo?.picBed?.['aws-s3'];
+    if (config?.endpoint && config?.bucketName && config?.accessKeyID && config?.secretAccessKey) {
+      return {
+        endpoint: config.endpoint,
+        bucket: config.bucketName,
+        accessKeyId: config.accessKeyID,
+        secretAccessKey: config.secretAccessKey,
+        forcePathStyle: Boolean(config.pathStyleAccess),
+        source: configPath,
+      };
+    }
+  }
+
+  throw new Error(
+    'No complete R2 configuration was found in PicGo or GALLERY_R2_* environment variables.',
+  );
 };
 
 const s3For = (config) =>
@@ -146,6 +175,22 @@ const walk = async (directory) => {
     }),
   );
   return nested.flat();
+};
+
+const userDirectory = (value) => {
+  let directory = String(value || '').trim();
+  if (
+    directory.length >= 2 &&
+    ((directory.startsWith('"') && directory.endsWith('"')) ||
+      (directory.startsWith("'") && directory.endsWith("'")))
+  ) {
+    directory = directory.slice(1, -1);
+  }
+  if (directory === '~') directory = homedir();
+  else if (directory.startsWith('~/') || directory.startsWith('~\\')) {
+    directory = join(homedir(), directory.slice(2));
+  }
+  return directory ? resolve(directory) : '';
 };
 
 const hashFile = (path) =>
@@ -327,6 +372,54 @@ const runCommand = (command, args) =>
     });
   });
 
+const captureCommand = (command, args) =>
+  new Promise((resolveCommand, reject) => {
+    const child = spawn(command, args, { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+    let stdout = '';
+    let stderr = '';
+    child.stdout.on('data', (chunk) => {
+      stdout += chunk.toString();
+    });
+    child.stderr.on('data', (chunk) => {
+      stderr += chunk.toString();
+    });
+    child.on('error', reject);
+    child.on('close', (code) => {
+      if (code === 0) resolveCommand(stdout.trim());
+      else reject(new Error(stderr.trim() || `${basename(command)} exited with code ${code}.`));
+    });
+  });
+
+const chooseFolder = async () => {
+  if (hostPlatform === 'darwin') {
+    return captureCommand('osascript', [
+      '-e',
+      'POSIX path of (choose folder with prompt "Choose a folder of photographs")',
+    ]);
+  }
+  if (hostPlatform === 'win32') {
+    const script = [
+      'Add-Type -AssemblyName System.Windows.Forms',
+      '$dialog = New-Object System.Windows.Forms.FolderBrowserDialog',
+      '$dialog.Description = "Choose a folder of photographs"',
+      '$dialog.ShowNewFolderButton = $false',
+      'if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {',
+      '  [Console]::OutputEncoding = [System.Text.Encoding]::UTF8',
+      '  Write-Output $dialog.SelectedPath',
+      '} else { exit 2 }',
+    ].join('; ');
+    return captureCommand('powershell.exe', [
+      '-NoLogo',
+      '-NoProfile',
+      '-NonInteractive',
+      '-STA',
+      '-Command',
+      script,
+    ]);
+  }
+  throw new Error('The native folder picker is not available on this platform. Enter a path.');
+};
+
 const exportFromPhotos = async (album) => {
   await mkdir(sourceRoot, { recursive: true });
   await runCommand(osxphotosPath, [
@@ -362,11 +455,11 @@ const removeExportCopy = async (path) => {
   if (sidecar) await unlink(sidecar).catch(() => undefined);
 };
 
-const processPhoto = async (path, options, r2, client, manifest, manifestIds) => {
+const processPhoto = async (path, options, r2, client, manifest, manifestIds, cleanupSource) => {
   const hash = await hashFile(path);
   const id = hash.slice(0, 24);
   if (manifestIds.has(id)) {
-    await removeExportCopy(path);
+    if (cleanupSource) await removeExportCopy(path);
     return { status: 'skipped', id };
   }
 
@@ -402,13 +495,15 @@ const processPhoto = async (path, options, r2, client, manifest, manifestIds) =>
   manifest.push(entry);
   manifestIds.add(id);
   await saveManifest(manifest);
-  await removeExportCopy(path);
+  if (cleanupSource) await removeExportCopy(path);
   return { status: 'imported', id };
 };
 
 const runSync = async (rawOptions) => {
   const options = {
+    source: rawOptions.source === 'folder' ? 'folder' : 'photos',
     album: String(rawOptions.album || 'Website Gallery').trim() || 'Website Gallery',
+    folder: userDirectory(rawOptions.folder),
     watermark: Boolean(rawOptions.watermark),
     watermarkScale: Math.min(0.2, Math.max(0.03, Number(rawOptions.watermarkScale) || 0.065)),
     watermarkOpacity: Math.min(1, Math.max(0.1, Number(rawOptions.watermarkOpacity) || 1)),
@@ -425,9 +520,28 @@ const runSync = async (rawOptions) => {
   });
 
   try {
-    log(`Reading new originals from Photos album “${options.album}”…`);
-    await exportFromPhotos(options.album);
-    const files = (await walk(sourceRoot)).filter((path) =>
+    let importRoot;
+    let cleanupSource = false;
+
+    if (options.source === 'photos') {
+      if (hostPlatform !== 'darwin') {
+        throw new Error('Apple Photos import is available only on macOS. Choose Folder instead.');
+      }
+      log(`Reading new originals from Photos album “${options.album}”…`);
+      await exportFromPhotos(options.album);
+      importRoot = sourceRoot;
+      cleanupSource = true;
+    } else {
+      if (!options.folder) throw new Error('Choose or enter a source folder.');
+      const folderStats = await stat(options.folder).catch(() => undefined);
+      if (!folderStats?.isDirectory()) {
+        throw new Error(`The source folder does not exist: ${options.folder}`);
+      }
+      importRoot = options.folder;
+      log(`Reading originals from folder “${options.folder}”…`);
+    }
+
+    const files = (await walk(importRoot)).filter((path) =>
       supportedExtensions.has(extname(path).toLowerCase()),
     );
     job.phase = 'uploading';
@@ -451,7 +565,15 @@ const runSync = async (rawOptions) => {
         const path = files[index];
         log(`[${index + 1}/${files.length}] ${basename(path)}`);
         try {
-          const result = await processPhoto(path, options, r2, client, manifest, manifestIds);
+          const result = await processPhoto(
+            path,
+            options,
+            r2,
+            client,
+            manifest,
+            manifestIds,
+            cleanupSource,
+          );
           if (result.status === 'imported') job.imported += 1;
         } catch (error) {
           const message = `${basename(path)} — ${error instanceof Error ? error.message : String(error)}`;
@@ -488,15 +610,17 @@ const server = createServer(async (request, response) => {
       return;
     }
     if (request.method === 'GET' && url.pathname === '/api/status') {
-      const [photos, hasOsxphotos, hasR2, hasPhotosLibrary] = await Promise.all([
+      const [photos, hasOsxphotos, r2Config, hasPhotosLibrary] = await Promise.all([
         loadManifest(),
         pathExists(osxphotosPath),
-        pathExists(picgoConfigPath),
+        loadR2Config().catch(() => undefined),
         pathExists(photosLibraryPath),
       ]);
       jsonResponse(response, 200, {
+        platform: hostPlatform,
         hasOsxphotos,
-        hasR2,
+        hasR2: Boolean(r2Config),
+        r2ConfigSource: r2Config?.source,
         hasPhotosLibrary,
         photoCount: photos.length,
         job,
@@ -515,6 +639,21 @@ const server = createServer(async (request, response) => {
       const options = await readJsonBody(request);
       void runSync(options);
       jsonResponse(response, 202, { started: true });
+      return;
+    }
+    if (request.method === 'POST' && url.pathname === '/api/pick-folder') {
+      if (job.running) {
+        jsonResponse(response, 409, { message: 'Wait for the current Gallery sync to finish.' });
+        return;
+      }
+      try {
+        const folder = await chooseFolder();
+        jsonResponse(response, 200, { folder: userDirectory(folder) });
+      } catch (error) {
+        jsonResponse(response, 400, {
+          message: error instanceof Error ? error.message : String(error),
+        });
+      }
       return;
     }
     jsonResponse(response, 404, { message: 'Not found.' });
