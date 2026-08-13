@@ -329,7 +329,12 @@ html.blog-paper::after {
       color: #ffffff;
 
       &[data-toc-stuck='true'] {
-        border-radius: var(--blog-paper-radius) var(--blog-paper-radius) 0 0;
+        /* The TOC belongs to the navigation field, not to the paper. Giving
+           this black bar upper corners exposes two empty wedges between it
+           and the top navigation—especially obvious at the 24px mobile
+           radius. Keep this edge continuous; the paper below owns the visible
+           rounded corners. */
+        border-radius: 0;
         background: #000000;
 
         &::before {
@@ -432,6 +437,7 @@ html.blog-paper::after {
 @media screen and (max-width: 768px) {
   html.blog-paper,
   html.blog-paper body {
+    --blog-paper-radius: 24px;
     --blog-paper-top: calc(64px + var(--blog-paper-gap));
   }
 

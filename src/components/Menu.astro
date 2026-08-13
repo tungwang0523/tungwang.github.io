@@ -223,6 +223,8 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
   if (toggle && menu && menu.dataset.swipeCloseReady !== 'true') {
     menu.dataset.swipeCloseReady = 'true';
     let pointerId: number | null = null;
+    let touchId: number | null = null;
+    let gestureActive = false;
     let startX = 0;
     let startY = 0;
     let startTime = 0;
@@ -237,13 +239,15 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
     };
 
     const finishSwipe = () => {
-      if (pointerId === null) return;
+      if (!gestureActive) return;
       const elapsed = Math.max(1, performance.now() - startTime);
       const velocity = distance / elapsed;
       const threshold = Math.max(72, menu.clientWidth * 0.16);
       const shouldClose = horizontalSwipe && (distance >= threshold || (distance >= 32 && velocity > 0.55));
 
       pointerId = null;
+      touchId = null;
+      gestureActive = false;
       directionResolved = false;
       horizontalSwipe = false;
 
@@ -269,21 +273,20 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
       }, 320);
     };
 
-    menu.addEventListener('pointerdown', (event) => {
-      if (!menu.classList.contains('is-open') || !event.isPrimary) return;
-      pointerId = event.pointerId;
-      startX = event.clientX;
-      startY = event.clientY;
+    const startSwipe = (clientX: number, clientY: number) => {
+      gestureActive = true;
+      startX = clientX;
+      startY = clientY;
       startTime = performance.now();
       distance = 0;
       directionResolved = false;
       horizontalSwipe = false;
-    });
+    };
 
-    window.addEventListener('pointermove', (event) => {
-      if (event.pointerId !== pointerId) return;
-      const deltaX = event.clientX - startX;
-      const deltaY = event.clientY - startY;
+    const moveSwipe = (clientX: number, clientY: number, preventDefault: () => void) => {
+      if (!gestureActive) return;
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
 
       if (!directionResolved && Math.max(Math.abs(deltaX), Math.abs(deltaY)) >= 7) {
         directionResolved = true;
@@ -291,10 +294,37 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
       }
       if (!horizontalSwipe) return;
 
-      event.preventDefault();
+      preventDefault();
       distance = Math.max(0, deltaX);
       menu.classList.add('is-swipe-dragging');
       menu.style.transform = `translateX(${distance}px)`;
+    };
+
+    const cancelSwipe = () => {
+      pointerId = null;
+      touchId = null;
+      gestureActive = false;
+      directionResolved = false;
+      horizontalSwipe = false;
+      clearSwipeStyles();
+    };
+
+    menu.addEventListener('pointerdown', (event) => {
+      /* iOS WebKit can cancel touch pointer sequences inside a vertically
+         scrollable drawer. Real touch input is handled by Touch Events below;
+         Pointer Events remain for mouse, pen and desktop emulation. */
+      if (
+        event.pointerType === 'touch' ||
+        !menu.classList.contains('is-open') ||
+        !event.isPrimary
+      ) return;
+      pointerId = event.pointerId;
+      startSwipe(event.clientX, event.clientY);
+    });
+
+    window.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return;
+      moveSwipe(event.clientX, event.clientY, () => event.preventDefault());
     }, { passive: false });
 
     window.addEventListener('pointerup', (event) => {
@@ -302,8 +332,33 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
     });
     window.addEventListener('pointercancel', (event) => {
       if (event.pointerId !== pointerId) return;
-      pointerId = null;
-      clearSwipeStyles();
+      cancelSwipe();
+    });
+
+    menu.addEventListener('touchstart', (event) => {
+      if (!menu.classList.contains('is-open') || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      touchId = touch.identifier;
+      startSwipe(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (event) => {
+      if (touchId === null) return;
+      const touch = Array.from(event.touches).find((item) => item.identifier === touchId);
+      if (!touch) return;
+      moveSwipe(touch.clientX, touch.clientY, () => event.preventDefault());
+    }, { passive: false });
+
+    window.addEventListener('touchend', (event) => {
+      if (touchId === null) return;
+      const ended = Array.from(event.changedTouches).some((item) => item.identifier === touchId);
+      if (ended) finishSwipe();
+    });
+
+    window.addEventListener('touchcancel', (event) => {
+      if (touchId === null) return;
+      const cancelled = Array.from(event.changedTouches).some((item) => item.identifier === touchId);
+      if (cancelled) cancelSwipe();
     });
   }
 

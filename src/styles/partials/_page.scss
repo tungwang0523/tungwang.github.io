@@ -303,6 +303,7 @@
       border-right: 0;
       background: var(--mobile-menu-bg);
       overflow-y: auto;
+      overscroll-behavior-x: none;
       touch-action: pan-y;
       transform: translateX(-100%);
       transition: transform 0.25s ease;
@@ -556,6 +557,7 @@ html.content-card-page body.menu-open .page--content-card {
 
   @media screen and (max-width: 768px) {
     --page-nav-height: 64px;
+    --page-content-card-radius: 24px;
     --page-content-card-inset: 24px;
     --page-content-card-title-space: 64px;
 
