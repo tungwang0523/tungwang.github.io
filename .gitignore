@@ -19,6 +19,7 @@ pnpm-debug.log*
 !.env.example
 .gallery-cache/
 gallery-r2-config.json
+package-TungsThinkbook16p.json
 
 # editor / OS
 .DS_Store
