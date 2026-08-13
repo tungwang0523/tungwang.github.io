@@ -65,7 +65,7 @@
     max-height: 100%;
     margin: auto;
     object-fit: contain;
-    touch-action: pan-y;
+    touch-action: none;
     transition: opacity 180ms ease;
 
     &.is-loading {

@@ -82,6 +82,13 @@
       infoContent.style.maxHeight = `${infoContent.scrollHeight}px`;
     };
 
+    const setInfoExpanded = (nowExpanded: boolean) => {
+      infoPanel?.classList.toggle('is-expanded', nowExpanded);
+      dialog.classList.toggle('is-info-collapsed', !nowExpanded);
+      toggle?.setAttribute('aria-expanded', String(nowExpanded));
+      applyInfo(nowExpanded);
+    };
+
     const applyInfo = (expanded: boolean) => {
       if (!infoContent) return;
       if (!window.matchMedia('(max-width: 900px)').matches) {
@@ -282,11 +289,7 @@
 
       render(index, previewFor(trigger));
       const mobileLayout = window.matchMedia('(max-width: 900px)').matches;
-      const expanded = !mobileLayout;
-      infoPanel?.classList.toggle('is-expanded', expanded);
-      dialog.classList.toggle('is-info-collapsed', !expanded);
-      toggle?.setAttribute('aria-expanded', String(expanded));
-      applyInfo(expanded);
+      setInfoExpanded(!mobileLayout);
       setLoading(true);
       show();
 
@@ -409,17 +412,25 @@
         const distanceY = touch.clientY - touchStartY;
         touchStartX = null;
         touchStartY = null;
-        if (Math.abs(distanceX) < 48 || Math.abs(distanceX) <= Math.abs(distanceY)) return;
-        void move(distanceX < 0 ? 1 : -1);
+        if (Math.abs(distanceX) >= 48 && Math.abs(distanceX) > Math.abs(distanceY)) {
+          void move(distanceX < 0 ? 1 : -1);
+          return;
+        }
+        // Vertical swipe on mobile: up expands the info card, down collapses it.
+        if (
+          Math.abs(distanceY) >= 48 &&
+          Math.abs(distanceY) > Math.abs(distanceX) &&
+          window.matchMedia('(max-width: 900px)').matches
+        ) {
+          setInfoExpanded(distanceY < 0);
+        }
       },
       { passive: true },
     );
 
     toggle?.addEventListener('click', () => {
       const nowExpanded = infoPanel?.classList.toggle('is-expanded') ?? false;
-      toggle.setAttribute('aria-expanded', String(nowExpanded));
-      dialog.classList.toggle('is-info-collapsed', !nowExpanded);
-      applyInfo(nowExpanded);
+      setInfoExpanded(nowExpanded);
     });
 
     close?.addEventListener('click', hide);
