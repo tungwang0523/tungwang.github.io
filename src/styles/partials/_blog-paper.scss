@@ -1,0 +1,371 @@
+@use 'foundation' as *;
+
+/* Blog articles are presented as a continuous paper surface on a black field. */
+html.blog-paper,
+html.blog-paper body {
+  --blog-paper-gap: 12px;
+  --blog-paper-radius: 14px;
+  --blog-cover-radius: 8px;
+  --blog-paper-width: min(920px, calc(100vw - 2 * var(--blog-paper-gap)));
+  --blog-paper-edge: calc((100vw - var(--blog-paper-width)) / 2);
+  --blog-paper-top: calc(76px + var(--blog-paper-gap));
+  overscroll-behavior-y: none;
+}
+
+html.blog-paper {
+  min-height: 100%;
+  background: #000000 !important;
+}
+
+html.blog-paper::after {
+  content: '';
+  position: fixed;
+  z-index: 24;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: calc(var(--blog-paper-radius) + var(--blog-paper-gap));
+  background:
+    radial-gradient(
+      circle at calc(var(--blog-paper-edge) + var(--blog-paper-radius)) 0,
+      transparent var(--blog-paper-radius),
+      #000000 calc(var(--blog-paper-radius) + 0.5px)
+    ) left top / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
+    radial-gradient(
+      circle at calc(100% - var(--blog-paper-edge) - var(--blog-paper-radius)) 0,
+      transparent var(--blog-paper-radius),
+      #000000 calc(var(--blog-paper-radius) + 0.5px)
+    ) right top / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
+    linear-gradient(#000000, #000000) left bottom / 100% var(--blog-paper-gap)
+      no-repeat;
+  pointer-events: none;
+}
+
+/* A single solid compositor layer carries the entire visible paper. Keeping
+   it independent from the scrolling document avoids repainting a fixed
+   page-wide gradient during rapid scrolling. */
+.blog-paper-viewport-bottom {
+  position: fixed;
+  z-index: 0;
+  top: var(--blog-paper-top);
+  bottom: var(--blog-paper-gap);
+  left: 50%;
+  width: var(--blog-paper-width);
+  border-radius: var(--blog-paper-radius);
+  background: $blog-bg;
+  transform: translate3d(-50%, 0, 0);
+  backface-visibility: hidden;
+  contain: paint;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.blog-paper body {
+  position: relative;
+  min-height: 100dvh;
+  background: #000000 !important;
+}
+
+.blog-paper {
+  .page.blog-post-page {
+    --page-nav-height: 76px;
+    --mobile-menu-bg: #000000;
+    --mobile-menu-color: #ffffff;
+    --mobile-menu-current-bg: #ffffff;
+    --mobile-menu-current-color: #000000;
+    --mobile-menu-mark-filter: invert(1);
+
+    width: 100%;
+    max-width: none;
+    margin-right: auto;
+    margin-left: auto;
+    background: transparent;
+  }
+
+  .blog-post-page.has-blog-toc {
+    --page-content-width: 920px;
+  }
+
+  .blog-post-page .page-main {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 2 * var(--blog-paper-gap));
+    max-width: 920px;
+    margin-top: var(--blog-paper-gap);
+    margin-bottom: var(--blog-paper-gap);
+    padding-top: clamp(20px, 4vw, 32px);
+    border-radius: var(--blog-paper-radius);
+    background: transparent;
+  }
+
+  .blog-post-page .page-hero,
+  .blog-post-page .page-hero img {
+    border-radius: var(--blog-cover-radius);
+  }
+
+  .blog-post-page .page-hero {
+    overflow: hidden;
+  }
+
+  .blog-post-page > .post-nav--paper-external {
+    position: relative;
+    z-index: 1;
+    width: var(--blog-paper-width);
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px clamp(20px, 4vw, 32px) 44px;
+    border: 0;
+    box-sizing: border-box;
+    background: #000000;
+
+    /* The fixed paper-coloured canvas remains behind the scrolling article.
+       Cover it only at the article's real end so the main element's bottom
+       radius reads against black without adding another scrolling layer. */
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: calc(-1 * var(--blog-paper-gap));
+      height: var(--blog-paper-gap);
+      background: #000000;
+    }
+
+    &::after {
+      top: calc(-1 * (var(--blog-paper-gap) + var(--blog-paper-radius)));
+      height: var(--blog-paper-radius);
+      background:
+        radial-gradient(
+          circle at 100% 0,
+          transparent var(--blog-paper-radius),
+          #000000 calc(var(--blog-paper-radius) + 0.5px)
+        ) left top / var(--blog-paper-radius) var(--blog-paper-radius) no-repeat,
+        radial-gradient(
+          circle at 0 0,
+          transparent var(--blog-paper-radius),
+          #000000 calc(var(--blog-paper-radius) + 0.5px)
+        ) right top / var(--blog-paper-radius) var(--blog-paper-radius) no-repeat;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.66);
+
+      strong {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .blog-post-page > .page-nav,
+  .blog-post-page > .menu-mobile-bar,
+  .blog-post-page > .site-footer {
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+    margin-left: 0;
+    box-sizing: border-box;
+    background: #000000;
+    color: #ffffff;
+  }
+
+  /* Every navigation module follows the same outer measure as the paper. */
+  .blog-post-page > .page-nav .page-nav__inner,
+  .blog-post-page > .site-footer .site-footer__inner {
+    width: var(--blog-paper-width);
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  .blog-post-page > .site-footer .site-footer__inner {
+    padding-right: clamp(20px, 4vw, 32px);
+    padding-left: clamp(20px, 4vw, 32px);
+  }
+
+  .blog-post-page > .page-nav,
+  .blog-post-page > .menu-mobile-bar {
+    box-shadow: 0 var(--blog-paper-gap) 0 #000000;
+  }
+
+  .blog-post-page > .site-footer {
+    position: relative;
+    z-index: 27;
+  }
+
+  @media screen and (max-width: 1030px) {
+    .blog-post-page > .menu-toggle {
+      left: 24px;
+    }
+
+    .blog-post-page > .menu-mobile-bar .menu-mobile-bar__brand {
+      left: 72px;
+    }
+  }
+
+  .blog-post-page > .page-nav :is(.page-nav__brand, nav a),
+  .blog-post-page > .menu-mobile-bar .menu-mobile-bar__brand,
+  .blog-post-page > .menu-toggle,
+  .blog-post-page > .site-footer :is(.site-footer__brand, .site-footer__nav a, .site-footer__meta) {
+    color: #ffffff;
+  }
+
+  .blog-post-page > .page-nav nav .page-nav__current,
+  .blog-post-page > .site-footer .site-footer__current {
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .page.blog-post-page {
+      --page-nav-height: 88px;
+    }
+
+    .blog-post-page > .page-nav {
+      box-shadow: none;
+
+      .page-nav__inner {
+        min-height: 88px;
+      }
+    }
+
+    .blog-post-page .page-main {
+      margin-top: 0;
+    }
+
+    .blog-post-page.has-blog-toc .blog-post-layout {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+
+      > .prose,
+      > .blog-toc--desktop {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+
+    .blog-post-page .blog-toc--desktop {
+      --blog-toc-side-gap: 32px;
+      --blog-toc-side-width: min(
+        220px,
+        calc((100vw - 920px) / 2 - var(--blog-toc-side-gap))
+      );
+      top: calc(var(--blog-paper-top) + 12px);
+      width: var(--blog-toc-side-width);
+      /* The grid starts at the paper's padded content edge; include that
+         32px inset before applying the visible gap outside the paper. */
+      margin-left: calc(100% + var(--blog-toc-side-gap) + 32px);
+      color: #ffffff;
+
+      .blog-toc__label,
+      li[data-depth] > a,
+      li > a:hover:not([aria-current='location']) {
+        color: #ffffff;
+      }
+
+      li > a[aria-current='location'] {
+        background: #ffffff;
+        color: #000000;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1279px) {
+    .blog-post-page .blog-toc-mobile {
+      top: var(--page-nav-height);
+      width: var(--blog-paper-width);
+      margin: 0 auto;
+      padding-right: clamp(20px, 4vw, 32px);
+      padding-left: clamp(20px, 4vw, 32px);
+      box-sizing: border-box;
+      background: #000000;
+      box-shadow: 0 var(--blog-paper-gap) 0 #000000;
+      color: #ffffff;
+
+      &[data-toc-stuck='true'] {
+        border-radius: var(--blog-paper-radius) var(--blog-paper-radius) 0 0;
+        background: #000000;
+
+        &::before {
+          display: none;
+        }
+
+        nav {
+          background: #000000;
+        }
+      }
+
+      summary {
+        color: #ffffff;
+      }
+
+      .blog-toc-mobile__current {
+        color: rgba(255, 255, 255, 0.58);
+      }
+
+      &[open] nav,
+      &[open][data-toc-stuck='true'] nav {
+        box-shadow: 0 0 0 100vmax #000000;
+      }
+
+      nav {
+        left: 0;
+        width: 100%;
+        margin-left: 0;
+        padding-right: clamp(20px, 4vw, 32px);
+        padding-left: clamp(20px, 4vw, 32px);
+        background: #000000;
+      }
+
+      li[data-depth] > a,
+      li > a:hover:not([aria-current='location']) {
+        color: #ffffff;
+      }
+
+      li > a[aria-current='location'] {
+        background: #ffffff;
+        color: #000000;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1030px) {
+    .page.blog-post-page {
+      padding-top: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .page.blog-post-page {
+      --page-nav-height: 64px;
+      padding-top: 64px;
+    }
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  html.blog-paper.blog-paper-has-toc,
+  html.blog-paper.blog-paper-has-toc body {
+    --blog-paper-top: calc(76px + 48px + var(--blog-paper-gap));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html.blog-paper,
+  html.blog-paper body {
+    --blog-paper-top: calc(64px + var(--blog-paper-gap));
+  }
+
+  html.blog-paper.blog-paper-has-toc,
+  html.blog-paper.blog-paper-has-toc body {
+    --blog-paper-top: calc(64px + 48px + var(--blog-paper-gap));
+  }
+}

@@ -23,6 +23,8 @@ interface Props {
   showHome?: boolean;
   mobileBrandExpanded?: string;
   mobileBrandExpandedAlways?: boolean;
+  mobileBrandHomeBeforeTitle?: boolean;
+  mobileBrandHomeAtTop?: boolean;
 }
 
 const {
@@ -36,6 +38,8 @@ const {
   showHome = true,
   mobileBrandExpanded,
   mobileBrandExpandedAlways = false,
+  mobileBrandHomeBeforeTitle = false,
+  mobileBrandHomeAtTop = false,
 } = Astro.props;
 
 const allMenuItems: MenuItem[] =
@@ -68,6 +72,8 @@ const menuItems = showHome
     data-mobile-brand-expanded={mobileBrandExpanded || undefined}
     data-mobile-brand-expanded-always={mobileBrandExpandedAlways || undefined}
     data-mobile-brand-scroll-top={mobileBrandExpanded || undefined}
+    data-mobile-brand-home-before-title={mobileBrandHomeBeforeTitle || undefined}
+    data-mobile-brand-home-at-top={mobileBrandHomeAtTop || undefined}
   >
     {
       mobileBrandExpanded ? (
@@ -88,6 +94,7 @@ const menuItems = showHome
       </div>
     )
   }
+  <slot />
 </div>
 
 <button
@@ -173,14 +180,27 @@ const menuItems = showHome
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.querySelector<HTMLElement>('[data-menu]');
   const mobileBrand = document.querySelector<HTMLElement>('[data-mobile-brand]');
+  const pageBrand = document.querySelector<HTMLElement>('[data-page-brand]');
   const mobileBrandTitle = document.querySelector<HTMLElement>('[data-mobile-brand-title]');
   const identityTitle =
     document.querySelector<HTMLElement>('[data-mobile-identity]') ??
     document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
 
   if (mobileBrand?.dataset.mobileBrandScrollTop) {
-    mobileBrand.setAttribute('aria-label', 'Back to top');
+    const homeBeforeTitle = mobileBrand.dataset.mobileBrandHomeBeforeTitle === 'true';
+    const homeAtTop = mobileBrand.dataset.mobileBrandHomeAtTop === 'true';
     mobileBrand.addEventListener('click', (event) => {
+      if (homeAtTop && window.scrollY <= 4) return;
+      if (homeBeforeTitle && !mobileBrand.classList.contains('is-expanded')) return;
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  if (pageBrand?.dataset.pageBrandExpanded) {
+    pageBrand.addEventListener('click', (event) => {
+      if (pageBrand.dataset.pageBrandHomeAtTop === 'true' && window.scrollY <= 4) return;
+      if (!pageBrand.classList.contains('is-expanded')) return;
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -213,6 +233,10 @@ const menuItems = showHome
         ? mobileBrandTitle.getBoundingClientRect().bottom <= 64
         : false;
       mobileBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
+      mobileBrand.closest('.menu-mobile-bar')?.classList.toggle(
+        'is-title-passed',
+        alwaysExpanded || titleHasPassed,
+      );
     };
 
     updateExpandedBrand();
@@ -230,5 +254,29 @@ const menuItems = showHome
       { rootMargin: '-64px 0px 0px', threshold: 0 },
     );
     brandObserver.observe(identityTitle);
+  }
+
+  if (pageBrand?.dataset.pageBrandExpanded) {
+    const alwaysExpanded = pageBrand.dataset.pageBrandExpandedAlways === 'true';
+    const updateExpandedPageBrand = () => {
+      const titleHasPassed = mobileBrandTitle
+        ? mobileBrandTitle.getBoundingClientRect().bottom <= -28
+        : false;
+      pageBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
+      pageBrand.closest('.page-nav')?.classList.toggle(
+        'is-title-passed',
+        alwaysExpanded || titleHasPassed,
+      );
+    };
+
+    updateExpandedPageBrand();
+
+    if (!alwaysExpanded && mobileBrandTitle) {
+      const pageBrandObserver = new IntersectionObserver(updateExpandedPageBrand, {
+        rootMargin: '28px 0px 0px',
+        threshold: 0,
+      });
+      pageBrandObserver.observe(mobileBrandTitle);
+    }
   }
 </script>

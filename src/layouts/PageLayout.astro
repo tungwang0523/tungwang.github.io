@@ -2,6 +2,8 @@
 import BaseLayout from './BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import Menu from '../components/Menu.astro';
+import BlogLanguageToggle from '../components/BlogLanguageToggle.astro';
+import MicroblogLanguageToggle from '../components/MicroblogLanguageToggle.astro';
 import { cloudflareImage, cloudflareSrcset, imagePresets } from '../utils/cloudflare-image.mjs';
 
 interface Props {
@@ -17,6 +19,13 @@ interface Props {
   canonicalUrl?: string;
   mainSiteNavigation?: boolean;
   activeSection?: 'research' | 'work' | 'blog' | 'microblog';
+  sectionLanding?: boolean;
+  contentCard?: boolean;
+  headerLanguage?: 'blog' | 'microblog';
+  languageCurrent?: 'zh' | 'en';
+  languageZhHref?: string;
+  languageEnHref?: string;
+  titleInBrand?: boolean;
 }
 
 const {
@@ -30,15 +39,25 @@ const {
   canonicalUrl,
   mainSiteNavigation = false,
   activeSection,
+  sectionLanding = false,
+  contentCard = false,
+  headerLanguage,
+  languageCurrent = 'zh',
+  languageZhHref,
+  languageEnHref,
+  titleInBrand = false,
 } = Astro.props;
 const headTitle = pageTitle ?? `${title} - Tung‘s`;
+const isBlogPost = pageClass?.split(/\s+/).includes('blog-post-page') ?? false;
+const hasBlogToc = pageClass?.split(/\s+/).includes('has-blog-toc') ?? false;
+const hasAdaptiveSectionBrand = sectionLanding || contentCard;
 const mobileBrandExpanded =
   activeSection === 'research'
     ? 'Tung’s Research'
     : activeSection === 'work'
       ? 'Tung’s Work'
       : activeSection === 'blog'
-        ? 'Tung’s Writing'
+        ? 'Tung’s Blog'
         : activeSection === 'microblog'
           ? 'Tung’s Microblog'
           : undefined;
@@ -65,53 +84,119 @@ const heroSrcset = heroImage
   image={heroImage}
   lang={lang}
   canonicalUrl={canonicalUrl}
+  rootClass={isBlogPost ? `blog-paper${hasBlogToc ? ' blog-paper-has-toc' : ''}` : undefined}
 >
-  <div class:list={['page', pageClass]}>
+  <div class:list={[
+    'page',
+    pageClass,
+    sectionLanding && 'page--section-landing',
+    contentCard && 'page--content-card',
+  ]}>
+    {isBlogPost && <div class="blog-paper-viewport-bottom" aria-hidden="true" />}
+    {contentCard && <div class="page-content-card-viewport" aria-hidden="true" />}
     <Menu
       mobileOnly
       activeSection={activeSection}
       mainSiteNavigation={mainSiteNavigation}
       blogHref={blogHref}
       mobileBrandExpanded={mobileBrandExpanded}
-      mobileBrandExpandedAlways={activeSection === 'research'}
-    />
+      mobileBrandExpandedAlways={activeSection === 'research' || titleInBrand}
+      mobileBrandHomeBeforeTitle={hasAdaptiveSectionBrand}
+      mobileBrandHomeAtTop={titleInBrand}
+    >
+      {
+        headerLanguage && (
+          <div class="page-header-language page-header-language--mobile">
+            {
+              headerLanguage === 'blog' ? (
+                <BlogLanguageToggle
+                  current={languageCurrent}
+                  zhHref={languageZhHref}
+                  enHref={languageEnHref}
+                />
+              ) : (
+                <MicroblogLanguageToggle />
+              )
+            }
+          </div>
+        )
+      }
+    </Menu>
     <header class="page-nav">
       <div class="page-nav__inner">
-        <a class="page-nav__brand" href="/" data-main-site-link={mainSiteNavigation || undefined}
-          >Tung’s</a
+        <a
+          class="page-nav__brand"
+          href="/"
+          aria-label={hasAdaptiveSectionBrand ? 'Home' : undefined}
+          data-page-brand={hasAdaptiveSectionBrand || undefined}
+          data-page-brand-expanded={hasAdaptiveSectionBrand ? mobileBrandExpanded : undefined}
+          data-page-brand-expanded-always={titleInBrand || undefined}
+          data-page-brand-home-at-top={titleInBrand || undefined}
         >
-        <nav aria-label="Primary">
           {
-            activeSection === 'research' ? (
-              <span class="page-nav__current" aria-current="page">Research</span>
+            hasAdaptiveSectionBrand && mobileBrandExpanded ? (
+              <>
+                <span class="page-nav__brand-default">Tung’s</span>
+                <span class="page-nav__brand-expanded">{mobileBrandExpanded}</span>
+              </>
             ) : (
-              <a href="/academic" data-cv-site-link>Research</a>
+              'Tung’s'
             )
           }
+        </a>
+        <div class="page-nav__controls">
+          <nav aria-label="Primary">
+            {
+              activeSection === 'research' ? (
+                <span class="page-nav__current" aria-current="page">Research</span>
+              ) : (
+                <a href="/academic" data-cv-site-link>Research</a>
+              )
+            }
+            {
+              activeSection === 'work' ? (
+                <span class="page-nav__current" aria-current="page">Work</span>
+              ) : (
+                <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+              )
+            }
+            {
+              activeSection === 'blog' ? (
+                <span class="page-nav__current" aria-current="page">Blog</span>
+              ) : (
+                <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
+              )
+            }
+            {
+              activeSection === 'microblog' ? (
+                <span class="page-nav__current" aria-current="page">Microblog</span>
+              ) : (
+                <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+              )
+            }
+          </nav>
           {
-            activeSection === 'work' ? (
-              <span class="page-nav__current" aria-current="page">Work</span>
-            ) : (
-              <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+            headerLanguage && (
+              <div class="page-header-language page-header-language--desktop">
+                {
+                  headerLanguage === 'blog' ? (
+                    <BlogLanguageToggle
+                      current={languageCurrent}
+                      zhHref={languageZhHref}
+                      enHref={languageEnHref}
+                    />
+                  ) : (
+                    <MicroblogLanguageToggle />
+                  )
+                }
+              </div>
             )
           }
-          {
-            activeSection === 'blog' ? (
-              <span class="page-nav__current" aria-current="page">Blog</span>
-            ) : (
-              <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
-            )
-          }
-          {
-            activeSection === 'microblog' ? (
-              <span class="page-nav__current" aria-current="page">Microblog</span>
-            ) : (
-              <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
-            )
-          }
-        </nav>
+        </div>
       </div>
     </header>
+
+    <slot name="after-nav" />
 
     <main class="page-main">
       {
@@ -130,7 +215,7 @@ const heroSrcset = heroImage
         )
       }
 
-      <section class="page-head">
+      <section class:list={['page-head', titleInBrand && 'page-head--in-brand']}>
         <h1 class="page-title" data-mobile-brand-title>{title}</h1>
       </section>
 
@@ -138,6 +223,8 @@ const heroSrcset = heroImage
         <slot />
       </div>
     </main>
+
+    <slot name="after-main" />
 
     <Footer
       blogHref={blogHref}

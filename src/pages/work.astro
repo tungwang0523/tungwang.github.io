@@ -1,145 +1,77 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import ResponsiveImage from '../components/ResponsiveImage.astro';
+import WorkIndexCard from '../components/WorkIndexCard.astro';
+
+const projects = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const featuredProject = projects.find((project) => project.data.featured);
+const regularProjects = projects.filter((project) => project !== featuredProject);
 ---
 
 <PageLayout
-  title="Selected Work"
+  title="Work"
   description="Research-led design, playable architecture, and digital reconstruction projects by Tung Wang."
-  pageTitle="Tung‘s Work"
+  pageTitle="Tung’s Work"
   pageClass="page--work"
   activeSection="work"
+  contentCard
+  titleInBrand
 >
   <div class="work-index">
-    <div class="work-band work-band--research">
-      <a class="work-project work-project--research" href="/work/between-strangers">
-        <div class="work-project__body">
-          <span class="work-project__number">01</span>
-          <h2>Between Strangers</h2>
-          <p>
-            Making subtle gaze-related experience available as a designable relation through
-            first-person inquiry, image schemas and XR.
-          </p>
-          <span class="work-project__meta">Research through Design · 2025–Present</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/research_white.png"
-            alt="Between Strangers — a symbolic point suspended in a light field"
-            sizes="(max-width: 760px) calc(100vw - 40px), 50vw"
-            priority
-          />
-        </div>
-      </a>
-    </div>
-
-    <div class="work-band work-band--mine">
-      <a class="work-project work-project--mine" href="/work/minetrarchi">
-        <div class="work-project__body">
-          <span class="work-project__number">02</span>
-          <h2>Minetrarchi</h2>
-          <p>
-            A Minecraft-based sandbox concept that turns the structural knowledge of traditional
-            Chinese architecture into rules of play.
-          </p>
-          <span class="work-project__role"
-            >Role — user research & personas, game mechanics, art & UI</span
-          >
-          <span class="work-project__meta">Game & Interface Design · Earlier Work</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/work/minetrarchi/m-hero.png"
-            alt="Minetrarchi — exploded axonometric of a traditional timber building"
-          />
-        </div>
-      </a>
-    </div>
-
-    <div class="work-band work-band--expo">
-      <a class="work-project work-project--expo" href="/work/expocraft">
-        <div class="work-project__body">
-          <span class="work-project__number">03</span>
-          <h2>ExpoCraft</h2>
-          <p>
-            An ongoing reconstruction of Expo 2010 Shanghai in Minecraft, assembled from maps,
-            photographs and surviving traces.
-          </p>
-          <span class="work-project__meta">Digital Reconstruction · Ongoing</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/work/expocraft/e-hero.png"
-            alt="ExpoCraft — rebuilt Expo site in Minecraft"
-          />
-        </div>
-      </a>
-    </div>
-
-    <div class="work-band work-band--seeds">
-      <a class="work-project work-project--seeds" href="/work/field-of-seeds">
-        <div class="work-project__body">
-          <span class="work-project__number">04</span>
-          <h2>The Field of Seeds</h2>
-          <p>
-            A physical-computing installation of light dandelions returning to the lawn where Expo
-            2010's Seed Cathedral once stood.
-          </p>
-          <span class="work-project__role"
-            >Role — topic, concept, form & circuit design · with Li Tinghao & Xu Xuanzhi</span
-          >
-          <span class="work-project__meta">Physical Media & Computing · Course Work</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/work/field-of-seeds/fos-hero.png"
-            alt="The Field of Seeds — a light dandelion field"
-          />
-        </div>
-      </a>
-    </div>
-
-    <div class="work-band work-band--roof">
-      <a class="work-project work-project--roof" href="/work/rooftop-garden">
-        <div class="work-project__body">
-          <span class="work-project__number">05</span>
-          <h2>Rooftop Garden</h2>
-          <p>
-            An interactive projection proposal that keeps a typhoon's leftover—the fallen iron roof
-            of Weixin Hall—as a canvas for passersby.
-          </p>
-          <span class="work-project__meta">Digital Media Art · Course Proposal</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/work/rooftop-garden/cover.png"
-            alt="Rooftop Garden — the fallen roof in the atrium"
-          />
-        </div>
-      </a>
-    </div>
-
-    <div class="work-band work-band--robotaxi">
-      <a class="work-project work-project--robotaxi" href="/work/robotaxi-cabin">
-        <div class="work-project__body">
-          <span class="work-project__number">06</span>
-          <h2>The Empathetic Robotaxi</h2>
-          <p>
-            An autonomous robotaxi cabin that earns passenger trust by making the vehicle's effort
-            feelable—through a pet-like persona, touch, voice and light.
-          </p>
-          <span class="work-project__role"
-            >Role — topic, concept, persona & journey, IA & HMI · with Li Tinghao</span
-          >
-          <span class="work-project__meta">Interaction Design · Course Work</span>
-        </div>
-        <div class="work-project__media">
-          <ResponsiveImage
-            src="/pictures/work/robotaxi-cabin/cabin.png"
-            alt="The Empathetic Robotaxi — cabin"
-          />
-        </div>
-      </a>
+    {
+      featuredProject && (
+        <WorkIndexCard {...featuredProject.data} featured priority />
+      )
+    }
+    <div class="work-index__grid" data-work-masonry>
+      {regularProjects.map((project) => <WorkIndexCard {...project.data} />)}
     </div>
   </div>
 </PageLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-work-masonry]').forEach((grid) => {
+    if (grid.dataset.masonryReady === 'true') return;
+    grid.dataset.masonryReady = 'true';
+
+    const tiles = Array.from(grid.children).filter(
+      (child): child is HTMLElement => child instanceof HTMLElement,
+    );
+    let frame = 0;
+
+    const layout = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        grid.classList.remove('is-masonry-ready');
+        tiles.forEach((tile) => tile.style.removeProperty('grid-row-end'));
+
+        if (window.matchMedia('(max-width: 760px)').matches) {
+          return;
+        }
+
+        const styles = getComputedStyle(grid);
+        const row = Number.parseFloat(styles.gridAutoRows) || 2;
+        const gap = Number.parseFloat(styles.rowGap) || 12;
+
+        const spans = tiles.map((tile) =>
+          Math.max(1, Math.ceil((tile.getBoundingClientRect().height + gap) / (row + gap))),
+        );
+
+        grid.classList.add('is-masonry-ready');
+        tiles.forEach((tile, index) => {
+          tile.style.gridRowEnd = `span ${spans[index]}`;
+        });
+      });
+    };
+
+    const observer = new ResizeObserver(layout);
+    observer.observe(grid);
+    grid.querySelectorAll('img').forEach((image) => {
+      if (!image.complete) image.addEventListener('load', layout, { once: true });
+    });
+    document.fonts?.ready.then(layout);
+    layout();
+  });
+</script>

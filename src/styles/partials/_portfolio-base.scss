@@ -7,6 +7,11 @@
   --project-red: #c93028;
   --mobile-page-nav-bg: #{$panel-bg};
   --mobile-page-nav-color: #{$title-color};
+  --mobile-menu-bg: var(--mobile-page-nav-bg);
+  --mobile-menu-color: var(--mobile-page-nav-color);
+  --mobile-menu-current-bg: var(--mobile-page-nav-color);
+  --mobile-menu-current-color: var(--mobile-page-nav-bg);
+  --mobile-menu-mark-filter: none;
   background: #e9e6e4;
 
   .page-nav__inner,
@@ -22,26 +27,31 @@
   --next-theme: #1e7a46;
   --mobile-page-nav-bg: #c93028;
   --mobile-page-nav-color: #ffffff;
+  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--expo {
   --next-theme: #6d28d9;
   --mobile-page-nav-bg: #1e7a46;
   --mobile-page-nav-color: #ffffff;
+  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--seeds {
   --next-theme: #546e7a;
   --mobile-page-nav-bg: #6d28d9;
   --mobile-page-nav-color: #ffffff;
+  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--roof {
   --next-theme: #c2410c;
   --mobile-page-nav-bg: #546e7a;
   --mobile-page-nav-color: #ffffff;
+  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--robotaxi {
   --next-theme: #002fa7;
   --mobile-page-nav-bg: #c2410c;
   --mobile-page-nav-color: #ffffff;
+  --mobile-menu-mark-filter: invert(1);
 }
 
 @media screen and (max-width: 768px) {
@@ -69,14 +79,16 @@
   }
 
   .site-footer__current {
-    background: #ffffff;
-    color: #121418;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
   }
 }
 
 .portfolio-page .page-nav nav .page-nav__current {
-  background: #ffffff;
-  color: #121418;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* Minetrarchi & ExpoCraft: Space Grotesk, themed top band, themed dark blocks */

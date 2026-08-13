@@ -8,9 +8,10 @@ interface Heading {
 interface Props {
   headings: Heading[];
   lang?: 'zh' | 'en';
+  variant?: 'both' | 'desktop' | 'mobile';
 }
 
-const { headings, lang = 'zh' } = Astro.props;
+const { headings, lang = 'zh', variant = 'both' } = Astro.props;
 const items = headings.filter(
   (heading) => heading.depth >= 1 && heading.depth <= 3 && heading.text.trim().length > 0,
 );
@@ -21,68 +22,73 @@ const label = lang === 'en' ? 'Contents' : '目录';
 {
   visible && (
     <>
-      <aside
-        class="blog-toc blog-toc--desktop"
-        data-blog-toc
-        data-blog-toc-desktop
-        data-toc-has-before="false"
-        data-toc-has-after="false"
-        aria-label={label}
-      >
-        <div class="blog-toc__label">{label}</div>
-        <ol data-blog-toc-list>
-          {items.map((heading) => (
-            <li data-depth={heading.depth}>
-              <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
-            </li>
-          ))}
-        </ol>
-      </aside>
-
-      <details
-        class="blog-toc-mobile"
-        data-blog-toc-mobile
-        data-blog-toc
-        data-toc-has-before="false"
-        data-toc-has-after="false"
-      >
-        <summary>
-          <span class="blog-toc-mobile__label">{label}</span>
-          <span class="blog-toc-mobile__current" data-toc-current>{items[0]?.text}</span>
-          <span class="blog-toc-mobile__arrow" aria-hidden="true">↓</span>
-        </summary>
-        <nav aria-label={label}>
-          <ol>
+      {variant !== 'mobile' && (
+        <aside
+          class="blog-toc blog-toc--desktop"
+          data-blog-toc
+          data-blog-toc-desktop
+          data-toc-has-before="false"
+          data-toc-has-after="false"
+          aria-label={label}
+        >
+          <div class="blog-toc__label">{label}</div>
+          <ol data-blog-toc-list>
             {items.map((heading) => (
               <li data-depth={heading.depth}>
                 <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
               </li>
             ))}
           </ol>
-        </nav>
-      </details>
+        </aside>
+      )}
+
+      {variant !== 'desktop' && (
+        <details
+          class="blog-toc-mobile"
+          data-blog-toc-mobile
+          data-blog-toc
+          data-toc-has-before="false"
+          data-toc-has-after="false"
+        >
+          <summary>
+            <span class="blog-toc-mobile__label">{label}</span>
+            <span class="blog-toc-mobile__current" data-toc-current>{items[0]?.text}</span>
+            <span class="blog-toc-mobile__arrow" aria-hidden="true">↓</span>
+          </summary>
+          <nav aria-label={label}>
+            <ol>
+              {items.map((heading) => (
+                <li data-depth={heading.depth}>
+                  <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
+      )}
     </>
   )
 }
 
 {
-  visible && (
+  visible && variant !== 'mobile' && (
     <script>
       const initialiseBlogToc = () => {
+        const page = document.querySelector<HTMLElement>('.blog-post-page');
         const article = document.querySelector<HTMLElement>('.blog-post-layout');
-        if (!article || article.dataset.tocReady === 'true') return;
-        article.dataset.tocReady = 'true';
+        if (!page || !article || page.dataset.tocReady === 'true') return;
+        page.dataset.tocReady = 'true';
 
-        const links = Array.from(article.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+        const links = Array.from(page.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
         const ids = Array.from(new Set(links.map((link) => link.dataset.tocLink).filter(Boolean))) as string[];
         const headings = ids
           .map((id) => document.getElementById(id))
           .filter((heading): heading is HTMLElement => heading instanceof HTMLElement);
-        const currentLabel = article.querySelector<HTMLElement>('[data-toc-current]');
-        const mobileToc = article.querySelector<HTMLDetailsElement>('[data-blog-toc-mobile]');
+        const currentLabel = page.querySelector<HTMLElement>('[data-toc-current]');
+        const mobileToc = page.querySelector<HTMLDetailsElement>('[data-blog-toc-mobile]');
         const mobileSummary = mobileToc?.querySelector<HTMLElement>('summary');
         const mobileList = mobileToc?.querySelector<HTMLOListElement>('nav ol');
-        const desktopToc = article.querySelector<HTMLElement>('[data-blog-toc-desktop]');
+        const desktopToc = page.querySelector<HTMLElement>('[data-blog-toc-desktop]');
         const desktopList = desktopToc?.querySelector<HTMLOListElement>('[data-blog-toc-list]');
         const desktopItems = desktopToc
           ? Array.from(desktopToc.querySelectorAll<HTMLLIElement>('li'))
@@ -110,7 +116,9 @@ const label = lang === 'en' ? 'Contents' : '目录';
         const updateMobileStickyState = (navigationHeight: number) => {
           if (!mobileToc) return;
           const top = mobileToc.getBoundingClientRect().top;
-          mobileToc.dataset.tocStuck = String(top <= navigationHeight + 1);
+          const configuredTop = Number.parseFloat(window.getComputedStyle(mobileToc).top);
+          const stickyTop = Number.isFinite(configuredTop) ? configuredTop : navigationHeight;
+          mobileToc.dataset.tocStuck = String(top <= stickyTop + 1);
         };
 
         const updateMobileFades = () => {

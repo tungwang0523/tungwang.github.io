@@ -5,6 +5,11 @@
 .page {
   --page-content-width: 920px;
   --page-nav-height: 75px;
+  --mobile-menu-bg: #{$blog-bg};
+  --mobile-menu-color: #{$subtitle-color};
+  --mobile-menu-current-bg: #{$title-color};
+  --mobile-menu-current-color: #{$blog-bg};
+  --mobile-menu-mark-filter: none;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -43,6 +48,7 @@
   }
 
   &__brand {
+    display: grid;
     font-family: $title-font;
     font-weight: 700;
     font-size: 22px;
@@ -50,10 +56,28 @@
     color: $title-color;
     text-decoration: none;
 
+    &-default,
+    &-expanded {
+      grid-area: 1 / 1;
+      transition: opacity 180ms ease;
+    }
+
+    &-expanded {
+      opacity: 0;
+    }
+
+    &.is-expanded &-default {
+      opacity: 0;
+    }
+
+    &.is-expanded &-expanded {
+      opacity: 1;
+    }
+
     span {
       font-family: $title-font;
       font-style: normal;
-      font-weight: 400;
+      font-weight: inherit;
     }
   }
 
@@ -73,17 +97,266 @@
     .page-nav__current {
       display: inline-flex;
       align-items: center;
-      padding: 7px 11px;
-      background: $title-color;
-      color: $blog-bg;
-      font-weight: 400;
-      line-height: 1;
+      padding: 0;
+      background: transparent;
+      color: $subtitle-color;
+      font-weight: 700;
+      line-height: inherit;
       cursor: default;
     }
   }
 
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
   @media screen and (max-width: 768px) {
     display: none;
+  }
+}
+
+.page-header-language {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  font-family: $title-font;
+
+  :is(.blog-language, .microblog-language) {
+    gap: 5px;
+    color: inherit;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+
+  :is(.blog-language__zh, [data-language-option='zh'])::before {
+    content: none;
+    display: none;
+  }
+
+  &--mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .page > .menu-mobile-bar .page-header-language--mobile {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    display: flex;
+    color: inherit;
+    transform: translateY(-50%);
+  }
+}
+
+/* Section landing pages begin with navigation integrated into the title row.
+   Once the title leaves the viewport, the familiar sticky navigation returns. */
+@media screen and (min-width: 1031px) {
+  .page--section-landing {
+    position: relative;
+
+    > .page-nav nav .page-nav__current {
+      display: none;
+    }
+
+    > .page-main {
+      overflow: visible;
+    }
+
+    &.page--section-landing .page-head {
+      margin-top: calc(-1 * clamp(32px, 6vw, 80px));
+      margin-bottom: calc(40px + var(--page-nav-height));
+      padding-top: clamp(32px, 6vw, 80px);
+      background: $panel-bg;
+      box-shadow: 0 0 0 100vmax $panel-bg;
+      clip-path: inset(0 -100vmax);
+    }
+
+    > .page-nav:not(.is-title-passed) {
+      position: absolute;
+      top: calc(clamp(32px, 6vw, 80px) + clamp(45px, 6.88vw, 89px) + 28px);
+      right: 0;
+      left: 0;
+      background: $panel-bg;
+      transform: none;
+
+      .page-nav__inner {
+        min-height: var(--page-nav-height);
+        justify-content: flex-end;
+        gap: clamp(12px, 1.4vw, 20px);
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      .page-nav__controls {
+        gap: clamp(12px, 1.4vw, 20px);
+      }
+
+      .page-nav__brand {
+        &-expanded {
+          display: none;
+        }
+      }
+
+      nav {
+        gap: clamp(12px, 1.4vw, 20px);
+      }
+    }
+
+    > .page-nav.is-title-passed {
+      position: fixed;
+      right: 0;
+      left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .page--section-landing {
+    --page-nav-height: 64px;
+    padding-top: var(--page-nav-height);
+
+    > .page-main {
+      overflow: visible;
+    }
+
+    &.page--section-landing .page-head {
+      margin-top: calc(-1 * clamp(32px, 6vw, 80px));
+      padding-top: clamp(32px, 6vw, 80px);
+      background: $panel-bg;
+      box-shadow: 0 0 0 100vmax $panel-bg;
+      clip-path: inset(0 -100vmax);
+    }
+
+    > .page-nav {
+      display: none;
+    }
+
+    > .menu-mobile-bar.menu-mobile-only {
+      display: block;
+      background: $panel-bg;
+
+      &.is-title-passed {
+        background: $panel-bg;
+      }
+
+      .menu-mobile-bar__brand {
+        position: absolute;
+        top: 50%;
+        left: 72px;
+        display: grid;
+        width: max-content;
+        padding: 0;
+        background: transparent;
+        color: $title-color;
+        font-family: $title-font;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 1;
+        transform: translateY(-50%);
+        pointer-events: auto;
+
+        &-default,
+        &-expanded {
+          grid-area: 1 / 1;
+          transition: opacity 180ms ease;
+        }
+
+        &-expanded {
+          opacity: 0;
+        }
+
+        &.is-expanded .menu-mobile-bar__brand-default {
+          opacity: 0;
+        }
+
+        &.is-expanded .menu-mobile-bar__brand-expanded {
+          opacity: 1;
+        }
+      }
+
+    }
+
+    > .menu-toggle.menu-mobile-only {
+      display: inline-block;
+    }
+
+    > .is-menu.menu-mobile-only {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 28px 28px;
+      border-right: 0;
+      background: var(--mobile-menu-bg);
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+
+      &.is-open {
+        transform: translateX(0);
+      }
+
+      > .blog-menu {
+        display: flex;
+        align-items: center;
+        color: var(--mobile-menu-color);
+        font-family: $subtitle-font;
+        font-size: 24px;
+        letter-spacing: -0.5px;
+        text-decoration: none;
+
+        & + .blog-menu {
+          margin-top: 24px;
+        }
+
+        &.menu-current {
+          align-self: flex-start;
+          width: auto;
+          margin-left: 0;
+          padding: 0;
+          background: transparent;
+          color: inherit;
+          font-weight: 700;
+        }
+      }
+
+      > .blog-menu.mention {
+        margin-top: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        font-size: 18px;
+        line-height: 1.2;
+      }
+    }
+
+    .menu-home-item {
+      display: flex;
+    }
+  }
+}
+
+body.menu-open {
+  .page > .menu-mobile-bar {
+    background: var(--mobile-menu-bg) !important;
+    box-shadow: none !important;
+  }
+
+  .page > .menu-toggle {
+    color: var(--mobile-menu-color) !important;
+  }
+
+  .page-header-language--mobile {
+    visibility: hidden;
   }
 }
 
@@ -93,6 +366,169 @@
   max-width: var(--page-content-width);
   margin: 0 auto;
   padding: clamp(32px, 6vw, 80px) clamp(20px, 4vw, 32px);
+}
+
+/* Index-card mode adapts the article page's paper/field relationship for
+   section landing pages: navigation stays independent, while the title and
+   collection read as one continuous light card on the pale site field. */
+.page--content-card {
+  --page-nav-height: 76px;
+  --page-content-card-gap: 12px;
+  --page-content-card-radius: 14px;
+  --page-content-card-inset: 64px;
+  --page-content-card-title-space: clamp(64px, 9vw, 104px);
+  --page-content-card-width: min(
+    calc(var(--page-content-width) + 64px),
+    calc(100vw - 2 * var(--page-content-card-gap))
+  );
+  --page-content-card-edge: calc((100vw - var(--page-content-card-width)) / 2);
+  --page-content-card-top: calc(var(--page-nav-height) + var(--page-content-card-gap));
+  position: relative;
+  padding-top: var(--page-content-card-top);
+  isolation: isolate;
+  background: $panel-bg;
+
+  /* A shallow compositor overlay clips scrolling content at the two lower
+     corners and across the field gap. It is only 26px high, avoiding the
+     large fixed-gradient repaint cost of the previous implementation. */
+  &::after {
+    content: '';
+    position: fixed;
+    z-index: 28;
+    right: var(--page-content-card-edge);
+    bottom: 0;
+    left: var(--page-content-card-edge);
+    height: calc(var(--page-content-card-radius) + var(--page-content-card-gap));
+    background:
+      radial-gradient(
+        circle at 100% 0,
+        transparent var(--page-content-card-radius),
+        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+      ) left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+      radial-gradient(
+        circle at 0 0,
+        transparent var(--page-content-card-radius),
+        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+      ) right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+      linear-gradient($panel-bg, $panel-bg) left bottom / 100%
+        var(--page-content-card-gap) no-repeat;
+    pointer-events: none;
+  }
+
+  > .page-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  > .page-nav .page-nav__inner {
+    /* Absorb half of the former card gap on either side of the navigation
+       content. The visible card position stays unchanged, while the content
+       is centred between the viewport edge and the card edge. */
+    padding-top: calc(24px + var(--page-content-card-gap) / 2);
+    padding-bottom: calc(24px + var(--page-content-card-gap) / 2);
+  }
+
+  &.page > .page-main {
+    position: relative;
+    z-index: 1;
+    width: var(--page-content-card-width);
+    max-width: none;
+    margin: 0 auto;
+    padding: var(--page-content-card-title-space) var(--page-content-card-inset)
+      var(--page-content-card-inset);
+    border-radius: var(--page-content-card-radius);
+    background: transparent;
+  }
+
+  &.page .page-head {
+    margin-bottom: var(--page-content-card-title-space);
+    padding-bottom: 0;
+  }
+
+  /* These index components formerly supplied their own leading whitespace.
+     Remove it so the visible first item—not merely its wrapper—begins exactly
+     one card inset below the large title. */
+  &.page .post-list > .post-card:first-child,
+  &.page .microblog-archive {
+    padding-top: 0;
+  }
+
+  > .site-footer {
+    position: relative;
+    z-index: 29;
+
+    /* Once the real end of the long card enters the viewport, the footer
+       covers the fixed canvas. This mask redraws the two true lower corners
+       against the field instead of letting the canvas show through them. */
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(-1 * var(--page-content-card-radius));
+      left: 50%;
+      width: var(--page-content-card-width);
+      height: var(--page-content-card-radius);
+      background:
+        radial-gradient(
+          circle at 100% 0,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        ) left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+        radial-gradient(
+          circle at 0 0,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        ) right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+  }
+
+  > .site-footer .site-footer__inner {
+    padding-top: calc(40px + var(--page-content-card-gap) / 2);
+    padding-bottom: calc(40px + var(--page-content-card-gap) / 2);
+  }
+
+  @media screen and (max-width: 768px) {
+    --page-nav-height: 64px;
+    --page-content-card-inset: 24px;
+    --page-content-card-title-space: 64px;
+
+    > .menu-mobile-bar {
+      height: calc(var(--page-nav-height) + var(--page-content-card-gap));
+    }
+
+    > .menu-toggle {
+      top: calc(
+        (var(--page-nav-height) + var(--page-content-card-gap) - 28px) / 2
+      );
+    }
+
+    > .site-footer .site-footer__inner {
+      padding-top: calc(32px + var(--page-content-card-gap) / 2);
+      padding-bottom: calc(32px + var(--page-content-card-gap) / 2);
+    }
+  }
+}
+
+/* One compositor-friendly solid layer replaces the previous fixed page-wide
+   gradient and four masks. Content scrolls above it; the layer itself never
+   needs to be repainted during fast scrolling. */
+.page-content-card-viewport {
+  position: fixed;
+  z-index: 0;
+  top: var(--page-content-card-top);
+  bottom: var(--page-content-card-gap);
+  left: 50%;
+  width: var(--page-content-card-width);
+  border-radius: var(--page-content-card-radius);
+  background: $blog-bg;
+  transform: translate3d(-50%, 0, 0);
+  backface-visibility: hidden;
+  contain: paint;
+  will-change: transform;
+  pointer-events: none;
 }
 
 .page-body {

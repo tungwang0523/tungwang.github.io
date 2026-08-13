@@ -107,11 +107,38 @@
 
 .blog-post-page .page-title {
   max-width: 18ch;
-  font-size: clamp(34px, 5vw, 64px);
+  font-size: clamp(27px, 3.7vw, 48px);
   line-height: 1.04;
   letter-spacing: 0;
   overflow-wrap: anywhere;
   line-break: strict;
+}
+
+/* Keep the article identity legible while removing report-like dead space
+   between title, language, metadata, tags, and the start of the essay. */
+.blog-post-page {
+  .page-head {
+    margin-bottom: 24px;
+    padding-bottom: 0;
+  }
+
+  .blog-post-language {
+    margin-bottom: 18px;
+  }
+
+  .post-meta {
+    margin-top: 0;
+  }
+
+  .tag-list {
+    margin-top: 16px;
+    margin-bottom: 22px;
+  }
+
+  .post-intro-divider {
+    margin-top: 0;
+    margin-bottom: 28px;
+  }
 }
 
 .post-intro-divider {
@@ -286,7 +313,7 @@
   display: none;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1279px) {
   .blog-post-page.has-blog-toc {
     --page-content-width: 920px;
   }

@@ -30,7 +30,7 @@ const {
 } = Astro.props;
 ---
 
-<BaseLayout title={`${title} - Tung‘s Work`} description={description}>
+<BaseLayout title={`${title} - Tung’s Work`} description={description}>
   <div class:list={['page', 'portfolio-page', projectClass]}>
     <Menu mobileOnly />
     <header class="page-nav">
@@ -48,7 +48,7 @@ const {
     <main class="portfolio-main">
       <header class="portfolio-identity">
         <div class="portfolio-identity__inner">
-          <a class="portfolio-back" href="/work"><span aria-hidden="true">←</span> Selected Work</a>
+          <a class="portfolio-back" href="/work"><span aria-hidden="true">←</span> Tung’s Work</a>
           <h1>{title}</h1>
           <p class="portfolio-subtitle">{subtitle}</p>
           <dl class="portfolio-meta">
@@ -75,7 +75,7 @@ const {
         nextHref && nextTitle && (
           <div class="portfolio-next">
             <a class="portfolio-next__back" href="/work">
-              <span aria-hidden="true">←</span> Selected Work
+              <span aria-hidden="true">←</span> Tung’s Work
             </a>
             <a class="portfolio-next__link" href={nextHref}>
               <div class="portfolio-next__inner">

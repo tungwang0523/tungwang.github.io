@@ -54,11 +54,11 @@
     .site-footer__current {
       display: inline-flex;
       align-items: center;
-      padding: 7px 11px;
-      background: $title-color;
-      color: $blog-bg;
-      font-weight: 400;
-      line-height: 1;
+      padding: 0;
+      background: transparent;
+      color: $subtitle-color;
+      font-weight: 700;
+      line-height: inherit;
       cursor: default;
     }
   }

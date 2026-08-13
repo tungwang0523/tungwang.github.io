@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import BlogLanguageToggle from '../../components/BlogLanguageToggle.astro';
 import BlogPostCard from '../../components/BlogPostCard.astro';
 
 const posts = (
@@ -13,16 +12,17 @@ const postsEn = posts.filter((post) => post.data.lang === 'en');
 ---
 
 <PageLayout
-  title="The Blog"
+  title="Blog"
   eyebrow="Journal"
   description="Essays, field notes, and longer reads by Tung Wang."
   pageTitle="Tung‘s Blog"
   pageClass="blog-page"
   lang="zh-CN"
   activeSection="blog"
+  contentCard
+  headerLanguage="blog"
 >
   <div class="blog-index" data-blog-language-scope data-blog-language="zh">
-    <div class="blog-index__language"><BlogLanguageToggle /></div>
     <section data-blog-language-panel="zh" aria-label="中文文章">
       <div class="post-list">
         {postsZh.map((post) => <BlogPostCard post={post} />)}

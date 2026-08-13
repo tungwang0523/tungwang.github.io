@@ -102,6 +102,49 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
 </div>
 
 <script>
+  const getAvailableMediaHeight = (content: HTMLElement, copy: HTMLElement) => {
+    const styles = window.getComputedStyle(content);
+    const paddingTop = Number.parseFloat(styles.paddingTop) || 0;
+    const paddingBottom = Number.parseFloat(styles.paddingBottom) || 0;
+    return Math.max(0, content.clientHeight - paddingTop - paddingBottom - copy.offsetHeight);
+  };
+
+  const scheduleResearchLayout = (() => {
+    let frame = 0;
+
+    return (header: HTMLElement) => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const content = header.querySelector<HTMLElement>('.featured-content');
+        const media = header.querySelector<HTMLElement>('.featured-content__media');
+        const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+        if (!content || !media || !copy || !media.clientWidth) return;
+
+        const fullArtworkHeight = (media.clientWidth * 3) / 4;
+        const availableHeight = getAvailableMediaHeight(content, copy);
+        media.style.setProperty(
+          '--research-media-height',
+          `${Math.min(fullArtworkHeight, availableHeight)}px`,
+        );
+        media.dataset.researchLayout = 'true';
+      });
+    };
+  })();
+
+  document
+    .querySelectorAll<HTMLElement>(".blog-header[data-section='research']")
+    .forEach((header) => {
+      if (header.dataset.researchLayoutReady === 'true') return;
+      header.dataset.researchLayoutReady = 'true';
+
+      const observer = new ResizeObserver(() => scheduleResearchLayout(header));
+      observer.observe(header);
+      const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+      if (copy) observer.observe(copy);
+      scheduleResearchLayout(header);
+    });
+
   const scheduleWorkCrop = (() => {
     let frame = 0;
 
@@ -119,7 +162,7 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
 
         // work.png is a 4:3 canvas built from six exact 512px-high rows.
         const rowHeight = (imageWidth * 3) / 4 / 6;
-        const availableHeight = Math.max(0, content.clientHeight - copy.offsetHeight);
+        const availableHeight = getAvailableMediaHeight(content, copy);
         const rowCount = Math.max(2, Math.min(6, Math.floor(availableHeight / rowHeight)));
         const firstVisibleRow = Math.floor((6 - rowCount) / 2);
 
@@ -161,9 +204,9 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
         const imageWidth = media.clientWidth;
         if (!fullSource || !compactSource || !imageWidth) return;
 
-        const availableHeight = Math.max(0, content.clientHeight - copy.offsetHeight);
+        const availableHeight = getAvailableMediaHeight(content, copy);
         const fullArtworkHeight = (imageWidth * 3) / 4;
-        const useCompactArtwork = availableHeight < fullArtworkHeight;
+        const useCompactArtwork = availableHeight + 1 < fullArtworkHeight;
         const nextSource = useCompactArtwork ? compactSource : fullSource;
 
         if (image.getAttribute('src') !== nextSource) image.src = nextSource;

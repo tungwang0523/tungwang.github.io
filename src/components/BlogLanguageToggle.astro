@@ -43,7 +43,7 @@ const linked = Boolean(zhHref || enHref);
       const setBlogLanguage = (scope: HTMLElement, language: BlogLanguage) => {
         scope.dataset.blogLanguage = language;
         document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
-        scope.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
+        document.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
           button.setAttribute('aria-pressed', String(button.dataset.blogLanguageOption === language));
         });
         document
@@ -65,7 +65,7 @@ const linked = Boolean(zhHref || enHref);
           const language: BlogLanguage = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
           setBlogLanguage(scope, language);
 
-          scope.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
+          document.querySelectorAll<HTMLButtonElement>('[data-blog-language-option]').forEach((button) => {
             button.addEventListener('click', () => {
               setBlogLanguage(scope, button.dataset.blogLanguageOption === 'en' ? 'en' : 'zh');
             });

@@ -594,6 +594,13 @@
 .page--research {
   --page-content-width: 1120px;
 
+  > .page-nav,
+  > .menu-mobile-bar {
+    background: rgba($panel-bg, 0.76);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15);
+    backdrop-filter: blur(20px) saturate(1.15);
+  }
+
   * {
     font-style: normal;
   }
@@ -664,8 +671,9 @@
     }
 
     .site-footer__current {
-      background: $blog-bg;
-      color: $body-bg;
+      background: transparent;
+      color: $blog-bg;
+      font-weight: 700;
     }
   }
 

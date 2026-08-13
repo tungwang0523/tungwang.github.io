@@ -19,7 +19,7 @@
   const setMicroblogLanguage = (scope: HTMLElement, language: MicroblogLanguage) => {
     scope.dataset.language = language;
     scope.lang = language === 'en' ? 'en' : 'zh-CN';
-    scope.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((option) => {
+    document.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((option) => {
       option.setAttribute('aria-pressed', String(option.dataset.languageOption === language));
     });
     updateMicroblogLinks(scope, language);
@@ -40,7 +40,7 @@
       const language: MicroblogLanguage = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
       setMicroblogLanguage(scope, language);
 
-      scope.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((button) => {
+      document.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((button) => {
         button.addEventListener('click', () => {
           const language = button.dataset.languageOption === 'en' ? 'en' : 'zh';
           setMicroblogLanguage(scope, language);

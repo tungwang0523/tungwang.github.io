@@ -146,16 +146,12 @@
 body.menu-open {
   overflow: hidden;
 
-  .menu-mobile-bar {
-    background: transparent;
-  }
-
   .menu-mobile-bar__brand {
     visibility: hidden;
   }
 
   .menu-toggle {
-    color: $subtitle-color;
+    color: var(--mobile-menu-color, #{$subtitle-color});
   }
 }
 
@@ -165,10 +161,11 @@ body.menu-open {
 
 .is-menu .menu-current {
   width: max-content;
-  padding: 7px 11px;
-  background: $title-color;
-  color: $blog-bg;
-  line-height: 1;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
+  line-height: inherit;
   cursor: default;
 }
 
@@ -197,6 +194,10 @@ body.menu-open {
 @media screen and (max-width: 768px) {
   html.home-page,
   body.home-page {
+    /* The first card begins 64px below the mobile stage plus the shared
+       12px card gap. Centre the top-bar content in that entire interval. */
+    --home-mobile-card-edge: 76px;
+
     width: 100%;
     height: var(--home-viewport-height, 100dvh);
     overflow: hidden;
@@ -225,6 +226,7 @@ body.menu-open {
     max-height: none;
     overflow: hidden;
     padding: 0;
+    background: $panel-bg;
     grid-template-columns: 100%;
     grid-template-rows: minmax(0, 1fr);
   }
@@ -234,11 +236,16 @@ body.menu-open {
   }
 
   .menu-mobile-bar--has-marquee {
-    background: transparent;
+    height: var(--home-mobile-card-edge);
+    background: $panel-bg;
 
     .menu-mobile-bar__brand {
       display: none;
     }
+  }
+
+  body.home-page .menu-toggle {
+    top: calc((var(--home-mobile-card-edge) - 28px) / 2);
   }
 
   .menu-mobile-bar__marquee {
@@ -281,7 +288,7 @@ body.menu-open {
     flex-direction: column;
     padding: 80px 28px 28px;
     border-right: 0;
-    background-color: $blog-bg;
+    background-color: var(--mobile-menu-bg, #{$blog-bg});
     overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
@@ -293,7 +300,7 @@ body.menu-open {
     > .blog-menu {
       display: flex;
       align-items: center;
-      color: $subtitle-color;
+      color: var(--mobile-menu-color, #{$subtitle-color});
       font-family: $subtitle-font;
       font-size: 24px;
       letter-spacing: -0.5px;
@@ -306,10 +313,11 @@ body.menu-open {
       &.menu-current {
         align-self: flex-start;
         width: auto;
-        margin-left: -12px;
-        padding: 8px 12px;
-        background: $title-color;
-        color: $blog-bg;
+        margin-left: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font-weight: 700;
       }
     }
 
@@ -322,6 +330,10 @@ body.menu-open {
 
       &.mention--mark-only .mention__mark {
         margin-bottom: 0;
+      }
+
+      .mention__mark {
+        filter: var(--mobile-menu-mark-filter, none);
       }
     }
   }
@@ -339,28 +351,49 @@ body.menu-open {
   }
 
   .mobile-featured {
+    --mobile-featured-card-inset: 24px;
+    --mobile-featured-title-inset: 24px;
+    --mobile-featured-title-space: clamp(104px, 27vw, 120px);
+
     position: absolute;
     inset: 64px 0 0;
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr) auto;
     width: 100%;
     height: auto;
     min-height: 0;
     overflow: hidden;
 
     &__title {
+      position: absolute;
+      z-index: 3;
+      top: var(--home-card-gap);
+      right: calc(var(--home-card-gap) + var(--mobile-featured-card-inset));
+      left: calc(var(--home-card-gap) + var(--mobile-featured-card-inset));
       display: grid;
       grid-template-columns: max-content minmax(0, 1fr);
       align-items: start;
       gap: 0.22em;
       min-width: 0;
       margin: 0;
-      padding: clamp(18px, 5vw, 26px) 20px clamp(12px, 3vw, 18px);
+      padding: var(--mobile-featured-title-inset) 0 0;
+      background: transparent;
       font-family: $title-font;
-      font-size: clamp(38px, 11.5vw, 52px);
+      font-size: var(--mobile-featured-title-size, clamp(38px, 11.5vw, 52px));
       font-weight: 700;
       line-height: 1.05;
       letter-spacing: -2.5px;
+      pointer-events: none;
+    }
+
+    &__title-probe {
+      position: absolute;
+      display: flex;
+      gap: 0.22em;
+      width: max-content;
+      visibility: hidden;
+      white-space: nowrap;
+      pointer-events: none;
     }
 
     &__word-window {
@@ -386,9 +419,13 @@ body.menu-open {
 
     &__track {
       display: flex;
-      width: 100%;
-      height: 100%;
+      gap: var(--home-card-gap);
+      width: auto;
+      height: auto;
       min-height: 0;
+      margin: var(--home-card-gap);
+      border-radius: 0;
+      background: transparent;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
@@ -401,7 +438,10 @@ body.menu-open {
       align-items: center;
       justify-content: space-between;
       gap: 0;
-      padding: 14px 20px 18px;
+      /* Keep the labels centred between the last card and viewport while
+         reclaiming height for the four content cards. */
+      padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px));
+      background: $panel-bg;
 
       button {
         flex: 0 0 auto;
@@ -490,6 +530,9 @@ body.menu-open {
       height: 100%;
       min-height: 0;
       overflow: hidden;
+      border-radius: var(--home-card-radius);
+      background: $blog-bg;
+      padding: 0;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       touch-action: pan-x;
@@ -500,9 +543,10 @@ body.menu-open {
     display: none;
   }
 
-  .blog-header-container .featured-content {
+  .blog-header-container > .blog-header > .featured-content {
     height: 100%;
-    padding: 0 20px;
+    padding: var(--mobile-featured-title-space) var(--mobile-featured-card-inset)
+      var(--mobile-featured-card-inset);
 
     &__copy {
       padding-top: clamp(14px, 3vh, 24px);
@@ -533,7 +577,10 @@ body.menu-open {
     overflow: hidden;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding: 0 20px;
+    padding: var(--mobile-featured-title-space) var(--mobile-featured-card-inset)
+      var(--mobile-featured-card-inset);
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
     touch-action: pan-y;
 
     .microblog-sidebar__sticky-head {

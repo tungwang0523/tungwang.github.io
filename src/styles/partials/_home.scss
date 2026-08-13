@@ -1,7 +1,14 @@
 @use 'foundation' as *;
 
 .blog {
-  background-color: $blog-bg;
+  --home-card-gap: 12px;
+  --home-card-radius: 14px;
+  --home-card-padding: clamp(18px, 1.5vw, 24px);
+  /* Preserve the existing 35/30 shares after the three inter-column gaps
+     have been deducted from the grid's content box. */
+  --home-middle-column: calc(35% - 12.6px);
+  --home-right-column: calc(30% - 10.8px);
+  background-color: $panel-bg;
   max-width: none;
   display: grid;
   height: 100vh;
@@ -10,15 +17,20 @@
   overflow: hidden;
   // Keep the identity column compact and give the recovered space to the
   // central editorial column.
-  grid-template-columns: 15% 20% 35% 30%;
+  grid-template-columns:
+    minmax(0, 1fr)
+    max-content
+    minmax(0, var(--home-middle-column))
+    minmax(0, var(--home-right-column));
   grid-template-rows: 100%;
   width: 100%;
-  padding: clamp(16px, 2vh, 32px) clamp(16px, 2vw, 40px);
+  gap: var(--home-card-gap);
+  padding: var(--home-card-gap);
   position: relative;
 
   @media screen and (max-width: 1030px) {
-    grid-template-columns: 27% 42% 31%;
-    padding-top: 80px;
+    grid-template-columns: minmax(0, 27fr) minmax(0, 42fr) minmax(0, 31fr);
+    padding: 80px var(--home-card-gap) var(--home-card-gap);
   }
 
   @media screen and (max-width: 768px) {
@@ -193,6 +205,50 @@
       max-height: 22vh;
       width: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+/* The global navigation remains on the background field. The three homepage
+   content cards begin with the identity/editorial card beside it. This is the
+   site's primary visual system rather than a progressive-enhancement skin. */
+.home-identity-card {
+  display: contents;
+
+  .blog-is-sticky {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
+    padding: var(--home-card-padding);
+
+    > .blog-article {
+      padding: 0;
+    }
+  }
+
+  .page-number {
+    border-right: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  @media screen and (min-width: 1031px) {
+    > .is-menu {
+      overflow: hidden;
+      padding: var(--home-card-padding);
+      border-right: 0;
+      border-radius: var(--home-card-radius);
+      background: $panel-bg;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    > .blog-is-sticky {
+      border-radius: 0;
+      background: transparent;
     }
   }
 }
@@ -390,7 +446,8 @@
     justify-content: space-between;
     gap: 20px;
     padding-top: 14px;
-    border-top: 1px solid $border-color;
+    padding-bottom: 0;
+    border-top: 0;
 
     a {
       margin-left: auto;
@@ -411,6 +468,11 @@
   &__media {
     width: 100%;
     overflow: visible;
+
+    &[data-research-layout='true'] {
+      flex: 0 0 var(--research-media-height);
+      height: var(--research-media-height);
+    }
   }
 
   &__image {
@@ -484,7 +546,9 @@
   display: flex;
   flex-direction: column;
   scroll-snap-type: y mandatory;
-  border-right: 1px solid $border-color;
+  gap: var(--home-card-gap);
+  border-right: 0;
+  background: transparent;
 
   @media screen and (max-width: 768px) {
     border-right: 0;
@@ -493,7 +557,16 @@
   & > .blog-header {
     flex-shrink: 0;
     min-height: 100%;
+    overflow: hidden;
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
+    padding: var(--home-card-padding);
     scroll-snap-align: start;
+
+    > .blog-article {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 
   .blog-article:not(.header-article) {
@@ -527,8 +600,8 @@
   background-color: $body-bg;
   color: $blog-bg;
   padding: 6px 0;
-  width: calc(100% + 44px);
-  margin-left: -20px;
+  width: 100%;
+  margin-left: 0;
   flex-shrink: 0;
 
   &__track,
@@ -606,7 +679,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 0;
   margin-bottom: 20px;
   padding-bottom: 20px;
   margin-top: 100px;
@@ -659,6 +732,53 @@
 .right-blog {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--home-card-radius);
+  background: $blog-bg;
+  padding: var(--home-card-padding) var(--home-card-padding) 0;
+
+  > .microblog-sidebar__sticky-head > .site-marquee {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    background: $blog-bg;
+    color: rgba($title-color, 0.42);
+
+    span::before {
+      background-color: currentColor;
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    position: relative;
+
+    > .microblog-sidebar__sticky-head {
+      display: block;
+      flex: 0 0 calc(
+        clamp(52px, 5.7vw, 100px) +
+        var(--home-card-padding) +
+        var(--home-card-padding) +
+        34px
+      );
+
+      > .blog-right-title-container {
+        position: absolute;
+        top: calc(
+          var(--home-card-padding) +
+          clamp(52px, 5.7vw, 100px) +
+          var(--home-card-padding)
+        );
+        right: var(--home-card-padding);
+        left: var(--home-card-padding);
+        align-items: center;
+        height: 34px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -667,6 +787,107 @@
   .blog-menu {
     @media screen and (max-width: 1030px) {
       display: none;
+    }
+  }
+}
+
+/* Cards define the homepage rhythm through space rather than rules. Keep
+   these removals scoped to the homepage so article and archive layouts retain
+   their own separators. */
+body.home-page .blog {
+  .blog-part,
+  .page-number,
+  .small-title,
+  .featured-content__actions,
+  .blog-right-title-container,
+  .blog-is-sticky .header-article .blog-big__title {
+    border: 0;
+  }
+
+  .blog-is-sticky .header-article .blog-big__title {
+    padding-bottom: 0;
+  }
+
+  .microblog-sidebar .microblog-feed {
+    padding-bottom: 0;
+  }
+}
+
+/* ---------- Portrait desktop ----------
+   Keep the navigation as a full-height rail. Identity and the featured
+   editorial column form the first row; Microblog then spans their combined
+   width below. The first row is sized from the featured column's actual
+   composition rather than stretched to the tall viewport. */
+@media screen and (min-width: 1031px) and (max-aspect-ratio: 4 / 5) {
+  html.home-page,
+  body.home-page {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .blog {
+    --home-portrait-nav-width: clamp(156px, 17vw, 196px);
+    --home-portrait-identity-width: clamp(230px, 25vw, 286px);
+    --home-portrait-feature-height: clamp(
+      760px,
+      calc((100vw - 520px) * 0.75 + 360px),
+      940px
+    );
+
+    grid-template-columns:
+      var(--home-portrait-nav-width)
+      var(--home-portrait-identity-width)
+      minmax(0, 1fr);
+    grid-template-rows: var(--home-portrait-feature-height) minmax(680px, 78vh);
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    align-items: stretch;
+
+    > .home-identity-card > .is-menu {
+      position: sticky;
+      top: var(--home-card-gap);
+      grid-column: 1;
+      grid-row: 1 / -1;
+      align-self: start;
+      height: calc(100dvh - 2 * var(--home-card-gap));
+      min-height: 0;
+    }
+
+    > .home-identity-card > .blog-is-sticky {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    > .mobile-featured > .mobile-featured__track > .blog-header-container {
+      grid-column: 3;
+      grid-row: 1;
+      height: var(--home-portrait-feature-height);
+    }
+
+    > .mobile-featured > .mobile-featured__track > .right-blog {
+      grid-column: 2 / 4;
+      grid-row: 2;
+      height: 100%;
+      min-height: 0;
+
+      .microblog-feed {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: start;
+        gap: clamp(48px, 5vw, 72px) clamp(40px, 5vw, 68px);
+        padding-bottom: var(--home-card-padding);
+
+        > .microblog-entry {
+          min-width: 0;
+          padding-bottom: 0;
+        }
+
+        > .circle {
+          grid-column: 1 / -1;
+        }
+      }
     }
   }
 }

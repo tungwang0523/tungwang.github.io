@@ -1,0 +1,69 @@
+---
+import ResponsiveImage from './ResponsiveImage.astro';
+
+interface Props {
+  title: string;
+  summary: string;
+  href: string;
+  category: string;
+  year: string;
+  cover: string;
+  color: string;
+  order: number;
+  featured?: boolean;
+  role?: string;
+  coverFit?: 'contain' | 'cover';
+  coverPosition?: string;
+  compactMedia?: boolean;
+  priority?: boolean;
+}
+
+const {
+  title,
+  summary,
+  href,
+  category,
+  year,
+  cover,
+  color,
+  order,
+  featured = false,
+  role,
+  coverFit = 'cover',
+  coverPosition = 'center',
+  compactMedia = false,
+  priority = false,
+} = Astro.props;
+
+const number = String(order).padStart(2, '0');
+---
+
+<article
+  class:list={[
+    'work-tile',
+    featured && 'work-tile--featured',
+    coverFit === 'cover' && 'work-tile--cover',
+    compactMedia && 'work-tile--compact-media',
+  ]}
+  style={`--work-tile-color:${color};--work-cover-fit:${coverFit};--work-cover-position:${coverPosition};`}
+>
+  <a class="work-tile__link" href={href}>
+    <div class="work-tile__media">
+      <ResponsiveImage
+        src={cover}
+        alt={title}
+        sizes={featured
+          ? '(max-width: 760px) calc(100vw - 72px), 520px'
+          : '(max-width: 760px) 38vw, 410px'}
+        priority={priority}
+      />
+    </div>
+    <div class="work-tile__body">
+      <span class="work-tile__number">{number}</span>
+      <h2>{title}</h2>
+      <p>{summary}</p>
+      {role && <span class="work-tile__role">{role}</span>}
+      <span class="work-tile__meta">{category} · {year}</span>
+    </div>
+  </a>
+</article>

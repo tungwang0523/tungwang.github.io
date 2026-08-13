@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import BlogLanguageToggle from '../../components/BlogLanguageToggle.astro';
 import BlogTableOfContents from '../../components/BlogTableOfContents.astro';
 import Bibliography from '../../components/blog/Bibliography.astro';
 import BlogFigure from '../../components/blog/BlogFigure.astro';
@@ -86,14 +85,17 @@ const enHref =
   pageClass={`blog-page blog-post-page${hasTableOfContents ? ' has-blog-toc' : ''}`}
   lang={isEnglish ? 'en' : 'zh-CN'}
   blogHref={isEnglish ? '/blog?lang=en' : '/blog'}
+  headerLanguage={post.data.translationKey ? 'blog' : undefined}
+  languageCurrent={post.data.lang}
+  languageZhHref={zhHref}
+  languageEnHref={enHref}
 >
-  {
-    post.data.translationKey && (
-      <div class="blog-post-language">
-        <BlogLanguageToggle current={post.data.lang} zhHref={zhHref} enHref={enHref} />
-      </div>
-    )
-  }
+  <BlogTableOfContents
+    slot="after-nav"
+    headings={headings}
+    lang={post.data.lang}
+    variant="mobile"
+  />
   <div class="post-meta">
     <span>{post.data.author}</span>
     <span>{formatSiteDate(post.data.date)}</span>
@@ -102,7 +104,7 @@ const enHref =
 
   {
     post.data.tags.length > 0 && (
-      <div class="tag-list" style="margin-top: 24px;">
+      <div class="tag-list">
         {post.data.tags.map((tag) => (
           <a href={`/tags/${tag}`}>{tag}</a>
         ))}
@@ -113,13 +115,17 @@ const enHref =
   <hr class="post-intro-divider" />
 
   <div class="blog-post-layout">
-    <BlogTableOfContents headings={headings} lang={post.data.lang} />
+    <BlogTableOfContents headings={headings} lang={post.data.lang} variant="desktop" />
     <div class="prose" data-lightbox-scope>
       <Content components={mdxComponents} />
     </div>
   </div>
 
-  <nav class="post-nav" aria-label={isEnglish ? 'Adjacent essays' : '相邻文章'}>
+  <nav
+    slot="after-main"
+    class="post-nav post-nav--paper-external"
+    aria-label={isEnglish ? 'Adjacent essays' : '相邻文章'}
+  >
     {
       prev ? (
         <a class="post-nav__prev" href={`/blog/${prev.id}`}>

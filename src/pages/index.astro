@@ -36,13 +36,15 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
   rootClass="home-page"
 >
   <div class="blog">
-    <Menu activeSection="home" marqueeItems={announcements} showIdentity showHome={false} />
-    <StickyHeader
-      title="Tung’s"
-      pinnedLabel=""
-      pageNumber=""
-      pageContext={['A', 'Curious', 'Creator']}
-    />
+    <div class="home-identity-card">
+      <Menu activeSection="home" marqueeItems={announcements} showIdentity showHome={false} />
+      <StickyHeader
+        title="Tung’s"
+        pinnedLabel=""
+        pageNumber=""
+        pageContext={['A', 'Curious', 'Creator']}
+      />
+    </div>
 
     <section class="mobile-featured" aria-label="Featured sections" data-mobile-featured>
       <h1 class="mobile-featured__title" data-mobile-identity>
@@ -55,6 +57,9 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
         </span>
         <span class="visually-hidden" data-featured-title-current>
           {sections[0] ? mobileSectionLabel(sections[0].data.bigTitle) : ''}
+        </span>
+        <span class="mobile-featured__title-probe" data-featured-title-probe aria-hidden="true">
+          <span>Tung’s</span><span>Microblog</span>
         </span>
       </h1>
 
@@ -119,6 +124,8 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     const track = featured.querySelector<HTMLElement>('[data-featured-track]');
     const wordTrack = featured.querySelector<HTMLElement>('[data-featured-word-track]');
     const currentTitle = featured.querySelector<HTMLElement>('[data-featured-title-current]');
+    const titleHeading = featured.querySelector<HTMLElement>('.mobile-featured__title');
+    const titleProbe = featured.querySelector<HTMLElement>('[data-featured-title-probe]');
     const swipeHint = featured.querySelector<HTMLElement>('[data-featured-swipe-hint]');
     const buttons = Array.from(
       featured.querySelectorAll<HTMLButtonElement>('[data-featured-index]'),
@@ -135,6 +142,37 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     let touchStartY: number | null = null;
     let touchHintShown = false;
 
+    const fitMobileTitle = () => {
+      if (!titleHeading || !titleProbe) return;
+      titleHeading.style.removeProperty('--mobile-featured-title-size');
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      const availableWidth = titleHeading.clientWidth;
+      const requiredWidth = titleProbe.getBoundingClientRect().width;
+      const baseSize = Number.parseFloat(window.getComputedStyle(titleHeading).fontSize);
+      if (!availableWidth || !requiredWidth || !baseSize) return;
+
+      let fittedSize = Math.min(baseSize, (baseSize * availableWidth) / requiredWidth);
+      titleHeading.style.setProperty('--mobile-featured-title-size', `${fittedSize}px`);
+
+      // Letter-spacing is fixed in pixels rather than ems, so one proportional
+      // pass leaves a small residual. Correct it against the rendered probe.
+      for (let pass = 0; pass < 2; pass += 1) {
+        const renderedWidth = titleProbe.getBoundingClientRect().width;
+        if (!renderedWidth) break;
+        fittedSize = Math.min(baseSize, (fittedSize * availableWidth) / renderedWidth);
+        titleHeading.style.setProperty('--mobile-featured-title-size', `${fittedSize}px`);
+      }
+    };
+
+    const panelStride = () => {
+      const panel = track.querySelector<HTMLElement>('.blog-header-container > .blog-header');
+      if (!(panel instanceof HTMLElement)) return track.clientWidth || 1;
+      const styles = window.getComputedStyle(track);
+      const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+      return panel.getBoundingClientRect().width + gap;
+    };
+
     const showSwipeHint = () => {
       if (!swipeHint || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       window.clearTimeout(hintTimer);
@@ -146,8 +184,8 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
 
     const update = () => {
       frame = 0;
-      const panelWidth = track.clientWidth || 1;
-      const progress = Math.max(0, Math.min(buttons.length - 1, track.scrollLeft / panelWidth));
+      const stride = panelStride();
+      const progress = Math.max(0, Math.min(buttons.length - 1, track.scrollLeft / stride));
       const nextIndex = Math.round(progress);
 
       wordTrack.style.setProperty('--featured-progress', String(progress));
@@ -160,6 +198,10 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
         if (currentTitle) currentTitle.textContent = buttons[activeIndex]?.textContent ?? '';
       }
     };
+
+    const titleObserver = new ResizeObserver(fitMobileTitle);
+    titleObserver.observe(featured);
+    fitMobileTitle();
 
     track.addEventListener(
       'scroll',
@@ -207,7 +249,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
         if (Math.abs(wheelAccumulator) < 24) return;
 
         wheelGestureActive = true;
-        const currentIndex = Math.round(track.scrollLeft / (track.clientWidth || 1));
+        const currentIndex = Math.round(track.scrollLeft / panelStride());
         if (currentIndex === 0) {
           showSwipeHint();
           return;
@@ -265,7 +307,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         track.scrollTo({
-          left: index * track.clientWidth,
+          left: index * panelStride(),
           behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
             ? 'auto'
             : 'smooth',

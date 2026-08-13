@@ -99,9 +99,20 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     year: z.string(),
-    cover: z.string().url(),
+    cover: z.union([
+      z.string().url(),
+      z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
+    ]),
     summary: z.string(),
-    url: z.string().url().optional(),
+    href: z.string().regex(/^\/(?!\/)/, 'Use a site path beginning with /'),
+    category: z.string(),
+    role: z.string().optional(),
+    color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+    featured: z.boolean().default(false),
+    coverFit: z.enum(['contain', 'cover']).default('cover'),
+    coverPosition: z.string().default('center'),
+    compactMedia: z.boolean().default(false),
+    draft: z.boolean().default(false),
     order: z.number().default(0),
   }),
 });
