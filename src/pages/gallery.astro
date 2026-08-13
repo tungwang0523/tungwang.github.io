@@ -176,7 +176,7 @@ const captionItems = (photo: GalleryPhoto) =>
 
         const gap = Number.parseFloat(styles.columnGap) || 4;
         const viewportWidth = window.innerWidth;
-        const target = viewportWidth <= 620 ? 128 : viewportWidth <= 1030 ? 180 : 250;
+        const target = viewportWidth <= 620 ? 240 : viewportWidth <= 1030 ? 220 : 250;
         const rows: Array<{ items: HTMLElement[]; ratio: number }> = [];
         let items: HTMLElement[] = [];
         let ratio = 0;
