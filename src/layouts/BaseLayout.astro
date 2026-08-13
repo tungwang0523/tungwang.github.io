@@ -30,6 +30,8 @@ const isDev = import.meta.env.DEV;
 const rootClasses = rootClass?.split(/\s+/) ?? [];
 const themeColor = rootClasses.includes('blog-paper')
   ? '#000000'
+  : rootClasses.includes('gallery-page-root')
+    ? '#121418'
   : rootClasses.includes('home-page')
     ? '#e7e4e3'
     : rootClasses.includes('content-card-page')
@@ -154,6 +156,29 @@ const themeColor = rootClasses.includes('blog-paper')
             window.addEventListener('resize', updateHomeViewportHeight);
             window.addEventListener('orientationchange', () => {
               window.setTimeout(updateHomeViewportHeight, 120);
+            });
+          })();
+        </script>
+      )
+    }
+    {
+      rootClasses.includes('content-card-page') && (
+        <script is:inline>
+          (() => {
+            const updateContentCardViewport = () => {
+              const viewport = window.visualViewport;
+              const height = viewport?.height ?? window.innerHeight;
+              document.documentElement.style.setProperty(
+                '--content-card-viewport-height',
+                `${Math.round(height)}px`,
+              );
+            };
+
+            updateContentCardViewport();
+            window.visualViewport?.addEventListener('resize', updateContentCardViewport);
+            window.addEventListener('resize', updateContentCardViewport);
+            window.addEventListener('orientationchange', () => {
+              window.setTimeout(updateContentCardViewport, 120);
             });
           })();
         </script>

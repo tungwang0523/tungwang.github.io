@@ -53,10 +53,17 @@ const hasBlogToc = pageClass?.split(/\s+/).includes('has-blog-toc') ?? false;
 const rootClass = [
   isBlogPost && `blog-paper${hasBlogToc ? ' blog-paper-has-toc' : ''}`,
   contentCard && 'content-card-page',
+  activeSection === 'gallery' && 'gallery-page-root',
 ]
   .filter(Boolean)
   .join(' ');
-const hasAdaptiveSectionBrand = sectionLanding || contentCard;
+const hasAdaptiveSectionBrand = sectionLanding || contentCard || titleInBrand;
+const sectionHref =
+  activeSection === 'research'
+    ? '/academic'
+    : activeSection
+      ? `/${activeSection}`
+      : '/';
 const mobileBrandExpanded =
   activeSection === 'research'
     ? 'Tung’s Research'
@@ -110,7 +117,7 @@ const heroSrcset = heroImage
       mobileBrandExpanded={mobileBrandExpanded}
       mobileBrandExpandedAlways={activeSection === 'research' || titleInBrand}
       mobileBrandHomeBeforeTitle={hasAdaptiveSectionBrand}
-      mobileBrandHomeAtTop={titleInBrand}
+      mobileBrandHref={titleInBrand ? sectionHref : '/'}
     >
       {
         headerLanguage && (
@@ -134,12 +141,11 @@ const heroSrcset = heroImage
       <div class="page-nav__inner">
         <a
           class="page-nav__brand"
-          href="/"
-          aria-label={hasAdaptiveSectionBrand ? 'Home' : undefined}
+          href={titleInBrand ? sectionHref : '/'}
+          aria-label={titleInBrand ? 'Back to top' : hasAdaptiveSectionBrand ? 'Home' : undefined}
           data-page-brand={hasAdaptiveSectionBrand || undefined}
           data-page-brand-expanded={hasAdaptiveSectionBrand ? mobileBrandExpanded : undefined}
           data-page-brand-expanded-always={titleInBrand || undefined}
-          data-page-brand-home-at-top={titleInBrand || undefined}
         >
           {
             hasAdaptiveSectionBrand && mobileBrandExpanded ? (
@@ -154,6 +160,11 @@ const heroSrcset = heroImage
         </a>
         <div class="page-nav__controls">
           <nav aria-label="Primary">
+            {
+              (activeSection === 'work' || activeSection === 'gallery') && (
+                <a href="/">Home</a>
+              )
+            }
             {
               activeSection === 'research' ? (
                 <span class="page-nav__current" aria-current="page">Research</span>

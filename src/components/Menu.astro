@@ -25,6 +25,7 @@ interface Props {
   mobileBrandExpandedAlways?: boolean;
   mobileBrandHomeBeforeTitle?: boolean;
   mobileBrandHomeAtTop?: boolean;
+  mobileBrandHref?: string;
 }
 
 const {
@@ -40,6 +41,7 @@ const {
   mobileBrandExpandedAlways = false,
   mobileBrandHomeBeforeTitle = false,
   mobileBrandHomeAtTop = false,
+  mobileBrandHref = '/',
 } = Astro.props;
 
 const allMenuItems: MenuItem[] = items ?? [
@@ -61,9 +63,9 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
   ]}
 >
   <a
-    href="/"
+    href={mobileBrandHref}
     class:list={['menu-mobile-bar__brand', mobileOnly && 'is-visible']}
-    aria-label="Home"
+    aria-label={mobileBrandHref === '/' ? 'Home' : 'Back to top'}
     data-main-site-link={mainSiteNavigation || undefined}
     data-mobile-brand
     data-mobile-brand-expanded={mobileBrandExpanded || undefined}
