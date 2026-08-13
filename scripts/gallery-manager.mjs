@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import exifr from 'exifr';
 import sharp from 'sharp';
+import { coordinatesFor, createLocationResolver } from './gallery-location-utils.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const cacheRoot = join(root, '.gallery-cache');
@@ -18,6 +19,7 @@ const exportDatabase = join(cacheRoot, 'osxphotos.db');
 const manifestPath = join(root, 'src/data/gallery.json');
 const adminPath = join(root, 'tools/gallery-admin/index.html');
 const watermarkPath = join(root, 'public/pictures/watermark.png');
+const locationCachePath = join(cacheRoot, 'geocoding.json');
 const osxphotosCrashLogPath = join(root, 'osxphotos_crash.log');
 const hostPlatform = platform();
 const picgoConfigPaths = [
@@ -66,6 +68,8 @@ const log = (message) => {
   job.message = message;
   process.stdout.write(`${line}\n`);
 };
+
+const resolveLocation = await createLocationResolver({ cachePath: locationCachePath, log });
 
 const jsonResponse = (response, status, payload) => {
   response.writeHead(status, {
@@ -454,13 +458,7 @@ const chooseFolder = async () => {
       '  Write-Output $dialog.SelectedPath',
       '} else { exit 2 }',
     ].join('; ');
-    return captureCommand('powershell.exe', [
-      '-NoLogo',
-      '-NoProfile',
-      '-STA',
-      '-Command',
-      script,
-    ]);
+    return captureCommand('powershell.exe', ['-NoLogo', '-NoProfile', '-STA', '-Command', script]);
   }
   throw new Error('The native folder picker is not available on this platform. Enter a path.');
 };
@@ -509,6 +507,15 @@ const processPhoto = async (path, options, r2, client, manifest, manifestIds, cl
   }
 
   const technical = await technicalMetadata(path);
+  const coordinates = await coordinatesFor(path);
+  let location;
+  if (coordinates) {
+    try {
+      location = await resolveLocation(coordinates);
+    } catch (error) {
+      log(`Location lookup skipped — ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
   const derivatives = await makeDerivatives(path, options);
   if (!derivatives.width || !derivatives.height)
     throw new Error('Could not determine output dimensions.');
@@ -531,7 +538,7 @@ const processPhoto = async (path, options, r2, client, manifest, manifestIds, cl
     ...(technical.takenAt ? { takenAt: technical.takenAt } : {}),
     title: { zh: '', en: '' },
     caption: { zh: '', en: '' },
-    location: { zh: '', en: '' },
+    location: { zh: '', en: location || '' },
     tags: [],
     exif: removeEmpty(technical.exif),
     watermarked: options.watermark,

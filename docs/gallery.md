@@ -9,7 +9,9 @@ npm run gallery
 
 The manager creates a maximum-2560 px display WebP and a 720 px thumbnail,
 extracts a safe EXIF subset, detects duplicates by the original file's SHA-256
-hash, uploads derivatives to R2, and updates the shared manifest.
+hash, resolves available GPS coordinates to a coarse English administrative
+place, uploads derivatives to R2, and updates the shared manifest. Exact
+coordinates are not published.
 
 Original photographs remain local. They are never uploaded to R2.
 
@@ -27,6 +29,17 @@ Original photographs remain local. They are never uploaded to R2.
 originals to `.gallery-cache/source`. After a derivative has uploaded
 successfully, the manager deletes only that temporary export and its sidecar.
 It never modifies or deletes anything inside Photos.
+
+To add places to photographs imported before location support was added, run
+the following once on the Mac:
+
+```sh
+npm run gallery:locations
+```
+
+This temporarily re-exports the album, matches originals to existing records by
+content hash, updates only `src/data/gallery.json`, and removes the temporary
+copies. It does not re-upload or delete any R2 objects.
 
 The manager can also import an ordinary folder on macOS by selecting **Folder**.
 
