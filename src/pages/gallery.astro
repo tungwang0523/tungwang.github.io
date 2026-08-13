@@ -53,6 +53,13 @@ photos.forEach((photo) => {
 const titleFor = (photo: GalleryPhoto) =>
   photo.title?.en || photo.title?.zh || photo.caption?.en || photo.caption?.zh;
 
+const cameraFor = (photo: GalleryPhoto) => {
+  const camera = photo.exif?.camera;
+  if (!camera) return undefined;
+  if (/nikon\s+d7100/i.test(camera)) return 'Nikon D7100';
+  return camera;
+};
+
 const technicalLine = (photo: GalleryPhoto) =>
   [
     photo.exif?.focalLength,
@@ -68,7 +75,7 @@ const captionItems = (photo: GalleryPhoto) =>
     titleFor(photo),
     photo.title && (photo.caption?.en || photo.caption?.zh),
     [photo.location?.en, formatDate(photo.takenAt)].filter(Boolean).join(' · '),
-    [photo.exif?.camera, photo.exif?.lens].filter(Boolean).join(' · '),
+    [cameraFor(photo), photo.exif?.lens].filter(Boolean).join(' · '),
     technicalLine(photo),
   ].filter((item): item is string => Boolean(item));
 ---
@@ -99,6 +106,7 @@ const captionItems = (photo: GalleryPhoto) =>
                 const title = titleFor(photo);
                 const location = photo.location?.en;
                 const date = formatDate(photo.takenAt);
+                const camera = cameraFor(photo);
                 return (
                   <figure
                     class="gallery-photo"
@@ -126,17 +134,14 @@ const captionItems = (photo: GalleryPhoto) =>
                       />
                     </button>
                     <figcaption>
-                      {title && <strong>{title}</strong>}
-                      {(location || date) && (
-                        <span class="gallery-photo__place-date">
-                          {location && <span>{location}</span>}
-                          {location && date && <i aria-hidden="true">·</i>}
-                          {date && <time datetime={photo.takenAt}>{date}</time>}
+                      {title && <strong class="gallery-photo__title">{title}</strong>}
+                      {date && (
+                        <span class="gallery-photo__date">
+                          <time datetime={photo.takenAt}>{date}</time>
                         </span>
                       )}
-                      {photo.exif?.camera && (
-                        <span class="gallery-photo__camera">{photo.exif.camera}</span>
-                      )}
+                      {location && <span class="gallery-photo__location">{location}</span>}
+                      {camera && <span class="gallery-photo__camera">{camera}</span>}
                     </figcaption>
                   </figure>
                 );

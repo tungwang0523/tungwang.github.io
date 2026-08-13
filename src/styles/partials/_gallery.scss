@@ -57,7 +57,7 @@ html.gallery-page-root body {
 }
 
 .gallery-year + .gallery-year {
-  margin-top: clamp(100px, 14vw, 210px);
+  margin-top: clamp(52px, 7vw, 96px);
 }
 
 .gallery-year__header {
@@ -76,7 +76,7 @@ html.gallery-page-root body {
   h1 {
     margin: 0;
     font-family: $title-font;
-    font-size: clamp(64px, 10vw, 152px);
+    font-size: clamp(38px, 5vw, 72px);
     font-weight: 600;
     line-height: 0.78;
     letter-spacing: -0.07em;
@@ -130,7 +130,6 @@ html.gallery-page-root body {
     align-items: flex-start;
     width: 100%;
     max-width: 100%;
-    min-height: 48px;
     padding: 9px 7px 0;
     overflow: hidden;
     font-family: $title-font;
@@ -149,27 +148,15 @@ html.gallery-page-root body {
     white-space: nowrap;
   }
 
-  &__place-date,
+  &__date,
+  &__location,
   &__camera {
-    display: flex;
-    gap: 0.42em;
+    display: block;
     width: 100%;
-    margin-top: 3px;
     overflow: hidden;
     color: rgba(233, 230, 228, 0.58);
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  &__place-date span,
-  &__camera {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__place-date i {
-    flex: 0 0 auto;
-    font-style: normal;
   }
 }
 
@@ -212,7 +199,7 @@ html.gallery-page-root body {
     margin-bottom: 38px;
 
     h1 {
-      font-size: clamp(62px, 22vw, 92px);
+      font-size: clamp(36px, 12vw, 52px);
     }
   }
 
@@ -226,16 +213,11 @@ html.gallery-page-root body {
   }
 
   .gallery-photo figcaption {
-    min-height: 44px;
     padding: 7px 5px 0;
     font-size: 9px;
   }
 
   .gallery-photo figcaption strong {
     font-size: 11px;
-  }
-
-  .gallery-photo__camera {
-    display: none;
   }
 }
