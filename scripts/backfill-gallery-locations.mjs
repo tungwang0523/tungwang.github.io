@@ -88,9 +88,7 @@ try {
   ]);
 
   const photos = JSON.parse(await readFile(manifestPath, 'utf8'));
-  const pending = new Map(
-    photos.filter((photo) => !photo.location?.en).map((photo) => [photo.id, photo]),
-  );
+  const pending = new Map(photos.map((photo) => [photo.id, photo]));
   const files = (await walk(exportRoot)).filter((path) =>
     supportedExtensions.has(extname(path).toLowerCase()),
   );
@@ -120,7 +118,7 @@ try {
     }
   }
 
-  log(`Finished. ${matched} existing records matched; ${updated} locations added.`);
+  log(`Finished. ${matched} existing records matched; ${updated} locations updated.`);
 } finally {
   await rm(exportRoot, { recursive: true, force: true });
 }

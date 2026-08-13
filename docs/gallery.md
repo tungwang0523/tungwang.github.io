@@ -9,8 +9,9 @@ npm run gallery
 
 The manager creates a maximum-2560 px display WebP and a 720 px thumbnail,
 extracts a safe EXIF subset, detects duplicates by the original file's SHA-256
-hash, resolves available GPS coordinates to a coarse English administrative
-place, uploads derivatives to R2, and updates the shared manifest. Exact
+hash, resolves available GPS coordinates to an English place hierarchy down to
+the county or municipality level, uploads derivatives to R2, and updates the
+shared manifest. Generic administrative suffixes are omitted, and exact
 coordinates are not published.
 
 Original photographs remain local. They are never uploaded to R2.

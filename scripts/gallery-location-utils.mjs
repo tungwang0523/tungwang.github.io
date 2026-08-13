@@ -9,7 +9,27 @@ let cacheWrite = Promise.resolve();
 
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
-const compactPlace = (address = {}) => {
+const administrativeSuffix =
+  /\s+(?:autonomous\s+(?:county|prefecture|region)|special\s+administrative\s+region|district|county|township|town|municipality|prefecture|province|city|village|borough)$/i;
+
+const cleanPlaceName = (value) => {
+  let name = typeof value === 'string' ? value.trim() : '';
+  while (administrativeSuffix.test(name)) name = name.replace(administrativeSuffix, '').trim();
+  return name;
+};
+
+const regionFromIso = (address = {}) => {
+  const iso = address['ISO3166-2-lvl4'];
+  return {
+    'CN-BJ': 'Beijing',
+    'CN-CQ': 'Chongqing',
+    'CN-SH': 'Shanghai',
+    'CN-TJ': 'Tianjin',
+    'JP-13': 'Tokyo',
+  }[iso];
+};
+
+const fullPlace = (address = {}) => {
   const locality =
     address.city_district ||
     address.borough ||
@@ -18,8 +38,15 @@ const compactPlace = (address = {}) => {
     address.town ||
     address.city ||
     address.village;
-  const region = address.city || address.state_district || address.state;
-  return [...new Set([locality, region].filter(Boolean))].join(', ');
+  const levels = [
+    locality,
+    address.city || address.municipality || address.state_district,
+    address.province || address.state || regionFromIso(address),
+    address.country,
+  ]
+    .map(cleanPlaceName)
+    .filter(Boolean);
+  return levels.filter((name, index) => levels.indexOf(name) === index).join(', ');
 };
 
 const readCache = async (path) => {
@@ -75,7 +102,7 @@ export const createLocationResolver = async ({ cachePath, log = () => {} }) => {
   const cache = await readCache(cachePath);
 
   return async ({ latitude, longitude }) => {
-    const key = `${latitude.toFixed(4)},${longitude.toFixed(4)}`;
+    const key = `v3:${latitude.toFixed(4)},${longitude.toFixed(4)}`;
     if (Object.hasOwn(cache, key)) return cache[key] || undefined;
 
     const request = async () => {
@@ -89,7 +116,7 @@ export const createLocationResolver = async ({ cachePath, log = () => {} }) => {
         lon: String(longitude),
         format: 'jsonv2',
         addressdetails: '1',
-        zoom: '10',
+        zoom: '14',
         'accept-language': 'en',
       });
       const response = await fetch(url, {
@@ -101,7 +128,7 @@ export const createLocationResolver = async ({ cachePath, log = () => {} }) => {
       });
       if (!response.ok) throw new Error(`Location service returned HTTP ${response.status}.`);
       const result = await response.json();
-      const place = compactPlace(result?.address);
+      const place = fullPlace(result?.address);
       cache[key] = place || null;
       await saveCache(cachePath, cache);
       if (place) log(`Location: ${place}`);
