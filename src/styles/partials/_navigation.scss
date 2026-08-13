@@ -293,7 +293,7 @@ body.menu-open {
     flex-direction: column;
     padding: 80px 28px 28px;
     border-right: 0;
-    background-color: var(--mobile-menu-bg, #{$blog-bg});
+    background-color: var(--mobile-menu-bg, #{$panel-bg});
     overflow-y: auto;
     touch-action: pan-y;
     transform: translateX(-100%);

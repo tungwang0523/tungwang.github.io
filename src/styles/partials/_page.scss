@@ -5,7 +5,11 @@
 .page {
   --page-content-width: 920px;
   --page-nav-height: 75px;
-  --mobile-menu-bg: #{$blog-bg};
+  /* The drawer is an extension of the mobile top bar. Keep both surfaces on
+     the same field colour so Safari's lower browser mask does not reveal a
+     second band when the menu is open. Individual dark/themed pages override
+     this variable together with their navigation colour. */
+  --mobile-menu-bg: #{$panel-bg};
   --mobile-menu-color: #{$subtitle-color};
   --mobile-menu-current-bg: #{$title-color};
   --mobile-menu-current-color: #{$blog-bg};
