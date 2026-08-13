@@ -273,8 +273,12 @@ body.menu-open {
     }
   }
 
-  body.menu-open .menu-mobile-bar__marquee {
+  /* The homepage bar sits above the drawer in the normal stacking order.
+     Remove the whole bar while the drawer is open so its panel colour cannot
+     cover the menu; the separate toggle remains above both as the close icon. */
+  body.home-page.menu-open .menu-mobile-bar--has-marquee {
     visibility: hidden;
+    pointer-events: none;
   }
 
   .menu-home-item {
