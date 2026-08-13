@@ -1,6 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import galleryData from '../data/gallery.json';
+import GalleryLightbox from '../components/GalleryLightbox.astro';
+import { cloudflareImage } from '../utils/cloudflare-image.mjs';
 
 interface GalleryPhoto {
   id: string;
@@ -53,6 +55,26 @@ photos.forEach((photo) => {
 const titleFor = (photo: GalleryPhoto) =>
   photo.title?.en || photo.title?.zh || photo.caption?.en || photo.caption?.zh;
 
+const lightboxMobileSrcFor = (photo: GalleryPhoto) =>
+  cloudflareImage(photo.src, {
+    width: 1280,
+    fit: 'scale-down',
+    quality: 85,
+    format: 'auto',
+  });
+
+const infoFor = (photo: GalleryPhoto) =>
+  JSON.stringify({
+    title: photo.title?.en || photo.title?.zh || '',
+    caption: photo.caption?.en || photo.caption?.zh || '',
+    location: photo.location?.en || photo.location?.zh || '',
+    takenAt: photo.takenAt ?? '',
+    width: photo.width,
+    height: photo.height,
+    tags: photo.tags ?? [],
+    exif: photo.exif ?? null,
+  });
+
 const cameraFor = (photo: GalleryPhoto) => {
   const camera = photo.exif?.camera;
   if (!camera) return undefined;
@@ -90,7 +112,7 @@ const captionItems = (photo: GalleryPhoto) =>
 >
   {
     photos.length > 0 ? (
-      <div class="gallery-archive" data-lightbox-scope>
+      <div class="gallery-archive" data-gallery-lightbox>
         {Array.from(years).map(([year, yearPhotos]) => (
           <section class="gallery-year" aria-labelledby={`gallery-year-${year}`}>
             <header class="gallery-year__header">
@@ -102,7 +124,6 @@ const captionItems = (photo: GalleryPhoto) =>
 
             <div class="gallery-wall" data-gallery-wall>
               {yearPhotos.map((photo) => {
-                const caption = captionItems(photo);
                 const title = titleFor(photo);
                 const location = photo.location?.en;
                 const date = formatDate(photo.takenAt);
@@ -116,11 +137,12 @@ const captionItems = (photo: GalleryPhoto) =>
                     <button
                       class="gallery-photo__button"
                       type="button"
-                      data-lightbox-image
-                      data-lightbox-src={photo.src}
-                      data-lightbox-mobile-src={photo.src}
-                      data-caption={JSON.stringify(caption)}
-                      data-alt={title || 'Photograph by Tung Wang'}
+                      data-gallery-lightbox-image
+                      data-gallery-lightbox-src={photo.src}
+                      data-gallery-lightbox-mobile-src={lightboxMobileSrcFor(photo)}
+                      data-gallery-lightbox-thumb={photo.thumb}
+                      data-gallery-info={infoFor(photo)}
+                      data-gallery-alt={title || 'Photograph by Tung Wang'}
                       aria-label={title ? `View ${title}` : 'View photograph'}
                     >
                       <img
@@ -157,6 +179,7 @@ const captionItems = (photo: GalleryPhoto) =>
       </div>
     )
   }
+  <GalleryLightbox />
 </PageLayout>
 
 <script>

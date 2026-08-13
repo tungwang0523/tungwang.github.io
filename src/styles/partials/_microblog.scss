@@ -411,6 +411,11 @@
     & + &::before {
       margin-left: 11px;
     }
+
+    /* A single caption needs no leading dot. */
+    &:only-child::before {
+      display: none;
+    }
   }
 }
 
@@ -519,12 +524,11 @@
   }
 
   &__caption {
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
     max-height: min(20vh, 180px);
     margin-top: 16px;
-    padding-top: 12px;
     overflow: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
     color: #fff;
   }
 
