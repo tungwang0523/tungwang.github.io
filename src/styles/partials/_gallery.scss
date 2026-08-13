@@ -2,28 +2,28 @@
 
 html.gallery-page-root,
 html.gallery-page-root body {
-  background: $body-bg;
+  background: #000000;
 }
 
 .page--gallery {
   --page-content-width: 100%;
-  --mobile-menu-bg: #{$body-bg};
+  --mobile-menu-bg: #000000;
   --mobile-menu-color: #{$blog-bg};
   --mobile-menu-mark-filter: invert(1);
   width: 100%;
   max-width: none;
-  background: $body-bg;
+  background: #000000;
   color: $blog-bg;
 
   > .page-nav,
   > .menu-mobile-bar {
-    background: rgba($body-bg, 0.78);
+    background: rgba(0, 0, 0, 0.78);
     -webkit-backdrop-filter: blur(20px) saturate(1.1);
     backdrop-filter: blur(20px) saturate(1.1);
   }
 
   > .site-footer {
-    background: $body-bg;
+    background: #000000;
     color: $blog-bg;
   }
 
@@ -49,7 +49,7 @@ html.gallery-page-root body {
     margin: 0;
     padding-right: clamp(20px, 3vw, 48px);
     padding-left: clamp(20px, 3vw, 48px);
-    background: $body-bg;
+    background: #000000;
   }
 
   .page-head--in-brand {

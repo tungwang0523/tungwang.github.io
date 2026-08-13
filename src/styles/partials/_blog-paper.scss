@@ -41,6 +41,7 @@ html.blog-paper::before {
     ) right bottom / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
       var(--blog-paper-radius) no-repeat;
   pointer-events: none;
+  transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html.blog-paper::after {
@@ -86,6 +87,15 @@ html.blog-paper::after {
   contain: paint;
   will-change: transform;
   pointer-events: none;
+  transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* On mobile the navigation and TOC move independently of the scrolling
+   article. This solid layer keeps the interval above the TOC genuinely black
+   instead of allowing the white paper underneath to flash through while the
+   two bars animate. */
+.blog-paper-viewport-top {
+  display: none;
 }
 
 .blog-paper body {
@@ -376,6 +386,40 @@ html.blog-paper::after {
       --page-nav-height: 64px;
       padding-top: 64px;
     }
+
+    .blog-post-page > .menu-mobile-bar,
+    .blog-post-page > .menu-toggle,
+    .blog-post-page .blog-toc-mobile {
+      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        top 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.blog-mobile-nav-hidden:not(.menu-open) {
+      .blog-post-page > .menu-mobile-bar,
+      .blog-post-page > .menu-toggle {
+        transform: translateY(calc(-1 * var(--page-nav-height)));
+        pointer-events: none;
+      }
+
+      .blog-post-page .blog-toc-mobile {
+        top: var(--blog-paper-gap);
+
+        &[data-toc-stuck='true'] {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.blog-paper::before,
+  .blog-paper .blog-paper-viewport-top,
+  .blog-paper .blog-paper-viewport-bottom,
+  .blog-paper .blog-post-page > .menu-mobile-bar,
+  .blog-paper .blog-post-page > .menu-toggle,
+  .blog-paper .blog-post-page .blog-toc-mobile {
+    transition: none;
   }
 }
 
@@ -389,11 +433,36 @@ html.blog-paper::after {
 @media screen and (max-width: 768px) {
   html.blog-paper,
   html.blog-paper body {
+    --blog-mobile-toc-top: 64px;
     --blog-paper-top: calc(64px + var(--blog-paper-gap));
+  }
+
+  .blog-paper-viewport-top {
+    position: fixed;
+    z-index: 19;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    height: var(--blog-mobile-toc-top);
+    background: #000000;
+    transition: height 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
   }
 
   html.blog-paper.blog-paper-has-toc,
   html.blog-paper.blog-paper-has-toc body {
     --blog-paper-top: calc(64px + 48px + var(--blog-paper-gap));
+  }
+
+  html.blog-paper.blog-mobile-nav-hidden,
+  html.blog-paper.blog-mobile-nav-hidden body {
+    --blog-mobile-toc-top: var(--blog-paper-gap);
+    --blog-paper-top: var(--blog-paper-gap);
+  }
+
+  html.blog-paper.blog-paper-has-toc.blog-mobile-nav-hidden,
+  html.blog-paper.blog-paper-has-toc.blog-mobile-nav-hidden body {
+    --blog-paper-top: calc(48px + 2 * var(--blog-paper-gap));
   }
 }

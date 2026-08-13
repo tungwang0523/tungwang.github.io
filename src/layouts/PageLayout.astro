@@ -107,6 +107,7 @@ const heroSrcset = heroImage
     sectionLanding && 'page--section-landing',
     contentCard && 'page--content-card',
   ]}>
+    {isBlogPost && <div class="blog-paper-viewport-top" aria-hidden="true" />}
     {isBlogPost && <div class="blog-paper-viewport-bottom" aria-hidden="true" />}
     {contentCard && <div class="page-content-card-viewport" aria-hidden="true" />}
     <Menu
@@ -146,6 +147,7 @@ const heroSrcset = heroImage
           data-page-brand={hasAdaptiveSectionBrand || undefined}
           data-page-brand-expanded={hasAdaptiveSectionBrand ? mobileBrandExpanded : undefined}
           data-page-brand-expanded-always={titleInBrand || undefined}
+          data-main-site-link={mainSiteNavigation || undefined}
         >
           {
             hasAdaptiveSectionBrand && mobileBrandExpanded ? (

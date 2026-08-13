@@ -56,6 +56,14 @@ const linked = Boolean(zhHref || enHref);
         if (language === 'en') url.searchParams.set('lang', 'en');
         else url.searchParams.delete('lang');
         window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+
+        /* Replacing one complete list with another changes the scroll extent
+           without a viewport resize. Safari can otherwise keep the old fixed
+           lower mask in its compositor until another UI state forces a
+           rebuild (opening the hamburger happened to do that). */
+        requestAnimationFrame(() => {
+          window.dispatchEvent(new Event('content-card:refresh'));
+        });
       };
 
       const initialiseBlogLanguage = () => {

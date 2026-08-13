@@ -31,12 +31,12 @@ const rootClasses = rootClass?.split(/\s+/) ?? [];
 const themeColor = rootClasses.includes('blog-paper')
   ? '#000000'
   : rootClasses.includes('gallery-page-root')
-    ? '#121418'
+    ? '#000000'
   : rootClasses.includes('home-page')
-    ? '#e7e4e3'
+    ? '#dddad9'
     : rootClasses.includes('content-card-page')
-      ? '#e7e4e3'
-      : '#f6f4f3';
+      ? '#dddad9'
+      : '#e9e6e4';
 ---
 
 <!doctype html>
@@ -174,7 +174,28 @@ const themeColor = rootClasses.includes('blog-paper')
               );
             };
 
+            let refreshFrame = 0;
+            const refreshContentCard = () => {
+              updateContentCardViewport();
+
+              const page = document.querySelector('.page--content-card');
+              if (!(page instanceof HTMLElement)) return;
+
+              const previousTop = page.scrollTop;
+              page.classList.add('is-layout-refreshing');
+              void page.offsetHeight;
+
+              cancelAnimationFrame(refreshFrame);
+              refreshFrame = requestAnimationFrame(() => {
+                page.classList.remove('is-layout-refreshing');
+                const maximumTop = Math.max(0, page.scrollHeight - page.clientHeight);
+                page.scrollTop = Math.min(previousTop, maximumTop);
+                updateContentCardViewport();
+              });
+            };
+
             updateContentCardViewport();
+            window.addEventListener('content-card:refresh', refreshContentCard);
             window.visualViewport?.addEventListener('resize', updateContentCardViewport);
             window.addEventListener('resize', updateContentCardViewport);
             window.addEventListener('orientationchange', () => {

@@ -384,6 +384,10 @@ html.content-card-page body.menu-open .page--content-card {
   overflow: hidden;
 }
 
+.page--content-card.is-layout-refreshing {
+  overflow-y: hidden;
+}
+
 .page--content-card {
   --page-nav-height: 76px;
   --page-content-card-gap: 12px;
@@ -788,7 +792,7 @@ html.content-card-page body.menu-open .page--content-card {
     line-height: 1.55;
     tab-size: 2;
     scrollbar-width: thin;
-    scrollbar-color: rgba(246, 244, 243, 0.34) transparent;
+    scrollbar-color: rgba(233, 230, 228, 0.34) transparent;
 
     &::-webkit-scrollbar {
       height: 6px;
@@ -800,7 +804,7 @@ html.content-card-page body.menu-open .page--content-card {
 
     &::-webkit-scrollbar-thumb {
       border: 2px solid $body-bg;
-      background: rgba(246, 244, 243, 0.42);
+      background: rgba(233, 230, 228, 0.42);
     }
 
     code {

@@ -79,7 +79,7 @@
 .project-figure {
   margin: clamp(28px, 4vw, 48px) 0 0;
   padding: clamp(10px, 1.5vw, 18px);
-  background: #e1dedc;
+  background: #d8d4d1;
 
   img {
     display: block;
@@ -116,7 +116,7 @@
   figure {
     margin: 0;
     padding: clamp(8px, 1.2vw, 14px);
-    background: #e1dedc;
+    background: #d8d4d1;
   }
 
   img {
@@ -283,7 +283,7 @@
   figure {
     margin: 0;
     padding: clamp(8px, 1.2vw, 14px);
-    background: rgba(246, 244, 243, 0.1);
+    background: rgba(233, 230, 228, 0.1);
   }
 
   img {
@@ -305,11 +305,11 @@
 }
 
 .portfolio-section--dark .project-figure {
-  background: rgba(246, 244, 243, 0.1);
+  background: rgba(233, 230, 228, 0.1);
 }
 
 .portfolio-section--dark .figure-row figure {
-  background: rgba(246, 244, 243, 0.1);
+  background: rgba(233, 230, 228, 0.1);
 }
 
 .project-figure--white {
@@ -384,7 +384,7 @@
     min-height: 240px;
     flex-direction: column;
     padding: clamp(20px, 2.4vw, 32px);
-    background: #e1dedc;
+    background: #d8d4d1;
   }
 
   small {
@@ -556,7 +556,7 @@
     min-height: 320px;
     flex-direction: column;
     padding: clamp(22px, 2.6vw, 34px);
-    background: #e1dedc;
+    background: #d8d4d1;
   }
 
   small {
@@ -630,7 +630,7 @@
   gap: clamp(28px, 5vw, 72px);
   margin-top: clamp(48px, 7vw, 84px);
   padding: clamp(28px, 4.5vw, 56px);
-  background: rgba(246, 244, 243, 0.1);
+  background: rgba(233, 230, 228, 0.1);
 
   small {
     font-family: $title-font;
@@ -687,7 +687,7 @@
 
     li {
       padding: 8px 12px;
-      border: 1px solid rgba(246, 244, 243, 0.35);
+      border: 1px solid rgba(233, 230, 228, 0.35);
       border-radius: 999px;
       font-size: 12px;
     }
@@ -800,7 +800,7 @@
 .guide-dialogue {
   margin-top: clamp(34px, 5vw, 64px);
   padding: clamp(26px, 4vw, 48px);
-  background: rgba(246, 244, 243, 0.1);
+  background: rgba(233, 230, 228, 0.1);
 
   &__head {
     small {
@@ -871,7 +871,7 @@
     min-height: 250px;
     flex-direction: column;
     padding: clamp(22px, 2.6vw, 34px);
-    background: #e1dedc;
+    background: #d8d4d1;
   }
 
   small {
@@ -917,7 +917,7 @@
     min-height: 280px;
     flex-direction: column;
     padding: clamp(22px, 2.6vw, 34px);
-    background: #e1dedc;
+    background: #d8d4d1;
   }
 
   small {

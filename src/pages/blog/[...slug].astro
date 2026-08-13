@@ -148,3 +148,52 @@ const enHref =
     }
   </nav>
 </PageLayout>
+
+<script>
+  const initialiseMobileBlogNavigation = () => {
+    const page = document.querySelector<HTMLElement>('.blog-post-page');
+    if (!page || page.dataset.mobileNavAutoHideReady === 'true') return;
+    page.dataset.mobileNavAutoHideReady = 'true';
+
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    let previousY = Math.max(0, window.scrollY);
+    let frame = 0;
+
+    const setHidden = (hidden: boolean) => {
+      document.body.classList.toggle('blog-mobile-nav-hidden', hidden);
+      document.documentElement.classList.toggle('blog-mobile-nav-hidden', hidden);
+    };
+    const reveal = () => setHidden(false);
+
+    const update = () => {
+      frame = 0;
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - previousY;
+
+      if (!mobileQuery.matches || document.body.classList.contains('menu-open') || currentY <= 72) {
+        reveal();
+      } else if (delta > 5) {
+        setHidden(true);
+      } else if (delta < -5) {
+        reveal();
+      }
+
+      previousY = currentY;
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    mobileQuery.addEventListener('change', () => {
+      previousY = Math.max(0, window.scrollY);
+      reveal();
+    });
+    document.querySelector('[data-menu-toggle]')?.addEventListener('click', reveal);
+  };
+
+  initialiseMobileBlogNavigation();
+  document.addEventListener('astro:page-load', initialiseMobileBlogNavigation);
+</script>
