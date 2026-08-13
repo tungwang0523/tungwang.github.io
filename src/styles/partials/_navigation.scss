@@ -295,8 +295,14 @@ body.menu-open {
     border-right: 0;
     background-color: var(--mobile-menu-bg, #{$blog-bg});
     overflow-y: auto;
+    touch-action: pan-y;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
+    will-change: transform;
+
+    &.is-swipe-dragging {
+      transition: none;
+    }
 
     &.is-open {
       transform: translateX(0);

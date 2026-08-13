@@ -220,6 +220,93 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
     document.body.classList.toggle('menu-open', open);
   };
 
+  if (toggle && menu && menu.dataset.swipeCloseReady !== 'true') {
+    menu.dataset.swipeCloseReady = 'true';
+    let pointerId: number | null = null;
+    let startX = 0;
+    let startY = 0;
+    let startTime = 0;
+    let distance = 0;
+    let directionResolved = false;
+    let horizontalSwipe = false;
+
+    const clearSwipeStyles = () => {
+      menu.classList.remove('is-swipe-dragging');
+      menu.style.removeProperty('transform');
+      menu.style.removeProperty('transition');
+    };
+
+    const finishSwipe = () => {
+      if (pointerId === null) return;
+      const elapsed = Math.max(1, performance.now() - startTime);
+      const velocity = distance / elapsed;
+      const threshold = Math.max(72, menu.clientWidth * 0.16);
+      const shouldClose = horizontalSwipe && (distance >= threshold || (distance >= 32 && velocity > 0.55));
+
+      pointerId = null;
+      directionResolved = false;
+      horizontalSwipe = false;
+
+      menu.classList.remove('is-swipe-dragging');
+      menu.style.removeProperty('transition');
+
+      if (!shouldClose) {
+        menu.style.removeProperty('transform');
+        return;
+      }
+
+      menu.style.transform = `translateX(${Math.max(menu.clientWidth, window.innerWidth)}px)`;
+      const complete = () => {
+        setOpen(false);
+        menu.classList.add('is-swipe-dragging');
+        menu.style.removeProperty('transition');
+        menu.style.removeProperty('transform');
+        requestAnimationFrame(() => menu.classList.remove('is-swipe-dragging'));
+      };
+      menu.addEventListener('transitionend', complete, { once: true });
+      window.setTimeout(() => {
+        if (menu.classList.contains('is-open')) complete();
+      }, 320);
+    };
+
+    menu.addEventListener('pointerdown', (event) => {
+      if (!menu.classList.contains('is-open') || !event.isPrimary) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startY = event.clientY;
+      startTime = performance.now();
+      distance = 0;
+      directionResolved = false;
+      horizontalSwipe = false;
+    });
+
+    window.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return;
+      const deltaX = event.clientX - startX;
+      const deltaY = event.clientY - startY;
+
+      if (!directionResolved && Math.max(Math.abs(deltaX), Math.abs(deltaY)) >= 7) {
+        directionResolved = true;
+        horizontalSwipe = deltaX > 0 && Math.abs(deltaX) > Math.abs(deltaY);
+      }
+      if (!horizontalSwipe) return;
+
+      event.preventDefault();
+      distance = Math.max(0, deltaX);
+      menu.classList.add('is-swipe-dragging');
+      menu.style.transform = `translateX(${distance}px)`;
+    }, { passive: false });
+
+    window.addEventListener('pointerup', (event) => {
+      if (event.pointerId === pointerId) finishSwipe();
+    });
+    window.addEventListener('pointercancel', (event) => {
+      if (event.pointerId !== pointerId) return;
+      pointerId = null;
+      clearSwipeStyles();
+    });
+  }
+
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     setOpen(open);
