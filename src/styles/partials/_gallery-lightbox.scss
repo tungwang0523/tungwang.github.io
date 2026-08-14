@@ -388,28 +388,30 @@
       transform: translateY(0);
     }
 
-    /* The image fills the whole lightbox; the card floats over it as a
-       frosted panel and folds directly across the photograph. */
+    /* The image fills the whole lightbox, top-aligned, and the card
+       folds over it from the bottom as a black frosted panel. */
     &__stage {
       position: absolute;
       inset: 0;
       padding: 56px 14px 0;
+      align-items: flex-start;
     }
 
     &__image {
       max-width: 100%;
       max-height: 100%;
+      margin: 0 auto;
     }
 
     &__info {
       position: absolute;
       left: 12px;
       right: 12px;
-      bottom: 12px;
+      bottom: 0;
       margin: 0;
       max-height: calc(100% - 68px);
-      border-radius: 16px;
-      background: rgba(18, 20, 24, 0.32);
+      border-radius: 16px 16px 0 0;
+      background: rgba(18, 20, 24, 0.66);
       -webkit-backdrop-filter: blur(24px) saturate(1.1);
       backdrop-filter: blur(24px) saturate(1.1);
     }
