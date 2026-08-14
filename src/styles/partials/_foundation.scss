@@ -85,6 +85,10 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
+  /* Disable iOS font boosting, which intermittently inflates small text
+     such as photo captions (visible on iPhone Safari and Chrome). */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 img {
