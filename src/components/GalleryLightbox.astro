@@ -266,20 +266,6 @@
       dialog.setAttribute('aria-label', `Gallery photograph ${index + 1} of ${items.length}`);
     };
 
-    // Mobile: capture the collapsed image box size once so expanding the
-    // card moves the image up instead of shrinking it.
-    const freezeImageSize = () => {
-      if (!image) return;
-      if (!window.matchMedia('(max-width: 900px)').matches) return;
-      requestAnimationFrame(() => {
-        const rect = image.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          image.style.width = `${Math.round(rect.width)}px`;
-          image.style.height = `${Math.round(rect.height)}px`;
-        }
-      });
-    };
-
     const show = () => {
       dialog.classList.remove('is-closing');
       document.body.style.overflow = 'hidden';
@@ -319,7 +305,6 @@
       setInfoExpanded(!mobileLayout);
       setLoading(true);
       show();
-      freezeImageSize();
 
       if (fullSource) {
         void preload(fullSource).then(async (loaded) => {

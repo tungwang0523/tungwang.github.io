@@ -308,12 +308,10 @@
 
 @media screen and (max-width: 900px) {
   .gallery-lightbox {
-    --gl-pad: 12px;
+    padding: 0;
 
     &[open] {
-      grid-template-columns: 1fr;
-      grid-template-rows: minmax(0, 1fr) auto;
-      gap: 12px;
+      display: block;
     }
 
     &__toggle {
@@ -390,8 +388,12 @@
       transform: translateY(0);
     }
 
+    /* The image fills the whole lightbox; the card floats over it as a
+       frosted panel and folds directly across the photograph. */
     &__stage {
-      padding: 56px 14px 14px;
+      position: absolute;
+      inset: 0;
+      padding: 56px 14px 0;
     }
 
     &__image {
@@ -399,19 +401,17 @@
       max-height: 100%;
     }
 
-    /* Expanded card: the image keeps its captured size and slides up
-       (top-anchored) instead of shrinking. */
-    &:not(.is-info-collapsed) &__stage {
-      justify-content: flex-start;
-    }
-
-    &:not(.is-info-collapsed) &__image {
-      max-width: none;
-      max-height: none;
-    }
-
     &__info {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      margin: 0;
+      max-height: calc(100% - 68px);
       border-radius: 16px;
+      background: rgba(18, 20, 24, 0.32);
+      -webkit-backdrop-filter: blur(24px) saturate(1.1);
+      backdrop-filter: blur(24px) saturate(1.1);
     }
 
     &__nav {
