@@ -3712,38 +3712,6 @@
     "draft": false
   },
   {
-    "id": "bcc26b2eb0409d93c0fad908",
-    "src": "https://img.mockingbird.team/gallery/2024/12/display/bcc26b2eb0409d93c0fad908-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2024/12/thumb/bcc26b2eb0409d93c0fad908.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2024-12-22T01:13:50.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/50 s",
-      "iso": 320,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "320b01a913196c14778b3815",
     "src": "https://img.mockingbird.team/gallery/2024/12/display/320b01a913196c14778b3815-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2024/12/thumb/320b01a913196c14778b3815.webp",
@@ -6397,7 +6365,7 @@
     },
     "location": {
       "zh": "",
-      "en": "Urad Rear Banner, Bayannur, Inner Mongolia, China"
+      "en": "Daoli, Harbin, Heilongjiang, China"
     },
     "tags": [],
     "exif": {
@@ -6428,7 +6396,7 @@
     },
     "location": {
       "zh": "",
-      "en": "Dengkou, Bayannur, Inner Mongolia, China"
+      "en": "Daoli, Harbin, Heilongjiang, China"
     },
     "tags": [],
     "exif": {
@@ -7032,7 +7000,7 @@
     },
     "location": {
       "zh": "",
-      "en": "Daoli, Harbin, Heilongjiang, China"
+      "en": "Chaoyang, Changchun, Jilin, China"
     },
     "tags": [],
     "exif": {
@@ -7156,7 +7124,7 @@
     },
     "location": {
       "zh": "",
-      "en": "Daoli, Harbin, Heilongjiang, China"
+      "en": "Chaoyang, Changchun, Jilin, China"
     },
     "tags": [],
     "exif": {
