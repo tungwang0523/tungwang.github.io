@@ -339,7 +339,32 @@
       }
     }
 
+    &__toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    &__toggle-title {
+      overflow: hidden;
+      font-size: 14px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__toggle-meta {
+      overflow: hidden;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.55);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     &__toggle-icon {
+      flex: none;
       font-size: 12px;
       line-height: 1;
       transition: transform 180ms ease;
@@ -365,9 +390,6 @@
       transform: translateY(0);
     }
 
-    /* Stage reserves the close button above and the info card below;
-       the image fills whatever space remains, so it grows when the card
-       is collapsed and shrinks when the card expands. */
     &__stage {
       padding: 56px 14px 14px;
     }
@@ -375,6 +397,17 @@
     &__image {
       max-width: 100%;
       max-height: 100%;
+    }
+
+    /* Expanded card: the image keeps its captured size and slides up
+       (top-anchored) instead of shrinking. */
+    &:not(.is-info-collapsed) &__stage {
+      justify-content: flex-start;
+    }
+
+    &:not(.is-info-collapsed) &__image {
+      max-width: none;
+      max-height: none;
     }
 
     &__info {

@@ -32,7 +32,10 @@
       aria-expanded="false"
       data-gallery-info-toggle
     >
-      <span class="gallery-lightbox__toggle-title" data-gallery-info-toggle-title>Details</span>
+      <span class="gallery-lightbox__toggle-text">
+        <span class="gallery-lightbox__toggle-title" data-gallery-info-toggle-title>Details</span>
+        <span class="gallery-lightbox__toggle-meta" data-gallery-info-toggle-meta></span>
+      </span>
       <span class="gallery-lightbox__toggle-icon" aria-hidden="true">↓</span>
     </button>
     <div class="gallery-lightbox__content" data-gallery-info-content>
@@ -65,6 +68,7 @@
     const infoPanel = dialog.querySelector<HTMLElement>('.gallery-lightbox__info');
     const toggle = dialog.querySelector<HTMLButtonElement>('.gallery-lightbox__toggle');
     const toggleTitle = dialog.querySelector<HTMLElement>('[data-gallery-info-toggle-title]');
+    const toggleMeta = dialog.querySelector<HTMLElement>('[data-gallery-info-toggle-meta]');
     const infoContent = dialog.querySelector<HTMLElement>('[data-gallery-info-content]');
 
     // Mobile accordion: animate max-height, then release it so the content
@@ -164,6 +168,15 @@
       if (toggleTitle) {
         toggleTitle.textContent = info.title || 'Details';
       }
+      if (toggleMeta) {
+        const meta = [
+          formatTaken(info.takenAt),
+          info.location,
+          info.exif?.camera,
+        ].filter(Boolean).join(' · ');
+        toggleMeta.textContent = meta;
+        toggleMeta.hidden = !meta;
+      }
       if (captionEl) {
         captionEl.textContent = info.caption || '';
         captionEl.hidden = !info.caption;
@@ -253,6 +266,20 @@
       dialog.setAttribute('aria-label', `Gallery photograph ${index + 1} of ${items.length}`);
     };
 
+    // Mobile: capture the collapsed image box size once so expanding the
+    // card moves the image up instead of shrinking it.
+    const freezeImageSize = () => {
+      if (!image) return;
+      if (!window.matchMedia('(max-width: 900px)').matches) return;
+      requestAnimationFrame(() => {
+        const rect = image.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          image.style.width = `${Math.round(rect.width)}px`;
+          image.style.height = `${Math.round(rect.height)}px`;
+        }
+      });
+    };
+
     const show = () => {
       dialog.classList.remove('is-closing');
       document.body.style.overflow = 'hidden';
@@ -292,6 +319,7 @@
       setInfoExpanded(!mobileLayout);
       setLoading(true);
       show();
+      freezeImageSize();
 
       if (fullSource) {
         void preload(fullSource).then(async (loaded) => {
