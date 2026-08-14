@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, readdir, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { homedir, platform } from 'node:os';
+import { homedir, platform, tmpdir } from 'node:os';
 import { basename, dirname, extname, join, resolve } from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -238,7 +238,18 @@ const cleanCamera = (make, model) => {
   const camera = typeof model === 'string' ? model.trim() : '';
   if (!maker) return camera || undefined;
   if (!camera) return maker;
-  return camera.toLowerCase().startsWith(maker.toLowerCase()) ? camera : `${maker} ${camera}`;
+  let combined = camera.toLowerCase().startsWith(maker.toLowerCase()) ? camera : `${maker} ${camera}`;
+  if (/nikon/i.test(combined)) {
+    // "NIKON CORPORATION NIKON D7100" -> "Nikon D7100"
+    combined = `Nikon ${combined.replace(/nikon\s*(corporation)?\s*/gi, '').trim()}`;
+  } else if (/fujifilm/i.test(combined)) {
+    combined = combined.replace(/fujifilm/gi, 'Fujifilm');
+  } else if (/xiaomi/i.test(combined)) {
+    combined = combined
+      .replace(/\bxiaomi\b/gi, 'Xiaomi')
+      .replace(/\bM2002J9E\b/i, 'Mi 10 Lite');
+  }
+  return combined;
 };
 
 const formatShutter = (value) => {
@@ -310,8 +321,34 @@ const watermarkBuffer = async (width, scale, opacity) => {
   return sharp(resized.data, { raw: resized.info }).png().toBuffer();
 };
 
+// macOS-only: sharp's bundled libheif cannot decode every HEIC variant
+// (e.g. IMG_1899.HEIC). Convert HEIC/HEIF to a temporary JPEG with sips
+// first, then feed that to sharp.
+const convertHeicForSharp = async (path) => {
+  const extension = extname(path).toLowerCase();
+  if (process.platform !== 'darwin' || (extension !== '.heic' && extension !== '.heif')) {
+    return { path, cleanup: async () => {} };
+  }
+  const output = join(tmpdir(), `gallery-${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`);
+  await new Promise((resolve, reject) => {
+    const child = spawn('sips', ['-s', 'format', 'jpeg', path, '--out', output], { stdio: 'ignore' });
+    child.on('error', reject);
+    child.on('close', (code) =>
+      code === 0 ? resolve() : reject(new Error(`sips HEIC conversion failed (${code})`)),
+    );
+  });
+  return {
+    path: output,
+    cleanup: async () => {
+      await unlink(output).catch(() => {});
+    },
+  };
+};
+
 const makeDerivatives = async (path, options) => {
-  const displayBase = await sharp(path, { failOn: 'none' })
+  const source = await convertHeicForSharp(path);
+  try {
+  const displayBase = await sharp(source.path, { failOn: 'none' })
     .rotate()
     .resize({ width: 2560, height: 2560, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 88, effort: 5 })
@@ -339,7 +376,7 @@ const makeDerivatives = async (path, options) => {
       .toBuffer();
   }
 
-  const thumb = await sharp(path, { failOn: 'none' })
+  const thumb = await sharp(source.path, { failOn: 'none' })
     .rotate()
     .resize({ width: 720, height: 720, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 82, effort: 5 })
@@ -351,6 +388,9 @@ const makeDerivatives = async (path, options) => {
     width: finalInfo.width,
     height: finalInfo.height,
   };
+  } finally {
+    await source.cleanup();
+  }
 };
 
 const putIfMissing = async (client, bucket, key, body) => {
