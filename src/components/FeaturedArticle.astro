@@ -191,46 +191,45 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
       scheduleWorkCrop(header);
     });
 
-  const scheduleWritingArtwork = (() => {
-    let frame = 0;
-
-    return (header: HTMLElement) => {
-      if (frame) window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        const content = header.querySelector<HTMLElement>('.featured-content');
-        const media = header.querySelector<HTMLElement>('.featured-content__media');
-        const copy = header.querySelector<HTMLElement>('.featured-content__copy');
-        const image = header.querySelector<HTMLImageElement>('.featured-content__image');
-        if (!content || !media || !copy || !image) return;
-
-        const fullSource = image.dataset.fullSrc;
-        const compactSource = image.dataset.compactSrc;
-        const imageWidth = media.clientWidth;
-        if (!fullSource || !compactSource || !imageWidth) return;
-
-        const availableHeight = getAvailableMediaHeight(content, copy);
-        const fullArtworkHeight = (imageWidth * 3) / 4;
-        const useCompactArtwork = availableHeight + 1 < fullArtworkHeight;
-        const nextSource = useCompactArtwork ? compactSource : fullSource;
-
-        if (image.getAttribute('src') !== nextSource) image.src = nextSource;
-        header.dataset.artwork = useCompactArtwork ? 'compact' : 'full';
-      });
-    };
-  })();
-
   document
     .querySelectorAll<HTMLElement>(".blog-header[data-section='writing'], .blog-header[data-section='gallery']")
     .forEach((header) => {
       if (header.dataset.writingArtworkReady === 'true') return;
       header.dataset.writingArtworkReady = 'true';
 
-      const observer = new ResizeObserver(() => scheduleWritingArtwork(header));
+      // Each header owns its own animation frame so the writing and gallery
+      // sections never cancel each other's pending layout pass.
+      let frame = 0;
+      const schedule = () => {
+        if (frame) window.cancelAnimationFrame(frame);
+        frame = window.requestAnimationFrame(() => {
+          frame = 0;
+          const content = header.querySelector<HTMLElement>('.featured-content');
+          const media = header.querySelector<HTMLElement>('.featured-content__media');
+          const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+          const image = header.querySelector<HTMLImageElement>('.featured-content__image');
+          if (!content || !media || !copy || !image) return;
+
+          const fullSource = image.dataset.fullSrc;
+          const compactSource = image.dataset.compactSrc;
+          const imageWidth = media.clientWidth;
+          if (!fullSource || !compactSource || !imageWidth) return;
+
+          const availableHeight = getAvailableMediaHeight(content, copy);
+          const fullArtworkHeight = (imageWidth * 3) / 4;
+          const useCompactArtwork = availableHeight + 1 < fullArtworkHeight;
+          const nextSource = useCompactArtwork ? compactSource : fullSource;
+
+          if (image.getAttribute('src') !== nextSource) image.src = nextSource;
+          header.dataset.artwork = useCompactArtwork ? 'compact' : 'full';
+        });
+      };
+
+      const observer = new ResizeObserver(schedule);
       observer.observe(header);
       const copy = header.querySelector<HTMLElement>('.featured-content__copy');
       if (copy) observer.observe(copy);
-      scheduleWritingArtwork(header);
+      schedule();
     });
 
   document.addEventListener('click', (event) => {
