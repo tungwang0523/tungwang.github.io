@@ -86,11 +86,29 @@
       infoContent.style.maxHeight = `${infoContent.scrollHeight}px`;
     };
 
+    // Mobile: animate the image between centred (collapsed) and top-aligned
+    // (expanded) by translating it up by half the free stage height.
+    const syncImageRise = () => {
+      if (!image || !stage) return;
+      if (!window.matchMedia('(max-width: 900px)').matches) return;
+      const expanded = infoPanel?.classList.contains('is-expanded') ?? false;
+      if (!expanded) {
+        image.style.transform = 'translateY(0)';
+        return;
+      }
+      const stageRect = stage.getBoundingClientRect();
+      const contentHeight = stageRect.height - 56;
+      const imageHeight = image.getBoundingClientRect().height;
+      const rise = Math.max(0, (contentHeight - imageHeight) / 2);
+      image.style.transform = `translateY(-${rise}px)`;
+    };
+
     const setInfoExpanded = (nowExpanded: boolean) => {
       infoPanel?.classList.toggle('is-expanded', nowExpanded);
       dialog.classList.toggle('is-info-collapsed', !nowExpanded);
       toggle?.setAttribute('aria-expanded', String(nowExpanded));
       applyInfo(nowExpanded);
+      syncImageRise();
     };
 
     const applyInfo = (expanded: boolean) => {
@@ -258,6 +276,7 @@
       activeIndex = index;
       renderInfo(trigger);
       syncInfoHeight();
+      syncImageRise();
       image.src = displaySource;
       image.alt = trigger.dataset.galleryAlt || '';
       counterEl.textContent = `${index + 1} / ${items.length}`;
