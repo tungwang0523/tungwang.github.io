@@ -35,7 +35,12 @@ const {
 
 const formatted = dateLabel ?? (date ? formatSiteDate(date) : '');
 const sectionId = bigTitle.toLowerCase();
-const compactCover = sectionId === 'writing' ? '/pictures/writing_small.png' : undefined;
+const compactCover =
+  sectionId === 'writing'
+    ? '/pictures/writing_small.png'
+    : sectionId === 'gallery'
+      ? '/pictures/gallery_small.png'
+      : undefined;
 
 const parts = emphasis ? headline.split('{emphasis}') : [headline];
 ---
@@ -216,7 +221,7 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
   })();
 
   document
-    .querySelectorAll<HTMLElement>(".blog-header[data-section='writing']")
+    .querySelectorAll<HTMLElement>(".blog-header[data-section='writing'], .blog-header[data-section='gallery']")
     .forEach((header) => {
       if (header.dataset.writingArtworkReady === 'true') return;
       header.dataset.writingArtworkReady = 'true';

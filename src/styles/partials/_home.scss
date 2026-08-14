@@ -520,7 +520,8 @@
 /* Writing uses art-directed 4:3 and 2:1 compositions. Both remain complete
    and full-column; JavaScript selects the compact composition when the copy
    leaves insufficient height for the original. */
-.blog-header[data-section='writing'] .featured-content {
+.blog-header[data-section='writing'] .featured-content,
+.blog-header[data-section='gallery'] .featured-content {
   &__media {
     width: 100%;
   }
