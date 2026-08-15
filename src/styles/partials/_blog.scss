@@ -9,8 +9,6 @@
   .page-head,
   .blog-post-language,
   .post-meta,
-  .tag-list,
-  .post-intro-divider,
   .post-nav {
     max-width: 856px;
   }
@@ -130,23 +128,15 @@
     margin-top: 0;
   }
 
-  .tag-list {
-    margin-top: 16px;
-    margin-bottom: 22px;
-  }
+  
 
-  .post-intro-divider {
-    margin-top: 0;
-    margin-bottom: 28px;
-  }
 }
 
-.post-intro-divider {
-  margin: 32px 0;
-  border: 0;
-  border-top: 1px solid $border-color;
-}
 
+/* Vertical breathing between the title environment and the essay body. */
+.blog-post-page .blog-post-layout {
+  margin-top: clamp(32px, 5vw, 64px);
+}
 .blog-post-page.has-blog-toc .blog-post-layout {
   display: grid;
   grid-template-columns: minmax(0, 65ch) 220px;
@@ -318,9 +308,7 @@
     --page-content-width: 920px;
   }
 
-  .blog-post-page.has-blog-toc .post-intro-divider {
-    margin-bottom: 0;
-  }
+
 
   .blog-post-page.has-blog-toc .blog-post-layout {
     display: flex;
@@ -833,26 +821,6 @@
     max-width: 60ch;
   }
 
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 12px;
-    font-family: $title-font;
-    font-style: normal;
-    color: $subtitle-color;
-
-    span:before,
-    a:before {
-      content: '#';
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-  }
-
   @media screen and (max-width: 560px) {
     grid-template-columns: 1fr;
   }
@@ -913,33 +881,6 @@
     grid-template-columns: 1fr;
     .post-nav__next {
       text-align: left;
-    }
-  }
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-
-  a {
-    border: 1px solid $border-color;
-    padding: 6px 14px;
-    text-decoration: none;
-    color: $subtitle-color;
-    font-family: $title-font;
-    font-size: 14px;
-    font-style: normal;
-
-    &:before {
-      content: '#';
-    }
-
-    &:hover {
-      background: $body-bg;
-      color: $blog-bg;
-      border-color: $body-bg;
     }
   }
 }

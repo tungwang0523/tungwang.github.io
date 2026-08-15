@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2021-12-21
 cover: 'https://img.mockingbird.team/images/2026/08/07b7d2d4f03672719709742e7251dec1.webp'
 featured: false
-tags: ['创作', '插画', '建筑', '长春']
 draft: false
 lang: zh
 ---

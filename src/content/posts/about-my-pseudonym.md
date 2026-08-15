@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2020-03-03
 cover: 'https://img.mockingbird.team/images/2026/08/f1e158f967adb888ff4e447d8bf5ba76.webp'
 featured: false
-tags: ['随笔', '自述']
 draft: false
 lang: zh
 ---

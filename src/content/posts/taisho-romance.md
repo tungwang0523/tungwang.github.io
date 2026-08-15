@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2022-03-17
 cover: 'https://img.mockingbird.team/images/2026/08/b76cb5a60fa0f54c132c1cf8e858ea60.webp'
 featured: false
-tags: ['读书笔记', '历史', '日本']
 draft: false
 lang: zh
 ---

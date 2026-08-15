@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2021-03-21
 cover: 'https://pica.zhimg.com/v2-206d962784b141f4cc272a02175b1337.jpg?source=2c26e567'
 featured: false
-tags: ['建筑', '历史', '长春']
 draft: false
 lang: zh
 ---

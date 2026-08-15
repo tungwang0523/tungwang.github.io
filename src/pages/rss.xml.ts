@@ -25,7 +25,6 @@ export async function GET(context: APIContext) {
     description: post.data.excerpt,
     author: post.data.author,
     link: `/blog/${post.id}`,
-    categories: post.data.tags,
   }));
 
   const microblogItems = microblog.map((entry) => {

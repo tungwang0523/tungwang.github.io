@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2020-08-15
 cover: 'https://img.mockingbird.team/images/2026/08/1b6716cafba9f52e6c36aa0716eadd8e.png'
 featured: false
-tags: ['游记', '城市', '上海']
 draft: false
 lang: zh
 ---

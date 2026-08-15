@@ -14,7 +14,6 @@ const posts = defineCollection({
       z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
     ]),
     featured: z.boolean().default(false),
-    tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     lang: z.enum(['zh', 'en']).default('zh'),
     translationKey: z.string().optional(),

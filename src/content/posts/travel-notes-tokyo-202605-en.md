@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2026-08-10
 cover: 'https://img.mockingbird.team/images/2026/08/e8392f622be2b6c7f6e1f62be77dcd28.webp'
 featured: false
-tags: ['Travel Notes', 'Cities', 'Tokyo', 'Kamakura']
 draft: false
 lang: en
 translationKey: 'travel-notes-tokyo-202605'

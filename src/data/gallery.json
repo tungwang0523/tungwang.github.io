@@ -320,38 +320,6 @@
     "draft": false
   },
   {
-    "id": "5bfa92637c9259659640c78f",
-    "src": "https://img.mockingbird.team/gallery/2026/05/display/5bfa92637c9259659640c78f-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/5bfa92637c9259659640c78f.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2026-05-26T08:10:29.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Chiyoda, Tokyo, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/100 s",
-      "iso": 64,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "6e21e77dba9652368c8242a7",
     "src": "https://img.mockingbird.team/gallery/2026/05/display/6e21e77dba9652368c8242a7-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/6e21e77dba9652368c8242a7.webp",
@@ -378,38 +346,6 @@
       "aperture": "f/1.8",
       "shutter": "1/25 s",
       "iso": 800,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "b52203b46900da2bab130472",
-    "src": "https://img.mockingbird.team/gallery/2026/05/display/b52203b46900da2bab130472-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/b52203b46900da2bab130472.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2026-05-25T09:33:00.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Kamakura, Kanagawa, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/100 s",
-      "iso": 200,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -448,38 +384,6 @@
     "draft": false
   },
   {
-    "id": "fddf6f9f17183cdd40331645",
-    "src": "https://img.mockingbird.team/gallery/2026/05/display/fddf6f9f17183cdd40331645-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/fddf6f9f17183cdd40331645.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2026-05-25T04:10:40.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Kamakura, Kanagawa, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/1800 s",
-      "iso": 25,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "ab5b4e7cb4acb4afbd3729a3",
     "src": "https://img.mockingbird.team/gallery/2026/05/display/ab5b4e7cb4acb4afbd3729a3-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/ab5b4e7cb4acb4afbd3729a3.webp",
@@ -506,38 +410,6 @@
       "aperture": "f/2.8",
       "shutter": "1/50 s",
       "iso": 640,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "7bcbfa831ca75f059bbe15c0",
-    "src": "https://img.mockingbird.team/gallery/2026/05/display/7bcbfa831ca75f059bbe15c0-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2026/05/thumb/7bcbfa831ca75f059bbe15c0.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2026-05-24T03:15:01.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Taito, Tokyo, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/1200 s",
-      "iso": 64,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -864,70 +736,6 @@
     "draft": false
   },
   {
-    "id": "e322d062feb283923da92e43",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/e322d062feb283923da92e43-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/e322d062feb283923da92e43.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-12-24T14:50:42.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/25 s",
-      "iso": 640,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "97b2e68fbf5c99b2ee2a3539",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/97b2e68fbf5c99b2ee2a3539-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/97b2e68fbf5c99b2ee2a3539.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-12-24T12:39:31.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/35 s",
-      "iso": 800,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "fc77a4b82498fa8e10926bca",
     "src": "https://img.mockingbird.team/gallery/2025/12/display/fc77a4b82498fa8e10926bca-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/fc77a4b82498fa8e10926bca.webp",
@@ -1120,70 +928,6 @@
     "draft": false
   },
   {
-    "id": "c3d35b8e7bd3e8ca588f9c4b",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/c3d35b8e7bd3e8ca588f9c4b-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/c3d35b8e7bd3e8ca588f9c4b.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-12-14T04:30:19.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Dongcheng, Beijing, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/2700 s",
-      "iso": 32,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "3eec59d70bee33315a8f8e0b",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/3eec59d70bee33315a8f8e0b-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/3eec59d70bee33315a8f8e0b.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-12-14T03:31:21.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Xicheng, Beijing, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/6000 s",
-      "iso": 100,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "3b97093fc07c5abe6585e96d",
     "src": "https://img.mockingbird.team/gallery/2025/12/display/3b97093fc07c5abe6585e96d-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/3b97093fc07c5abe6585e96d.webp",
@@ -1339,70 +1083,6 @@
       "shutter": "1/15000 s",
       "iso": 80,
       "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "b7986f067f10ed08928eaefb",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/b7986f067f10ed08928eaefb-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/b7986f067f10ed08928eaefb.webp",
-    "width": 2560,
-    "height": 2560,
-    "takenAt": "2025-12-14T01:37:09.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Xicheng, Beijing, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/750 s",
-      "iso": 25,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "e0611bf919f1d060ca47f334",
-    "src": "https://img.mockingbird.team/gallery/2025/12/display/e0611bf919f1d060ca47f334-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/12/thumb/e0611bf919f1d060ca47f334.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-12-13T15:17:13.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Dongcheng, Beijing, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/4 s",
-      "iso": 2500,
-      "exposureCompensation": "+0.2 EV"
     },
     "watermarked": true,
     "draft": false
@@ -1600,38 +1280,6 @@
     "draft": false
   },
   {
-    "id": "fbc6c0cd878fa90e8cf9382f",
-    "src": "https://img.mockingbird.team/gallery/2025/11/display/fbc6c0cd878fa90e8cf9382f-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/11/thumb/fbc6c0cd878fa90e8cf9382f.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-11-16T12:09:46.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/35 s",
-      "iso": 1000,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "c0df49efcbf073a8d6c58fd0",
     "src": "https://img.mockingbird.team/gallery/2025/11/display/c0df49efcbf073a8d6c58fd0-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/11/thumb/c0df49efcbf073a8d6c58fd0.webp",
@@ -1728,38 +1376,6 @@
     "draft": false
   },
   {
-    "id": "802965de7ca29e851ddd3b9e",
-    "src": "https://img.mockingbird.team/gallery/2025/10/display/802965de7ca29e851ddd3b9e-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/10/thumb/802965de7ca29e851ddd3b9e.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-10-02T07:40:37.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/450 s",
-      "iso": 25,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "2c489891236855da48c1208f",
     "src": "https://img.mockingbird.team/gallery/2025/09/display/2c489891236855da48c1208f-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/09/thumb/2c489891236855da48c1208f.webp",
@@ -1786,38 +1402,6 @@
       "aperture": "f/2.8",
       "shutter": "1/40 s",
       "iso": 1000,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "990f7d2d6b46339c0e6a0d83",
-    "src": "https://img.mockingbird.team/gallery/2025/09/display/990f7d2d6b46339c0e6a0d83-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/09/thumb/990f7d2d6b46339c0e6a0d83.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-09-01T08:37:53.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Jiading, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/60 s",
-      "iso": 200,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -2080,38 +1664,6 @@
     "draft": false
   },
   {
-    "id": "7ff3db1c89a155cb3b6fd3a4",
-    "src": "https://img.mockingbird.team/gallery/2025/06/display/7ff3db1c89a155cb3b6fd3a4-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/06/thumb/7ff3db1c89a155cb3b6fd3a4.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-06-03T06:27:07.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Laoshan, Qingdao, Shandong, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/2400 s",
-      "iso": 50,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "91f3ebee93ca8903065332e6",
     "src": "https://img.mockingbird.team/gallery/2025/06/display/91f3ebee93ca8903065332e6-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/06/thumb/91f3ebee93ca8903065332e6.webp",
@@ -2368,70 +1920,6 @@
     "draft": false
   },
   {
-    "id": "32c89c0aae8060e5e51492df",
-    "src": "https://img.mockingbird.team/gallery/2025/04/display/32c89c0aae8060e5e51492df-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/32c89c0aae8060e5e51492df.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2025-04-18T05:17:14.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Nara, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/100 s",
-      "iso": 160,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "7fed617f53627279c18030b7",
-    "src": "https://img.mockingbird.team/gallery/2025/04/display/7fed617f53627279c18030b7-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/7fed617f53627279c18030b7.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-04-18T05:09:44.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Nara, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/950 s",
-      "iso": 100,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "44f8c51804d914de0d445740",
     "src": "https://img.mockingbird.team/gallery/2025/04/display/44f8c51804d914de0d445740-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/44f8c51804d914de0d445740.webp",
@@ -2656,38 +2144,6 @@
     "draft": false
   },
   {
-    "id": "e0ba5aca3c83a8e44f5bdb5e",
-    "src": "https://img.mockingbird.team/gallery/2025/04/display/e0ba5aca3c83a8e44f5bdb5e-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/e0ba5aca3c83a8e44f5bdb5e.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-04-15T10:44:53.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Kyoto, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/40 s",
-      "iso": 250,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "d48d50a26535a073930ae09b",
     "src": "https://img.mockingbird.team/gallery/2025/04/display/d48d50a26535a073930ae09b-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/d48d50a26535a073930ae09b.webp",
@@ -2746,38 +2202,6 @@
       "aperture": "f/1.8",
       "shutter": "1/120 s",
       "iso": 125,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "2fec8667d2feed7a66d7511d",
-    "src": "https://img.mockingbird.team/gallery/2025/04/display/2fec8667d2feed7a66d7511d-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/2fec8667d2feed7a66d7511d.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-04-15T07:12:05.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Kyoto, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 6.765mm f/1.78",
-      "focalLength": "6.8 mm",
-      "aperture": "f/1.8",
-      "shutter": "1/8000 s",
-      "iso": 100,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -2912,38 +2336,6 @@
     "draft": false
   },
   {
-    "id": "eab8778c601bfba1fce3bda7",
-    "src": "https://img.mockingbird.team/gallery/2025/04/display/eab8778c601bfba1fce3bda7-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/eab8778c601bfba1fce3bda7.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-04-14T03:02:11.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Himeji, Hyogo, Japan"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/1400 s",
-      "iso": 25,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "1459aee5a9e127b44f3c4b1d",
     "src": "https://img.mockingbird.team/gallery/2025/04/display/1459aee5a9e127b44f3c4b1d-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/04/thumb/1459aee5a9e127b44f3c4b1d.webp",
@@ -3066,38 +2458,6 @@
       "aperture": "f/2.2",
       "shutter": "1/750 s",
       "iso": 40,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "80a38ddbd955691073b81189",
-    "src": "https://img.mockingbird.team/gallery/2025/03/display/80a38ddbd955691073b81189-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/03/thumb/80a38ddbd955691073b81189.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2025-03-15T10:06:17.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Jiading, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/40 s",
-      "iso": 1600,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -3424,38 +2784,6 @@
     "draft": false
   },
   {
-    "id": "1e690b99442e8a68c2342221",
-    "src": "https://img.mockingbird.team/gallery/2025/01/display/1e690b99442e8a68c2342221-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/01/thumb/1e690b99442e8a68c2342221.webp",
-    "width": 2560,
-    "height": 1707,
-    "takenAt": "2025-01-01T03:21:55.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Xihu, Hangzhou, Zhejiang, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Nikon D7100",
-      "lens": "12.0-24.0 mm f/4.0",
-      "focalLength": "12 mm",
-      "aperture": "f/5.6",
-      "shutter": "1/1000 s",
-      "iso": 160,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "ad8082259b18f6bd090d9289",
     "src": "https://img.mockingbird.team/gallery/2025/01/display/ad8082259b18f6bd090d9289-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2025/01/thumb/ad8082259b18f6bd090d9289.webp",
@@ -3545,38 +2873,6 @@
       "focalLength": "22 mm",
       "aperture": "f/5.6",
       "shutter": "1/60 s",
-      "iso": 125,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "20c3299ebce7515afcca31af",
-    "src": "https://img.mockingbird.team/gallery/2025/01/display/20c3299ebce7515afcca31af-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2025/01/thumb/20c3299ebce7515afcca31af.webp",
-    "width": 1707,
-    "height": 2560,
-    "takenAt": "2025-01-01T01:34:19.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Xihu, Hangzhou, Zhejiang, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Nikon D7100",
-      "lens": "12.0-24.0 mm f/4.0",
-      "focalLength": "12 mm",
-      "aperture": "f/5.6",
-      "shutter": "1/2000 s",
       "iso": 125,
       "exposureCompensation": "0 EV"
     },
@@ -3712,38 +3008,6 @@
     "draft": false
   },
   {
-    "id": "320b01a913196c14778b3815",
-    "src": "https://img.mockingbird.team/gallery/2024/12/display/320b01a913196c14778b3815-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2024/12/thumb/320b01a913196c14778b3815.webp",
-    "width": 1920,
-    "height": 2560,
-    "takenAt": "2024-12-22T01:11:39.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Huangpu, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 9mm f/2.8",
-      "focalLength": "9 mm",
-      "aperture": "f/2.8",
-      "shutter": "1/50 s",
-      "iso": 320,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "89c1f492ed3543b4c9f22c8d",
     "src": "https://img.mockingbird.team/gallery/2024/12/display/89c1f492ed3543b4c9f22c8d-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2024/12/thumb/89c1f492ed3543b4c9f22c8d.webp",
@@ -3834,70 +3098,6 @@
       "aperture": "f/8",
       "shutter": "1/125 s",
       "iso": 100,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "13ce3090232beec8bf060394",
-    "src": "https://img.mockingbird.team/gallery/2024/10/display/13ce3090232beec8bf060394-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2024/10/thumb/13ce3090232beec8bf060394.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2024-10-03T09:59:48.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Pudong, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/57 s",
-      "iso": 640,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "5857a51cb7385d70ca206ec2",
-    "src": "https://img.mockingbird.team/gallery/2024/09/display/5857a51cb7385d70ca206ec2-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2024/09/thumb/5857a51cb7385d70ca206ec2.webp",
-    "width": 2560,
-    "height": 1920,
-    "takenAt": "2024-09-22T10:00:45.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Pudong, Shanghai, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Apple iPhone 15 Pro",
-      "lens": "iPhone 15 Pro back triple camera 2.22mm f/2.2",
-      "focalLength": "2.2 mm",
-      "aperture": "f/2.2",
-      "shutter": "1/100 s",
-      "iso": 250,
       "exposureCompensation": "0 EV"
     },
     "watermarked": true,
@@ -4539,38 +3739,6 @@
       "shutter": "1/2000 s",
       "iso": 100,
       "exposureCompensation": "−0.7 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "c1821bd9c1915fffe84c980a",
-    "src": "https://img.mockingbird.team/gallery/2023/04/display/c1821bd9c1915fffe84c980a-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2023/04/thumb/c1821bd9c1915fffe84c980a.webp",
-    "width": 2560,
-    "height": 1707,
-    "takenAt": "2023-04-15T10:48:49.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Xigang, Dalian, Liaoning, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Nikon D7100",
-      "lens": "35.0 mm f/1.8",
-      "focalLength": "35 mm",
-      "aperture": "f/5.6",
-      "shutter": "2 s",
-      "iso": 100,
-      "exposureCompensation": "0 EV"
     },
     "watermarked": true,
     "draft": false
@@ -6287,68 +5455,6 @@
     "draft": false
   },
   {
-    "id": "69d138c6cfbc984c6fa11bd5",
-    "src": "https://img.mockingbird.team/gallery/2021/05/display/69d138c6cfbc984c6fa11bd5-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2021/05/thumb/69d138c6cfbc984c6fa11bd5.webp",
-    "width": 2560,
-    "height": 1707,
-    "takenAt": "2021-05-02T07:50:49.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Daowai, Harbin, Heilongjiang, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Fujifilm X-A5",
-      "lens": "SMC Pentax-M 75–150 mm f/4",
-      "focalLength": "Unknown",
-      "shutter": "1/400 s",
-      "iso": 250,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "51555650f39432929f3da8f5",
-    "src": "https://img.mockingbird.team/gallery/2021/05/display/51555650f39432929f3da8f5-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2021/05/thumb/51555650f39432929f3da8f5.webp",
-    "width": 2560,
-    "height": 1707,
-    "takenAt": "2021-05-02T07:09:13.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Daoli, Harbin, Heilongjiang, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Fujifilm X-A5",
-      "lens": "SMC Pentax-M 75–150 mm f/4",
-      "focalLength": "Unknown",
-      "shutter": "1/3200 s",
-      "iso": 250,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
     "id": "69a11574944f8b2a74d4185b",
     "src": "https://img.mockingbird.team/gallery/2021/05/display/69a11574944f8b2a74d4185b-wm.webp",
     "thumb": "https://img.mockingbird.team/gallery/2021/05/thumb/69a11574944f8b2a74d4185b.webp",
@@ -6405,37 +5511,6 @@
       "focalLength": "15 mm",
       "aperture": "f/5.6",
       "shutter": "1/20 s",
-      "iso": 800,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "264f99c97e51854bc5bb25e3",
-    "src": "https://img.mockingbird.team/gallery/2021/05/display/264f99c97e51854bc5bb25e3-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2021/05/thumb/264f99c97e51854bc5bb25e3.webp",
-    "width": 1707,
-    "height": 2560,
-    "takenAt": "2021-05-01T10:33:54.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Daoli, Harbin, Heilongjiang, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Fujifilm X-A5",
-      "lens": "SMC Pentax-M 75–150 mm f/4",
-      "focalLength": "Unknown",
-      "shutter": "1/100 s",
       "iso": 800,
       "exposureCompensation": "0 EV"
     },
@@ -6689,38 +5764,6 @@
       "focalLength": "28.8 mm",
       "aperture": "f/5.6",
       "shutter": "1/900 s",
-      "iso": 200,
-      "exposureCompensation": "0 EV"
-    },
-    "watermarked": true,
-    "draft": false
-  },
-  {
-    "id": "9fd9bd4dd9ef02829b39d9ae",
-    "src": "https://img.mockingbird.team/gallery/2021/04/display/9fd9bd4dd9ef02829b39d9ae-wm.webp",
-    "thumb": "https://img.mockingbird.team/gallery/2021/04/thumb/9fd9bd4dd9ef02829b39d9ae.webp",
-    "width": 1707,
-    "height": 2560,
-    "takenAt": "2021-04-03T03:49:24.000Z",
-    "title": {
-      "zh": "",
-      "en": ""
-    },
-    "caption": {
-      "zh": "",
-      "en": ""
-    },
-    "location": {
-      "zh": "",
-      "en": "Changyi, Jilin City, Jilin, China"
-    },
-    "tags": [],
-    "exif": {
-      "camera": "Fujifilm X-A5",
-      "lens": "XC15-45mmF3.5-5.6 OIS PZ",
-      "focalLength": "45 mm",
-      "aperture": "f/5.6",
-      "shutter": "1/280 s",
       "iso": 200,
       "exposureCompensation": "0 EV"
     },

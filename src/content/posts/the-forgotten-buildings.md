@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2021-03-21
 cover: 'https://img.mockingbird.team/images/2026/08/8581e4e95e7d38e1fffb866e99191d95.webp'
 featured: false
-tags: ['建筑', '历史', '长春']
 draft: false
 lang: zh
 ---

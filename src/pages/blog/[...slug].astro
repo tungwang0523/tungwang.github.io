@@ -102,18 +102,6 @@ const enHref =
     <span>{readTime}</span>
   </div>
 
-  {
-    post.data.tags.length > 0 && (
-      <div class="tag-list">
-        {post.data.tags.map((tag) => (
-          <a href={`/tags/${tag}`}>{tag}</a>
-        ))}
-      </div>
-    )
-  }
-
-  <hr class="post-intro-divider" />
-
   <div class="blog-post-layout">
     <BlogTableOfContents headings={headings} lang={post.data.lang} variant="desktop" />
     <div class="prose" data-lightbox-scope>

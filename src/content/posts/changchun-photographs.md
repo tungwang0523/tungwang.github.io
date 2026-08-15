@@ -5,7 +5,6 @@ author: 'Tung Wang'
 date: 2021-10-27
 cover: 'https://picx.zhimg.com/v2-1f067171da34de88b014958ed388e967.jpg?source=2c26e567'
 featured: false
-tags: ['摄影', '城市', '长春']
 draft: false
 lang: zh
 ---

@@ -43,14 +43,5 @@ const srcset = cloudflareSrcset(post.data.cover, imagePresets.listing.widths, {
       {cardTitle}
     </h2>
     <p class="post-card__excerpt">{post.data.excerpt}</p>
-    {
-      post.data.tags.length > 0 && (
-        <div class="post-card__tags">
-          {post.data.tags.map((tag) => (
-            <span>{tag}</span>
-          ))}
-        </div>
-      )
-    }
   </div>
 </a>
