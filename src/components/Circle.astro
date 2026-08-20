@@ -26,15 +26,22 @@ const {
   href ? (
     <a class="circle" href={href}>
       <div class="circle-title">
-        <span data-copy-language="zh">{title}</span><span data-copy-language="en">{titleEn}</span>
+        <>
+          <span data-copy-language="zh">{title}</span>
+          <span data-copy-language="en">{titleEn}</span>
+        </>
       </div>
       {subtitle && (
         <div class="circle-subtitle">
-          <span data-copy-language="zh">{subtitle}</span><span data-copy-language="en">{subtitleEn}</span>
+          <span data-copy-language="zh">{subtitle}</span>
+          <span data-copy-language="en">{subtitleEn}</span>
         </div>
       )}
       <div class="circle-footer">
-        <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+        <>
+          <span data-copy-language="zh">{cta}</span>
+          <span data-copy-language="en">{ctaEn}</span>
+        </>
         {showArrow && (
           <svg class="circle-footer__arrow" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 5l14 14M5 19h14V5" />
@@ -45,15 +52,22 @@ const {
   ) : (
     <div class="circle">
       <div class="circle-title">
-        <span data-copy-language="zh">{title}</span><span data-copy-language="en">{titleEn}</span>
+        <>
+          <span data-copy-language="zh">{title}</span>
+          <span data-copy-language="en">{titleEn}</span>
+        </>
       </div>
       {subtitle && (
         <div class="circle-subtitle">
-          <span data-copy-language="zh">{subtitle}</span><span data-copy-language="en">{subtitleEn}</span>
+          <span data-copy-language="zh">{subtitle}</span>
+          <span data-copy-language="en">{subtitleEn}</span>
         </div>
       )}
       <div class="circle-footer">
-        <span data-copy-language="zh">{cta}</span><span data-copy-language="en">{ctaEn}</span>
+        <>
+          <span data-copy-language="zh">{cta}</span>
+          <span data-copy-language="en">{ctaEn}</span>
+        </>
         {showArrow && (
           <svg class="circle-footer__arrow" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 5l14 14M5 19h14V5" />

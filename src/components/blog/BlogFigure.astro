@@ -30,8 +30,7 @@ const {
 
 const remote = isCloudflareImage(src);
 const widths = [320, 480, 960, 1440];
-const displayWidth =
-  layout === 'normal' || layout === 'portrait' ? 480 : 720;
+const displayWidth = layout === 'normal' || layout === 'portrait' ? 480 : 720;
 const renderedSrc = remote
   ? cloudflareImage(src, {
       width: displayWidth,

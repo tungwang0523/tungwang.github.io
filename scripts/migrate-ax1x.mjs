@@ -9,7 +9,8 @@ const { PicGo } = require('/Users/tungwang/Library/Application Support/picgo/nod
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const postsDir = join(root, 'src/content/posts');
-const configPath = process.env.PICGO_CONFIG || join(homedir(), 'Library/Application Support/picgo/data.json');
+const configPath =
+  process.env.PICGO_CONFIG || join(homedir(), 'Library/Application Support/picgo/data.json');
 const mapPath = join('/tmp', 'tung-ax1x-migration-map.json');
 const urlPattern = /https?:\/\/(?:[a-z0-9-]+\.)*ax1x\.com\/[^\s)\]>'"]+/gi;
 const retryCount = 3;
@@ -18,11 +19,13 @@ const sleep = (ms) => new Promise((resolveSleep) => setTimeout(resolveSleep, ms)
 
 async function postFiles() {
   const names = (await readdir(postsDir)).filter((name) => name.endsWith('.md')).sort();
-  return Promise.all(names.map(async (name) => ({
-    name,
-    path: join(postsDir, name),
-    text: await readFile(join(postsDir, name), 'utf8'),
-  })));
+  return Promise.all(
+    names.map(async (name) => ({
+      name,
+      path: join(postsDir, name),
+      text: await readFile(join(postsDir, name), 'utf8'),
+    })),
+  );
 }
 
 async function existingMapping() {

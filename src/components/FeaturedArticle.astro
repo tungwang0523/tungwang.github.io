@@ -80,11 +80,16 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
       </h2>
       <p>{excerpt}</p>
       <div class="featured-content__actions">
-        {hasNext && (
-          <button type="button" data-featured-next aria-label="Scroll to the next section">
-            Next <span class="featured-next__arrow" aria-hidden="true">↓</span>
-          </button>
-        )}
+        {
+          hasNext && (
+            <button type="button" data-featured-next aria-label="Scroll to the next section">
+              Next{' '}
+              <span class="featured-next__arrow" aria-hidden="true">
+                ↓
+              </span>
+            </button>
+          )
+        }
         <a href={href}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -178,21 +183,21 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
     };
   })();
 
-  document
-    .querySelectorAll<HTMLElement>(".blog-header[data-section='works']")
-    .forEach((header) => {
-      if (header.dataset.workCropReady === 'true') return;
-      header.dataset.workCropReady = 'true';
+  document.querySelectorAll<HTMLElement>(".blog-header[data-section='works']").forEach((header) => {
+    if (header.dataset.workCropReady === 'true') return;
+    header.dataset.workCropReady = 'true';
 
-      const observer = new ResizeObserver(() => scheduleWorkCrop(header));
-      observer.observe(header);
-      const copy = header.querySelector<HTMLElement>('.featured-content__copy');
-      if (copy) observer.observe(copy);
-      scheduleWorkCrop(header);
-    });
+    const observer = new ResizeObserver(() => scheduleWorkCrop(header));
+    observer.observe(header);
+    const copy = header.querySelector<HTMLElement>('.featured-content__copy');
+    if (copy) observer.observe(copy);
+    scheduleWorkCrop(header);
+  });
 
   document
-    .querySelectorAll<HTMLElement>(".blog-header[data-section='writing'], .blog-header[data-section='gallery']")
+    .querySelectorAll<HTMLElement>(
+      ".blog-header[data-section='writing'], .blog-header[data-section='gallery']",
+    )
     .forEach((header) => {
       if (header.dataset.writingArtworkReady === 'true') return;
       header.dataset.writingArtworkReady = 'true';

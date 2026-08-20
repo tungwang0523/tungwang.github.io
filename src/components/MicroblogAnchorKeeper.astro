@@ -18,7 +18,11 @@
       const archive = document.querySelector('.microblog-archive');
       const scrollContainer = document.querySelector('.page--content-card');
       const target = readHashTarget();
-      if (!(archive instanceof HTMLElement) || !(target instanceof HTMLElement) || !archive.contains(target)) {
+      if (
+        !(archive instanceof HTMLElement) ||
+        !(target instanceof HTMLElement) ||
+        !archive.contains(target)
+      ) {
         return;
       }
 
@@ -31,15 +35,19 @@
 
       const topGuide = () => {
         const navigation = document.querySelector('.page-nav');
-        const navigationBottom = navigation instanceof HTMLElement
-          ? navigation.getBoundingClientRect().bottom
-          : Number.parseFloat(
-              getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
-            ) || 0;
+        const navigationBottom =
+          navigation instanceof HTMLElement
+            ? navigation.getBoundingClientRect().bottom
+            : Number.parseFloat(
+                getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+              ) || 0;
         let guide = navigationBottom + 16;
 
         const languageBar = archive.querySelector('.microblog-archive__language');
-        if (languageBar instanceof HTMLElement && getComputedStyle(languageBar).position === 'sticky') {
+        if (
+          languageBar instanceof HTMLElement &&
+          getComputedStyle(languageBar).position === 'sticky'
+        ) {
           const barRect = languageBar.getBoundingClientRect();
           const stickyTop = Number.parseFloat(getComputedStyle(languageBar).top);
           const isStuck = Number.isFinite(stickyTop) && barRect.top <= stickyTop + 2;

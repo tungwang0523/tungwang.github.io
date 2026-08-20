@@ -7,8 +7,9 @@ import FeaturedArticle from '../components/FeaturedArticle.astro';
 import Sidebar from '../components/Sidebar.astro';
 
 const sections = await getCollection('home');
-const microblogEntries = (await getCollection('microblog', ({ data }) => !data.draft))
-  .sort((a, b) => +b.data.date - +a.data.date);
+const microblogEntries = (await getCollection('microblog', ({ data }) => !data.draft)).sort(
+  (a, b) => +b.data.date - +a.data.date,
+);
 // The homepage window is anchored to the build system clock, not to the newest post.
 const sixMonthsAgo = new Date();
 sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
@@ -276,12 +277,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     track.addEventListener(
       'touchmove',
       (event) => {
-        if (
-          activeIndex !== 0 ||
-          touchHintShown ||
-          touchStartX === null ||
-          touchStartY === null
-        )
+        if (activeIndex !== 0 || touchHintShown || touchStartX === null || touchStartY === null)
           return;
         const touch = event.changedTouches[0];
         if (!touch) return;

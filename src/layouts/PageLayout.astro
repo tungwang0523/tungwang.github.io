@@ -59,11 +59,7 @@ const rootClass = [
   .join(' ');
 const hasAdaptiveSectionBrand = sectionLanding || contentCard || titleInBrand;
 const sectionHref =
-  activeSection === 'research'
-    ? '/academic'
-    : activeSection
-      ? `/${activeSection}`
-      : '/';
+  activeSection === 'research' ? '/academic' : activeSection ? `/${activeSection}` : '/';
 const mobileBrandExpanded =
   activeSection === 'research'
     ? 'Tung’s Research'
@@ -71,11 +67,11 @@ const mobileBrandExpanded =
       ? 'Tung’s Work'
       : activeSection === 'gallery'
         ? 'Tung’s Gallery'
-      : activeSection === 'blog'
-        ? 'Tung’s Blog'
-        : activeSection === 'microblog'
-          ? 'Tung’s Microblog'
-          : undefined;
+        : activeSection === 'blog'
+          ? 'Tung’s Blog'
+          : activeSection === 'microblog'
+            ? 'Tung’s Microblog'
+            : undefined;
 const heroSrc = heroImage
   ? cloudflareImage(heroImage, {
       width: 960,
@@ -101,12 +97,14 @@ const heroSrcset = heroImage
   canonicalUrl={canonicalUrl}
   rootClass={rootClass || undefined}
 >
-  <div class:list={[
-    'page',
-    pageClass,
-    sectionLanding && 'page--section-landing',
-    contentCard && 'page--content-card',
-  ]}>
+  <div
+    class:list={[
+      'page',
+      pageClass,
+      sectionLanding && 'page--section-landing',
+      contentCard && 'page--content-card',
+    ]}
+  >
     {isBlogPost && <div class="blog-paper-viewport-top" aria-hidden="true" />}
     {isBlogPost && <div class="blog-paper-viewport-bottom" aria-hidden="true" />}
     {contentCard && <div class="page-content-card-viewport" aria-hidden="true" />}
@@ -123,17 +121,15 @@ const heroSrcset = heroImage
       {
         headerLanguage && (
           <div class="page-header-language page-header-language--mobile">
-            {
-              headerLanguage === 'blog' ? (
-                <BlogLanguageToggle
-                  current={languageCurrent}
-                  zhHref={languageZhHref}
-                  enHref={languageEnHref}
-                />
-              ) : (
-                <MicroblogLanguageToggle />
-              )
-            }
+            {headerLanguage === 'blog' ? (
+              <BlogLanguageToggle
+                current={languageCurrent}
+                zhHref={languageZhHref}
+                enHref={languageEnHref}
+              />
+            ) : (
+              <MicroblogLanguageToggle />
+            )}
           </div>
         )
       }
@@ -162,61 +158,75 @@ const heroSrcset = heroImage
         </a>
         <div class="page-nav__controls">
           <nav aria-label="Primary">
-            {
-              (activeSection === 'work' || activeSection === 'gallery') && (
-                <a href="/">Home</a>
-              )
-            }
+            {(activeSection === 'work' || activeSection === 'gallery') && <a href="/">Home</a>}
             {
               activeSection === 'research' ? (
-                <span class="page-nav__current" aria-current="page">Research</span>
+                <span class="page-nav__current" aria-current="page">
+                  Research
+                </span>
               ) : (
-                <a href="/academic" data-cv-site-link>Research</a>
+                <a href="/academic" data-cv-site-link>
+                  Research
+                </a>
               )
             }
             {
               activeSection === 'work' ? (
-                <span class="page-nav__current" aria-current="page">Work</span>
+                <span class="page-nav__current" aria-current="page">
+                  Work
+                </span>
               ) : (
-                <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>Work</a>
+                <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>
+                  Work
+                </a>
               )
             }
             {
               activeSection === 'blog' ? (
-                <span class="page-nav__current" aria-current="page">Blog</span>
+                <span class="page-nav__current" aria-current="page">
+                  Blog
+                </span>
               ) : (
-                <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>Blog</a>
+                <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>
+                  Blog
+                </a>
               )
             }
             {
               activeSection === 'microblog' ? (
-                <span class="page-nav__current" aria-current="page">Microblog</span>
+                <span class="page-nav__current" aria-current="page">
+                  Microblog
+                </span>
               ) : (
-                <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>Microblog</a>
+                <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>
+                  Microblog
+                </a>
               )
             }
             {
               activeSection === 'gallery' ? (
-                <span class="page-nav__current" aria-current="page">Gallery</span>
+                <span class="page-nav__current" aria-current="page">
+                  Gallery
+                </span>
               ) : (
-                <a href="/gallery" data-main-site-link={mainSiteNavigation || undefined}>Gallery</a>
+                <a href="/gallery" data-main-site-link={mainSiteNavigation || undefined}>
+                  Gallery
+                </a>
               )
             }
           </nav>
           {
             headerLanguage && (
               <div class="page-header-language page-header-language--desktop">
-                {
-                  headerLanguage === 'blog' ? (
-                    <BlogLanguageToggle
-                      current={languageCurrent}
-                      zhHref={languageZhHref}
-                      enHref={languageEnHref}
-                    />
-                  ) : (
-                    <MicroblogLanguageToggle />
-                  )
-                }
+                {headerLanguage === 'blog' ? (
+                  <BlogLanguageToggle
+                    current={languageCurrent}
+                    zhHref={languageZhHref}
+                    enHref={languageEnHref}
+                  />
+                ) : (
+                  <MicroblogLanguageToggle />
+                )}
               </div>
             )
           }
@@ -262,23 +272,20 @@ const heroSrcset = heroImage
   </div>
 </BaseLayout>
 
-{
-  mainSiteNavigation && (
-    <script is:inline>
-      (() => {
-        const prefixes = ['cv.', 'academic.'];
-        const prefix = prefixes.find((value) => window.location.hostname.startsWith(value));
-        if (!prefix) return;
+<script is:inline data-enabled={mainSiteNavigation}>
+  (() => {
+    if (document.currentScript?.dataset.enabled !== 'true') return;
+    const prefixes = ['cv.', 'academic.'];
+    const prefix = prefixes.find((value) => window.location.hostname.startsWith(value));
+    if (!prefix) return;
 
-        const hostname = window.location.hostname.slice(prefix.length);
-        const port = window.location.port ? `:${window.location.port}` : '';
-        const origin = `${window.location.protocol}//${hostname}${port}`;
+    const hostname = window.location.hostname.slice(prefix.length);
+    const port = window.location.port ? `:${window.location.port}` : '';
+    const origin = `${window.location.protocol}//${hostname}${port}`;
 
-        document.querySelectorAll('[data-main-site-link]').forEach((link) => {
-          const href = link.getAttribute('href');
-          if (href?.startsWith('/')) link.setAttribute('href', new URL(href, origin).href);
-        });
-      })();
-    </script>
-  )
-}
+    document.querySelectorAll('[data-main-site-link]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href?.startsWith('/')) link.setAttribute('href', new URL(href, origin).href);
+    });
+  })();
+</script>

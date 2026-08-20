@@ -529,7 +529,9 @@ body.menu-open {
       &.is-visible {
         animation: mobile-swipe-hint 1.65s ease both;
 
-        b { animation: mobile-swipe-dot 1.65s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        b {
+          animation: mobile-swipe-dot 1.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
       }
     }
   }
@@ -648,19 +650,39 @@ body.menu-open {
 }
 
 @keyframes mobile-swipe-hint {
-  0% { opacity: 0; transform: translateY(12px) scale(0.97); }
-  10%, 82% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-6px) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  10%,
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(1);
+  }
 }
 
 @keyframes mobile-swipe-dot {
-  0%, 14% { transform: translate(0, -50%) scale(1); }
-  66% { transform: translate(calc(var(--swipe-run) * -1), -50%) scale(1); }
-  82%, 100% { transform: translate(calc(var(--swipe-run) * -1), -50%) scale(0.72); }
+  0%,
+  14% {
+    transform: translate(0, -50%) scale(1);
+  }
+  66% {
+    transform: translate(calc(var(--swipe-run) * -1), -50%) scale(1);
+  }
+  82%,
+  100% {
+    transform: translate(calc(var(--swipe-run) * -1), -50%) scale(0.72);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mobile-featured__swipe-hint { display: none; }
+  .mobile-featured__swipe-hint {
+    display: none;
+  }
 }
 
 /* Smooth scroll for in-page nav */

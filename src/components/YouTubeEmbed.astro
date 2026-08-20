@@ -16,12 +16,7 @@ const posterUrl = poster ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg
 const fallbackPosterUrl = poster ? undefined : `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
-<div
-  class="youtube-embed-lite"
-  data-youtube-embed
-  data-video-id={videoId}
-  data-video-title={title}
->
+<div class="youtube-embed-lite" data-youtube-embed data-video-id={videoId} data-video-title={title}>
   <div class="youtube-embed-lite__stage">
     <img
       class="youtube-embed-lite__poster"

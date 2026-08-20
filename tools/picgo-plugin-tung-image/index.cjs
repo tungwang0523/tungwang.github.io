@@ -2,8 +2,7 @@ const { readFile } = require('node:fs/promises');
 const { basename, extname, resolve } = require('node:path');
 
 const pluginName = 'picgo-plugin-tung-image';
-const defaultWatermark =
-  '/Users/tungwang/Websites/Tung Wang/public/pictures/watermark.png';
+const defaultWatermark = '/Users/tungwang/Websites/Tung Wang/public/pictures/watermark.png';
 let imageProcessor;
 
 function getImageProcessor() {
@@ -60,7 +59,10 @@ async function processImage(image, config) {
 
   const watermark = await sharp(config.watermarkPath)
     .ensureAlpha()
-    .resize({ width: Math.max(1, Math.round(width * config.watermarkScale)), withoutEnlargement: true })
+    .resize({
+      width: Math.max(1, Math.round(width * config.watermarkScale)),
+      withoutEnlargement: true,
+    })
     .linear([1, 1, 1, config.opacity], [0, 0, 0, 0])
     .png()
     .toBuffer();
@@ -132,13 +134,43 @@ function getSettings(ctx) {
 function config(ctx) {
   const settings = getSettings(ctx);
   return [
-    { name: 'maxEdge', type: 'input', default: settings.maxEdge, message: 'Longest image edge in pixels (2560 recommended)' },
-    { name: 'quality', type: 'input', default: settings.quality, message: 'WebP quality, 1 to 100' },
+    {
+      name: 'maxEdge',
+      type: 'input',
+      default: settings.maxEdge,
+      message: 'Longest image edge in pixels (2560 recommended)',
+    },
+    {
+      name: 'quality',
+      type: 'input',
+      default: settings.quality,
+      message: 'WebP quality, 1 to 100',
+    },
     { name: 'lossless', type: 'confirm', default: settings.lossless, message: 'Use lossless WebP' },
-    { name: 'watermarkPath', type: 'input', default: settings.watermarkPath, message: 'Absolute watermark PNG path' },
-    { name: 'watermarkScale', type: 'input', default: settings.watermarkScale, message: 'Watermark width as a fraction of image width' },
-    { name: 'transparency', type: 'input', default: settings.transparency, message: 'Watermark transparency, 0 to 1 (0 is opaque)' },
-    { name: 'margin', type: 'input', default: settings.margin, message: 'Right and bottom margin in pixels' },
+    {
+      name: 'watermarkPath',
+      type: 'input',
+      default: settings.watermarkPath,
+      message: 'Absolute watermark PNG path',
+    },
+    {
+      name: 'watermarkScale',
+      type: 'input',
+      default: settings.watermarkScale,
+      message: 'Watermark width as a fraction of image width',
+    },
+    {
+      name: 'transparency',
+      type: 'input',
+      default: settings.transparency,
+      message: 'Watermark transparency, 0 to 1 (0 is opaque)',
+    },
+    {
+      name: 'margin',
+      type: 'input',
+      default: settings.margin,
+      message: 'Right and bottom margin in pixels',
+    },
   ];
 }
 
@@ -147,7 +179,9 @@ module.exports = (ctx) => ({
     ctx.helper.beforeUploadPlugins.register(pluginName, {
       handle: async (picgo) => {
         const settings = getSettings(picgo);
-        picgo.output = await Promise.all(picgo.output.map((image) => processImage(image, settings)));
+        picgo.output = await Promise.all(
+          picgo.output.map((image) => processImage(image, settings)),
+        );
         return picgo.output;
       },
     });

@@ -238,16 +238,16 @@ const cleanCamera = (make, model) => {
   const camera = typeof model === 'string' ? model.trim() : '';
   if (!maker) return camera || undefined;
   if (!camera) return maker;
-  let combined = camera.toLowerCase().startsWith(maker.toLowerCase()) ? camera : `${maker} ${camera}`;
+  let combined = camera.toLowerCase().startsWith(maker.toLowerCase())
+    ? camera
+    : `${maker} ${camera}`;
   if (/nikon/i.test(combined)) {
     // "NIKON CORPORATION NIKON D7100" -> "Nikon D7100"
     combined = `Nikon ${combined.replace(/nikon\s*(corporation)?\s*/gi, '').trim()}`;
   } else if (/fujifilm/i.test(combined)) {
     combined = combined.replace(/fujifilm/gi, 'Fujifilm');
   } else if (/xiaomi/i.test(combined)) {
-    combined = combined
-      .replace(/\bxiaomi\b/gi, 'Xiaomi')
-      .replace(/\bM2002J9E\b/i, 'Mi 10 Lite');
+    combined = combined.replace(/\bxiaomi\b/gi, 'Xiaomi').replace(/\bM2002J9E\b/i, 'Mi 10 Lite');
   }
   return combined;
 };
@@ -331,7 +331,9 @@ const convertHeicForSharp = async (path) => {
   }
   const output = join(tmpdir(), `gallery-${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`);
   await new Promise((resolve, reject) => {
-    const child = spawn('sips', ['-s', 'format', 'jpeg', path, '--out', output], { stdio: 'ignore' });
+    const child = spawn('sips', ['-s', 'format', 'jpeg', path, '--out', output], {
+      stdio: 'ignore',
+    });
     child.on('error', reject);
     child.on('close', (code) =>
       code === 0 ? resolve() : reject(new Error(`sips HEIC conversion failed (${code})`)),
@@ -348,46 +350,46 @@ const convertHeicForSharp = async (path) => {
 const makeDerivatives = async (path, options) => {
   const source = await convertHeicForSharp(path);
   try {
-  const displayBase = await sharp(source.path, { failOn: 'none' })
-    .rotate()
-    .resize({ width: 2560, height: 2560, fit: 'inside', withoutEnlargement: true })
-    .webp({ quality: 88, effort: 5 })
-    .toBuffer();
-  const displayInfo = await sharp(displayBase).metadata();
-  let display = displayBase;
-
-  if (options.watermark && displayInfo.width && displayInfo.height) {
-    const mark = await watermarkBuffer(
-      displayInfo.width,
-      options.watermarkScale,
-      options.watermarkOpacity,
-    );
-    const markInfo = await sharp(mark).metadata();
-    const margin = Math.max(18, Math.round(displayInfo.width * 0.018));
-    display = await sharp(displayBase)
-      .composite([
-        {
-          input: mark,
-          left: Math.max(0, displayInfo.width - (markInfo.width || 0) - margin),
-          top: Math.max(0, displayInfo.height - (markInfo.height || 0) - margin),
-        },
-      ])
+    const displayBase = await sharp(source.path, { failOn: 'none' })
+      .rotate()
+      .resize({ width: 2560, height: 2560, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: 88, effort: 5 })
       .toBuffer();
-  }
+    const displayInfo = await sharp(displayBase).metadata();
+    let display = displayBase;
 
-  const thumb = await sharp(source.path, { failOn: 'none' })
-    .rotate()
-    .resize({ width: 720, height: 720, fit: 'inside', withoutEnlargement: true })
-    .webp({ quality: 82, effort: 5 })
-    .toBuffer();
-  const finalInfo = await sharp(display).metadata();
-  return {
-    display,
-    thumb,
-    width: finalInfo.width,
-    height: finalInfo.height,
-  };
+    if (options.watermark && displayInfo.width && displayInfo.height) {
+      const mark = await watermarkBuffer(
+        displayInfo.width,
+        options.watermarkScale,
+        options.watermarkOpacity,
+      );
+      const markInfo = await sharp(mark).metadata();
+      const margin = Math.max(18, Math.round(displayInfo.width * 0.018));
+      display = await sharp(displayBase)
+        .composite([
+          {
+            input: mark,
+            left: Math.max(0, displayInfo.width - (markInfo.width || 0) - margin),
+            top: Math.max(0, displayInfo.height - (markInfo.height || 0) - margin),
+          },
+        ])
+        .webp({ quality: 88, effort: 5 })
+        .toBuffer();
+    }
+
+    const thumb = await sharp(source.path, { failOn: 'none' })
+      .rotate()
+      .resize({ width: 720, height: 720, fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 82, effort: 5 })
+      .toBuffer();
+    const finalInfo = await sharp(display).metadata();
+    return {
+      display,
+      thumb,
+      width: finalInfo.width,
+      height: finalInfo.height,
+    };
   } finally {
     await source.cleanup();
   }

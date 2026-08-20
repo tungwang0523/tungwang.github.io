@@ -6,7 +6,7 @@
   "r2_buckets": [
     {
       "binding": "IMAGES",
-      "bucket_name": "tungwang-images"
-    }
-  ]
+      "bucket_name": "tungwang-images",
+    },
+  ],
 }

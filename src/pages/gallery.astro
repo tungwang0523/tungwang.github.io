@@ -100,6 +100,11 @@ const captionItems = (photo: GalleryPhoto) =>
     [cameraFor(photo), photo.exif?.lens].filter(Boolean).join(' · '),
     technicalLine(photo),
   ].filter((item): item is string => Boolean(item));
+
+const buttonLabelFor = (photo: GalleryPhoto) => {
+  const details = [titleFor(photo), formatDate(photo.takenAt), photo.location?.en].filter(Boolean);
+  return details.length > 0 ? `View photograph — ${details.join(', ')}` : 'View photograph';
+};
 ---
 
 <PageLayout
@@ -116,7 +121,7 @@ const captionItems = (photo: GalleryPhoto) =>
         {Array.from(years).map(([year, yearPhotos]) => (
           <section class="gallery-year" aria-labelledby={`gallery-year-${year}`}>
             <header class="gallery-year__header">
-              <h1 id={`gallery-year-${year}`}>{year}</h1>
+              <h2 id={`gallery-year-${year}`}>{year}</h2>
               <span>
                 {yearPhotos.length} photograph{yearPhotos.length === 1 ? '' : 's'}
               </span>
@@ -143,7 +148,7 @@ const captionItems = (photo: GalleryPhoto) =>
                       data-gallery-lightbox-thumb={photo.thumb}
                       data-gallery-info={infoFor(photo)}
                       data-gallery-alt={title || 'Photograph by Tung Wang'}
-                      aria-label={title ? `View ${title}` : 'View photograph'}
+                      aria-label={buttonLabelFor(photo)}
                     >
                       <img
                         src={photo.thumb}
@@ -181,59 +186,3 @@ const captionItems = (photo: GalleryPhoto) =>
   }
   <GalleryLightbox />
 </PageLayout>
-
-<script>
-  document.querySelectorAll<HTMLElement>('[data-gallery-wall]').forEach((wall) => {
-    const photos = Array.from(wall.querySelectorAll<HTMLElement>('[data-gallery-photo]'));
-    let frame = 0;
-
-    const layout = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const styles = getComputedStyle(wall);
-        const available =
-          wall.clientWidth -
-          (Number.parseFloat(styles.paddingLeft) || 0) -
-          (Number.parseFloat(styles.paddingRight) || 0);
-        if (!available) return;
-
-        const gap = Number.parseFloat(styles.columnGap) || 4;
-        const viewportWidth = window.innerWidth;
-        const target = viewportWidth <= 620 ? 240 : viewportWidth <= 1030 ? 220 : 250;
-        const rows: Array<{ items: HTMLElement[]; ratio: number }> = [];
-        let items: HTMLElement[] = [];
-        let ratio = 0;
-
-        photos.forEach((photo) => {
-          const photoRatio = Number.parseFloat(photo.dataset.galleryRatio || '1') || 1;
-          items.push(photo);
-          ratio += photoRatio;
-          if (ratio * target + gap * (items.length - 1) >= available) {
-            rows.push({ items, ratio });
-            items = [];
-            ratio = 0;
-          }
-        });
-        if (items.length) rows.push({ items, ratio });
-
-        rows.forEach((row, rowIndex) => {
-          const complete =
-            rowIndex < rows.length - 1 ||
-            row.ratio * target + gap * (row.items.length - 1) >= available;
-          const height = complete
-            ? (available - gap * (row.items.length - 1)) / row.ratio
-            : Math.min(target, (available - gap * (row.items.length - 1)) / row.ratio);
-
-          row.items.forEach((photo) => {
-            const photoRatio = Number.parseFloat(photo.dataset.galleryRatio || '1') || 1;
-            photo.style.flexBasis = `${photoRatio * height}px`;
-          });
-        });
-      });
-    };
-
-    const observer = new ResizeObserver(layout);
-    observer.observe(wall);
-    layout();
-  });
-</script>

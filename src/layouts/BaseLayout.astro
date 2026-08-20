@@ -32,11 +32,11 @@ const themeColor = rootClasses.includes('blog-paper')
   ? '#000000'
   : rootClasses.includes('gallery-page-root')
     ? '#000000'
-  : rootClasses.includes('home-page')
-    ? '#dddad9'
-    : rootClasses.includes('content-card-page')
+    : rootClasses.includes('home-page')
       ? '#dddad9'
-      : '#e9e6e4';
+      : rootClasses.includes('content-card-page')
+        ? '#dddad9'
+        : '#e9e6e4';
 ---
 
 <!doctype html>
@@ -69,10 +69,7 @@ const themeColor = rootClasses.includes('blog-paper')
     <script is:inline>
       (() => {
         const websiteId = 'c34be2b1-006c-48bc-9249-fcf0712c144d';
-        const productionHosts = new Set([
-          'tung.mockingbird.team',
-          'cv.tung.mockingbird.team',
-        ]);
+        const productionHosts = new Set(['tung.mockingbird.team', 'cv.tung.mockingbird.team']);
         const optOutKey = 'tungs-analytics-disabled';
         const optOutCookie = `${optOutKey}=true`;
         const url = new URL(window.location.href);
@@ -139,72 +136,66 @@ const themeColor = rootClasses.includes('blog-paper')
         window.addEventListener('pagehide', reportActiveTime);
       })();
     </script>
-    {
-      rootClass === 'home-page' && (
-        <script is:inline>
-          (() => {
-            const updateHomeViewportHeight = () => {
-              const height = window.visualViewport?.height ?? window.innerHeight;
-              document.documentElement.style.setProperty(
-                '--home-viewport-height',
-                `${Math.round(height)}px`,
-              );
-            };
+    <script is:inline data-enabled={rootClass === 'home-page'}>
+      (() => {
+        if (document.currentScript?.dataset.enabled !== 'true') return;
+        const updateHomeViewportHeight = () => {
+          const height = window.visualViewport?.height ?? window.innerHeight;
+          document.documentElement.style.setProperty(
+            '--home-viewport-height',
+            `${Math.round(height)}px`,
+          );
+        };
 
-            updateHomeViewportHeight();
-            window.visualViewport?.addEventListener('resize', updateHomeViewportHeight);
-            window.addEventListener('resize', updateHomeViewportHeight);
-            window.addEventListener('orientationchange', () => {
-              window.setTimeout(updateHomeViewportHeight, 120);
-            });
-          })();
-        </script>
-      )
-    }
-    {
-      rootClasses.includes('content-card-page') && (
-        <script is:inline>
-          (() => {
-            const updateContentCardViewport = () => {
-              const viewport = window.visualViewport;
-              const height = viewport?.height ?? window.innerHeight;
-              document.documentElement.style.setProperty(
-                '--content-card-viewport-height',
-                `${Math.round(height)}px`,
-              );
-            };
+        updateHomeViewportHeight();
+        window.visualViewport?.addEventListener('resize', updateHomeViewportHeight);
+        window.addEventListener('resize', updateHomeViewportHeight);
+        window.addEventListener('orientationchange', () => {
+          window.setTimeout(updateHomeViewportHeight, 120);
+        });
+      })();
+    </script>
+    <script is:inline data-enabled={rootClasses.includes('content-card-page')}>
+      (() => {
+        if (document.currentScript?.dataset.enabled !== 'true') return;
+        const updateContentCardViewport = () => {
+          const viewport = window.visualViewport;
+          const height = viewport?.height ?? window.innerHeight;
+          document.documentElement.style.setProperty(
+            '--content-card-viewport-height',
+            `${Math.round(height)}px`,
+          );
+        };
 
-            let refreshFrame = 0;
-            const refreshContentCard = () => {
-              updateContentCardViewport();
+        let refreshFrame = 0;
+        const refreshContentCard = () => {
+          updateContentCardViewport();
 
-              const page = document.querySelector('.page--content-card');
-              if (!(page instanceof HTMLElement)) return;
+          const page = document.querySelector('.page--content-card');
+          if (!(page instanceof HTMLElement)) return;
 
-              const previousTop = page.scrollTop;
-              page.classList.add('is-layout-refreshing');
-              void page.offsetHeight;
+          const previousTop = page.scrollTop;
+          page.classList.add('is-layout-refreshing');
+          void page.offsetHeight;
 
-              cancelAnimationFrame(refreshFrame);
-              refreshFrame = requestAnimationFrame(() => {
-                page.classList.remove('is-layout-refreshing');
-                const maximumTop = Math.max(0, page.scrollHeight - page.clientHeight);
-                page.scrollTop = Math.min(previousTop, maximumTop);
-                updateContentCardViewport();
-              });
-            };
-
+          cancelAnimationFrame(refreshFrame);
+          refreshFrame = requestAnimationFrame(() => {
+            page.classList.remove('is-layout-refreshing');
+            const maximumTop = Math.max(0, page.scrollHeight - page.clientHeight);
+            page.scrollTop = Math.min(previousTop, maximumTop);
             updateContentCardViewport();
-            window.addEventListener('content-card:refresh', refreshContentCard);
-            window.visualViewport?.addEventListener('resize', updateContentCardViewport);
-            window.addEventListener('resize', updateContentCardViewport);
-            window.addEventListener('orientationchange', () => {
-              window.setTimeout(updateContentCardViewport, 120);
-            });
-          })();
-        </script>
-      )
-    }
+          });
+        };
+
+        updateContentCardViewport();
+        window.addEventListener('content-card:refresh', refreshContentCard);
+        window.visualViewport?.addEventListener('resize', updateContentCardViewport);
+        window.addEventListener('resize', updateContentCardViewport);
+        window.addEventListener('orientationchange', () => {
+          window.setTimeout(updateContentCardViewport, 120);
+        });
+      })();
+    </script>
     {isDev && <DevScrollKeeper />}
   </head>
   <body class={rootClass}>

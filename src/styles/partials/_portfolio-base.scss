@@ -1754,14 +1754,6 @@
 
 /* Minetrarchi */
 
-.project-hero--mine {
-  background: #c93028;
-
-  > p {
-    color: #fff;
-  }
-}
-
 /* MineTrArchi hero: content constrained to the page width; exploded diagram
    on the left, statement overlaid on top for a partial-occlusion effect */
 .project-hero--mine {
@@ -1769,6 +1761,11 @@
   --hero-anchor-bottom: clamp(40px, 5vw, 76px);
   overflow: visible;
   min-height: clamp(520px, 60vh, 640px);
+  background: #c93028;
+
+  > p {
+    color: #fff;
+  }
 
   .project-hero__inner {
     position: absolute;

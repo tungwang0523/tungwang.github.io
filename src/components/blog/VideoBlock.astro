@@ -11,18 +11,14 @@ interface Props {
   ratio?: string;
 }
 
-const {
-  src,
-  title,
-  poster,
-  caption,
-  credit,
-  provider = 'auto',
-  ratio = '16 / 9',
-} = Astro.props;
+const { src, title, poster, caption, credit, provider = 'auto', ratio = '16 / 9' } = Astro.props;
 
 const parseUrl = (value: string) => {
-  try { return new URL(value, Astro.url); } catch { return null; }
+  try {
+    return new URL(value, Astro.url);
+  } catch {
+    return null;
+  }
 };
 const url = parseUrl(src);
 const host = url?.hostname.replace(/^www\./, '') ?? '';
@@ -38,16 +34,17 @@ const youtubeId = (() => {
   return null;
 })();
 const bilibiliId = url?.pathname.match(/\/(BV[A-Za-z0-9]+)/)?.[1] ?? null;
-const vimeoId = host.endsWith('vimeo.com') ? url?.pathname.match(/\/(\d+)/)?.[1] ?? null : null;
-const resolvedProvider = provider !== 'auto'
-  ? provider
-  : youtubeId
-    ? 'youtube'
-    : bilibiliId && host.endsWith('bilibili.com')
-      ? 'bilibili'
-      : vimeoId
-        ? 'vimeo'
-        : 'file';
+const vimeoId = host.endsWith('vimeo.com') ? (url?.pathname.match(/\/(\d+)/)?.[1] ?? null) : null;
+const resolvedProvider =
+  provider !== 'auto'
+    ? provider
+    : youtubeId
+      ? 'youtube'
+      : bilibiliId && host.endsWith('bilibili.com')
+        ? 'bilibili'
+        : vimeoId
+          ? 'vimeo'
+          : 'file';
 
 if (resolvedProvider === 'youtube' && (!youtubeId || !/^[A-Za-z0-9_-]{11}$/.test(youtubeId))) {
   throw new Error(`Invalid YouTube URL: ${src}`);
@@ -55,12 +52,14 @@ if (resolvedProvider === 'youtube' && (!youtubeId || !/^[A-Za-z0-9_-]{11}$/.test
 if (resolvedProvider === 'bilibili' && !bilibiliId) throw new Error(`Invalid Bilibili URL: ${src}`);
 if (resolvedProvider === 'vimeo' && !vimeoId) throw new Error(`Invalid Vimeo URL: ${src}`);
 
-const embedUrl = resolvedProvider === 'bilibili'
-  ? `https://player.bilibili.com/player.html?bvid=${bilibiliId}&autoplay=0`
-  : resolvedProvider === 'vimeo'
-    ? `https://player.vimeo.com/video/${vimeoId}?dnt=1`
-    : undefined;
-const providerLabel = resolvedProvider === 'bilibili' ? 'Bilibili' : resolvedProvider === 'vimeo' ? 'Vimeo' : 'Video';
+const embedUrl =
+  resolvedProvider === 'bilibili'
+    ? `https://player.bilibili.com/player.html?bvid=${bilibiliId}&autoplay=0`
+    : resolvedProvider === 'vimeo'
+      ? `https://player.vimeo.com/video/${vimeoId}?dnt=1`
+      : undefined;
+const providerLabel =
+  resolvedProvider === 'bilibili' ? 'Bilibili' : resolvedProvider === 'vimeo' ? 'Vimeo' : 'Video';
 ---
 
 {
@@ -87,7 +86,11 @@ const providerLabel = resolvedProvider === 'bilibili' ? 'Bilibili' : resolvedPro
       <figcaption>
         <span>{caption ?? title}</span>
         {credit && <cite>{credit}</cite>}
-        {resolvedProvider !== 'file' && <a href={src} target="_blank" rel="noreferrer">Open on {providerLabel} ↗</a>}
+        {resolvedProvider !== 'file' && (
+          <a href={src} target="_blank" rel="noreferrer">
+            Open on {providerLabel} ↗
+          </a>
+        )}
       </figcaption>
     </figure>
   )

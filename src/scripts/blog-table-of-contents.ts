@@ -1,0 +1,310 @@
+const initialiseBlogToc = () => {
+  const page = document.querySelector<HTMLElement>('.blog-post-page');
+  const article = document.querySelector<HTMLElement>('.blog-post-layout');
+  if (!page || !article || page.dataset.tocReady === 'true') return;
+  page.dataset.tocReady = 'true';
+
+  const links = Array.from(page.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+  const ids = Array.from(
+    new Set(links.map((link) => link.dataset.tocLink).filter(Boolean)),
+  ) as string[];
+  const headings = ids
+    .map((id) => document.getElementById(id))
+    .filter((heading): heading is HTMLElement => heading instanceof HTMLElement);
+  const currentLabel = page.querySelector<HTMLElement>('[data-toc-current]');
+  const mobileToc = page.querySelector<HTMLDetailsElement>('[data-blog-toc-mobile]');
+  const mobileSummary = mobileToc?.querySelector<HTMLElement>('summary');
+  const mobileList = mobileToc?.querySelector<HTMLOListElement>('nav ol');
+  const desktopToc = page.querySelector<HTMLElement>('[data-blog-toc-desktop]');
+  const desktopList = desktopToc?.querySelector<HTMLOListElement>('[data-blog-toc-list]');
+  const desktopItems = desktopToc
+    ? Array.from(desktopToc.querySelectorAll<HTMLLIElement>('li'))
+    : [];
+
+  if (headings.length === 0) return;
+
+  let currentId = '';
+  let frame = 0;
+  let navigationRequest = 0;
+  let navigationTarget: HTMLElement | null = null;
+  let correctionStart = 0;
+  let correctionUntil = 0;
+  let correctionFrame = 0;
+  let mobileTocAnimating = false;
+  let queuedMobileTocState: boolean | null = null;
+
+  const updateDesktopFades = () => {
+    if (!desktopToc || !desktopList) return;
+    const maxScroll = Math.max(0, desktopList.scrollHeight - desktopList.clientHeight);
+    desktopToc.dataset.tocHasBefore = String(desktopList.scrollTop > 2);
+    desktopToc.dataset.tocHasAfter = String(desktopList.scrollTop < maxScroll - 2);
+  };
+
+  const updateMobileStickyState = (navigationHeight: number) => {
+    if (!mobileToc) return;
+    const top = mobileToc.getBoundingClientRect().top;
+    const configuredTop = Number.parseFloat(window.getComputedStyle(mobileToc).top);
+    const stickyTop = Number.isFinite(configuredTop) ? configuredTop : navigationHeight;
+    mobileToc.dataset.tocStuck = String(top <= stickyTop + 1);
+  };
+
+  const updateMobileFades = () => {
+    if (!mobileToc || !mobileList) return;
+    const maxScroll = Math.max(0, mobileList.scrollHeight - mobileList.clientHeight);
+    mobileToc.dataset.tocHasBefore = String(mobileList.scrollTop > 2);
+    mobileToc.dataset.tocHasAfter = String(maxScroll > 2 && mobileList.scrollTop < maxScroll - 2);
+  };
+
+  const followActiveDesktopItem = (activeIndex: number) => {
+    if (!desktopList || activeIndex < 0) return;
+    const anchorIndex = Math.max(0, activeIndex - 2);
+    const anchor = desktopItems[anchorIndex];
+    if (!anchor) return;
+    desktopList.scrollTop = anchor.offsetTop;
+    updateDesktopFades();
+  };
+
+  const setActive = (active: HTMLElement) => {
+    if (active.id === currentId) return;
+    currentId = active.id;
+
+    links.forEach((link) => {
+      if (link.dataset.tocLink === currentId) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (currentLabel) currentLabel.textContent = active.textContent?.trim() ?? '';
+
+    if (desktopToc && desktopItems.length > 0) {
+      const activeIndex = ids.indexOf(currentId);
+      followActiveDesktopItem(activeIndex);
+    }
+  };
+
+  const update = () => {
+    frame = 0;
+    const navigationHeight =
+      Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+      ) || 0;
+    const mobileVisible = Boolean(mobileToc && getComputedStyle(mobileToc).display !== 'none');
+    updateMobileStickyState(navigationHeight);
+    // On mobile, the reading line is always the lower rule of the TOC bar.
+    // Reading it directly avoids falling back to the page-navigation rule
+    // when sticky-position detection differs by a fractional CSS pixel.
+    const threshold =
+      mobileVisible && mobileSummary
+        ? mobileSummary.getBoundingClientRect().bottom + 16
+        : navigationHeight + 40;
+
+    let active = headings[0];
+
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top <= threshold + 2) active = heading;
+      else break;
+    }
+
+    // The final headings cannot always reach the reading line because the
+    // document has no more content below them. At the page end, use the
+    // last heading that has entered the viewport instead.
+    const atDocumentEnd =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atDocumentEnd) {
+      const lastEnteredHeading = [...headings]
+        .reverse()
+        .find((heading) => heading.getBoundingClientRect().top < window.innerHeight);
+      if (lastEnteredHeading) active = lastEnteredHeading;
+    }
+
+    setActive(active);
+  };
+
+  const requestUpdate = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(update);
+  };
+
+  const readingLine = () => {
+    const navigationHeight =
+      Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
+      ) || 0;
+    const mobileVisible = Boolean(mobileToc && getComputedStyle(mobileToc).display !== 'none');
+    return mobileVisible && mobileSummary
+      ? mobileSummary.getBoundingClientRect().bottom + 16
+      : navigationHeight + 40;
+  };
+
+  const correctNavigationPosition = () => {
+    correctionFrame = 0;
+    if (!navigationTarget || performance.now() > correctionUntil) {
+      navigationTarget = null;
+      return;
+    }
+    // Do not interrupt the initial smooth movement. Once it has normally
+    // settled, compensate for fonts and lazy images expanding above it.
+    if (performance.now() - correctionStart < 650) return;
+    const offset = navigationTarget.getBoundingClientRect().top - readingLine();
+    if (Math.abs(offset) > 2) {
+      window.scrollBy({ top: offset, left: 0, behavior: 'auto' });
+    }
+    requestUpdate();
+  };
+
+  const requestPositionCorrection = () => {
+    if (!navigationTarget || correctionFrame) return;
+    correctionFrame = window.requestAnimationFrame(correctNavigationPosition);
+  };
+
+  const cancelPositionCorrection = () => {
+    navigationTarget = null;
+    correctionUntil = 0;
+  };
+
+  const animateMobileToc = async (opening: boolean) => {
+    if (!mobileToc || !mobileList) return;
+    if (mobileTocAnimating) {
+      queuedMobileTocState = opening;
+      return;
+    }
+    if (mobileToc.open === opening) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      mobileToc.open = opening;
+      return;
+    }
+
+    mobileTocAnimating = true;
+    if (opening) mobileToc.open = true;
+    else mobileToc.dataset.tocClosing = '';
+
+    await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
+    const keyframes = opening
+      ? [
+          {
+            clipPath: 'inset(0 -100vmax 100% -100vmax)',
+            opacity: 0,
+            transform: 'translateY(-8px)',
+          },
+          { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
+        ]
+      : [
+          { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
+          {
+            clipPath: 'inset(0 -100vmax 100% -100vmax)',
+            opacity: 0,
+            transform: 'translateY(-8px)',
+          },
+        ];
+    const nav = mobileToc.querySelector<HTMLElement>('nav');
+    const animation = nav?.animate(keyframes, {
+      duration: 190,
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      fill: 'both',
+    });
+    await animation?.finished.catch(() => undefined);
+
+    if (!opening) {
+      mobileToc.open = false;
+      // WebKit may otherwise cancel the animation before it has applied
+      // the closed details layout, briefly restoring the full nav height.
+      void mobileToc.getBoundingClientRect().height;
+    }
+    animation?.cancel();
+    delete mobileToc.dataset.tocClosing;
+    mobileTocAnimating = false;
+    updateMobileFades();
+
+    const queuedState = queuedMobileTocState;
+    queuedMobileTocState = null;
+    if (queuedState !== null && mobileToc.open !== queuedState) {
+      void animateMobileToc(queuedState);
+    }
+  };
+
+  mobileSummary?.addEventListener('click', (event) => {
+    event.preventDefault();
+    void animateMobileToc(!mobileToc?.open);
+  });
+
+  document.addEventListener('pointerdown', (event) => {
+    if (!mobileToc?.open || !(event.target instanceof Node)) return;
+    if (!mobileToc.contains(event.target)) void animateMobileToc(false);
+  });
+
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const id = link.dataset.tocLink;
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      event.preventDefault();
+
+      const request = ++navigationRequest;
+      const mobileVisible = Boolean(mobileToc && getComputedStyle(mobileToc).display !== 'none');
+
+      const navigate = () => {
+        if (request !== navigationRequest) return;
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto'
+          : 'smooth';
+        navigationTarget = target;
+        correctionStart = performance.now();
+        correctionUntil = correctionStart + 12000;
+        target.scrollIntoView({ behavior, block: 'start' });
+        window.history.replaceState(window.history.state, '', `#${id}`);
+        requestUpdate();
+        [700, 1200, 2200, 4000, 7000, 11000].forEach((delay) => {
+          window.setTimeout(() => {
+            if (request === navigationRequest) requestPositionCorrection();
+          }, delay);
+        });
+      };
+
+      const navigateAfterLayout = () => {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(navigate));
+      };
+
+      if (mobileVisible && mobileToc?.open) {
+        void animateMobileToc(false).then(navigateAfterLayout);
+      } else if (mobileVisible) {
+        navigateAfterLayout();
+      } else {
+        navigate();
+      }
+    });
+  });
+
+  const articleResizeObserver = new ResizeObserver(requestPositionCorrection);
+  articleResizeObserver.observe(article);
+  window.addEventListener('wheel', cancelPositionCorrection, { passive: true });
+  window.addEventListener('touchstart', cancelPositionCorrection, { passive: true });
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileToc?.open) {
+      event.preventDefault();
+      void animateMobileToc(false);
+      mobileSummary?.focus();
+    }
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+      cancelPositionCorrection();
+    }
+  });
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener(
+    'resize',
+    () => {
+      requestUpdate();
+      window.requestAnimationFrame(updateDesktopFades);
+      window.requestAnimationFrame(updateMobileFades);
+    },
+    { passive: true },
+  );
+  desktopList?.addEventListener('scroll', updateDesktopFades, { passive: true });
+  mobileList?.addEventListener('scroll', updateMobileFades, { passive: true });
+  mobileToc?.addEventListener('toggle', () => window.requestAnimationFrame(updateMobileFades));
+  update();
+  window.requestAnimationFrame(updateDesktopFades);
+  window.requestAnimationFrame(updateMobileFades);
+};
+
+initialiseBlogToc();
+document.addEventListener('astro:page-load', initialiseBlogToc);

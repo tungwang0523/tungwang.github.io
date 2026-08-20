@@ -29,9 +29,8 @@ export function calculateReadingTime(body = '') {
 
   const cjkPattern = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/gu;
   const cjkCharacters = readable.match(cjkPattern)?.length ?? 0;
-  const words = readable
-    .replace(cjkPattern, ' ')
-    .match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+  const words =
+    readable.replace(cjkPattern, ' ').match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
   const textSeconds = (cjkCharacters / CJK_CHARACTERS_PER_MINUTE + words / WORDS_PER_MINUTE) * 60;
   const minutes = Math.max(1, Math.ceil((textSeconds + imageViewingSeconds(imageCount)) / 60));
 

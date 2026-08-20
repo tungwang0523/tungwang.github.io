@@ -20,11 +20,7 @@ const regularProjects = projects.filter((project) => project !== featuredProject
   titleInBrand
 >
   <div class="work-index">
-    {
-      featuredProject && (
-        <WorkIndexCard {...featuredProject.data} featured priority />
-      )
-    }
+    {featuredProject && <WorkIndexCard {...featuredProject.data} featured priority />}
     <div class="work-index__grid" data-work-masonry>
       {regularProjects.map((project) => <WorkIndexCard {...project.data} />)}
     </div>

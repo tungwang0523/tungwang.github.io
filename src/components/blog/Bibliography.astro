@@ -22,9 +22,13 @@ const { entries, title = 'References' } = Astro.props;
         <li id={`reference-${entry.id}`}>
           <span>{entry.text}</span>
           {entry.doi ? (
-            <a href={`https://doi.org/${entry.doi}`} target="_blank" rel="noreferrer">doi:{entry.doi}</a>
+            <a href={`https://doi.org/${entry.doi}`} target="_blank" rel="noreferrer">
+              doi:{entry.doi}
+            </a>
           ) : entry.url ? (
-            <a href={entry.url} target="_blank" rel="noreferrer">Source ↗</a>
+            <a href={entry.url} target="_blank" rel="noreferrer">
+              Source ↗
+            </a>
           ) : null}
         </li>
       ))

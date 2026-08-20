@@ -23,7 +23,9 @@ const {
     {
       pageContext.length > 0 && (
         <div class="page-number__context">
-          {pageContext.map((line) => <span>{line}</span>)}
+          {pageContext.map((line) => (
+            <span>{line}</span>
+          ))}
         </div>
       )
     }

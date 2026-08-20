@@ -760,20 +760,12 @@
 
     > .microblog-sidebar__sticky-head {
       display: block;
-      flex: 0 0 calc(
-        clamp(52px, 5.7vw, 100px) +
-        var(--home-card-padding) +
-        var(--home-card-padding) +
-        34px
-      );
+      flex: 0 0
+        calc(clamp(52px, 5.7vw, 100px) + var(--home-card-padding) + var(--home-card-padding) + 34px);
 
       > .blog-right-title-container {
         position: absolute;
-        top: calc(
-          var(--home-card-padding) +
-          clamp(52px, 5.7vw, 100px) +
-          var(--home-card-padding)
-        );
+        top: calc(var(--home-card-padding) + clamp(52px, 5.7vw, 100px) + var(--home-card-padding));
         right: var(--home-card-padding);
         left: var(--home-card-padding);
         align-items: center;
@@ -833,11 +825,7 @@ body.home-page .blog {
   .blog {
     --home-portrait-nav-width: clamp(156px, 17vw, 196px);
     --home-portrait-identity-width: clamp(230px, 25vw, 286px);
-    --home-portrait-feature-height: clamp(
-      760px,
-      calc((100vw - 520px) * 0.75 + 360px),
-      940px
-    );
+    --home-portrait-feature-height: clamp(760px, calc((100vw - 520px) * 0.75 + 360px), 940px);
 
     grid-template-columns:
       var(--home-portrait-nav-width)

@@ -75,7 +75,12 @@ const playerNode = ({ videoId, title }) => {
                 properties: { className: ['youtube-embed-lite__play-icon'], ariaHidden: 'true' },
                 children: [],
               },
-              { type: 'element', tagName: 'span', properties: {}, children: [{ type: 'text', value: 'Play video' }] },
+              {
+                type: 'element',
+                tagName: 'span',
+                properties: {},
+                children: [{ type: 'text', value: 'Play video' }],
+              },
             ],
           },
         ],

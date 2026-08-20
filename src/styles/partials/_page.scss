@@ -286,7 +286,6 @@
           opacity: 1;
         }
       }
-
     }
 
     > .menu-toggle.menu-mobile-only {
@@ -434,18 +433,19 @@ html.content-card-page body.menu-open .page--content-card {
     left: var(--page-content-card-edge);
     height: calc(var(--page-content-card-gap) + var(--page-content-card-radius));
     background:
-      linear-gradient($panel-bg, $panel-bg) left top / 100%
-        var(--page-content-card-gap) no-repeat,
+      linear-gradient($panel-bg, $panel-bg) left top / 100% var(--page-content-card-gap) no-repeat,
       radial-gradient(
-        circle at 100% 100%,
-        transparent var(--page-content-card-radius),
-        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-      ) left bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+          circle at 100% 100%,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        )
+        left bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
       radial-gradient(
-        circle at 0 100%,
-        transparent var(--page-content-card-radius),
-        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-      ) right bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
+          circle at 0 100%,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        )
+        right bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
     pointer-events: none;
   }
 
@@ -462,17 +462,19 @@ html.content-card-page body.menu-open .page--content-card {
     height: calc(var(--page-content-card-radius) + var(--page-content-card-gap));
     background:
       radial-gradient(
-        circle at 100% 0,
-        transparent var(--page-content-card-radius),
-        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-      ) left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+          circle at 100% 0,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        )
+        left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
       radial-gradient(
-        circle at 0 0,
-        transparent var(--page-content-card-radius),
-        $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-      ) right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
-      linear-gradient($panel-bg, $panel-bg) left bottom / 100%
-        var(--page-content-card-gap) no-repeat;
+          circle at 0 0,
+          transparent var(--page-content-card-radius),
+          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+        )
+        right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+      linear-gradient($panel-bg, $panel-bg) left bottom / 100% var(--page-content-card-gap)
+        no-repeat;
     pointer-events: none;
   }
 
@@ -536,15 +538,17 @@ html.content-card-page body.menu-open .page--content-card {
       height: var(--page-content-card-radius);
       background:
         radial-gradient(
-          circle at 100% 0,
-          transparent var(--page-content-card-radius),
-          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-        ) left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+            circle at 100% 0,
+            transparent var(--page-content-card-radius),
+            $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+          )
+          left top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
         radial-gradient(
-          circle at 0 0,
-          transparent var(--page-content-card-radius),
-          $panel-bg calc(var(--page-content-card-radius) + 0.5px)
-        ) right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
+            circle at 0 0,
+            transparent var(--page-content-card-radius),
+            $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+          )
+          right top / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
       transform: translateX(-50%);
       pointer-events: none;
     }
@@ -566,9 +570,7 @@ html.content-card-page body.menu-open .page--content-card {
     }
 
     > .menu-toggle {
-      top: calc(
-        (var(--page-nav-height) + var(--page-content-card-gap) - 28px) / 2
-      );
+      top: calc((var(--page-nav-height) + var(--page-content-card-gap) - 28px) / 2);
     }
 
     > .site-footer .site-footer__inner {

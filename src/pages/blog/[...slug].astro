@@ -17,9 +17,7 @@ import { formatSiteDate } from '../../utils/date';
 export async function getStaticPaths() {
   const posts = (
     await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft)
-  ).sort(
-    (a, b) => +b.data.date - +a.data.date,
-  );
+  ).sort((a, b) => +b.data.date - +a.data.date);
 
   return posts.map((post) => {
     const languagePosts = posts.filter((candidate) => candidate.data.lang === post.data.lang);

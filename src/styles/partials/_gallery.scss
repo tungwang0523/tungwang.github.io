@@ -60,6 +60,11 @@ html.gallery-page-root body {
   margin-top: clamp(52px, 7vw, 96px);
 }
 
+.gallery-year {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1400px;
+}
+
 .gallery-year__header {
   padding-right: clamp(20px, 3vw, 48px);
   padding-left: clamp(20px, 3vw, 48px);
@@ -73,7 +78,7 @@ html.gallery-page-root body {
   margin-bottom: clamp(42px, 6vw, 80px);
   font-family: $title-font;
 
-  h1 {
+  h2 {
     margin: 0;
     font-family: $title-font;
     font-size: clamp(38px, 5vw, 72px);
@@ -198,7 +203,7 @@ html.gallery-page-root body {
   .gallery-year__header {
     margin-bottom: 38px;
 
-    h1 {
+    h2 {
       font-size: clamp(36px, 12vw, 52px);
     }
   }

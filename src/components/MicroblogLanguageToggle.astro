@@ -37,7 +37,8 @@
     document.querySelectorAll<HTMLElement>('[data-microblog-scope]').forEach((scope) => {
       if (scope.dataset.languageReady === 'true') return;
       scope.dataset.languageReady = 'true';
-      const language: MicroblogLanguage = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
+      const language: MicroblogLanguage =
+        new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
       setMicroblogLanguage(scope, language);
 
       document.querySelectorAll<HTMLButtonElement>('[data-language-option]').forEach((button) => {
