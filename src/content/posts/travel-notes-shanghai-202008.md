@@ -21,11 +21,11 @@ lang: zh
 
 可能出了一些什么状况，登记后飞机大约半个小时才起飞。我等待到失去耐心（可能是我没怎么坐过飞机，大惊小怪吧），在电话上还和朋友调侃说：“我感觉呼和浩特和我一块飞起来了。”
 
-![](https://user-assets.sxlcdn.com/images/786672/FoA_qPVAQ_cYnU3i6WajJq4AStv4.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/7d3a6a2edcb99bf7cd73c39762039053d27d4ec8ac2927d00bc8f65eb71889ea.jpg)
 
 从飞机上向外看云层，大约在山西忻州上空。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fj-TgJ_MYNEx_sh7bpXBZHiAh5ae.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/802fe9d31fb4d8c4289c92f14717e2ec39b7ce34ba48ff9bfa10dbd555772da3.jpg)
 
 快降落到浦东国际机场时从飞机上向外看上海夜景。（大约在上海杨浦区五角场一带）。
 
@@ -54,22 +54,22 @@ lang: zh
 
 九点多，坐地铁到了世博会博物馆。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fp0vO_I9kq6dm3dTZD4ERvgZC7y1.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/59f39b7d190def69d7bf7fc9ed89d904655cff1c8bc26cd5d0cc68974fb89061.jpg)
 
 >世博会博物馆以传承世博遗产、发扬世博精神、保存世博精髓为宗旨，将全面综合地陈列展示中国上海世博会盛况，介绍1851年以来世博会历史发展及2010年以后各届世博会举办情况，并为与世博会相关的国际文化交流和科技创新提供平台，成为服务国际社会的世博文化知识库。
 >——来自 世博会博物馆官网
 
-![](https://user-assets.sxlcdn.com/images/786672/FuyFUHmxsZDdY9lDaD3W64O0O0Sk.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/d70353b0cf864402a506330bd0371c800fc30cf146862bb3b4a0148cd21c981a.jpg)
 
 进入展厅，首先看到写满历届世博会举办时间与举办城市的幕墙。
 
 博物馆前面的部分是关于世博会的历史和历史上历届世博会的介绍与陈列。可能是看得太认真了吧，这部分没有拍照。
 
-![](https://user-assets.sxlcdn.com/images/786672/FnxD9W1EFBXvXb_kdxj5mf1ltFk8.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/62c0feef16a0cabb92cd95de1b7541f6283cdb49914bfe2c1a221ae123c8f1c2.jpg)
 
 进入到关于上海世博会的部分了。这是展出的2010年时上海世博园的沙盘模型。（现在的世博园和2010年相比发生了很大变化，后面会提到）
 
-![](https://user-assets.sxlcdn.com/images/786672/FnGCVnJSHYLnPREesFeJ8n3CWxUE.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/6aba7fd9fd824810a410ecbbfdd4e948c953f9ab4dc1d2d9d6ec3cdb178f0e25.jpg)
 
 上海世博园地图（来自世博会博物馆官网）
 
@@ -77,50 +77,50 @@ lang: zh
 
 > 注意：本文誊写至该博客站点时此链接已失效
 
-![](https://user-assets.sxlcdn.com/images/786672/Fv_erlcXGFKwptMzNvJ2OgKYGZL9.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/a827bd4990131abc4981ced8b13fea1599743c54e2031653d68d1b060d95ed26.jpg)
 
 这是上海世博会吉祥物“海宝”的几种不同着装。
 
 >海宝（Haibao）2010年上海世界博览会吉祥物。2007年12月18日晚上8点，万众瞩目的2010年上海世博会吉祥物“海宝”终于掀开了神秘面纱，蓝色人字的可爱造形让所有人耳目一新。海宝，以汉字“人”为核心创意，配以代表生命和活力的海蓝色。他的欢笑，展示着中国积极乐观、健康向上的精神面貌；他挺胸抬头的动作和双手的优雅姿势，显示着包容和热情；他翘起的大拇指，是对来自世界各地的朋友发出的真诚邀请。
 >——百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/FhEaSYIJ2LHuuq8oAOByliOyPKvC.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/97f31ecad5381f6c4a96b734b6274590b675984ad407a2351052d02868e40970.jpg)
 
 这部分是关于上海世博会前期准备的。在这个展区里面，我看到了上海市民为举办世博会所做出的牺牲与贡献、全国各方面各领域的劳动者为世博会成功举办所做出的努力。可能又是看得太专心了吧，这部分我没有照照片。
 
 下一部分是上海世博会举办时各场馆展出的经典展品。
 
-![](https://user-assets.sxlcdn.com/images/786672/FryPh-6857Y7DOR-NQyQdPpRkn5q.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/c750f96e36e9c25a487760a02c427bc1b4895d82ba9b06273ca21935fa14ec0d.jpg)
 
 这是一个无论如何放置都会回到这种姿态的“不倒翁”似的东西。曾在上海世博会某个欧洲国家展馆展出。（具体哪个馆我忘了）
 
-![](https://user-assets.sxlcdn.com/images/786672/Fh6hiYfu2_aO0FBqqli4JBMqxNEF.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/75b64bfc33d428f4d4f686631f750d7ab76c0f1c9ff93c44ec9bf204141e85c7.jpg)
 
 这是上海世博会伊拉克馆展出的阿拉丁神灯。
 
-![](https://user-assets.sxlcdn.com/images/786672/FhnLKcWAXSyUz5y1Na-2YQ5rk7HE.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/87ac6b0e99ba0682764f7e9c45c0f4c5fb84a8b31fcd2b478e820569b2359c9b.jpg)
 
 这是上海世博会以色列馆展出的爱因斯坦相对论手稿（复制品）。
 
 （可能是这份手稿的神秘力量让我选择了物理专业吧）
 
-![](https://user-assets.sxlcdn.com/images/786672/FkpKFuhrYQo5iouqzsMbvdMj4VWh.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/17e508c93606c3cc37cdb9f73edb651e56c0740215b45f31ddc65efae05f5aa7.jpg)
 
 这是上海世博会泰国馆门口的因陀罗耆特（泰国的门神，曾与中国的南天王一起在泰国馆门口展示）雕像。我在网上世博会上面看到过，印象很深。在博物馆里面见到，有种似曾相识的熟悉感。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fq6m_Qx7Aap3SOSXP3LdwZMbBZz7.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/f947990d2fa66af441046786668f7df024e5e4dab2bf533c0baa7425de96284b.jpg)
 
 这是上海世博会丹麦馆的自行车。有兴趣的读者可以了解下，当年上海世博会丹麦馆设有贯穿整个场馆的自行车道。当年小美人鱼雕像的真品还千里迢迢运到这里展出过呢。
 
-![](https://user-assets.sxlcdn.com/images/786672/FmY2_-4llSBSaB8yjJbOKl2r9bvh.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/465ba0d358fe8254a9f01992885187d461156a7dd77800986e317fe192e222a2.jpg)
 
 这是上海世博会埃及馆（应该是）展出的雕像。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fuh9KYVn2gzOrUuBqWhxxH_go39t.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/85ef0463000712527ae8883b2f4d69861ffdf9292ab555cc22d81dd7c14d3a33.jpg)
 
 这可能是上海世博会意大利馆的展品。上海世博会意大利馆很巧妙地展示了意大利的雕像艺术、音乐艺术等文化。在世博会谢幕后，又长期作为“上海意大利中心”存在。现在状况未知。
 
-![](https://user-assets.sxlcdn.com/images/786672/FuwxZ1ymyYKt9SBLOXmKmJn3Db8e.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/fdbe15d6cdc5addaba493ca24e0d272eb84bf66da8b4b369d500e57249d087c8.jpg)
 
 这是当时上海世博会的热门展品“叶子”汽车，当时在上海世博会中国国家馆展出。
 
@@ -133,23 +133,23 @@ lang: zh
 >
 > 注意：网上世博会运用了flash技术，请确认你的浏览器仍然支持flash。
 
-![](https://user-assets.sxlcdn.com/images/786672/FjIJN12oMTm_PRZojhAL8EwnuSMZ.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/c4cdc30567ebc95c4477be01073273ac3bda73917067bb9a2e707c4a435b91b8.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FnDBoA8zk6rgZs0Tqw4QkjRtFdqV.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/c69b40e08e9bdf0e3e73b0d548452de4e546715bd9f5f419264c86d4390340c3.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FizHbCAx7V9ozJkJkLq4A3M4UBD0.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/0197b01a362c3cfb43349f657d6165f6250ee2b34ebb5db17ef4ac77e84f6900.jpg)
 
 这是展出的上海世博会的部分样式的门票。
 
 参观完展区，我来到了展馆的室外部分。世博会博物馆的建筑设计很独特。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fq39ZfcLI750ahgh6tn2Se0bH4vo.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/158c8e112342d8b46ca35856a01818b65094b3281dbbd94db967a3292afcb0b1.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FgS0rtwxeF5GYfeHG7bCtiBu_yOq.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/14523e4603db7796b262bddf52baf918713a60a61d2251ab151272f29d67c8d2.jpg)
 
 拍摄这张照片的位置既可以看到世博会博物馆本体，又可以看待远处的绿地甚至是黄浦江对岸的世博文化中心（现在的上海梅赛德斯文化中心）。其他游客都说我挑的机位非常好，可把我膨胀坏了（不是）。
 
-![](https://user-assets.sxlcdn.com/images/786672/FqIgY00D9wRtP2L9s8GZnT7WM1U6.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/38db2e2d199b6d72e8e1b50314720db1e54965fcd851f8dbccd3965924f0b99c.jpg)
 
 世博会博物馆的玻璃结构让我联想到了黄浦江对岸的世博轴。
 
@@ -173,31 +173,31 @@ lang: zh
 
 中华艺术宫所在就是原来的上海世博会主场馆——中国馆（包括中国国家馆和中国省市区联合馆）。其东方之冠的设计成为上海世博会具有影响力的知名标志。绝大部分人提到上海世博会必会想到中国馆。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fr6qIMWcPN_9GWabZlMu89mD_d2z.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/5779f4663d88c3f24a1d2b85a02cde9c4eaddf54abe8ee24333e8d9ef45d8bfa.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/Fj3x6BG7tNxvBXZcnrZhj_U3sGsc.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/af7c71b097295a73872a77eb52600307c5d43630b318bdba4d5b5ff8dbfc1f0b.jpg)
 
 中国馆的大致外观，我在之前就已经非常熟悉了。可我从来没有想到这座建筑出现在我视野中居然如此巨大（中国馆的大小可以参考上张照片台阶上游客的大小）。在我的印象里，这座建筑的巨大体量带给我的震撼感远超我见过的其他建筑（包括接下来要到访的上海中心大厦）。
 
-![](https://user-assets.sxlcdn.com/images/786672/FkhjjQ06vW_R8A5ampw4hXrLVwX2.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/d5191850d43da261626e9cac6ea5e6024589c03d63dc97b197e27e81d42d80b4.jpg)
 
 中国馆的整体结构设计灵感来自中国传统建筑结构——斗拱。在色彩上，运用了最能代表中国的颜色——中国红。当初中国馆的色彩设计师巧妙地运用了多种红色结合，从上到下又暗到明的色彩安排，巧妙地避免了运用大片红色所带来的视觉上的不适，使中国馆成为一个视觉上宏伟而又庄重的建筑。（中国馆的深入大有讲究，感兴趣的朋友可以上网深入了解一下）
 
 上海世博园可谓是现代世界建筑设计艺术的花园，来自世界各地的建筑设计文化与艺术在这片土地上争相绽放，表达他们对上海世博会主题“城市，让生活更美好”的独特理解。如果你对上海世博园独特多元的建筑设计感兴趣，我强烈推荐央视出品的纪录片《为世博而设计》，了解世博园里部分精妙建筑作品背后的故事。
 
-![](https://user-assets.sxlcdn.com/images/786672/FhvDGfpn5KYFv8j_mzwEg3uVd9NL.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/0f0758d7275db212ca0f9695e07878f14614a42b27f70985b165838958a3397e.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FhgVVzAM9o8KydJOcB0zWmAxhmzQ.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/ca09a9be806ec21da9146ecdd595df4bec761458613b4449ecb91d9c9277d76e.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FgbcbuHQmaNnIJFCLRG9PN8IJTt8.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/87bcb0d28143802bac0c475c06cba5b65d6451bd0d2416bbfce88e5d11624ad3.jpg)
 
 从地面可以乘坐电梯到达馆内。
 
-![](https://user-assets.sxlcdn.com/images/786672/FvtbCZ-7XQI0Muax3fiPUOOp5e80.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/08b9011f3bb1a9afa2783a8eacf6b8e0d63ee1ae7d9ea35aae171804789cc5b9.jpg)
 
 透过窗户看外面的风景。从这里可以看到黄浦江的江景，甚至可以眺望到远处的陆家嘴CBD。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fr74kYUgXL7NHh0ElIj1gfQt_tw6.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/90069a118603e615c3767067abe7092a6e430c172dfbb678c00b2cc557547c1f.jpg)
 
 >这是十年前上海世博会中国馆的镇馆之宝——动态的“清明上河图”。世博会闭幕后，“清明上河图”一直留存到原位置展示。
 >而今天，中国馆里的这幅《清明上河图》，不仅被创作人员用声光电重新包装，放大了数十倍，而且还有了白天和黑夜两个版本，那些原来凝固在宣纸上的光影变得鲜活起来，参观者似乎穿越时光隧道回到了八九百年前的城市。再加上画幕的下方还有一条用光影做成的河，似乎图中的人物、牲口就在河的那边，历史触手可及。
@@ -218,7 +218,7 @@ lang: zh
 地铁8号线 中华艺术宫 站 → 地铁2号线 陆家嘴 站
 </div>
 
-![](https://user-assets.sxlcdn.com/images/786672/FshT-yP5Yi5lmmai3-q8m3vYnFMO.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/8334397f065097211ed4fe1f02d0a2c46ed5b78ba5a15c9df8125bb44cf75492.jpg)
 
 魔都三神器镇楼。
 
@@ -242,7 +242,7 @@ lang: zh
 地铁2号线 陆家嘴 站 → 明珠环岛天桥 → 世纪大道 → 银城中路 → 花园石桥路 步行至金茂大厦
 </div>
 
-![](https://user-assets.sxlcdn.com/images/786672/FjLJ7E8hfWSBKGwL_jthicO3mtdY.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/cae1ffe0f2ab0e4ef70eea38802eb6a98df53f6e2556a677a7c95ec3c2aaaa6c.jpg)
 
 乘坐电梯来到观光厅了。
 
@@ -252,49 +252,49 @@ lang: zh
 >在88层观光厅设有中国最高的“空中邮局”——金茂大厦88层观光厅邮政服务处，为游客提供珍贵邮品和特色服务。观光厅还设有数码摄影服务，为游客留下永久的纪念。
 >——百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/FthrRrDDSWXSjcAmTPz1oPuJyFNO.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/f9f20688823c441f16d2a588105838399fa2e2b1d596167787f0acd9caf76206.jpg)
 
 在观光厅中，可以透过玻璃看到窗外现代都市上海的景色。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fno1VwSQyv86wdzhFilWq1NxD4tD.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/6eba48d3c004543e9493d478d569ed7b760412af9d0093452e3ad0dac04a7d1a.jpg)
 
 环球金融中心一角。
 
-![](https://user-assets.sxlcdn.com/images/786672/FoesoB6VqBW48ln7C7RwTQkUMmfe.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/5e478f3a36f4338c7924b697352628fdbb4d5b6d6cac64bce9b9e230d4613711.jpg)
 
 金茂大厦的一角。
 
-![](https://user-assets.sxlcdn.com/images/786672/FnIwaBSGdK7WSPp__Q7G3dZFSt3Y.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/8a2bdf6a27bf03a9c9e0b647b505a9bdaa5faa4ec33bafceced8c1ea8b7d129a.jpg)
 
 金茂大厦建筑结构细部与远处的上海中心大厦一角。
 
-![](https://user-assets.sxlcdn.com/images/786672/FjKaP_dhxcDfpbnEOyIOfbt0HwwL.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/c17b114eb2e28be28a1b9c07216c677d7b1bd38f32724e0ed780e4f5de928fab.jpg)
 
 近处的上海中心大厦与远处的黄浦江。
 
-![](https://user-assets.sxlcdn.com/images/786672/FgXCQibQ4XHspy89FmeCFkoCUfMS.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/a7bd65a2ec52ebdeb7a127ca57a27c19fd81bf4b5eff46fd3bb15df941b56351.jpg)
 
 金砖大厦，黄浦江与对岸的浦西。
 
-![](https://user-assets.sxlcdn.com/images/786672/FjKTD5ov3l6vY7GbbtgELSm6QlOX.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/e820c14a40a352cfe0653671cee2f55613af523e780665a6c1ebf5972af487c3.jpg)
 
 从浦东看浦西。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fr2dYt4jJS2LIW5Uw6PMY_iI8itw.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/9f08ab474d8bdf62fb99c56d9cc32ecf2663e1971b78f3bbb2071c54975f8aee.jpg)
 
 东方明珠与远处的浦西
 
-![](https://user-assets.sxlcdn.com/images/786672/Fme_Yu8sRKdmGkeKiydXWoR3zVSP.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/b104131f8fb6299d92977692fe36e2f677b30dad3724dae04b6fb493b5927652.jpg)
 
 上海中心大厦与黄浦江。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fgf49qaTELhATEP2BFiOjE2ryUcE.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/266eaa78578d59f3b603c41ff34f7614a7d6f505f9475728e0d4bec9e4cb823a.jpg)
 
 陆家嘴与浦西。
 
 （玻璃上有污点，拍出来的照片效果不是很好）
 
-![](https://user-assets.sxlcdn.com/images/786672/Fi9PmwgK4ytpHcaead-Z8YRuk7dG.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/6ebd3770f2e37ad317eb6066a906dc87319f8eb4864ddb9f512975ce003f4aaf.jpg)
 
 环球金融中心与远处的浦东城区。
 
@@ -318,11 +318,11 @@ lang: zh
 
 我在轮渡上没有拍照，仅仅拍了东昌路码头屋顶的轮渡标志。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fl454uvdTMS-ESwLD30OHU1AjLR0.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/29c915cbbd8327ddd9825c096e1ab5f95b2c6d67d9af894646090ce389a2d1e2.jpg)
 
 到达外滩时还远没有天黑，我就买了瓶盐汽水，坐在观光走道旁的椅子上，等待黑夜的到来。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fs6Ce3NOS5_i7hQHyPbmqtQ11crc.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/7f1864e80682cede665b9c409d706b63d1ddedc6af92927d62736d4f8b6f40e3.jpg)
 
 啊。在外滩，闲适地坐着，在忍耐一天的高温后享受着黄昏时候让人闲适的阵阵清凉微风，听着旁边旅行者的闲适的聊天，看着近处观光道上闲适地走过的人群，看着江对岸的高楼闲适地慢慢亮起霓虹，闲适地喝着盐汽水，闲适地享受汽水在我口腔里的奇妙感觉。啊。对于刚刚结束高考备战的高三毕业生，享受如此闲适的时光，真是享受啊。
 
@@ -334,14 +334,14 @@ lang: zh
 外滩气象信号台 → 外滩观景步道（沿路可见 外滩万国博览建筑群 等） → 陈毅广场
 </div>
 
-![](https://user-assets.sxlcdn.com/images/786672/FlRqqEI_Cwkz_Bp-_gErG2J3jVFv.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/d50773364c6eaa5df3de7b1b8c2fd5c1e1267285011b12f8b10aec608639be1b.jpg)
 
 外滩气象信号台。
 
 >外滩天文台是由西班牙建筑设计师阿塔努布设计，所以也叫伊是阿塔努布式建筑。该塔总高约50米，下头为地下室，地浪厢两层是长方形平顶房屋，当作办公用，房顶上头是一个高达36.8米的圆柱，柱子顶上头安置有风向风速仪和悬挂风旗风球额桅杆。外墙红灰色相间隔，屋顶及圆柱顶部侪有铁栏杆。总体建筑风格是简化额洛可可式。室内装饰采用16世纪意大利文艺复兴时期额均衡式风格，华丽气派，古典优雅。当时是外滩额最高建筑，称为远东第一塔。伊为航行辣嗨黄埔江上额船只提供了方便，海轮老远就能看见信号塔上悬挂额信号旗。老早子游宁到外滩白相，大多数是从南京东路外滩开始看万国建筑群，一直走到气象天文台为止，轧是外滩额重要标志。
 >——摘自百度贴吧
 
-![](https://user-assets.sxlcdn.com/images/786672/FgLe0fyyLZ_AmWeXIoW_gz3Aedq-.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/c45842412be4a9dc60c620b38bfa59cbed28cbca468f41bf7264c6a352543c1b.jpg)
 
 上海海关大楼的大钟。每隔十五分钟，这座巨钟便会响起东方红的优美钟声，以一种柔和安静的方式推动者时间往前流动。
 
@@ -350,19 +350,19 @@ lang: zh
 >海关大钟由英国Whitchurch公司设计制造，总造价为5000多两白银，1927年制成，同年8月从伦敦运到上海，原包装木箱连同大钟共重6.25吨，把6吨多重的大木箱吊到72米多高的钟楼时，外滩马路行人都停步观望之吊装奇景。1928年元旦敲响第一声，逢刻“奏威斯敏斯特乐曲”。这座大钟楼，亚洲名列第一，世界名列第三。
 >——百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/FvEwwnjMnpbNZf2tjKl-pyvgTgfB.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/9742c7c9fa4f8653a21aebd228fc7b3ac1ed4a5d34d5713bdc8c86f94fb92763.jpg)
 
 外滩和行人。
 
-![](https://user-assets.sxlcdn.com/images/786672/FofMW4gZkQQrq1LayOoHYx-lY6a4.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/b15b7608520198689324966fc3c7435f0af578353a7f201bb46aeede41c58fbb.jpg)
 
 坐落于外滩的原泰王国驻上海总领事馆。
 
-![](https://user-assets.sxlcdn.com/images/786672/FrYkxk9QHKC9_Brj1MAliE4W0EKG.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/19efe3a66d46a02eac547b75a85b73bf7b1a4211a4d6d8d80ad5082ec87385a3.jpg)
 
 陈毅广场上的陈毅雕像。陈毅是上海的第一任市长，为上海的解放后经济恢复和建设做出了极大的贡献。
 
-![](https://user-assets.sxlcdn.com/images/786672/FjoRO6-X4unNChWJ-yjL0dLKJzN6.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/7fd42164dbba725cb57bc4cd2d41207fa9d6848c49469c4e02fc9e3c0758acc4.jpg)
 
 陈毅雕像与远处的陆家嘴。
 
@@ -383,9 +383,9 @@ lang: zh
 
 我来这里没有什么购物的欲望，对南京路的兴趣也仅仅是它的建筑、招牌和灯光。
 
-![](https://user-assets.sxlcdn.com/images/786672/FgBvNExHXaJqnjw8XLCOxwGKnpRl.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/a1d49ccdd49668f22a3d3b98f1b113b5b0ca583d36d7eb0fa24ff83c47718c64.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FnkxvmX5JnbWuGL6rvwPN4lGHTF1.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/daff252ac589957af353729faa43014546ffbc686a075ba9730d80498e8cdc9e.jpg)
 
 走完南京路，它给我留下的印象也只是：灯光好漂亮，招牌好吸引人，建筑好好看，人好多，商店好多。我对购物不感兴趣（经济原因，毕竟一个穷学生），故对南京路没有多少兴趣。但是对那些热爱购物的人来说，南京路可谓是他们的天堂了。
 
@@ -407,7 +407,7 @@ lang: zh
 
 早餐在黄河路边的佳乐汤包吃了灌汤包。
 
-![](https://user-assets.sxlcdn.com/images/786672/FrnyIa8jUvIhILclEA77moNoLSRb.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/3faf4905d4353961c9b0232e99fa0c96e34144bb63fb9a62c122620ce887c431.jpg)
 
 本来我们只计划点一些灌汤包的，但柜台负责点菜的推荐我们再点一份馄饨：
 
@@ -422,7 +422,7 @@ lang: zh
 
 最后放一个可爱的小灌汤包酱结束本部分。
 
-![](https://user-assets.sxlcdn.com/images/786672/FpIi8KP1HZgzr_a1jqV5goF_3msa.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/522990aa1a1522a6f763f28fcb41e9d13eeb7e360b0f2efe5435bdd25926581d.jpg)
 
 ##  邮政博物馆
 
@@ -432,7 +432,7 @@ lang: zh
 
 上海邮政博物馆是原来上海邮政局的所在，其建筑设计整体风格为19世纪上半叶到20世纪初流行于欧美国家的折衷主义建筑风格，主体参照英国古典建筑风格，融合了罗马式的大型科林斯立柱和巴洛克式钟楼。其中大楼主立面即南面和东面以及东北转角处共设有19根高数十米的罗马科林斯柱。这种风格符合租界时期上海建筑的一些特点——西化，精致。
 
-![](https://user-assets.sxlcdn.com/images/786672/FmT3WSvaifFhY3HrqIOKy5WSRoah.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/011b7dab2bf9d12f0441dcb21d95eeac8eb0fee5d2bf596d2e190d3f77117660.jpg)
 
 这是在四川路桥上拍摄上海邮政博物馆。（照片的角度有些斜）
 
@@ -441,25 +441,25 @@ lang: zh
 
 博物馆中介绍了上海邮政事业的历史与发展。我们来这里的目的不是为了了解这些，故这里不再赘述。对此感兴趣的朋友可以来这里亲自参观，博物馆的布展内容是真的可以提起对此感兴趣的人（邮政控集邮控等）的兴趣的。
 
-![](https://user-assets.sxlcdn.com/images/786672/FihsmUh89r-5phZ7mBVRpzO-A9-z.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/2835c04b29050da4c200e6eeecb758b37c79d89ccf2355297ddfef21fbec10ec.jpg)
 
 这是上海邮政大楼的天井，以前是全上海邮政车的集散地，现在已经加上顶棚，成为展览用地和职工的休闲用地？（我也不知道，看到羽毛球场猜的）
 
 我们来邮政博物馆的目的是登上它的屋顶花园，来这个绝佳的拍照地点拍摄陆家嘴建筑群与苏州河南边的上海老城区。但是不知道什么原因，屋顶花园不开放。我们只能在参观完展览部分时不甚尽兴地离开。
 
-![](https://user-assets.sxlcdn.com/images/786672/FqpM49V7LZVaOtFAwUUFiMg7FKHP.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/e5dea0a761fb03da096629c8a4beb72240daf7fa67cfc1e16090498996c16ac0.jpg)
 
 其实苏州河上的几座路桥也是拍摄陆家嘴的绝佳机位。这是在乍浦路桥上拍摄陆家嘴。
 
-![](https://user-assets.sxlcdn.com/images/786672/FulfVKZMUD1-8b-wCgTY5LSbmx77.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/f1276284c0bfc92dec494e991672f291de5812583ba5727d9854ef40ad7a165d.jpg)
 
 这是在乍浦路桥上拍摄苏州河沿岸。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fhdag2qAIikHKh_-eGAyyAvKbw4w.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/41fb304f860b225af89d4c9f7ce209708b6311f6de5317438bfe59a6bfd69831.jpg)
 
 这是在外白渡桥旁拍摄苏州河对岸的俄罗斯联邦驻上海总领事馆。
 
-![](https://user-assets.sxlcdn.com/images/786672/FvgsLvTfjUZGAV9fa2BGlGaAJM6v.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/4693c8c92b7dfa46bea9b3275dc3da805662577e55bd3023baae0c3bc8cc6586.jpg)
 
 这是在南苏州路拍摄上海大厦的一角。
 
@@ -469,7 +469,7 @@ lang: zh
 
 在途中，我们在南京路的海底捞解决了午饭。（说是外滩店，其实在南京路，只是距离外滩比较近）
 
-![](https://user-assets.sxlcdn.com/images/786672/FisD93S9aZ93eVRZMY2ARldscH5u.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/8b6972dd3015391ccf76f55c5158cb917f4f0a1eb88096bb1ad1715f465b6362.jpg)
 
 这可能是我第一场吃海底捞的火锅吧，服务员”无微不至“的照顾真的是把我吓了一跳：酸梅汤不足一半自动续杯，看到我正在研究小零食包装上的文字，服务员马上又拿了一大堆小零食过来……
 
@@ -505,7 +505,7 @@ lang: zh
 
 ##  早餐
 
-![](https://user-assets.sxlcdn.com/images/786672/FvkoFhr6DtO100vRDlmQvcYzE1mi.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/580bc5be4d06717c6c1c153f7c6614d6630832bd869c30d34974a3a35b80c558.jpg)
 
 在宾馆旁边吃的小杨生煎。
 
@@ -529,7 +529,7 @@ lang: zh
 
 在写这段游记时，我辅助百度地图全景尽力找到下文地址所拍摄的精确地址。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fp-0nxL_6CB9E305Z0qpDpTViw4K.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/22f738cb16f8f5825347dbeda9b4be4f0809eaa559ebe639ba6024369dfa4ac0.jpg)
 
 **武康路 115 号 密丹公寓**
 
@@ -544,55 +544,55 @@ lang: zh
 >1930-40 年代出版的英文上海黄历显示，密丹公寓昔日的住客几乎清一色是在跨国公司工作的旅沪外籍人士，比如在石油公司 Texaco 上班的 Russakoff 先生，还有在建筑公司泰来洋行工作的 Berg 先生。有趣的是，这些公司都位于上海外滩。看来在幽静的武康路居住，到繁华的外滩上班，曾经是魔都外国金领的一种生活工作模式。
 >——直接摘自 百度百家号 小李说说，原作者未找到
 
-![](https://user-assets.sxlcdn.com/images/786672/Fo80hqnW5cui41EFx93q1qjkVwny.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/fb2ad960f92de353ff0b05acd66da627d4c68464d34b561ff73bf004daff3605.jpg)
 
 武康路 322 号附近
 
-![](https://user-assets.sxlcdn.com/images/786672/Fvy6qZ614NaOuze4Sl_5ua41AjfN.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/9138a8901f1fa7a5a01e08aa7ea4e31423deb4677321ad7fba7e2e1f49bc2ca4.jpg)
 
 **武康路135、137号 美杜公寓/密勒托公寓**
 
 这座公寓的设计大量运用了西班牙建筑元素，特别是西班牙式的三联窗设计。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fs0sCwtHqSwMABJyqx3iksQDXbFe.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/49ab483c7b801d12fe3e8b36222c03860df5c8a7b492030e0718d071e2e5300c.jpg)
 
 武康路378号。
 
 在侧外立面上镶嵌着一座玻璃时钟，这种独特的设计一下子就吸引了我的眼球。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fi8LTtz-mlXL_7vowpLg3S8GoNca.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/398d3eb2cd71eabcfab8fdd091d3f27d9d57c0b4570757a765a042a0d4207d10.jpg)
 
 一位电动车手路过武康路395号。这所住宅的外观体现了巴洛克建筑的特点：在古典的框架上极尽装饰之能事。这幢巴洛克风格的大型花园住宅曾经是曾任北洋政府交通总长的书画家、收藏家叶恭绰的住宅，之后又先后为国立北平研究院药物研究所和镭学研究所、上影演员剧团使用。
 
-![](https://user-assets.sxlcdn.com/images/786672/FiqDVnISuPOh25OB4J81TqQ7wYyf.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/8145a002880fc12402b5c3154e98ec60bb4425914fc28625dee44059a4b0e91d.jpg)
 
 在街边树荫映衬下的武康路405号二层的百叶窗户。
 
-![](https://user-assets.sxlcdn.com/images/786672/FmYnZecSYNxjpN9qK9eFenUP8nRJ.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/79ddb7b4357cacb445cc8d0bf6694c8e8e0da1f075530b3cbd17f5757739a816.jpg)
 
 在武康路392号附近拍摄武康路。在绿色树荫的荫蔽下，繁忙的武康路没有给行人任何嘈杂的感觉。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fkj4hERNLzN4XslvzDlUercCLAEO.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/d3b68ff279f550931fa5187c643544649e1bea1e5695f1b256a85a72849188ef.jpg)
 
 可能是武康路 392 号屋顶上的老虎窗。
 
-![](https://user-assets.sxlcdn.com/images/786672/FnezR6Gqxe69qCa8gIDJ8YpwPSCe.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/fb8fdbc879089b374085941b89cf41c8acbdc0a74b40702b49bd2701d4e80fd0.jpg)
 
 **淮海中路 1850 号 武康大楼**
 
 武康大楼原名诺曼底公寓，建于 1924 年，是上海第一座外廊式公寓大楼，现在仍作为公寓使用，其法国文艺复兴式风格的建筑设计使其成为了上海十里洋场的一张代表性名片。现在，武康大楼已经成为上海的网红拍照地，是很多人来上海旅游的必打卡景点。这个景点由多火呢，参考上面图片里面为武康大楼拍照的人群吧。
 
-![](https://user-assets.sxlcdn.com/images/786672/FlTItA98OjMDx5qRZ3JOkKllhQ4l.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/18e2e6c7146183c2b2aa7710353734d4f22a6076a41a5a1755584e5da4ecf2f5.jpg)
 
 夕阳下的武康大楼。
 
-![](https://user-assets.sxlcdn.com/images/786672/FsHDV5lJ-eZn7fU3BPZh33mdsScA.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/40bab181418a1c5f0ea64ad94410d817cf061ab9b4c9b5bae05b6cdc0fe14d47.jpg)
 
 车水马龙的淮海中路。
 
 由于建筑面积有限，武康大楼底层采用了骑楼设计，将店面橱窗向内收缩，留出人行道空间。
 
-![](https://user-assets.sxlcdn.com/images/786672/FqPValQwRDQ1t6M-wh_V452EiHfY.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/bdf5c61547332bd44e6f036eda7bd565507bc2c460cd514606db7a0d80f88461.jpg)
 
 武康大楼细部。外墙的斑驳红砖更增加了这栋建筑的古典感。
 
@@ -602,27 +602,27 @@ lang: zh
 >1953 年，诺曼底公寓被上海市人民政府接管并更名为武康大楼，其后一些文化演艺界名流均入住此间，包括赵丹、王人美、秦怡、孙道临、郑君里、王文娟等。
 >——摘自 百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/FiY-TJZQ2uS6-Xuo-OlyM1Pa24Nl.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpg)
+![](https://img.mockingbird.team/blog/external/ab0e637854cd5ffce0eb397d25ba1becae86e564b9e020105a6e4c11aa24680e.jpg)
 
 余庆路 2 号。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fvq3LV-xyKfCABnCXDw1iiRYroog.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/4d94f8dd56911bfbe2791df2a743131c54355d1b4ac771e42f835f9513e74e3b.jpg)
 
 余庆路 146 弄 爱棠新村
 
-![](https://user-assets.sxlcdn.com/images/786672/Fm8C9DZgCgCr2yoM0584x6c_Yeir.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/806df6b8b018930ea229fde532adef07d22b235eacd75797b5779259368a2e25.jpg)
 
 淮海中路 1555 号 上海图书馆
 
 原计划进去在书海中游览一下，在看一会儿书。可是时间所限，只好作罢。
 
-![](https://user-assets.sxlcdn.com/images/786672/FlTR5YS6kbdkTz-125YbWWZlliDG.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/87749b716c174913b0839e8dc25a52ab70ece6e945e771f7c9767a5ac2c82ddd.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FlanYeGNOlxDqI1_AGv4IQJkaFnB.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/95a9662616e06b9e82e5a320dc5a4d7d82a20a8ebd7c9a00226c037645b58d25.jpg)
 
 上海图书馆建筑细部。
 
-![](https://user-assets.sxlcdn.com/images/786672/FkvWmI5MTclq4-spWqJKDCanesE0.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/8ba19bb4d260a6b15d2afe2fa64758f399da0af6635c200a7789b25628b52a06.jpg)
 
 在树荫中若隐若现的别墅建筑。
 
@@ -650,7 +650,7 @@ lang: zh
 
 我在新天地没有拍照。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fnj5z1BFYTrjv4gXH6zmThRwEv-W.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/1b34dd550852ff7019e92b5b217e67fd02383c409e39bee0eeb6c1f43b51478c.jpg)
 
 著名的中共一大会址就紧挨着新天地北里，因为天已经黑了下去，这里也不再开放，我也只能在外面来瞻仰这一革命圣地。
 
@@ -667,19 +667,19 @@ lang: zh
 >静安寺，又称静安古寺，位于上海市静安区，其历史相传最早可追溯至三国孙吴赤乌十年（247 年），初名沪渎重玄寺。宋大中祥符元年（1008 年），更名静安寺。南宋嘉定九年（1216 年），寺从吴淞江畔迁入境内芦浦沸井浜边（今南京西路），早于上海建城。静安寺总建筑面积达  万平方米，整个庙宇形成前寺后塔的格局，由大雄宝殿、天王殿、三圣殿三座主要建筑构成，是上海最古老的佛寺。寺内藏有八大山人名画、文征明真迹《琵琶行》行草长卷。静安区亦由静安寺而闻名于世。静安寺的建筑风格是仿明代以前的建筑风格，典型的代表就是斗拱的形制。
 >——摘自 百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/Ft2njiQXZ6vPz8lDZv5w3MCw-9F-.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/dc3a95342b60132b4b02a9efecd89638e192762c45deb43f89da966e74fe558d.jpg)
 
 静安寺山门。
 
-![](https://user-assets.sxlcdn.com/images/786672/FgsMDuOU_vDFtlSs-AKSGsYLu9UO.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/ba324a6318d15bcd5fa7aed07c20e19e96c4713a21aede07d729dcacd4c8a709.jpg)
 
 想在山门这边拍一张长曝光照片来着，但是摄影设备有些拉跨，再加上缺少稳定设备（稳定靠手），所以失败了。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fh3B_ENIOTrfQaljtFQ6ZxMYOT3Q.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/0679fbd592ca2e808efda624fec7952269ba206f553ccd706caa7d85b38cb6ba.jpg)
 
 静安寺山门飞檐，上面还悬挂着风铃。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fj_EMd2rZ9JnYmamob47jZARVMDB.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/62ce2b87739731c6f7ddb25074de716dfcefbf160e91032034af74c978b4598b.jpg)
 
 静安寺梵幢（阿育王石柱）上部代表佛陀说法的《四面狮吼》像，金光灿灿，是用 16 吨白铜浇铸而成，表面贴金。
 
@@ -688,7 +688,7 @@ lang: zh
 >鹿野苑竖立的阿育王石柱于 19 世纪出土后，成为印度民族精神的象征。印度政府于 1950 年决定将其作为国徽图案，以其体现印度悠久文化和国家独立的民族自豪感。
 >——摘自 百度百科
 
-![](https://user-assets.sxlcdn.com/images/786672/Fkehnvv9Kju8VIHBma9IPcrrQycE.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/9b1aa39e60327f73c4a0fdc4d02e65266be83c2aaae2947e6a0503cec94df3e4.jpg)
 
 静安寺附近的宜家。静安寺附近是上海著名的几个繁华商圈之一。
 
@@ -702,7 +702,7 @@ lang: zh
 
 云南路是上海老字号餐馆集中的一条路。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fvu8qkcuq4FTgj1HwJTSOJcP9ZpR.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/29acc954cb785402365c34594c68ee98f644eada2a296f5b680b68121ca4bebb.jpg)
 
 摄于云南路美食街。
 
@@ -710,11 +710,11 @@ lang: zh
 
 建议早点去，不要像我一样，晚上九点多去的时候大多数饭店和摊位都关门了。
 
-![](https://user-assets.sxlcdn.com/images/786672/FpvB_2AAAzivjr5YHTbTkLbYMOzN.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/45ef440b7b5602d017866e442d65ce4d8bba5e893af0abd915cc25bbd3f1d99e.jpg)
 
 上海老字号鲜得来，以他们的排骨年糕出名。
 
-![](https://user-assets.sxlcdn.com/images/786672/FlbT7TNX_Cuvu21J2ExsDQFiveyO.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/2819f19b1a64755289d192ca195271bb825944200e62786c58675bf71732fb06.jpg)
 
 阿叔阿姨的店，曾经上过纪录片《上海的味道》。我在来上海之前就已经知道这家店。
 
@@ -722,7 +722,7 @@ lang: zh
 
 我特意来这里买了一些炸串，特意感受一下上海人“小时候的味道”。
 
-![](https://user-assets.sxlcdn.com/images/786672/Fsq1fenIr_kK0bWv0ETG9mutTxq_.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/87dc93f85530a73dec3f58bd2c41b9ab3ad079d76858e2403b59f1aaf70a48c6.jpg)
 
 在那里买的炸串。在酒店里拍的。
 
@@ -730,7 +730,7 @@ lang: zh
 
 之后发生了些小插曲。我肚子还是有些饿，便进入路边一家火锅店准备吃点火锅，但我又怕浪费，菜价又很贵，只点了很少。“你加起来一共就点了一盘菜，我们给你上不了啊……”但是我吃火锅有吃酱的习惯，刚上的花生酱，我已经开吃了。“算了算了，酱送你吧，“店主说。我只好想店长道了歉，不好意思地走出火锅店。
 
-![](https://user-assets.sxlcdn.com/images/786672/FiQ1p_EYmXRDwuF9i7aXoqcIzQa5.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/19c24cfce37fac968c4390ad1ae57fddfe21e8caf71528805f2360aa62923594.jpg)
 
 大世界。在延安东路于西藏南路交叉口的天桥上拍摄。
 
@@ -738,15 +738,15 @@ lang: zh
 
 已经快夜晚十点了，这路口还是又不少车忙碌地通行。这其中，有夜晚娱乐完意犹未尽的人，但更多的是加班完毕匆匆回家休息的打工人。在上海这个”冒险家的乐园“，有千万人在这里奋斗，不辞辛苦地开辟自己的人生。
 
-![](https://user-assets.sxlcdn.com/images/786672/FheCeA5MAusgaeSBi5hZiIEXjr2w.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/34dccffeaab13beefb34a4d853d4128b5e990ac9f4703fe84a1ba160362be9ad.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FrakX8rbA79O5xfPAbWZwm3HNtRv.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/6e4a661243da313b63049f8e1c9797ada1c668908d470dd71cb347bab941a944.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FgsNiOjVXjdthCNuI3nFUDCCROGv.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/2ed71e099df07fcff4d65eac29e35b5753468aca7d79cffa38f68def6fb1ef76.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FtjIEFNjnRwB-TeQQ4ksPpV-V0UC.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/a4c1b549082ee6938b9c46ceb0f01684795be598238a995a5bb8446ca86ecae2.jpg)
 
-![](https://user-assets.sxlcdn.com/images/786672/FmDAoaF0fYLBXMeN0saj71heNAyq.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/8ee2f25848354fdec7dd261c12a20a891aceeef891e77468033082ead31c1660.jpg)
 
 我现在（指编写这篇游记时）已经上了大学。成为了一个大学生，我比拍摄这些照片时更能理解这繁忙的车流意味着什么。
 
@@ -794,7 +794,7 @@ lang: zh
 
 朋友想去中华艺术宫，我今天也没什么想去的地方，就陪他又去了一趟。
 
-![](https://user-assets.sxlcdn.com/images/786672/FoKwt6C84KVuDxTxuJ3VhWe8A1NY.jpg?imageMogr2/strip/auto-orient/thumbnail/1200x9000%3E/quality/90!/interlace/1/format/jpeg)
+![](https://img.mockingbird.team/blog/external/562b1e59927984580673c384157b686a391343b1982f1afabec9157e3513ea9c.jpg)
 
 台风快要登陆了，天也阴了下来。
 

@@ -73,13 +73,29 @@ const enHref =
     : isEnglish
       ? `/blog/${post.id}`
       : undefined;
+const alternateLanguages = translation
+  ? [
+      {
+        lang: 'zh-CN',
+        href: `/blog/${isEnglish ? translation.id : post.id}`,
+      },
+      {
+        lang: 'en',
+        href: `/blog/${isEnglish ? post.id : translation.id}`,
+      },
+      {
+        lang: 'x-default',
+        href: `/blog/${isEnglish ? translation.id : post.id}`,
+      },
+    ]
+  : undefined;
 ---
 
 <PageLayout
   title={post.data.title}
   description={post.data.excerpt}
   heroImage={post.data.cover}
-  pageTitle={`${post.data.title} - Tung‘s Blog`}
+  pageTitle={`${post.data.title} - Tung’s Blog`}
   pageClass={`blog-page blog-post-page${hasTableOfContents ? ' has-blog-toc' : ''}`}
   lang={isEnglish ? 'en' : 'zh-CN'}
   blogHref={isEnglish ? '/blog?lang=en' : '/blog'}
@@ -87,6 +103,7 @@ const enHref =
   languageCurrent={post.data.lang}
   languageZhHref={zhHref}
   languageEnHref={enHref}
+  alternateLanguages={alternateLanguages}
 >
   <BlogTableOfContents
     slot="after-nav"
@@ -134,6 +151,14 @@ const enHref =
     }
   </nav>
 </PageLayout>
+
+<style lang="scss" is:global>
+  @use '../../styles/partials/microblog';
+  @use '../../styles/partials/blog';
+  @use '../../styles/partials/youtube';
+  @use '../../styles/partials/editorial-elements';
+  @use '../../styles/partials/blog-paper';
+</style>
 
 <script>
   const initialiseMobileBlogNavigation = () => {

@@ -30,15 +30,15 @@ lang: zh
 
 >**伪满洲国国务院旧址**是伪八大部建筑群中的主要建筑，位于长春市新民大街2号，此处原为伪满洲国总务厅和参议院的办公楼，现为吉林大学白求恩医学院基础教学楼。伪满洲国国务院旧址又称“第五厅舍”，由日本设计师石井达郎设计，大林组施工，1934年7月19日动工，1936年11月20日竣工.占地面积50600平方米，建筑面积20500平方米，呈“川”字形，主要建筑为钢筋混凝土结构，正门朝西，正面五层（地下室一层）塔式屋顶，楼顶铺盖烟色琉璃瓦，外墙以咖啡色瓷砖贴面。
 
-![](http://minsheng.cnjiwang.com/xcxm/201605/W020160526391397672242.jpg)
+![](https://img.mockingbird.team/blog/external/df67d90cb3984c383d0de73e4fa658cb8501c498d17562e48d7b7d02db51b6bd.jpg)
 
 (伪满时期伪满洲国国务院上色照片，图源网络)
 
-![](http://p0.ssl.cdn.btime.com/t0186919932e1370b42.jpg)
+![](https://img.mockingbird.team/blog/external/d6970a2e70b16ebd4dc35ef8f13328652e1846c54e1d1e6aa58bb9daca667a7f.jpg)
 
 (日本明信片上的伪满洲国国务院旧址，图源网络)
 
-![](http://5b0988e595225.cdn.sohucs.com/images/20190910/e8cb5d17e3d14021bc3c59f74f1a55f0.jpeg)
+![](https://img.mockingbird.team/blog/external/e2416d9f671cdf26915e6d6c56d1716dc6f994f1fca777156fe5e7b1a2f06aed.jpg)
 
 (伪满洲国货币“满洲国圆”五圆纸币上的伪满洲国国务院，图源网络)
 
@@ -60,7 +60,7 @@ lang: zh
 >1945年抗战胜利后，这里曾开设中国青年公司东北区公司，1947年改为中国贸易企业公司；1948年中国百货公司长春市公司营业部在大楼一层开业，1952年店名改为长春市百货公司第二商店，1984年改称长白山百货商场，1994年改为长春中兴商厦，2005年由长春欧亚集团收购重组为欧亚新发商厦。
 宝山百货店大楼现基本保持完好，被定为长春市级文物保护单位。
 
-![](https://upload.wikimedia.org/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
+![](https://img.mockingbird.team/blog/external/5f26924e0b1cc6216c286d119774fc9ac15b9282f22dae2c73809d7064fe1374.jpg)
 
 （Paoshan Dept. store of Hsinking. 伪满时期的宝山洋行，图源维基百科）
 
@@ -77,7 +77,7 @@ lang: zh
 
 藤坂写真馆，位于今天胜利大街与黄河路交汇处西北，建于大正十年（即1921年)。该楼是满铁附属地早期留存不多的建筑物之一。曾是伪满皇宫“御用”的照相馆，溥仪的很多照片，都是这家照相馆拍摄的。
 
-![](http://p0.ssl.cdn.btime.com/t01af987e3b3ba81319.jpg)
+![](https://img.mockingbird.team/blog/external/699a35870fc6ae35dcd5f0014fdd12b56171e3794c84f622e9a371ae132ed891.jpg)
 
 （藤坂写真馆，拍摄年代不详，图源网络）
 

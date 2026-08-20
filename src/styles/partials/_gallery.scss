@@ -27,16 +27,12 @@ html.gallery-page-root body {
     color: $blog-bg;
   }
 
-  > .page-nav :is(.page-nav__brand, nav a, .page-nav__current),
+  > .page-nav :is(.page-nav__brand, nav a),
   > .menu-mobile-bar .menu-mobile-bar__brand,
   > .menu-toggle,
   > .site-footer
     :is(.site-footer__brand, .site-footer__nav a, .site-footer__current, .site-footer__meta) {
     color: $blog-bg;
-  }
-
-  > .page-nav .page-nav__current {
-    display: none;
   }
 
   > .page-main {

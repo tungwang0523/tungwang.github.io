@@ -31,12 +31,12 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
 ---
 
 <BaseLayout
-  title="Tung‘s"
+  title="Tung’s"
   description="The personal website of Tung Wang, an interdisciplinary researcher and designer."
   lang="zh-CN"
   rootClass="home-page"
 >
-  <div class="blog">
+  <main class="blog">
     <div class="home-identity-card">
       <Menu activeSection="home" marqueeItems={announcements} showIdentity showHome={false} />
       <StickyHeader
@@ -78,6 +78,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
                 readTime={section.data.metaRight}
                 excerpt={section.data.excerpt}
                 href={section.data.href}
+                linkSite={section.data.linkSite}
                 hasNext={index < sections.length - 1}
                 imageLoading={index === 0 ? 'eager' : 'lazy'}
                 imageFetchPriority={index === 0 ? 'high' : 'low'}
@@ -114,7 +115,7 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
         <i><b></b></i>
       </div>
     </section>
-  </div>
+  </main>
 </BaseLayout>
 
 <script>
@@ -325,3 +326,8 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
     update();
   });
 </script>
+
+<style lang="scss" is:global>
+  @use '../styles/partials/home';
+  @use '../styles/partials/microblog';
+</style>

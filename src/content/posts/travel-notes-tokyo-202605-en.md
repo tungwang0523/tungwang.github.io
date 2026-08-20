@@ -41,7 +41,7 @@ Akasaka Palace is Japan’s only Baroque building, and perhaps the only place in
 
 ![](https://img.mockingbird.team/images/2026/08/32639f343494e574e149e293e00454f8.webp "Akasaka Palace")
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/89/President_Trump_at_the_Akasaka_Palace_%2847945564911%29.jpg "The Asahi-no-Ma room at Akasaka Palace")
+![](https://img.mockingbird.team/blog/external/721b6159d271d46c64122517e1f17029a1c1d9f310cf25e884eda60d46856039.jpg "The Asahi-no-Ma room at Akasaka Palace")
 
 The interior is extravagance taken to its limit: unmistakably Baroque. Photography is forbidden inside, unfortunately, so I would have to rely on the exterior of this Western-style palace to summon the rooms from memory. I found an online photograph of one of them, Asahi-no-Ma, taken during a meeting between Donald Trump and Shinzō Abe. It gives some idea of the splendor within.
 
@@ -59,21 +59,21 @@ This building deserves a proper digression. In prewar Japan—and further back, 
 
 In the early Meiji years, these were still pseudo-Western structures: buildings that borrowed a few Western motifs while remaining neither quite Japanese nor quite foreign. Then Japanese architects trained by Western masters returned home, and more orthodox Western architecture began to spread, especially through Tokyo. Marunouchi, where the station’s main building stands, became one of the greatest concentrations of these buildings. In the Meiji and Taishō periods, its red-brick cityscape was likened to London and nicknamed “Icchō London”—London for a block. In the Shōwa era, the arrival of New York-style skyscrapers earned it another name: “Icchō New York.” Within Tokyo’s pocket London and pocket New York, the Marunouchi station building was unquestionably the city’s architectural calling card.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Tokyo_station_building_front_view_1914.jpg/1920px-Tokyo_station_building_front_view_1914.jpg "The newly completed Marunouchi building of Tokyo Station, 1914")
+![](https://img.mockingbird.team/blog/external/f483ff3819c262022c8588d4d5a2c971e0bf16d60c244ffec340611129bf46bb.jpg "The newly completed Marunouchi building of Tokyo Station, 1914")
 
 To speak of this building is also to speak of its two sisters: Seoul Station and Shenyang Station.
 
-![](https://upload.wikimedia.org/wikipedia/commons/1/17/Keijo_Station.JPG "Keijō Station")
+![](https://img.mockingbird.team/blog/external/516da199179a0d9e5a6d9fd5752f48e5d1e4329fc891a742bae1900af1d4cbc3.jpg "Keijō Station")
 
-![](https://inews.gtimg.com/newsapp_match/0/14449492078/0 "Mukden Station")
+![](https://img.mockingbird.team/blog/external/1e5811ac857b17d67fd3c0188a3563be83531123ecf412847bf718e836297635.jpg "Mukden Station")
 
 Their kinship may be hard to see in black and white. Put present-day color photographs side by side, however, and it becomes immediately clear why I call them sisters.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Tokyo---2025-06-18_060.jpg/3840px-Tokyo---2025-06-18_060.jpg "Exterior of Tokyo Station’s south entrance")
+![](https://img.mockingbird.team/blog/external/21aeebaf0ea073642d6a6a39357a01b7c3c6913f6b5ca64f3fd1be956f02e86d.jpg "Exterior of Tokyo Station’s south entrance")
 
-![](https://tchinese.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=68381&fileTy=MEDIA&fileNo=2&thumbTy=L "The former Seoul Station building")
+![](https://img.mockingbird.team/blog/external/757bac46820431a4e1111daa30ebe74ea5dee11bfd0da9f47d6f77cfe53e4ff1.bin "The former Seoul Station building")
 
-![](http://wap.china-railway.com.cn/zyyw/lkys/fwss/202011/W020201130522063132958.jpg "The station building on the west square of Shenyang Station")
+![](https://img.mockingbird.team/blog/external/ca14340bb4ded761713766b4dc5f492c63a119eaac9d174bc5aabce346cf7e55.jpg "The station building on the west square of Shenyang Station")
 
 The same red brick, the same domes, the same bands of stone—it is difficult not to connect them, even if Shenyang Station has since been mauled by dreadful heritage restoration. All three were designed by Tatsuno Kingo or his students. Imagine a traveler from the provinces stepping off a train and emerging before one of these elegant red-brick buildings. He might feel, sincerely, that he had arrived at the center of a modern capitalist empire setting the pace of the world—imperial Tokyo—or at a center of modern colonial rule: Keijō at the heart of Japanese Korea, or Mukden at the heart of Manchuria (Keijō was colonial Seoul; Mukden is present-day Shenyang, a major city in northeast China that came under Japanese control). This was not the crumbling, dilapidated “edge of civilization” he knew, slowly disappearing beneath the colonial tide. A century ago, Tokyo Station brought a touch of modern fashion to an old city; today, it lends classical grace to a modern one. But I should return to this particular visit.
 
@@ -143,7 +143,7 @@ After dinner I suggested walking from Roppongi to Tokyo Tower to see it at night
 
 I had also hoped to see the Sangedatsumon Gate at Zōjōji beside the tower; I knew the building from a Kawase Hasui print. It was undergoing restoration, however, and had been sealed behind construction hoardings. I would not be seeing it this time.
 
-![](https://www.soumei.biz/storage/images/items/1587435778.2758_pict1.jpeg "Sangedatsumon as depicted by Kawase Hasui")
+![](https://img.mockingbird.team/blog/external/71e6d5909a98b0f71d198859ff7b314c84a2457cc35e761efb8366ec27828e83.jpg "Sangedatsumon as depicted by Kawase Hasui")
 
 # Day 2. A Day in Ueno
 
@@ -161,9 +161,9 @@ I have very little to say about this house. Only this: how wonderful it would be
 
 I first came to know Shinobazu Pond through Kawase Hasui’s prints.
 
-![](https://www.soumei.biz/storage/images/items/1693624532.4668_pict1.jpg "Pondside at Night — Kawase Hasui")
+![](https://img.mockingbird.team/blog/external/5c25b76f8cf93468e9274e46e297e2f97770b7f36e398eae917044a5c8264638.jpg "Pondside at Night — Kawase Hasui")
 
-![](https://i.seaofog.com/media_attachments/files/108/592/863/112/695/796/original/23219a67d224c4d0.jpeg "Shiba Benten Pond — Kawase Hasui")
+![](https://img.mockingbird.team/blog/external/943ab7523d1f46eaa94b604268aaadc011c29d1a04090c2a5f22aa5afba8fad0.jpg "Shiba Benten Pond — Kawase Hasui")
 
 The moment I saw that duck boats were available, I rented one without hesitation. Here, they let you row alone. Every time I visit West Lake (in Hangzhou), I want to hire a boat and never manage it, because rentals require at least two people—presumably for fear that I might jump into the lake. My wish to drift across a lake was finally granted in Tokyo.
 
@@ -205,7 +205,7 @@ I made only a quick circuit of the Chinese, Korean, Middle Eastern, and Egyptian
 
 After leaving the museum, I went to Ueno Tōshōgū to see its five-story pagoda, a motif that appears often in Kawase Hasui’s work.
 
-![](https://www.roningallery.com/Inventory_Images/JPR-210978_Main-01?resizeid=5&resizeh=1800&resizew=1800 "The five-story pagoda of Ueno Tōshōgū, by Kawase Hasui")
+![](https://img.mockingbird.team/blog/external/8bfd3b627045fdb7a3f80a3f5fce2934615e55d4d8e0e32f7ac4545391bf556a.jpg "The five-story pagoda of Ueno Tōshōgū, by Kawase Hasui")
 
 Faced with the real thing, I had to admit that it looked much like every other five-story pagoda. Perhaps Hasui painted it so often because it was convenient. The light was poor—it was nearly dusk—and trees obscured the tower, so I took no photograph. Beside the approach outside the shrine, though, a single flower caught a beam of evening sun. It was so beautiful that I made a portrait of her instead. The photograph, unfortunately, could not capture her proud little temperament.
 
@@ -255,7 +255,7 @@ Truthfully, the Buddha did not interest me very much either. Why insist on going
 
 Afterward, I took a bus toward Tsurugaoka Hachimangū. Perhaps I boarded the wrong service, or perhaps I forgot to get off; either way, I traveled one stop too far to a station called “Daigaku-mae” and had to retrace my route. How had I first heard of Tsurugaoka Hachimangū? Through Kawase Hasui, yet again.
 
-![](https://egenolfgallery.com/cdn/shop/products/HAC258G_1024x1024@2x.jpg?v=1632080305 "Tsurugaoka Hachimangū as depicted by Kawase Hasui")
+![](https://img.mockingbird.team/blog/external/a3825208a39774c2c4a5347bad8dfcaf08401194acc90e32a3e83803c849bf76.jpg "Tsurugaoka Hachimangū as depicted by Kawase Hasui")
 
 ![](https://img.mockingbird.team/images/2026/08/2564b51c1de118e4a92067155f85d020.webp "My photograph from the same angle")
 

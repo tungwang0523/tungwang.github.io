@@ -12,9 +12,8 @@ const postsEn = posts.filter((post) => post.data.lang === 'en');
 
 <PageLayout
   title="Blog"
-  eyebrow="Journal"
   description="Essays, field notes, and longer reads by Tung Wang."
-  pageTitle="Tung‘s Blog"
+  pageTitle="Tung’s Blog"
   pageClass="blog-page"
   lang="zh-CN"
   activeSection="blog"
@@ -34,3 +33,7 @@ const postsEn = posts.filter((post) => post.data.lang === 'en');
     </section>
   </div>
 </PageLayout>
+
+<style lang="scss" is:global>
+  @use '../../styles/partials/blog';
+</style>

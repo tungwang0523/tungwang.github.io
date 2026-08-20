@@ -17,9 +17,8 @@ const entries = await Promise.all(
 
 <PageLayout
   title="Microblog"
-  eyebrow="Fragments"
   description="Short notes, images, links, and things still in motion."
-  pageTitle="Tung‘s Microblog"
+  pageTitle="Tung’s Microblog"
   pageClass="microblog-page"
   lang="zh-CN"
   activeSection="microblog"
@@ -31,3 +30,7 @@ const entries = await Promise.all(
   </div>
   <MicroblogAnchorKeeper />
 </PageLayout>
+
+<style lang="scss" is:global>
+  @use '../styles/partials/microblog';
+</style>

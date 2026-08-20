@@ -12,7 +12,6 @@ import PageLayout from '../layouts/PageLayout.astro';
 ---
 <PageLayout
   title="Page Title"
-  eyebrow="Section"
   description="Short deck shown under the title and in social previews."
   heroImage="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=1600&q=70"
 >

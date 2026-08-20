@@ -13,7 +13,7 @@ lang: zh
 <article class="message message-immersive is-primary">
 <div class="message-body">
 <i class="fas fa-camera"></i>
-</i>    封面图片来自YOASOBI《大正浪漫》的 Music Video</a>
+封面图片来自YOASOBI《大正浪漫》的 Music Video
 </div>
 </article>
 
@@ -30,7 +30,7 @@ lang: zh
 
 <article class="message message-immersive is-primary">
 <div class="message-body">
-</i>    关东大震灾是1923年9月1日日本关东地区发生的7.9级强烈地震。在这场地震中有10万人死亡，其中7万死亡者在东京。大多数死难者死于地震后的大火。</a>
+关东大震灾是1923年9月1日日本关东地区发生的7.9级强烈地震。在这场地震中有10万人死亡，其中7万死亡者在东京。大多数死难者死于地震后的大火。
 </div>
 </article>
 
@@ -38,10 +38,7 @@ lang: zh
 
 这篇小说非常短，不一会就能读完，篇幅和高考小说阅读差不多。
 
-<a class="button is-info" href="https://www.bilibili.com/read/cv8271117/" target="_blank">
-
-哔哩哔哩 - 「大正ロマンス」小说翻译
-</a><br /><br />
+<a class="button is-info" href="https://www.bilibili.com/read/cv8271117/" target="_blank" rel="noopener noreferrer">哔哩哔哩 - 「大正ロマンス」小说翻译</a><br /><br />
 
 ## 歌曲《大正浪漫》
 
@@ -49,15 +46,9 @@ lang: zh
 
 YOASOBI的歌曲，换句话可以说是「音乐化小说」：将小说情节改编成音乐进行演绎。这让YOASOBI的歌曲具有了文学内涵，较其他歌曲来说更能打动人心，这也是我迷上YOASOBI的原因。
 
-<a class="button is-info" href="https://www.bilibili.com/video/BV13f4y1n7oD" target="_blank">
+<a class="button is-info" href="https://www.bilibili.com/video/BV13f4y1n7oD" target="_blank" rel="noopener noreferrer">哔哩哔哩 - YOASOBI 大正浪漫</a><br /><br />
 
-哔哩哔哩 - YOASOBI 大正浪漫
-</a><br /><br />
-
-<a class="button is-danger" href="https://music.apple.com/cn/album/%E5%A4%A7%E6%AD%A3%E6%B5%AA%E6%BC%AB/1582913798?i=1582913800&ls" target="_blank">
-
-Apple Music 上 YOASOBI 的歌曲《大正浪漫》
-</a>
+<a class="button is-danger" href="https://music.apple.com/cn/album/%E5%A4%A7%E6%AD%A3%E6%B5%AA%E6%BC%AB/1582913798?i=1582913800&ls" target="_blank" rel="noopener noreferrer">Apple Music 上 YOASOBI 的歌曲《大正浪漫》</a>
 <br />
 <br />
 
@@ -66,7 +57,7 @@ Apple Music 上 YOASOBI 的歌曲《大正浪漫》
 
 <article class="message message-immersive is-primary">
 <div class="message-body">
-</i>这是歌曲《大正浪漫》歌词的中文翻译，其著作权属于原著作权人，仅以介绍为目的引用。<br /><br />
+这是歌曲《大正浪漫》歌词的中文翻译，其著作权属于原著作权人，仅以介绍为目的引用。<br /><br />
 某一天突然<br />
 来临的变故<br />
 一开始是一封书信<br />
@@ -113,7 +104,7 @@ Apple Music 上 YOASOBI 的歌曲《大正浪漫》
 即使跨越了千万年<br />
 你也紧紧握住你活在你的时代的证明<br />
 总有一天我将会把在我的时代里看见的所有一切<br />
-传达给你</a>
+传达给你
 </div>
 </article>
 
@@ -189,15 +180,15 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 印刷技术和通讯技术的发展使文化从权贵阶级下放到平民，在民间的艺术文学工作者逐渐向着理想主义和个人主义进发。同时，时代的矛盾与纠结又让文学艺术作品开始呼唤新时代的期望。日本人的“日本梦”——对未来的希望与信心使得未来主义思潮成为日本近代文学艺术的主流。
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Tokyo_station_building_front_view_1914.jpg/2880px-Tokyo_station_building_front_view_1914.jpg)
+![](https://img.mockingbird.team/blog/external/97f53ffb31492fd2eb41d65645457d2a3223374a7e58b62705a8337f1bd84825.jpg)
 
 1914年完工的東京駅（东京站）是非常典型的西式建筑。西方艺术在公共建筑中的运用体现了日本艺术家对新事物的喜爱。在这之后，日本人建造的京城駅（现在的首尔车站）、奉天駅（现在的沈阳站）均以东京站为蓝本设计。
 
-![](http://n.sinaimg.cn/sinakd20119/143/w1024h1519/20200626/4f9d-ivmqpck0946093.jpg)
+![](https://img.mockingbird.team/blog/external/da00f540dda29cd289c9a99c5f3f3f52a793f6afb870e8957024fea7b4373ac9.jpg)
 
 这是日本艺术家杉浦非水为1927年新建的东京地铁而创作的海报《1927年东洋第一条地下铁道》。该海报并未使用日本传统的浮世绘画法和西方的古典油画画法，而是将图像几何化、抽象化。这种新的表现形式广为日本艺术家采用。
 
-![](http://n.sinaimg.cn/sinakd20119/649/w914h1335/20200626/b72c-ivmqpck0950710.jpg)
+![](https://img.mockingbird.team/blog/external/e6e26148e83dc7b5185222558c1380bf6e27cb1e7b4cd2b8753c0fcb155c1e1e.jpg)
 
 这是杉浦非水为东京三越吴服店创作的广告海报。可以看出，在描绘日本传统文化元素“吴服”时，日本艺术家也是使用新潮的极简画法而不是传统画法，而对人物的描绘也再不是像传统浮世绘一样的呆板臃肿，而是细长身材、大眼美女的形象。没有大正时代艺术界对人物表达的革命性转变，昭和时期的日本漫画繁荣不会出现。
 
@@ -205,12 +196,12 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 这种在大正时代产生的日本近代艺术，对昭和时代的日本及其殖民地满洲、台湾、朝鲜等地产生了非常深刻的影响。
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
+![](https://img.mockingbird.team/blog/external/4ee62b775ce0890e50b907a61ba63cfad1fcc115c0d808596532932d63256a77.jpg)
 
 建于1936年的日本国会议事堂，将日本艺术、西方建筑艺术与现代建筑艺术有机结合。
 
-![](https://upload.wikimedia.org/wikipedia/commons/9/9e/Paoshan_Dept._store_of_Hsinking.jpg)
-![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Feng-Ler_Theatre.jpg)
+![](https://img.mockingbird.team/blog/external/5f26924e0b1cc6216c286d119774fc9ac15b9282f22dae2c73809d7064fe1374.jpg)
+![](https://img.mockingbird.team/blog/external/3c3377d24c85024a9bc35aacd1dbe1364ba504e2e94cdebfcee7c911c3e023b9.jpg)
 
 伪满时期新京特别市（长春）的宝山百货店和丰乐剧场。伪满时期的新京是日本建筑师自由创作的天堂，日本艺术家对新事物的向往体现在遍布新京的现代主义风格建筑中。
 
@@ -218,7 +209,7 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 知乎用户 JUN325 用军人、文豪、女学生三种人物形象描述大正时期。日本歌曲《千本樱》的MV封面很好地刻画了大正时期的社会风貌。
 
-![](https://pic2.zhimg.com/80/3a3bc2e02b76947abe54877123ea3228_1440w.jpg)
+![](https://img.mockingbird.team/blog/external/12d8a0f0b3e2a586711479c6b703e5b85bc9d009c8ecf4e2096d9486fd43186a.png)
 
 日本武士封建统治的结束使日本人的思想从封建思想的禁锢中解放出来，西方的自由、民主的资产阶级思潮涌入日本，日本平民的思想世界逐渐丰富，日本女性地位大幅提高。
 
@@ -229,16 +220,13 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 没有日本人自我解放，就绝没有大正时期的社会繁荣。
 
 ![](http://img.mp.itc.cn/upload/20170425/f6a872bedb4f4553a38359219a500490_th.jpeg)
-![](http://5b0988e595225.cdn.sohucs.com/images/20190514/618d1adebe5a459aa9ba884c1f072691.jpeg)
+![](https://img.mockingbird.team/blog/external/380fe2c464f7a5b93c8612a229598a5d95dddd250602d0facb02f0f4a35c609e.jpg)
 
 第一张照片是维新之前日本武士的照片，眼睛无神，没有笑容。第二章照片是维新后日本近代东京街头女孩的街拍，自信的笑容洋溢在充满青春活力的女孩脸上。这两张照片的对比中可以看出“大正浪漫”在日本人身上的体现。
 
 知乎上面有一个很好的问题，里面的回答会让人对大正时期的社会风貌有更全面的了解。
 
-<a class="button is-info" href="https://www.zhihu.com/question/28855342" target="_blank">
-
-求用实例说明大正浪漫究竟是怎样的一种感觉？
-</a>
+<a class="button is-info" href="https://www.zhihu.com/question/28855342" target="_blank" rel="noopener noreferrer">求用实例说明大正浪漫究竟是怎样的一种感觉？</a>
 
 ## 昙花般“大正浪漫”的凋谢
 
@@ -310,25 +298,25 @@ MV开头，大正时期日本西化的文化元素与传统的和式元素密集
 
 <article class="message is-danger message-immersive is-primary">
 <div class="message-body">
-</i>“对于在男子学校上学的我来说，她寄来的信简直，太棒了！她所纺织出的言语是如此的优美而温柔。初恋是一个大正时代的女孩子。这不是超浪漫吗！这就是所谓的大正浪漫吗？唉不是吗？”</a>
+“对于在男子学校上学的我来说，她寄来的信简直，太棒了！她所纺织出的言语是如此的优美而温柔。初恋是一个大正时代的女孩子。这不是超浪漫吗！这就是所谓的大正浪漫吗？唉不是吗？”
 </div>
 </article>
 
 <article class="message is-danger message-immersive is-primary">
 <div class="message-body">
-</i>“我一定会要活得久一些，去见时翔君。一定。<br />
+“我一定会要活得久一些，去见时翔君。一定。<br />
 有些话本来是想见到时翔君之后亲口告诉你的…我还是现在在信里写下来吧。<br />
 时翔君，我喜欢你。<br />
 我好想见到你。<br />
 好想牵着时翔君的手，走在东京的大街上。<br />
-不管你处在哪个时代，我都会去找你。”</a>
+不管你处在哪个时代，我都会去找你。”
 </div>
 </article>
 
 <article class="message is-danger message-immersive is-primary">
 <div class="message-body">
-</i>“我身患重病，过不了多久就要离世了。不过下个月我就80岁了，我得努力活到那时候呢。<br />
-时翔君，我们一定会在未来相遇的吧。我好期待。”</a>
+“我身患重病，过不了多久就要离世了。不过下个月我就80岁了，我得努力活到那时候呢。<br />
+时翔君，我们一定会在未来相遇的吧。我好期待。”
 </div>
 </article>
 

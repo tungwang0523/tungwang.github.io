@@ -25,7 +25,12 @@ export default defineConfig({
       },
     },
   },
-  integrations: [mdx({ gfm: false, remarkPlugins, rehypePlugins }), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => new URL(page).pathname.replace(/\/$/, '') !== '/academic',
+    }),
+  ],
   markdown: {
     // Image structure is finalized at build time; the browser only handles interaction.
     processor: unified({

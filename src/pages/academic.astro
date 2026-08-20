@@ -165,7 +165,6 @@ const [primaryProject, ...otherProjects] = projects;
 <PageLayout
   title="Wang Zhaodong"
   description="Interdisciplinary Researcher, Master’s Candidate in Design"
-  descriptionLines={['Interdisciplinary Researcher', 'Master’s Candidate in Design']}
   pageTitle="Academic Profile - Wang Zhaodong"
   pageClass="page--research"
   canonicalUrl="https://cv.tung.mockingbird.team/"
@@ -185,7 +184,7 @@ const [primaryProject, ...otherProjects] = projects;
         <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer">
           ORCID 0009-0008-1111-6742
         </a>
-        <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
+        <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
       </div>
     </section>
 
@@ -361,7 +360,7 @@ const [primaryProject, ...otherProjects] = projects;
       <div class="cv-web__closing-inner">
         <p>Curriculum Vitae · Publications · Research Collaboration</p>
         <div>
-          <a href="/files/Tung-Wang-CV.pdf" target="_blank">Download CV ↓</a>
+          <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
           <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
             >ORCID ↗</a
           >
@@ -371,3 +370,7 @@ const [primaryProject, ...otherProjects] = projects;
     </section>
   </div>
 </PageLayout>
+
+<style lang="scss" is:global>
+  @use '../styles/partials/academic';
+</style>

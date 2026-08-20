@@ -207,21 +207,22 @@ document.addEventListener('keydown', (e) => {
 
 if (mobileBrand?.dataset.mobileBrandExpanded) {
   const alwaysExpanded = mobileBrand.dataset.mobileBrandExpandedAlways === 'true';
+  const mobileBar = mobileBrand.closest<HTMLElement>('.menu-mobile-bar');
   const updateExpandedBrand = () => {
+    const navigationBottom = mobileBar?.getBoundingClientRect().bottom ?? 64;
     const titleHasPassed = mobileBrandTitle
-      ? mobileBrandTitle.getBoundingClientRect().bottom <= 64
+      ? mobileBrandTitle.getBoundingClientRect().bottom <= navigationBottom
       : false;
     mobileBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
-    mobileBrand
-      .closest('.menu-mobile-bar')
-      ?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
+    mobileBar?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
   };
 
   updateExpandedBrand();
 
   if (!alwaysExpanded && mobileBrandTitle) {
+    const navigationBottom = mobileBar?.getBoundingClientRect().bottom ?? 64;
     const expandedBrandObserver = new IntersectionObserver(updateExpandedBrand, {
-      rootMargin: '-64px 0px 0px',
+      rootMargin: `-${navigationBottom}px 0px 0px`,
       threshold: 0,
     });
     expandedBrandObserver.observe(mobileBrandTitle);
@@ -236,21 +237,22 @@ if (mobileBrand?.dataset.mobileBrandExpanded) {
 
 if (pageBrand?.dataset.pageBrandExpanded) {
   const alwaysExpanded = pageBrand.dataset.pageBrandExpandedAlways === 'true';
+  const pageNavigation = pageBrand.closest<HTMLElement>('.page-nav');
   const updateExpandedPageBrand = () => {
+    const navigationBottom = pageNavigation?.getBoundingClientRect().bottom ?? 0;
     const titleHasPassed = mobileBrandTitle
-      ? mobileBrandTitle.getBoundingClientRect().bottom <= -28
+      ? mobileBrandTitle.getBoundingClientRect().bottom <= navigationBottom
       : false;
     pageBrand.classList.toggle('is-expanded', alwaysExpanded || titleHasPassed);
-    pageBrand
-      .closest('.page-nav')
-      ?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
+    pageNavigation?.classList.toggle('is-title-passed', alwaysExpanded || titleHasPassed);
   };
 
   updateExpandedPageBrand();
 
   if (!alwaysExpanded && mobileBrandTitle) {
+    const navigationBottom = pageNavigation?.getBoundingClientRect().bottom ?? 0;
     const pageBrandObserver = new IntersectionObserver(updateExpandedPageBrand, {
-      rootMargin: '28px 0px 0px',
+      rootMargin: `-${navigationBottom}px 0px 0px`,
       threshold: 0,
     });
     pageBrandObserver.observe(mobileBrandTitle);

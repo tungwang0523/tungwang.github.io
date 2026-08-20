@@ -1,5 +1,6 @@
 ---
 import { formatSiteDate } from '../utils/date';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
   bigTitle: string;
@@ -12,6 +13,7 @@ interface Props {
   readTime: string;
   excerpt: string;
   href: string;
+  linkSite?: 'main' | 'cv';
   hasNext?: boolean;
   imageLoading?: 'eager' | 'lazy';
   imageFetchPriority?: 'high' | 'low' | 'auto';
@@ -28,6 +30,7 @@ const {
   readTime,
   excerpt,
   href,
+  linkSite = 'main',
   hasNext = false,
   imageLoading = 'lazy',
   imageFetchPriority = 'low',
@@ -52,16 +55,18 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
   </div>
   <div class="blog-article featured-content">
     <div class="featured-content__media">
-      <img
+      <ResponsiveImage
         class="featured-content__image"
         src={cover}
+        alternateSrc={compactCover}
         alt={bigTitle}
+        widths={[480, 768, 960, 1440]}
+        sizes="(max-width: 800px) calc(100vw - 48px), 50vw"
+        priority={imageLoading === 'eager'}
         loading={imageLoading}
         decoding="async"
         fetchpriority={imageFetchPriority}
         data-section={sectionId}
-        data-full-src={cover}
-        data-compact-src={compactCover}
       />
     </div>
     <div class="featured-content__copy">
@@ -90,7 +95,7 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
             </button>
           )
         }
-        <a href={href}>
+        <a href={href} data-cv-site-link={linkSite === 'cv' || undefined}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -224,8 +229,17 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
           const fullArtworkHeight = (imageWidth * 3) / 4;
           const useCompactArtwork = availableHeight + 1 < fullArtworkHeight;
           const nextSource = useCompactArtwork ? compactSource : fullSource;
+          const nextSrcset = useCompactArtwork
+            ? image.dataset.compactSrcset
+            : image.dataset.fullSrcset;
+          const nextMode = useCompactArtwork ? 'compact' : 'full';
 
-          if (image.getAttribute('src') !== nextSource) image.src = nextSource;
+          if (image.dataset.artworkSource !== nextMode) {
+            image.src = nextSource;
+            if (nextSrcset) image.srcset = nextSrcset;
+            else image.removeAttribute('srcset');
+            image.dataset.artworkSource = nextMode;
+          }
           header.dataset.artwork = useCompactArtwork ? 'compact' : 'full';
         });
       };

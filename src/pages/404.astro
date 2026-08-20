@@ -2,10 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Lost - Tung‘s" description="The page you were looking for isn't here.">
-  <div class="not-found">
-    <div class="not-found__code">404</div>
-    <div class="not-found__title">This page got quiet.</div>
+<BaseLayout
+  title="Lost - Tung’s"
+  description="The page you were looking for isn't here."
+  robots="noindex, nofollow"
+>
+  <main class="not-found">
+    <div class="not-found__code" aria-hidden="true">404</div>
+    <h1 class="not-found__title">This page got quiet.</h1>
     <a href="/">← Back to the cover</a>
-  </div>
+  </main>
 </BaseLayout>
+
+<style lang="scss" is:global>
+  @use '../styles/partials/not-found';
+</style>

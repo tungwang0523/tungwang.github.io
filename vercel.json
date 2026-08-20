@@ -1,20 +1,58 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "routes": [
+  "headers": [
     {
-      "src": "^/$",
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/academic",
+      "has": [{ "type": "host", "value": "tung.mockingbird.team" }],
+      "destination": "https://cv.tung.mockingbird.team/",
+      "permanent": true
+    },
+    {
+      "source": "/academic",
+      "has": [{ "type": "host", "value": "cv.tung.mockingbird.team" }],
+      "destination": "https://cv.tung.mockingbird.team/",
+      "permanent": true
+    },
+    {
+      "source": "/:section(work|blog|microblog|gallery)/:path*",
+      "has": [{ "type": "host", "value": "cv.tung.mockingbird.team" }],
+      "destination": "https://tung.mockingbird.team/:section/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/rss.xml",
+      "has": [{ "type": "host", "value": "cv.tung.mockingbird.team" }],
+      "destination": "https://tung.mockingbird.team/rss.xml",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "cv.tung.mockingbird.team"
         }
       ],
-      "dest": "/academic/index.html"
+      "destination": "/academic/index.html"
     },
-    { "handle": "filesystem" },
     {
-      "src": "^/stats/(.*)$",
-      "dest": "https://cloud.umami.is/$1"
+      "source": "/stats/:path*",
+      "destination": "https://cloud.umami.is/:path*"
     }
   ]
 }

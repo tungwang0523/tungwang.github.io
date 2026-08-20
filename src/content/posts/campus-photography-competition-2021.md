@@ -16,15 +16,15 @@ lang: zh
 # 基础楼的历史
 >伪满洲国国务院旧址是伪八大部建筑群中的主要建筑，位于长春市新民大街2号，此处原为总务厅和参议院的办公楼，现为吉林大学白求恩医学院基础教学楼。伪满洲国国务院旧址又称“第五厅舍”，由石井达郎设计，大林组施工，1934年7月19日动工，1936年11月20日竣工.占地面积50600平方米，建筑面积20500平方米，呈“川”字形，主要建筑为钢筋混凝土结构，正门朝西，正面五层（地下室一层）塔式屋顶，楼顶铺盖烟色琉璃瓦，外墙以咖啡色瓷砖贴面。  ——百度百科  
 
-![](http://minsheng.cnjiwang.com/xcxm/201605/W020160526391397672242.jpg)
+![](https://img.mockingbird.team/blog/external/df67d90cb3984c383d0de73e4fa658cb8501c498d17562e48d7b7d02db51b6bd.jpg)
 
 (伪满时期伪满洲国国务院上色照片，图源网络)
 
-![](http://p0.ssl.cdn.btime.com/t0186919932e1370b42.jpg)
+![](https://img.mockingbird.team/blog/external/d6970a2e70b16ebd4dc35ef8f13328652e1846c54e1d1e6aa58bb9daca667a7f.jpg)
 
 (日本明信片上的伪满洲国国务院旧址，图源网络)
 
-![](http://5b0988e595225.cdn.sohucs.com/images/20190910/e8cb5d17e3d14021bc3c59f74f1a55f0.jpeg)
+![](https://img.mockingbird.team/blog/external/e2416d9f671cdf26915e6d6c56d1716dc6f994f1fca777156fe5e7b1a2f06aed.jpg)
 
 (伪满洲国货币“满洲国圆”五圆纸币上的伪满洲国国务院，图源网络)
 
@@ -39,13 +39,13 @@ lang: zh
 帝冠样式是1930年代在日本民族主义势力抬头的背景下，为对抗现代主义建筑而产生的日本建筑样式。现代建筑辅以日本式的屋顶，是该样式非常显著的特点。该样式又以“穿着军服的建筑”之绰号为人所知。因为兼具实用和容易表现日本建筑的构思这些特点，不只是日本本土，中国东北（昔日的满洲国范围）等中国旧时受日本控制的地区也有留存不少帝冠样式的建筑。
 ——来自维基百科词条“帝冠样式”
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Kanagawa_Prefectural_Office.jpg/1599px-Kanagawa_Prefectural_Office.jpg)
+![](https://img.mockingbird.team/blog/external/49b05fdc820a144919caadd6913448748ff9261a5a2f6eb0b6fe32d0648fa786.jpg)
 
 (日本神奈川县厅舍，“帝冠式”建筑。图源维基百科)
 
 而作为伪满洲国最高行政机关驻所，伪满洲国国务院旧址大楼与同时期建造的日本东京的国会议事堂非常相似。
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Diet_of_Japan_Kokkai_2009.jpg/1600px-Diet_of_Japan_Kokkai_2009.jpg)
+![](https://img.mockingbird.team/blog/external/4ee62b775ce0890e50b907a61ba63cfad1fcc115c0d808596532932d63256a77.jpg)
 
 （日本国会议事堂，与伪满洲国国务院旧址在同一时期建成。图源维基百科）
 
@@ -91,10 +91,7 @@ lang: zh
 
 ![](https://img.mockingbird.team/images/2026/08/ac48ad12d47e64e96af65b4a70ef651f.webp)
 
-<a class="tag is-info is-medium" href="https://500px.com.cn/community/photo-details/af05d7eb91264500a6a5ab3d327038b8" target="_blank">
-
-到 500px.com.cn 欣赏该作品
-</a>
+<a class="tag is-info is-medium" href="https://500px.com.cn/community/photo-details/af05d7eb91264500a6a5ab3d327038b8" target="_blank" rel="noopener noreferrer">到 500px.com.cn 欣赏该作品</a>
 
 
 不过，这张照片给我的感觉是颜色比较“脏”且不太自然，就试着把这张照片调成黑白。调成黑白以后，我感觉颜色对这张照片的干扰被消除了,整张照片变得更加和谐。而黑白色，对这张照片的内容来说还有着另一些作用。

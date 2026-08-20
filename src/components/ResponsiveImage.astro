@@ -9,6 +9,7 @@ import {
 
 interface Props {
   src: string;
+  alternateSrc?: string;
   alt: string;
   class?: string;
   width?: number | string;
@@ -29,7 +30,7 @@ const readMetadata = (source: string) => {
   const cached = metadataCache.get(source);
   if (cached) return cached;
 
-  const filePath = path.join(process.cwd(), 'public', source.replace(/^\//, ''));
+  const filePath = path.join(process.cwd(), 'public', source.replace(/^\//, '').split(/[?#]/)[0]);
   const metadata = sharp(filePath).metadata();
   metadataCache.set(source, metadata);
   return metadata;
@@ -37,6 +38,7 @@ const readMetadata = (source: string) => {
 
 const {
   src,
+  alternateSrc,
   alt,
   width,
   height,
@@ -53,6 +55,10 @@ const {
 const localImage = isLocalSiteImage(src);
 const rasterImage = localImage && !src.toLowerCase().endsWith('.svg');
 const metadata = rasterImage ? await readMetadata(src) : undefined;
+const alternateLocalImage = alternateSrc ? isLocalSiteImage(alternateSrc) : false;
+const alternateRasterImage =
+  Boolean(alternateSrc) && alternateLocalImage && !alternateSrc!.toLowerCase().endsWith('.svg');
+const alternateMetadata = alternateRasterImage ? await readMetadata(alternateSrc!) : undefined;
 const intrinsicWidth = width ?? metadata?.width;
 const intrinsicHeight = height ?? metadata?.height;
 const availableWidths = metadata?.width
@@ -75,6 +81,25 @@ const renderedSource = productionTransform
 const renderedSrcset = productionTransform
   ? cloudflareRemoteSrcset(src, availableWidths, imageOptions)
   : undefined;
+const alternateWidths = alternateMetadata?.width
+  ? widths.filter((candidate) => candidate <= alternateMetadata.width!)
+  : widths;
+if (alternateMetadata?.width) {
+  const largestAlternateWidth = Math.min(alternateMetadata.width, Math.max(...widths));
+  if (!alternateWidths.includes(largestAlternateWidth)) alternateWidths.push(largestAlternateWidth);
+  alternateWidths.sort((left, right) => left - right);
+}
+const alternateProductionTransform = import.meta.env.PROD && alternateRasterImage;
+const alternateFallbackWidth = Math.min(960, alternateMetadata?.width ?? 960);
+const renderedAlternateSource = alternateSrc
+  ? alternateProductionTransform
+    ? cloudflareRemoteImage(alternateSrc, { ...imageOptions, width: alternateFallbackWidth })
+    : alternateSrc
+  : undefined;
+const renderedAlternateSrcset =
+  alternateSrc && alternateProductionTransform
+    ? cloudflareRemoteSrcset(alternateSrc, alternateWidths, imageOptions)
+    : undefined;
 const renderedSizes = renderedSrcset
   ? (sizes ?? (priority ? '100vw' : 'auto, (max-width: 800px) calc(100vw - 40px), 1180px'))
   : undefined;
@@ -90,5 +115,9 @@ const renderedSizes = renderedSrcset
   loading={loading ?? (priority ? 'eager' : 'lazy')}
   decoding={decoding}
   fetchpriority={fetchpriority ?? (priority ? 'high' : undefined)}
+  data-full-src={alternateSrc ? renderedSource : undefined}
+  data-full-srcset={alternateSrc ? renderedSrcset : undefined}
+  data-compact-src={renderedAlternateSource}
+  data-compact-srcset={renderedAlternateSrcset}
   {...attributes}
 />

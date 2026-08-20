@@ -628,26 +628,6 @@
     letter-spacing: clamp(-4px, -0.3vw, -2.5px);
   }
 
-  .page-deck {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: clamp(18px, 2vw, 28px);
-    max-width: 25ch;
-    margin: 0;
-    font-family: $title-font;
-    font-size: clamp(25px, 3vw, 36px);
-    font-weight: 600;
-    line-height: 1.03;
-    letter-spacing: -1.3px;
-    white-space: normal;
-
-    span {
-      display: block;
-    }
-  }
-
   .page-main {
     max-width: 1120px;
     padding-bottom: 0;
@@ -690,11 +670,6 @@
       align-items: start;
     }
 
-    .page-deck {
-      align-self: start;
-      max-width: 28ch;
-      gap: 14px;
-    }
   }
 }
 

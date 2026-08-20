@@ -89,6 +89,7 @@ const home = defineCollection({
       z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
     ]),
     href: z.string(),
+    linkSite: z.enum(['main', 'cv']).default('main'),
     order: z.number(),
   }),
 });

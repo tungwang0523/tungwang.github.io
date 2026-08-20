@@ -32,10 +32,6 @@
     }
   }
 
-  > .page-nav .page-nav__current {
-    display: none;
-  }
-
   /* Align the desktop navigation precisely with the Work canvas. Tablet and
      mobile keep the site's standard navigation insets instead of inheriting
      this page-specific full-width rule. */

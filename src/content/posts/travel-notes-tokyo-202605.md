@@ -43,7 +43,7 @@ translationKey: 'travel-notes-tokyo-202605'
 
 ![](https://img.mockingbird.team/images/2026/08/32639f343494e574e149e293e00454f8.webp "赤坂离宫")
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/89/President_Trump_at_the_Akasaka_Palace_%2847945564911%29.jpg "赤坂离宫朝日间")
+![](https://img.mockingbird.team/blog/external/721b6159d271d46c64122517e1f17029a1c1d9f310cf25e884eda60d46856039.jpg "赤坂离宫朝日间")
 
 赤坂离宫的内部装修极尽奢华，不愧是巴洛克。可惜内部不许拍照，就只好看着这西洋宫殿的外观来回忆了。我在网上找了一张其中的一个房间“朝日间”的图片，是特朗普和安倍晋三会谈时的照片，可见内部装潢之奢华。
 
@@ -61,21 +61,21 @@ translationKey: 'travel-notes-tokyo-202605'
 
 这个建筑我得好好说道说道。在战前的日本，或者再往前，大概是明治、大正时代，也就是开始维新，但还没有魔怔到见了“米英鬼畜”就应激的那段时间，全日本充满着“脱亚入欧”的气氛，以全面接受西方文明为“文明开化”。在这样一切向欧美看的时代，作为帝都的东京，“洋馆”则如雨后春笋般在市中心全面铺开。在明治早期，还只是吸收了些西方建筑样式的，不和不洋的“拟样风”建筑。随着一些日本本土建筑师从西方建筑师那里学成归来，正经的西方建筑就开始在日本，尤其是在帝都东京普及开来。东京站丸之内站舍所载的丸之内地区，则是这样的洋馆的集中地。在明治、大正时期，充满红砖（赤炼瓦）建筑的丸之内的城市景观因为与伦敦相似，被称为“一丁伦敦”。而在昭和时代，纽约式摩天大楼的兴建又使得丸之内被称为“一丁纽育”。而在这东京的“一丁伦敦”“一丁纽育”中，作为帝都东京的门面，东京站丸之内站舍可谓是当仁不让的标志性建筑。
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Tokyo_station_building_front_view_1914.jpg/1920px-Tokyo_station_building_front_view_1914.jpg "1914年 刚建成的东京站丸之内站舍")
+![](https://img.mockingbird.team/blog/external/f483ff3819c262022c8588d4d5a2c971e0bf16d60c244ffec340611129bf46bb.jpg "1914年 刚建成的东京站丸之内站舍")
 
 说到东京站丸之内站舍，不得不提它的两个姐妹 —— 首尔站和沈阳站。
 
-![](https://upload.wikimedia.org/wikipedia/commons/1/17/Keijo_Station.JPG "京城驿站舍")
+![](https://img.mockingbird.team/blog/external/516da199179a0d9e5a6d9fd5752f48e5d1e4329fc891a742bae1900af1d4cbc3.jpg "京城驿站舍")
 
-![](https://inews.gtimg.com/newsapp_match/0/14449492078/0 "奉天驿站舍")
+![](https://img.mockingbird.team/blog/external/1e5811ac857b17d67fd3c0188a3563be83531123ecf412847bf718e836297635.jpg "奉天驿站舍")
 
 可能这些黑白照片看不太出来他们的相似之处，但是将现在的彩色照片一对比，就可以立马看出来我为什么将她们以姐妹相称了。
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Tokyo---2025-06-18_060.jpg/3840px-Tokyo---2025-06-18_060.jpg "东京站南口外观")
+![](https://img.mockingbird.team/blog/external/21aeebaf0ea073642d6a6a39357a01b7c3c6913f6b5ca64f3fd1be956f02e86d.jpg "东京站南口外观")
 
-![](https://tchinese.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=68381&fileTy=MEDIA&fileNo=2&thumbTy=L "首尔站旧站舍")
+![](https://img.mockingbird.team/blog/external/757bac46820431a4e1111daa30ebe74ea5dee11bfd0da9f47d6f77cfe53e4ff1.bin "首尔站旧站舍")
 
-![](http://wap.china-railway.com.cn/zyyw/lkys/fwss/202011/W020201130522063132958.jpg "沈阳站西广场站房")
+![](https://img.mockingbird.team/blog/external/ca14340bb4ded761713766b4dc5f492c63a119eaac9d174bc5aabce346cf7e55.jpg "沈阳站西广场站房")
 
 一样的红砖，一样的穹顶，一样的石头带饰……很难不将她们联系起来（虽然沈阳站被国内糟糕的文物修复糟蹋成了现在这个样子）。而这三个火车站的站房，都是辰野金吾和他的学生设计的。试想一下，一个外地游客从这样的火车站下车，出站之后看到这样精美的、优雅的红砖洋馆，他会发自内心地想 —— 他来到了一个引领世界潮流的现代资本主义帝国的中心（帝都东京），或者是现代殖民统治的中心（日治朝鲜的中心京城府，或者满洲的中心奉天城），而非自己所熟悉的，破墙烂瓦的，在殖民浪潮中逐渐消亡的“文明边缘地带”。东京站在上个世纪，为这个古典城市带来了一丝现代的时尚气息；而在现代，为这个现代城市带来了一丝古典的优雅气息。该说回本次的东京站之行了。
 
@@ -149,7 +149,7 @@ translationKey: 'travel-notes-tokyo-202605'
 
 本来还想去东京塔旁边的增上寺，看看增上寺的三解脱门（我知道这个建筑正是在川濑巴水的版画里）。但是三解脱门正在进行修复工程，四周被围挡围得严严实实，这次是看不到了。
 
-![](https://www.soumei.biz/storage/images/items/1587435778.2758_pict1.jpeg "川濑巴水笔下的三解脱门")
+![](https://img.mockingbird.team/blog/external/71e6d5909a98b0f71d198859ff7b314c84a2457cc35e761efb8366ec27828e83.jpg "川濑巴水笔下的三解脱门")
 
 # Day 2. 上野之日
 
@@ -168,9 +168,9 @@ translationKey: 'travel-notes-tokyo-202605'
 
 我认识不忍池，也是在川濑巴水的笔下。
 
-![](https://www.soumei.biz/storage/images/items/1693624532.4668_pict1.jpg "夜之池畔 - 川濑巴水")
+![](https://img.mockingbird.team/blog/external/5c25b76f8cf93468e9274e46e297e2f97770b7f36e398eae917044a5c8264638.jpg "夜之池畔 - 川濑巴水")
 
-![](https://i.seaofog.com/media_attachments/files/108/592/863/112/695/796/original/23219a67d224c4d0.jpeg "芝弁天池 - 川濑巴水")
+![](https://img.mockingbird.team/blog/external/943ab7523d1f46eaa94b604268aaadc011c29d1a04090c2a5f22aa5afba8fad0.jpg "芝弁天池 - 川濑巴水")
 
 看到不忍池有鸭子船可以划，毫不犹豫地就租了一条 —— 这里是可以独自划船的。想起我每次去西湖，每次想去租条船，都未能如愿，因为租船至少需要两个人，估计是怕我跳到湖里。这个湖上泛舟的念想，终于能在东京如愿了。
 
@@ -213,7 +213,7 @@ translationKey: 'travel-notes-tokyo-202605'
 
 从东京国立博物馆出来，去上野东照宫看看这里的五重塔。这个五重塔是川濑巴水作品中常出现的素材。
 
-![](https://www.roningallery.com/Inventory_Images/JPR-210978_Main-01?resizeid=5&resizeh=1800&resizew=1800 "川濑巴水笔下的上野东照宫五重塔")
+![](https://img.mockingbird.team/blog/external/8bfd3b627045fdb7a3f80a3f5fce2934615e55d4d8e0e32f7ac4545391bf556a.jpg "川濑巴水笔下的上野东照宫五重塔")
 
 看到真品，感叹，确实与其他的五重塔没什么不同。其频繁出现在川濑巴水笔下，可能是比较方便吧。当时的光线不好（已近黄昏），五重塔又受树遮挡，就没能留下照片。倒是在东照宫外面的参道旁，有一株花，正好被一束夕阳照着，特别好看，就特别地给她照了张相。可惜照片拍不出来她的傲娇。
 
@@ -263,7 +263,7 @@ translationKey: 'travel-notes-tokyo-202605'
 
 从大佛出来了之后，我坐上了去鹤冈八幡宫的公交。可能是坐错车次了，或者到站忘了下车，我坐过去了一站，到了一个叫“大学前”的车站。下车之后又折返回去。我是怎么知道鹤冈八幡宫的？还是在川濑巴水的笔下看到的。
 
-![](https://egenolfgallery.com/cdn/shop/products/HAC258G_1024x1024@2x.jpg?v=1632080305 "川濑巴水笔下的鹤冈八幡宫")
+![](https://img.mockingbird.team/blog/external/a3825208a39774c2c4a5347bad8dfcaf08401194acc90e32a3e83803c849bf76.jpg "川濑巴水笔下的鹤冈八幡宫")
 
 ![](https://img.mockingbird.team/images/2026/08/2564b51c1de118e4a92067155f85d020.webp "我在同一角度拍的照片")
 

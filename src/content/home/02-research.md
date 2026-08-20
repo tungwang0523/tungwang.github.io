@@ -7,5 +7,6 @@ metaRight: 'Profile & CV'
 label: ''
 cover: '/pictures/research.png'
 href: '/academic'
+linkSite: 'cv'
 order: 1
 ---

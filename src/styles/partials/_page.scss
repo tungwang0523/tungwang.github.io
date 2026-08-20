@@ -90,24 +90,13 @@
     align-items: center;
     gap: 28px;
 
-    a,
-    .page-nav__current {
+    a {
       color: $subtitle-color;
       text-decoration: none;
       font-size: 17px;
       letter-spacing: -0.3px;
     }
 
-    .page-nav__current {
-      display: inline-flex;
-      align-items: center;
-      padding: 0;
-      background: transparent;
-      color: $subtitle-color;
-      font-weight: 700;
-      line-height: inherit;
-      cursor: default;
-    }
   }
 
   &__controls {
@@ -154,204 +143,6 @@
     display: flex;
     color: inherit;
     transform: translateY(-50%);
-  }
-}
-
-/* Section landing pages begin with navigation integrated into the title row.
-   Once the title leaves the viewport, the familiar sticky navigation returns. */
-@media screen and (min-width: 1031px) {
-  .page--section-landing {
-    position: relative;
-
-    > .page-nav nav .page-nav__current {
-      display: none;
-    }
-
-    > .page-main {
-      overflow: visible;
-    }
-
-    &.page--section-landing .page-head {
-      margin-top: calc(-1 * clamp(32px, 6vw, 80px));
-      margin-bottom: calc(40px + var(--page-nav-height));
-      padding-top: clamp(32px, 6vw, 80px);
-      background: $panel-bg;
-      box-shadow: 0 0 0 100vmax $panel-bg;
-      clip-path: inset(0 -100vmax);
-    }
-
-    > .page-nav:not(.is-title-passed) {
-      position: absolute;
-      top: calc(clamp(32px, 6vw, 80px) + clamp(45px, 6.88vw, 89px) + 28px);
-      right: 0;
-      left: 0;
-      background: $panel-bg;
-      transform: none;
-
-      .page-nav__inner {
-        min-height: var(--page-nav-height);
-        justify-content: flex-end;
-        gap: clamp(12px, 1.4vw, 20px);
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-
-      .page-nav__controls {
-        gap: clamp(12px, 1.4vw, 20px);
-      }
-
-      .page-nav__brand {
-        &-expanded {
-          display: none;
-        }
-      }
-
-      nav {
-        gap: clamp(12px, 1.4vw, 20px);
-      }
-    }
-
-    > .page-nav.is-title-passed {
-      position: fixed;
-      right: 0;
-      left: 0;
-    }
-  }
-}
-
-@media screen and (max-width: 1030px) {
-  .page--section-landing {
-    --page-nav-height: 64px;
-    padding-top: var(--page-nav-height);
-
-    > .page-main {
-      overflow: visible;
-    }
-
-    &.page--section-landing .page-head {
-      margin-top: calc(-1 * clamp(32px, 6vw, 80px));
-      padding-top: clamp(32px, 6vw, 80px);
-      background: $panel-bg;
-      box-shadow: 0 0 0 100vmax $panel-bg;
-      clip-path: inset(0 -100vmax);
-    }
-
-    > .page-nav {
-      display: none;
-    }
-
-    > .menu-mobile-bar.menu-mobile-only {
-      display: block;
-      background: $panel-bg;
-
-      &.is-title-passed {
-        background: $panel-bg;
-      }
-
-      .menu-mobile-bar__brand {
-        position: absolute;
-        top: 50%;
-        left: 72px;
-        display: grid;
-        width: max-content;
-        padding: 0;
-        background: transparent;
-        color: $title-color;
-        font-family: $title-font;
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: -1px;
-        line-height: 1;
-        text-decoration: none;
-        cursor: pointer;
-        opacity: 1;
-        transform: translateY(-50%);
-        pointer-events: auto;
-
-        &-default,
-        &-expanded {
-          grid-area: 1 / 1;
-          transition: opacity 180ms ease;
-        }
-
-        &-expanded {
-          opacity: 0;
-        }
-
-        &.is-expanded .menu-mobile-bar__brand-default {
-          opacity: 0;
-        }
-
-        &.is-expanded .menu-mobile-bar__brand-expanded {
-          opacity: 1;
-        }
-      }
-    }
-
-    > .menu-toggle.menu-mobile-only {
-      display: inline-block;
-    }
-
-    > .is-menu.menu-mobile-only {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      padding: 80px 28px 28px;
-      border-right: 0;
-      background: var(--mobile-menu-bg);
-      overflow-y: auto;
-      overscroll-behavior-x: none;
-      touch-action: pan-y;
-      transform: translateX(-100%);
-      transition: transform 0.25s ease;
-      will-change: transform;
-
-      &.is-swipe-dragging {
-        transition: none;
-      }
-
-      &.is-open {
-        transform: translateX(0);
-      }
-
-      > .blog-menu {
-        display: flex;
-        align-items: center;
-        color: var(--mobile-menu-color);
-        font-family: $subtitle-font;
-        font-size: 24px;
-        letter-spacing: -0.5px;
-        text-decoration: none;
-
-        & + .blog-menu {
-          margin-top: 24px;
-        }
-
-        &.menu-current {
-          align-self: flex-start;
-          width: auto;
-          margin-left: 0;
-          padding: 0;
-          background: transparent;
-          color: inherit;
-          font-weight: 700;
-        }
-      }
-
-      > .blog-menu.mention {
-        margin-top: auto;
-        align-items: flex-start;
-        flex-direction: column;
-        font-size: 18px;
-        line-height: 1.2;
-      }
-    }
-
-    .menu-home-item {
-      display: flex;
-    }
   }
 }
 
@@ -619,14 +410,6 @@ html.content-card-page body.menu-open .page--content-card {
   margin-bottom: 40px;
 }
 
-.page-eyebrow {
-  font-family: $title-font;
-  font-style: normal;
-  font-size: 18px;
-  margin-bottom: 14px;
-  color: $subtitle-color;
-}
-
 .page-title {
   font-family: $title-font;
   font-weight: 700;
@@ -635,14 +418,6 @@ html.content-card-page body.menu-open .page--content-card {
   line-height: 0.86;
   margin: 0;
   color: $title-color;
-}
-
-.page-deck {
-  font-size: 20px;
-  line-height: 1.45;
-  max-width: 55ch;
-  margin: 0;
-  color: $subtitle-color;
 }
 
 /* ---------- Prose (markdown article body) ---------- */

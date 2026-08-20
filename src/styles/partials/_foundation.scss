@@ -40,33 +40,13 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Tung Sans CJK';
-  src: url('/fonts/NotoSansSC-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Tung Serif CJK';
-  src: url('/fonts/NotoSerifSC-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Tung Serif CJK';
-  src: url('/fonts/NotoSerifSC-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
 * {
-  outline: none;
   box-sizing: border-box;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 .visually-hidden {
@@ -106,10 +86,10 @@ a {
   color: inherit;
 }
 
-$title-font: 'Space Grotesk', 'Tung Sans CJK', sans-serif;
-$subtitle-font: 'Inter', 'Tung Sans CJK', sans-serif;
-$home-editorial-font: 'Playfair Display', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
-$blog-serif-font: 'STIX Two Text', 'Tung Serif CJK', 'Songti SC', 'STSong', serif;
+$title-font: 'Space Grotesk', 'Noto Sans SC Variable', sans-serif;
+$subtitle-font: 'Inter', 'Noto Sans SC Variable', sans-serif;
+$home-editorial-font: 'Playfair Display', 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+$blog-serif-font: 'STIX Two Text', 'Noto Serif SC', 'Songti SC', 'STSong', serif;
 $blog-bg: #e9e6e4;
 $body-bg: #121418;
 $title-color: #121418;
