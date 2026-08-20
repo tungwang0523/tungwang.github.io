@@ -160,55 +160,35 @@ const heroSrcset = heroImage
           <nav aria-label="Primary">
             {(activeSection === 'work' || activeSection === 'gallery') && <a href="/">Home</a>}
             {
-              activeSection === 'research' ? (
-                <span class="page-nav__current" aria-current="page">
-                  Research
-                </span>
-              ) : (
+              activeSection !== 'research' && (
                 <a href="/academic" data-cv-site-link>
                   Research
                 </a>
               )
             }
             {
-              activeSection === 'work' ? (
-                <span class="page-nav__current" aria-current="page">
-                  Work
-                </span>
-              ) : (
+              activeSection !== 'work' && (
                 <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>
                   Work
                 </a>
               )
             }
             {
-              activeSection === 'blog' ? (
-                <span class="page-nav__current" aria-current="page">
-                  Blog
-                </span>
-              ) : (
+              activeSection !== 'blog' && (
                 <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>
                   Blog
                 </a>
               )
             }
             {
-              activeSection === 'microblog' ? (
-                <span class="page-nav__current" aria-current="page">
-                  Microblog
-                </span>
-              ) : (
+              activeSection !== 'microblog' && (
                 <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>
                   Microblog
                 </a>
               )
             }
             {
-              activeSection === 'gallery' ? (
-                <span class="page-nav__current" aria-current="page">
-                  Gallery
-                </span>
-              ) : (
+              activeSection !== 'gallery' && (
                 <a href="/gallery" data-main-site-link={mainSiteNavigation || undefined}>
                   Gallery
                 </a>
