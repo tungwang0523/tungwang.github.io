@@ -35,16 +35,6 @@
   ],
   "rewrites": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "cv.tung.mockingbird.team"
-        }
-      ],
-      "destination": "/academic"
-    },
-    {
       "source": "/stats/:path*",
       "destination": "https://cloud.umami.is/:path*"
     }
