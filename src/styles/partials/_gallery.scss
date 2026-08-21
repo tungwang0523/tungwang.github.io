@@ -5,7 +5,7 @@ html.gallery-page-root body {
   background: #000000;
 }
 
-.page--gallery {
+.page.page--gallery {
   --page-content-width: 100%;
   --mobile-menu-bg: #000000;
   --mobile-menu-color: #{$blog-bg};
