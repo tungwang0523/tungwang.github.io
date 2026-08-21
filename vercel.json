@@ -27,15 +27,9 @@
       "permanent": true
     },
     {
-      "source": "/:section(work|blog|microblog|gallery)/:path*",
+      "source": "/:path((?!academic/?$).+)",
       "has": [{ "type": "host", "value": "cv.tung.mockingbird.team" }],
-      "destination": "https://tung.mockingbird.team/:section/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/rss.xml",
-      "has": [{ "type": "host", "value": "cv.tung.mockingbird.team" }],
-      "destination": "https://tung.mockingbird.team/rss.xml",
+      "destination": "https://tung.mockingbird.team/:path*",
       "permanent": true
     }
   ],
@@ -48,7 +42,7 @@
           "value": "cv.tung.mockingbird.team"
         }
       ],
-      "destination": "/academic/index.html"
+      "destination": "/academic"
     },
     {
       "source": "/stats/:path*",

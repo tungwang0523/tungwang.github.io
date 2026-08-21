@@ -17,6 +17,7 @@ interface Props {
   rootClass?: string;
   robots?: string;
   alternateLanguages?: Array<{ lang: string; href: string }>;
+  domainScope?: 'main' | 'cv';
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   rootClass,
   robots,
   alternateLanguages = [],
+  domainScope = 'main',
 } = Astro.props;
 
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
@@ -237,7 +239,7 @@ const siteSchema = {
     </script>
     {isDev && <DevScrollKeeper />}
   </head>
-  <body class={rootClass}>
+  <body class={rootClass} data-domain-scope={domainScope}>
     <slot />
     <ImageLightbox />
     <YouTubeLoader />
@@ -259,7 +261,24 @@ const siteSchema = {
           ? hostname.slice(activePrefix.length)
           : hostname.replace(/^www\./, '');
         const cvHostname = activePrefix ? hostname : `cv.${mainHostname}`;
+        const mainOrigin = `${protocol}//${mainHostname}${port ? `:${port}` : ''}`;
         const cvOrigin = `${protocol}//${cvHostname}${port ? `:${port}` : ''}`;
+        const pageDomainScope = document.body.dataset.domainScope;
+
+        if (pageDomainScope === 'cv') {
+          const cvUrl = new URL('/', cvOrigin);
+          cvUrl.search = window.location.search;
+          cvUrl.hash = window.location.hash;
+          if (window.location.href !== cvUrl.href) {
+            window.location.replace(cvUrl.href);
+            return;
+          }
+        } else if (activePrefix) {
+          window.location.replace(
+            `${mainOrigin}${window.location.pathname}${window.location.search}${window.location.hash}`,
+          );
+          return;
+        }
 
         document.querySelectorAll('[data-cv-site-link]').forEach((link) => {
           link.setAttribute('href', new URL('/', cvOrigin).href);

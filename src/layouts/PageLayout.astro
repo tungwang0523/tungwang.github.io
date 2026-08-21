@@ -16,6 +16,7 @@ interface Props {
   blogHref?: string;
   canonicalUrl?: string;
   alternateLanguages?: Array<{ lang: string; href: string }>;
+  domainScope?: 'main' | 'cv';
   mainSiteNavigation?: boolean;
   activeSection?: 'research' | 'work' | 'gallery' | 'blog' | 'microblog';
   contentCard?: boolean;
@@ -36,6 +37,7 @@ const {
   blogHref = '/blog',
   canonicalUrl,
   alternateLanguages,
+  domainScope,
   mainSiteNavigation = false,
   activeSection,
   contentCard = false,
@@ -94,6 +96,7 @@ const heroSrcset = heroImage
   lang={lang}
   canonicalUrl={canonicalUrl}
   alternateLanguages={alternateLanguages}
+  domainScope={domainScope}
   rootClass={rootClass || undefined}
 >
   <div
