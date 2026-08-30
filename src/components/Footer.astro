@@ -7,6 +7,7 @@ interface Props {
 
 const year = new Date().getFullYear();
 const { blogHref = '/blog', mainSiteNavigation = false, activeSection } = Astro.props;
+const feedHref = new URL('/rss.xml', Astro.site ?? Astro.url).href.replace(/^https?:/, 'feed:');
 ---
 
 <footer class="site-footer">
@@ -69,7 +70,7 @@ const { blogHref = '/blog', mainSiteNavigation = false, activeSection } = Astro.
           </a>
         )
       }
-      <a href="/rss.xml" data-main-site-link={mainSiteNavigation || undefined}>RSS</a>
+      <a href={feedHref}>RSS</a>
     </nav>
     <div class="site-footer__meta">© {year} Tung Wang.</div>
   </div>
