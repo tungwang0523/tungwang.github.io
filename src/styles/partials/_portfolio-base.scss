@@ -12,6 +12,10 @@
   --mobile-menu-current-bg: var(--mobile-page-nav-color);
   --mobile-menu-current-color: var(--mobile-page-nav-bg);
   --mobile-menu-mark-filter: none;
+  // Full-bleed project bands use 100vw. Desktop browsers include the vertical
+  // scrollbar in that unit, which otherwise creates a few pixels of horizontal
+  // page overflow while the bands themselves still visually fill the viewport.
+  overflow-x: clip;
   background: #e9e6e4;
 
   .page-nav__inner,
