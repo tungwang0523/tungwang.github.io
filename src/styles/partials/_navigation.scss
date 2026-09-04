@@ -243,6 +243,12 @@ body.menu-open {
     .menu-mobile-bar__brand {
       display: none;
     }
+
+    /* Keep the mobile homepage field clean behind the cards. The desktop
+       announcement marquee remains available in the navigation card. */
+    .menu-mobile-bar__marquee {
+      display: none;
+    }
   }
 
   body.home-page .menu-toggle {
@@ -561,6 +567,8 @@ body.menu-open {
   }
 
   .blog-header-container > .blog-header > .featured-content {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     padding: var(--mobile-featured-title-space) var(--mobile-featured-card-inset)
       var(--mobile-featured-card-inset);

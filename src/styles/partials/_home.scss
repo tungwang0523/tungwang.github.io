@@ -401,6 +401,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    transform: translateY(var(--featured-image-offset, 0px));
   }
 
   &__image {
@@ -487,8 +488,22 @@
 
   &__copy {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     background: transparent;
+  }
+}
+
+/* Research is the one card whose full composition may cross both text
+   regions. Keep every label and action above the artwork at all widths. */
+.blog-header[data-section='research'] {
+  > .header-article {
+    position: relative;
+    z-index: 2;
+  }
+
+  .featured-content__media {
+    position: relative;
+    z-index: 0;
   }
 }
 
@@ -514,6 +529,10 @@
     max-width: none;
     max-height: none !important;
     transform: translateY(calc(var(--work-first-row) * -16.6666667%));
+  }
+
+  &__copy {
+    transform: translateY(calc(var(--work-copy-overflow, 0px) * -1));
   }
 }
 

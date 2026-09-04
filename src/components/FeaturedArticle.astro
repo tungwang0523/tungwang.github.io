@@ -178,12 +178,17 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
         // work.png is a 4:3 canvas built from six exact 512px-high rows.
         const rowHeight = (imageWidth * 3) / 4 / 6;
         const availableHeight = getAvailableMediaHeight(content, copy);
-        const rowCount = Math.max(2, Math.min(6, Math.floor(availableHeight / rowHeight)));
+        // Change rows near their visual midpoint instead of as soon as the
+        // next complete row is a fraction short. This keeps the crop from
+        // feeling premature while preserving the artwork's whole-row rhythm.
+        const rowCount = Math.max(2, Math.min(6, Math.round(availableHeight / rowHeight)));
         const firstVisibleRow = Math.floor((6 - rowCount) / 2);
+        const retainedRowOverflow = Math.max(0, rowCount * rowHeight - availableHeight);
 
         media.dataset.workCrop = 'true';
         media.style.setProperty('--work-crop-height', `${rowCount * rowHeight}px`);
         media.style.setProperty('--work-first-row', String(firstVisibleRow));
+        copy.style.setProperty('--work-copy-overflow', `${retainedRowOverflow}px`);
       });
     };
   })();
@@ -250,6 +255,76 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
       if (copy) observer.observe(copy);
       schedule();
     });
+
+  const featuredStage = document.querySelector<HTMLElement>('[data-mobile-featured]');
+
+  if (featuredStage && featuredStage.dataset.imageAlignmentReady !== 'true') {
+    featuredStage.dataset.imageAlignmentReady = 'true';
+    const headers = Array.from(
+      featuredStage.querySelectorAll<HTMLElement>('.blog-header[data-section]'),
+    );
+    let alignmentFrame = 0;
+
+    const alignImages = () => {
+      alignmentFrame = 0;
+      const mobileTitle =
+        featuredStage.querySelector<HTMLElement>('.mobile-featured__brand') ??
+        featuredStage.querySelector<HTMLElement>('.mobile-featured__title');
+      const useMobileTitle = window.matchMedia('(max-width: 768px)').matches;
+
+      headers.forEach((header) => {
+        const title = useMobileTitle
+          ? mobileTitle
+          : header.querySelector<HTMLElement>('.blog-big__title');
+        const media = header.querySelector<HTMLElement>('.featured-content__media');
+        const image = header.querySelector<HTMLImageElement>('.featured-content__image');
+        const subtitle = header.querySelector<HTMLElement>('.featured-content__copy h2');
+        if (!title || !media || !image || !subtitle) return;
+
+        const previousOffset =
+          Number.parseFloat(media.style.getPropertyValue('--featured-image-offset')) || 0;
+        const titleBottom = title.getBoundingClientRect().bottom;
+        const subtitleTop = subtitle.getBoundingClientRect().top;
+        const visualBounds =
+          media.dataset.workCrop === 'true'
+            ? media.getBoundingClientRect()
+            : image.getBoundingClientRect();
+        const unshiftedCenter = (visualBounds.top + visualBounds.bottom) / 2 - previousOffset;
+        // Centre the artwork in the clear vertical interval between the two
+        // text regions. Using the subtitle's bottom pulled multi-line cards
+        // progressively lower than their visual centre.
+        const targetCenter = (titleBottom + subtitleTop) / 2;
+
+        media.style.setProperty(
+          '--featured-image-offset',
+          `${(targetCenter - unshiftedCenter).toFixed(2)}px`,
+        );
+      });
+    };
+
+    const scheduleImageAlignment = () => {
+      if (alignmentFrame) window.cancelAnimationFrame(alignmentFrame);
+      alignmentFrame = window.requestAnimationFrame(alignImages);
+    };
+
+    const alignmentObserver = new ResizeObserver(scheduleImageAlignment);
+    alignmentObserver.observe(featuredStage);
+    headers.forEach((header) => {
+      const media = header.querySelector<HTMLElement>('.featured-content__media');
+      const image = header.querySelector<HTMLImageElement>('.featured-content__image');
+      const subtitle = header.querySelector<HTMLElement>('.featured-content__copy h2');
+      if (media) alignmentObserver.observe(media);
+      if (image) {
+        alignmentObserver.observe(image);
+        image.addEventListener('load', scheduleImageAlignment);
+      }
+      if (subtitle) alignmentObserver.observe(subtitle);
+    });
+
+    document.fonts.ready.then(scheduleImageAlignment);
+    window.addEventListener('resize', scheduleImageAlignment, { passive: true });
+    scheduleImageAlignment();
+  }
 
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
