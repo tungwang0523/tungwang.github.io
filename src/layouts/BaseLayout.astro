@@ -237,6 +237,41 @@ const siteSchema = {
         });
       })();
     </script>
+    <script is:inline data-enabled={rootClasses.includes('blog-paper')}>
+      (() => {
+        if (document.currentScript?.dataset.enabled !== 'true') return;
+
+        const updateBlogPaperViewport = () => {
+          const height = window.visualViewport?.height ?? window.innerHeight;
+          document.documentElement.style.setProperty(
+            '--blog-paper-viewport-height',
+            `${Math.round(height)}px`,
+          );
+        };
+
+        let refreshFrame = 0;
+        const refreshBlogPaperViewport = () => {
+          const page = document.querySelector('.blog-post-page');
+          const previousTop = page instanceof HTMLElement ? page.scrollTop : 0;
+          updateBlogPaperViewport();
+
+          cancelAnimationFrame(refreshFrame);
+          refreshFrame = requestAnimationFrame(() => {
+            if (page instanceof HTMLElement) {
+              const maximumTop = Math.max(0, page.scrollHeight - page.clientHeight);
+              page.scrollTop = Math.min(previousTop, maximumTop);
+            }
+          });
+        };
+
+        updateBlogPaperViewport();
+        window.visualViewport?.addEventListener('resize', refreshBlogPaperViewport);
+        window.addEventListener('resize', refreshBlogPaperViewport);
+        window.addEventListener('orientationchange', () => {
+          window.setTimeout(refreshBlogPaperViewport, 120);
+        });
+      })();
+    </script>
     {isDev && <DevScrollKeeper />}
   </head>
   <body class={rootClass} data-domain-scope={domainScope}>

@@ -9,7 +9,6 @@ html.blog-paper body {
   --blog-paper-width: min(920px, calc(100vw - 2 * var(--blog-paper-gap)));
   --blog-paper-edge: calc((100vw - var(--blog-paper-width)) / 2);
   --blog-paper-top: calc(76px + var(--blog-paper-gap));
-  --blog-paper-browser-overhang: 0px;
   overscroll-behavior-y: none;
 }
 
@@ -51,11 +50,9 @@ html.blog-paper::after {
   position: fixed;
   z-index: 24;
   right: 0;
-  bottom: calc(-1 * var(--blog-paper-browser-overhang));
+  bottom: 0;
   left: 0;
-  height: calc(
-    var(--blog-paper-radius) + var(--blog-paper-gap) + var(--blog-paper-browser-overhang)
-  );
+  height: calc(var(--blog-paper-radius) + var(--blog-paper-gap));
   background:
     radial-gradient(
         circle at calc(var(--blog-paper-edge) + var(--blog-paper-radius)) 0,
@@ -71,8 +68,7 @@ html.blog-paper::after {
       )
       right top / calc(var(--blog-paper-edge) + var(--blog-paper-radius)) var(--blog-paper-radius)
       no-repeat,
-    linear-gradient(#000000, #000000) left bottom / 100%
-      calc(var(--blog-paper-gap) + var(--blog-paper-browser-overhang)) no-repeat;
+    linear-gradient(#000000, #000000) left bottom / 100% var(--blog-paper-gap) no-repeat;
   pointer-events: none;
 }
 
@@ -396,6 +392,11 @@ html.blog-paper::after {
       padding-top: 64px;
     }
 
+    .blog-post-page .blog-toc-mobile {
+      /* Sticky offsets are measured from the scroll container's padded edge. */
+      top: 0;
+    }
+
     .blog-post-page > .menu-mobile-bar,
     .blog-post-page > .menu-toggle,
     .blog-post-page .blog-toc-mobile {
@@ -412,7 +413,7 @@ html.blog-paper::after {
       }
 
       .blog-post-page .blog-toc-mobile {
-        top: var(--blog-paper-gap);
+        top: calc(var(--blog-paper-gap) - var(--page-nav-height));
 
         &[data-toc-stuck='true'] {
           border-radius: 0;
@@ -444,10 +445,23 @@ html.blog-paper::after {
   html.blog-paper body {
     --blog-paper-radius: 24px;
     --blog-paper-top: calc(64px + var(--blog-paper-gap));
-    /* Safari's translucent bottom controls sit between the dynamic and large
-       viewport edges. Extend the black paper mask through that region so the
-       scrolling article cannot reappear beneath the rounded viewport edge. */
-    --blog-paper-browser-overhang: max(env(safe-area-inset-bottom, 0px), calc(100lvh - 100dvh));
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .blog-paper .page.blog-post-page {
+    height: var(--blog-paper-viewport-height, 100dvh);
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blog-paper body.menu-open .page.blog-post-page {
+    overflow: hidden;
   }
 
   html.blog-paper-has-toc .blog-paper-viewport-top {

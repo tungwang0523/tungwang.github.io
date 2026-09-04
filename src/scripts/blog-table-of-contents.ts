@@ -20,6 +20,8 @@ const initialiseBlogToc = () => {
   const desktopItems = desktopToc
     ? Array.from(desktopToc.querySelectorAll<HTMLLIElement>('li'))
     : [];
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+  const usesPageScroll = () => mobileQuery.matches;
 
   if (headings.length === 0) return;
 
@@ -44,7 +46,12 @@ const initialiseBlogToc = () => {
     if (!mobileToc) return;
     const top = mobileToc.getBoundingClientRect().top;
     const configuredTop = Number.parseFloat(window.getComputedStyle(mobileToc).top);
-    const stickyTop = Number.isFinite(configuredTop) ? configuredTop : navigationHeight;
+    const containerInset = usesPageScroll()
+      ? Number.parseFloat(window.getComputedStyle(page).paddingTop) || 0
+      : 0;
+    const stickyTop = Number.isFinite(configuredTop)
+      ? configuredTop + containerInset
+      : navigationHeight;
     mobileToc.dataset.tocStuck = String(top <= stickyTop + 1);
   };
 
@@ -106,12 +113,16 @@ const initialiseBlogToc = () => {
     // The final headings cannot always reach the reading line because the
     // document has no more content below them. At the page end, use the
     // last heading that has entered the viewport instead.
-    const atDocumentEnd =
-      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    const atDocumentEnd = usesPageScroll()
+      ? page.scrollTop + page.clientHeight >= page.scrollHeight - 2
+      : window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
     if (atDocumentEnd) {
+      const viewportBottom = usesPageScroll()
+        ? page.getBoundingClientRect().bottom
+        : window.innerHeight;
       const lastEnteredHeading = [...headings]
         .reverse()
-        .find((heading) => heading.getBoundingClientRect().top < window.innerHeight);
+        .find((heading) => heading.getBoundingClientRect().top < viewportBottom);
       if (lastEnteredHeading) active = lastEnteredHeading;
     }
 
@@ -145,7 +156,8 @@ const initialiseBlogToc = () => {
     if (performance.now() - correctionStart < 650) return;
     const offset = navigationTarget.getBoundingClientRect().top - readingLine();
     if (Math.abs(offset) > 2) {
-      window.scrollBy({ top: offset, left: 0, behavior: 'auto' });
+      if (usesPageScroll()) page.scrollBy({ top: offset, left: 0, behavior: 'auto' });
+      else window.scrollBy({ top: offset, left: 0, behavior: 'auto' });
     }
     requestUpdate();
   };
@@ -289,6 +301,7 @@ const initialiseBlogToc = () => {
   });
 
   window.addEventListener('scroll', requestUpdate, { passive: true });
+  page.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener(
     'resize',
     () => {

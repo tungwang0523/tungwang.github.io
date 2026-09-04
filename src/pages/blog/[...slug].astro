@@ -167,7 +167,9 @@ const alternateLanguages = translation
     page.dataset.mobileNavAutoHideReady = 'true';
 
     const mobileQuery = window.matchMedia('(max-width: 768px)');
-    let previousY = Math.max(0, window.scrollY);
+    const currentScrollTop = () =>
+      mobileQuery.matches ? Math.max(0, page.scrollTop) : Math.max(0, window.scrollY);
+    let previousY = currentScrollTop();
     let frame = 0;
 
     const setHidden = (hidden: boolean) => {
@@ -178,7 +180,7 @@ const alternateLanguages = translation
 
     const update = () => {
       frame = 0;
-      const currentY = Math.max(0, window.scrollY);
+      const currentY = currentScrollTop();
       const delta = currentY - previousY;
 
       if (!mobileQuery.matches || document.body.classList.contains('menu-open') || currentY <= 72) {
@@ -198,8 +200,9 @@ const alternateLanguages = translation
     };
 
     window.addEventListener('scroll', requestUpdate, { passive: true });
+    page.addEventListener('scroll', requestUpdate, { passive: true });
     mobileQuery.addEventListener('change', () => {
-      previousY = Math.max(0, window.scrollY);
+      previousY = currentScrollTop();
       reveal();
     });
     document.querySelector('[data-menu-toggle]')?.addEventListener('click', reveal);

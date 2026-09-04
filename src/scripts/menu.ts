@@ -3,12 +3,22 @@ const menu = document.querySelector<HTMLElement>('[data-menu]');
 const mobileBrand = document.querySelector<HTMLElement>('[data-mobile-brand]');
 const pageBrand = document.querySelector<HTMLElement>('[data-page-brand]');
 const mobileBrandTitle = document.querySelector<HTMLElement>('[data-mobile-brand-title]');
-const pageScrollContainer = document.querySelector<HTMLElement>('.page--content-card');
-const pageScrollTop = () => pageScrollContainer?.scrollTop ?? window.scrollY;
-const scrollPageToTop = () =>
-  pageScrollContainer
-    ? pageScrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
+const pageScrollCandidate = document.querySelector<HTMLElement>(
+  '.page--content-card, .blog-post-page',
+);
+const pageScrollContainer = () => {
+  if (!pageScrollCandidate) return null;
+  return /(auto|scroll)/.test(getComputedStyle(pageScrollCandidate).overflowY)
+    ? pageScrollCandidate
+    : null;
+};
+const pageScrollTop = () => pageScrollContainer()?.scrollTop ?? window.scrollY;
+const scrollPageToTop = () => {
+  const container = pageScrollContainer();
+  return container
+    ? container.scrollTo({ top: 0, behavior: 'smooth' })
     : window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 const identityTitle =
   document.querySelector<HTMLElement>('[data-mobile-identity]') ??
   document.querySelector<HTMLElement>('.blog-is-sticky .blog-big__title');
