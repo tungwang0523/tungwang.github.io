@@ -9,6 +9,7 @@ html.blog-paper body {
   --blog-paper-width: min(920px, calc(100vw - 2 * var(--blog-paper-gap)));
   --blog-paper-edge: calc((100vw - var(--blog-paper-width)) / 2);
   --blog-paper-top: calc(76px + var(--blog-paper-gap));
+  --blog-paper-browser-overhang: 0px;
   overscroll-behavior-y: none;
 }
 
@@ -50,9 +51,11 @@ html.blog-paper::after {
   position: fixed;
   z-index: 24;
   right: 0;
-  bottom: 0;
+  bottom: calc(-1 * var(--blog-paper-browser-overhang));
   left: 0;
-  height: calc(var(--blog-paper-radius) + var(--blog-paper-gap));
+  height: calc(
+    var(--blog-paper-radius) + var(--blog-paper-gap) + var(--blog-paper-browser-overhang)
+  );
   background:
     radial-gradient(
         circle at calc(var(--blog-paper-edge) + var(--blog-paper-radius)) 0,
@@ -68,7 +71,8 @@ html.blog-paper::after {
       )
       right top / calc(var(--blog-paper-edge) + var(--blog-paper-radius)) var(--blog-paper-radius)
       no-repeat,
-    linear-gradient(#000000, #000000) left bottom / 100% var(--blog-paper-gap) no-repeat;
+    linear-gradient(#000000, #000000) left bottom / 100%
+      calc(var(--blog-paper-gap) + var(--blog-paper-browser-overhang)) no-repeat;
   pointer-events: none;
 }
 
@@ -440,6 +444,10 @@ html.blog-paper::after {
   html.blog-paper body {
     --blog-paper-radius: 24px;
     --blog-paper-top: calc(64px + var(--blog-paper-gap));
+    /* Safari's translucent bottom controls sit between the dynamic and large
+       viewport edges. Extend the black paper mask through that region so the
+       scrolling article cannot reappear beneath the rounded viewport edge. */
+    --blog-paper-browser-overhang: max(env(safe-area-inset-bottom, 0px), calc(100lvh - 100dvh));
   }
 
   html.blog-paper-has-toc .blog-paper-viewport-top {

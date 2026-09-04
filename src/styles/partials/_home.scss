@@ -250,6 +250,7 @@
 
   @media screen and (max-width: 768px) {
     > .blog-is-sticky {
+      display: none;
       border-radius: 0;
       background: transparent;
     }
