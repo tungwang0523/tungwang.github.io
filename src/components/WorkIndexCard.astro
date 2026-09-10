@@ -8,6 +8,7 @@ interface Props {
   category: string;
   year: string;
   cover: string;
+  hoverCover?: string;
   color: string;
   order: number;
   featured?: boolean;
@@ -25,8 +26,8 @@ const {
   category,
   year,
   cover,
+  hoverCover,
   color,
-  order,
   featured = false,
   role,
   coverFit = 'cover',
@@ -34,8 +35,6 @@ const {
   compactMedia = false,
   priority = false,
 } = Astro.props;
-
-const number = String(order).padStart(2, '0');
 ---
 
 <article
@@ -43,27 +42,47 @@ const number = String(order).padStart(2, '0');
     'work-tile',
     featured && 'work-tile--featured',
     coverFit === 'cover' && 'work-tile--cover',
+    coverFit === 'contain' && 'work-tile--inset-media',
+    coverFit === 'cover' && !compactMedia && 'work-tile--edge-media',
     compactMedia && 'work-tile--compact-media',
+    compactMedia && 'work-tile--framed-media',
   ]}
-  style={`--work-tile-color:${color};--work-cover-fit:${coverFit};--work-cover-position:${coverPosition};`}
+  style={`--work-cover-fit:${coverFit};--work-cover-position:${coverPosition};--work-theme-color:${color};`}
 >
   <a class="work-tile__link" href={href}>
     <div class="work-tile__media">
       <ResponsiveImage
         src={cover}
         alt={title}
+        class={`work-tile__image work-tile__image--default${hoverCover ? ' is-switchable' : ''}`}
         sizes={featured
           ? '(max-width: 760px) calc(100vw - 72px), 520px'
           : '(max-width: 760px) 38vw, 410px'}
         priority={priority}
       />
+      {hoverCover && (
+        <ResponsiveImage
+          src={hoverCover}
+          alt=""
+          aria-hidden="true"
+          class="work-tile__image work-tile__image--theme"
+          sizes={featured
+            ? '(max-width: 760px) calc(100vw - 72px), 520px'
+            : '(max-width: 760px) 38vw, 410px'}
+          optimize={false}
+          priority={priority}
+        />
+      )}
     </div>
     <div class="work-tile__body">
-      <span class="work-tile__number">{number}</span>
       <h2>{title}</h2>
+      <div class="work-tile__meta">
+        <span class="work-tile__category">{category}</span>
+        <span aria-hidden="true">·</span>
+        <span class="work-tile__year">{year}</span>
+      </div>
       <p>{summary}</p>
       {role && <span class="work-tile__role">{role}</span>}
-      <span class="work-tile__meta">{category} · {year}</span>
     </div>
   </a>
 </article>

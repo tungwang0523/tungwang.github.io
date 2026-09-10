@@ -103,6 +103,12 @@ const work = defineCollection({
       z.string().url(),
       z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
     ]),
+    hoverCover: z
+      .union([
+        z.string().url(),
+        z.string().regex(/^\/(?!\/)/, 'Use a full URL or a site path beginning with /'),
+      ])
+      .optional(),
     summary: z.string(),
     href: z.string().regex(/^\/(?!\/)/, 'Use a site path beginning with /'),
     category: z.string(),

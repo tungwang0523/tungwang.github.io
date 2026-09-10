@@ -7,10 +7,8 @@ const publications = [
     author: 'Z. Wang',
     after: ', & F. You (2026).',
     title:
-      'Reconstructing subtle embodied social experience as designable relations: An image-schema-mediated empirical-to-design method demonstrated through a public-space gaze case.',
+      'From Subtle Embodied Social Experience to Designable Relations: An Image-Schema-Mediated Empirical-to-Design Method',
     credit: 'First Author',
-    status: 'Under review at',
-    venue: 'International Journal of Human–Computer Interaction',
     note: 'Preprint available on SSRN.',
     href: 'https://doi.org/10.2139/ssrn.7201181',
     linkLabel: 'doi:10.2139/ssrn.7201181',
@@ -292,9 +290,11 @@ const [primaryProject, ...otherProjects] = projects;
               <div class="cv-publications__details">
                 <p class="cv-publications__status">
                   {publication.credit && <strong>{publication.credit}</strong>}
-                  <span>
-                    <b>{publication.status}</b> {publication.venue}
-                  </span>
+                  {(publication.status || publication.venue) && (
+                    <span>
+                      <b>{publication.status}</b> {publication.venue}
+                    </span>
+                  )}
                 </p>
                 {publication.note && <span>{publication.note}</span>}
                 {publication.href && (
@@ -367,19 +367,20 @@ const [primaryProject, ...otherProjects] = projects;
       </p>
     </section>
 
-    <section class="cv-web__closing" aria-label="Academic links">
-      <div class="cv-web__closing-inner">
-        <p>Curriculum Vitae · Publications · Research Collaboration</p>
-        <div>
-          <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
-          <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
-            >ORCID ↗</a
-          >
-          <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
-        </div>
-      </div>
-    </section>
   </div>
+
+  <section slot="after-main" class="cv-web__closing" aria-label="Academic links">
+    <div class="cv-web__closing-inner">
+      <p>Curriculum Vitae · Publications · Research Collaboration</p>
+      <div>
+        <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
+        <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
+          >ORCID ↗</a
+        >
+        <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
 
 <style lang="scss" is:global>

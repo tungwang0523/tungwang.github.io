@@ -17,6 +17,7 @@ interface Props {
   widths?: number[];
   sizes?: string;
   quality?: number;
+  optimize?: boolean;
   priority?: boolean;
   loading?: 'eager' | 'lazy';
   decoding?: 'sync' | 'async' | 'auto';
@@ -45,12 +46,19 @@ const {
   widths = [480, 960, 1440, 1920],
   sizes,
   quality = 85,
+  optimize,
   priority = false,
   loading,
   decoding = 'async',
   fetchpriority,
   ...attributes
 } = Astro.props;
+
+// Project case studies present design artefacts whose fine details matter. Serve
+// their source files directly instead of asking Cloudflare to resize/re-encode
+// them. Other uses of this shared component keep responsive image optimisation.
+const projectDetailPage = /^\/work\/[^/]+\/?$/.test(Astro.url.pathname);
+const shouldOptimize = optimize ?? !projectDetailPage;
 
 const localImage = isLocalSiteImage(src);
 const rasterImage = localImage && !src.toLowerCase().endsWith('.svg');
@@ -72,7 +80,7 @@ if (metadata?.width) {
   availableWidths.sort((left, right) => left - right);
 }
 
-const productionTransform = import.meta.env.PROD && rasterImage;
+const productionTransform = import.meta.env.PROD && rasterImage && shouldOptimize;
 const fallbackWidth = Math.min(priority ? 1920 : 960, metadata?.width ?? (priority ? 1920 : 960));
 const imageOptions = { fit: 'scale-down', quality, format: 'auto' };
 const renderedSource = productionTransform
@@ -89,7 +97,8 @@ if (alternateMetadata?.width) {
   if (!alternateWidths.includes(largestAlternateWidth)) alternateWidths.push(largestAlternateWidth);
   alternateWidths.sort((left, right) => left - right);
 }
-const alternateProductionTransform = import.meta.env.PROD && alternateRasterImage;
+const alternateProductionTransform =
+  import.meta.env.PROD && alternateRasterImage && shouldOptimize;
 const alternateFallbackWidth = Math.min(960, alternateMetadata?.width ?? 960);
 const renderedAlternateSource = alternateSrc
   ? alternateProductionTransform

@@ -6,24 +6,9 @@ import PortfolioSectionHeader from '../../components/portfolio/PortfolioSectionH
 import ProjectFigure from '../../components/portfolio/ProjectFigure.astro';
 import ProjectHero from '../../components/portfolio/ProjectHero.astro';
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
-import { cloudflareRemoteImage } from '../../utils/cloudflare-image.mjs';
 
-const fieldBackdrop = import.meta.env.PROD
-  ? cloudflareRemoteImage('/pictures/work/field-of-seeds/fos-p5-1.png', {
-      width: 1920,
-      fit: 'cover',
-      quality: 85,
-      format: 'auto',
-    })
-  : '/pictures/work/field-of-seeds/fos-p5-1.png';
-const fieldClosingBackdrop = import.meta.env.PROD
-  ? cloudflareRemoteImage('/pictures/work/field-of-seeds/fos-hero.png', {
-      width: 1920,
-      fit: 'cover',
-      quality: 85,
-      format: 'auto',
-    })
-  : '/pictures/work/field-of-seeds/fos-hero.png';
+const fieldBackdrop = '/pictures/work/field-of-seeds/fos-p5-1.png';
+const fieldClosingBackdrop = '/pictures/work/field-of-seeds/fos-hero.png';
 ---
 
 <ProjectLayout

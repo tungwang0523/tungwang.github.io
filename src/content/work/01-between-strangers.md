@@ -4,7 +4,8 @@ summary: Making subtle gaze-related experience available as a designable relatio
 href: /work/between-strangers
 category: Empirical-to-Design Research
 year: 2025–Present
-cover: /pictures/research_white.png
+cover: /pictures/research.png
+hoverCover: /pictures/research_white_2.png
 color: "#002fa7"
 featured: true
 coverFit: contain

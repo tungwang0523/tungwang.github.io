@@ -1285,9 +1285,7 @@
 }
 
 .cv-web__closing {
-  width: 100vw;
-  margin-right: calc(50% - 50vw);
-  margin-left: calc(50% - 50vw);
+  width: 100%;
   margin-top: clamp(52px, 5vw, 60px);
   padding: clamp(48px, 6vw, 68px) 0 clamp(38px, 5vw, 52px);
   background: $body-bg;
