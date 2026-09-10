@@ -5,7 +5,7 @@ excerpt: 'Photographs from places I have walked and light I wanted to keep — t
 metaLeft: 'Photography'
 metaRight: 'The archive'
 label: ''
-cover: '/pictures/gallery.png?v=2'
+cover: '/pictures/gallery.png?v=3'
 href: '/gallery'
 order: 4
 ---
