@@ -580,10 +580,6 @@
 /* ---------- Footer ---------- */
 
 .page.page--research {
-  /* The generic index-card shell adds 64px to this value. This produces a
-     1120px card while keeping its content and navigation on the same grid. */
-  --page-content-width: 1056px;
-
   > .page-nav,
   > .menu-mobile-bar {
     background: $panel-bg;
