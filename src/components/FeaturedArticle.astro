@@ -43,7 +43,9 @@ const compactCover =
     ? '/pictures/writing_small.png'
     : sectionId === 'gallery'
       ? '/pictures/gallery_small.png?v=3'
-      : undefined;
+      : sectionId === 'research'
+        ? '/pictures/research_small.png?v=1'
+        : undefined;
 
 const parts = emphasis ? headline.split('{emphasis}') : [headline];
 ---
@@ -124,42 +126,6 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
     return Math.max(0, content.clientHeight - paddingTop - paddingBottom - copy.offsetHeight);
   };
 
-  const scheduleResearchLayout = (() => {
-    let frame = 0;
-
-    return (header: HTMLElement) => {
-      if (frame) window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        const content = header.querySelector<HTMLElement>('.featured-content');
-        const media = header.querySelector<HTMLElement>('.featured-content__media');
-        const copy = header.querySelector<HTMLElement>('.featured-content__copy');
-        if (!content || !media || !copy || !media.clientWidth) return;
-
-        const fullArtworkHeight = (media.clientWidth * 3) / 4;
-        const availableHeight = getAvailableMediaHeight(content, copy);
-        media.style.setProperty(
-          '--research-media-height',
-          `${Math.min(fullArtworkHeight, availableHeight)}px`,
-        );
-        media.dataset.researchLayout = 'true';
-      });
-    };
-  })();
-
-  document
-    .querySelectorAll<HTMLElement>(".blog-header[data-section='research']")
-    .forEach((header) => {
-      if (header.dataset.researchLayoutReady === 'true') return;
-      header.dataset.researchLayoutReady = 'true';
-
-      const observer = new ResizeObserver(() => scheduleResearchLayout(header));
-      observer.observe(header);
-      const copy = header.querySelector<HTMLElement>('.featured-content__copy');
-      if (copy) observer.observe(copy);
-      scheduleResearchLayout(header);
-    });
-
   const scheduleWorkCrop = (() => {
     let frame = 0;
 
@@ -206,7 +172,7 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
 
   document
     .querySelectorAll<HTMLElement>(
-      ".blog-header[data-section='writing'], .blog-header[data-section='gallery']",
+      ".blog-header[data-section='writing'], .blog-header[data-section='gallery'], .blog-header[data-section='research']",
     )
     .forEach((header) => {
       if (header.dataset.writingArtworkReady === 'true') return;

@@ -466,48 +466,6 @@
   }
 }
 
-/* Research always presents its 4:3 artwork at the full editorial-column
-   width. If a short viewport contracts the media box, the image is allowed to
-   continue behind the later copy so the text—not an opaque block—overlaps it. */
-.blog-header[data-section='research'] .featured-content {
-  &__media {
-    width: 100%;
-    overflow: visible;
-
-    &[data-research-layout='true'] {
-      flex: 0 0 var(--research-media-height);
-      height: var(--research-media-height);
-    }
-  }
-
-  &__image {
-    flex: none;
-    width: 100%;
-    max-width: none;
-    max-height: none !important;
-  }
-
-  &__copy {
-    position: relative;
-    z-index: 2;
-    background: transparent;
-  }
-}
-
-/* Research is the one card whose full composition may cross both text
-   regions. Keep every label and action above the artwork at all widths. */
-.blog-header[data-section='research'] {
-  > .header-article {
-    position: relative;
-    z-index: 2;
-  }
-
-  .featured-content__media {
-    position: relative;
-    z-index: 0;
-  }
-}
-
 /* The Works artwork is constructed on six exact horizontal row periods.
    ResizeObserver chooses how many whole rows fit; the crop alternates between
    the bottom and top so neither partial rows nor continuous image scaling are
@@ -537,11 +495,12 @@
   }
 }
 
-/* Writing uses art-directed 4:3 and 2:1 compositions. Both remain complete
-   and full-column; JavaScript selects the compact composition when the copy
-   leaves insufficient height for the original. */
+/* Writing, gallery and research use art-directed 4:3 and 2:1 compositions.
+   Both remain complete and full-column; JavaScript selects the compact
+   composition when the copy leaves insufficient height for the original. */
 .blog-header[data-section='writing'] .featured-content,
-.blog-header[data-section='gallery'] .featured-content {
+.blog-header[data-section='gallery'] .featured-content,
+.blog-header[data-section='research'] .featured-content {
   &__media {
     width: 100%;
   }
