@@ -83,6 +83,7 @@
   border-radius: 14px;
   background: var(--work-tile-color);
   color: $title-color;
+  font-family: $title-font;
   transition:
     background-color 220ms ease,
     color 220ms ease;

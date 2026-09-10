@@ -169,6 +169,7 @@ const [primaryProject, ...otherProjects] = projects;
   domainScope="cv"
   mainSiteNavigation
   activeSection="research"
+  contentCard
 >
   <div class="cv-web">
     <section class="cv-web__profile" aria-label="Academic profile">
@@ -367,20 +368,19 @@ const [primaryProject, ...otherProjects] = projects;
       </p>
     </section>
 
-  </div>
-
-  <section slot="after-main" class="cv-web__closing" aria-label="Academic links">
-    <div class="cv-web__closing-inner">
-      <p>Curriculum Vitae · Publications · Research Collaboration</p>
-      <div>
-        <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
-        <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
-          >ORCID ↗</a
-        >
-        <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
+    <section class="cv-web__closing" aria-label="Academic links">
+      <div class="cv-web__closing-inner">
+        <p>Curriculum Vitae · Publications · Research Collaboration</p>
+        <div>
+          <a href="/files/Tung-Wang-CV.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
+          <a href="https://orcid.org/0009-0008-1111-6742" target="_blank" rel="noreferrer"
+            >ORCID ↗</a
+          >
+          <a href="mailto:tungwang@tongji.edu.cn">Email ↗</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </PageLayout>
 
 <style lang="scss" is:global>

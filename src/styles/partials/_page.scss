@@ -208,6 +208,17 @@ html.content-card-page body.menu-open .page--content-card {
   padding-top: var(--page-content-card-top);
   overflow-x: hidden;
   overflow-y: auto;
+  /* The card and its fixed corner masks are both centred on the window, so this
+     scroll container must not reserve a classic scrollbar gutter (Windows, or
+     macOS with "always show scroll bars"). A reserved gutter narrows the content
+     box, shifting the card by half the scrollbar width while the masks stay put
+     and exposing the card's square corners. Matches the homepage's treatment. */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
   isolation: isolate;
