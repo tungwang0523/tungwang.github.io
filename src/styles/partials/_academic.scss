@@ -580,6 +580,8 @@
 /* ---------- Footer ---------- */
 
 .page.page--research {
+  --cv-title-size: clamp(44px, 5vw, 64px);
+
   > .page-nav,
   > .menu-mobile-bar {
     background: $panel-bg;
@@ -600,7 +602,7 @@
 
   .page-title {
     margin: 0;
-    font-size: clamp(44px, 5vw, 64px);
+    font-size: var(--cv-title-size);
     line-height: 0.94;
     letter-spacing: clamp(-4px, -0.3vw, -2.5px);
   }
@@ -631,6 +633,18 @@
   @media screen and (max-width: 680px) {
     grid-template-columns: 1fr;
   }
+}
+
+/* Portrait mark above the name, sharing the title's left edge inside the card.
+   Fixed diameter on purpose: tying it to the title's type size shrank the
+   portrait on phones, where the title drops to 44px. */
+.cv-web__avatar {
+  display: block;
+  width: 86px;
+  height: 86px;
+  margin-bottom: clamp(16px, 2vw, 22px);
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .cv-web__contact {
