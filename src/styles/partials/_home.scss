@@ -435,9 +435,10 @@
     }
 
     p {
-      margin: 0 0 16px;
-      font-size: 15px;
-      line-height: 1.4;
+      margin: 0 0 12px;
+      font-family: $title-font;
+      font-size: 14px;
+      line-height: 1.35;
     }
 
     a {
