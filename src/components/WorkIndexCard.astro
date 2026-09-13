@@ -60,19 +60,23 @@ const {
           : '(max-width: 760px) 38vw, 410px'}
         priority={priority}
       />
-      {hoverCover && (
-        <ResponsiveImage
-          src={hoverCover}
-          alt=""
-          aria-hidden="true"
-          class="work-tile__image work-tile__image--theme"
-          sizes={featured
-            ? '(max-width: 760px) calc(100vw - 72px), 520px'
-            : '(max-width: 760px) 38vw, 410px'}
-          optimize={false}
-          priority={priority}
-        />
-      )}
+      {
+        hoverCover && (
+          <ResponsiveImage
+            src={hoverCover}
+            alt=""
+            aria-hidden="true"
+            class="work-tile__image work-tile__image--theme"
+            sizes={
+              featured
+                ? '(max-width: 760px) calc(100vw - 72px), 520px'
+                : '(max-width: 760px) 38vw, 410px'
+            }
+            optimize={false}
+            priority={priority}
+          />
+        )
+      }
     </div>
     <div class="work-tile__body">
       <h2>{title}</h2>

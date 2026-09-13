@@ -99,13 +99,7 @@ const heroSrcset = heroImage
   domainScope={domainScope}
   rootClass={rootClass || undefined}
 >
-  <div
-    class:list={[
-      'page',
-      pageClass,
-      contentCard && 'page--content-card',
-    ]}
-  >
+  <div class:list={['page', pageClass, contentCard && 'page--content-card']}>
     {isBlogPost && <div class="blog-paper-viewport-top" aria-hidden="true" />}
     {isBlogPost && <div class="blog-paper-viewport-bottom" aria-hidden="true" />}
     {contentCard && <div class="page-content-card-viewport" aria-hidden="true" />}

@@ -113,7 +113,8 @@ const download = async (url) => {
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const contentType = response.headers.get('content-type')?.split(';')[0].toLowerCase() || '';
-      if (!contentType.startsWith('image/')) throw new Error(`unexpected ${contentType || 'content'}`);
+      if (!contentType.startsWith('image/'))
+        throw new Error(`unexpected ${contentType || 'content'}`);
       const body = Buffer.from(await response.arrayBuffer());
       if (!body.length) throw new Error('empty response');
       return { body, contentType, finalUrl: response.url };

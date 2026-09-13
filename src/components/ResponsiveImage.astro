@@ -97,8 +97,7 @@ if (alternateMetadata?.width) {
   if (!alternateWidths.includes(largestAlternateWidth)) alternateWidths.push(largestAlternateWidth);
   alternateWidths.sort((left, right) => left - right);
 }
-const alternateProductionTransform =
-  import.meta.env.PROD && alternateRasterImage && shouldOptimize;
+const alternateProductionTransform = import.meta.env.PROD && alternateRasterImage && shouldOptimize;
 const alternateFallbackWidth = Math.min(960, alternateMetadata?.width ?? 960);
 const renderedAlternateSource = alternateSrc
   ? alternateProductionTransform
