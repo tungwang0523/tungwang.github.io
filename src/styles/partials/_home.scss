@@ -905,7 +905,7 @@ body.home-page .blog {
     grid-template-columns: minmax(max-content, clamp(0px, 30vw, 230px)) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
     gap: var(--home-card-gap);
-    padding: 68px var(--home-card-gap) var(--home-card-gap);
+    padding: 76px var(--home-card-gap) var(--home-card-gap);
   }
 
   .home-identity-card > .blog-is-sticky {
@@ -1082,16 +1082,16 @@ body.home-page .blog {
     &__brand-card {
       display: flex;
       align-items: center;
-      height: 52px;
+      height: 60px;
       min-width: 0;
       padding: 0 calc(var(--home-card-padding) + 44px) 0 var(--home-card-padding);
       border-radius: var(--home-card-radius);
       background: $blog-bg;
       font-family: $title-font;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
-      line-height: 1;
-      letter-spacing: clamp(-4px, -0.22vw, -2px);
+      line-height: 1.15;
+      letter-spacing: -1px;
     }
 
     &__track {
@@ -1111,7 +1111,7 @@ body.home-page .blog {
   }
 
   body.home-page .menu-toggle {
-    top: 24px;
+    top: 28px;
     right: calc(var(--home-card-gap) + var(--home-card-padding));
     left: auto;
   }
@@ -1161,8 +1161,9 @@ body.home-page .blog {
   .blog-header-container > .blog-header .blog-big__title {
     margin: 0 0 8px;
     padding: 0;
-    font-size: 24px;
-    line-height: 1;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.15;
     letter-spacing: -1px;
   }
 
@@ -1197,11 +1198,11 @@ body.home-page .blog {
 
     .blog-right-title {
       display: block;
-      font-family: $home-editorial-font;
-      font-size: 24px;
-      font-style: italic;
-      font-weight: 400;
-      line-height: normal;
+      font-family: $title-font;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.15;
       letter-spacing: -1px;
     }
 
@@ -1266,14 +1267,14 @@ body.home-page .blog {
 
     h2 {
       margin-bottom: 8px;
-      font-size: 20px;
+      font-size: 22px;
       line-height: 1.12;
       letter-spacing: -1px;
     }
 
     p {
       margin-bottom: 10px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.35;
     }
   }
@@ -1283,7 +1284,7 @@ body.home-page .blog {
 
     a,
     button {
-      font-size: 18px;
+      font-size: 20px;
       letter-spacing: -0.5px;
     }
   }

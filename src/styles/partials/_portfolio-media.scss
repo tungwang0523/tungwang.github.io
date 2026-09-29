@@ -987,10 +987,19 @@
     }
 
     > .portfolio-main {
-      width: calc(100% - var(--portfolio-desktop-rail-space));
-      max-width: none;
+      width: min(
+        calc(100% - var(--portfolio-desktop-rail-space)),
+        var(--page-content-width)
+      );
+      max-width: var(--page-content-width);
       margin-right: 0;
-      margin-left: var(--portfolio-desktop-rail-space);
+      margin-left: calc(
+        var(--portfolio-desktop-rail-space) +
+          max(
+            0px,
+            (100% - var(--portfolio-desktop-rail-space) - var(--page-content-width)) / 2
+          )
+      );
     }
 
     :is(.portfolio-identity__inner, .portfolio-section__inner, .portfolio-next__inner) {
@@ -1012,6 +1021,58 @@
       width: auto;
       margin-right: calc(var(--portfolio-desktop-edge) * -1);
       margin-left: calc(var(--portfolio-desktop-edge) * -1);
+    }
+
+    /* Keep the project composition on its original measure, but allow colour
+       fields to continue across the whole pane beside the fixed navigation. */
+    :is(.portfolio-identity, .portfolio-section--dark) {
+      box-shadow: 0 0 0 100vmax var(--theme);
+      clip-path: inset(0 -100vmax);
+    }
+
+    .project-hero {
+      isolation: isolate;
+
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        inset: 0 -100vmax;
+        background: var(--theme);
+        pointer-events: none;
+      }
+    }
+
+    .project-hero:not(.project-hero--mine) {
+      box-shadow: 0 0 0 100vmax var(--theme);
+      clip-path: inset(0 -100vmax);
+    }
+
+    .portfolio-section--video {
+      box-shadow: 0 0 0 100vmax #121418;
+      clip-path: inset(0 -100vmax);
+    }
+
+    .portfolio-next {
+      box-shadow: 0 0 0 100vmax var(--next-theme, #121418);
+      clip-path: inset(0 -100vmax);
+    }
+
+    &.portfolio-page--narrative {
+      .portfolio-identity,
+      .case-projection {
+        box-shadow: 0 0 0 100vmax #002fa7;
+        clip-path: inset(0 -100vmax);
+      }
+
+      .project-hero {
+        box-shadow: 0 0 0 100vmax $body-bg;
+      }
+
+      .case-turn {
+        box-shadow: 0 0 0 100vmax $body-bg;
+        clip-path: inset(0 -100vmax);
+      }
     }
 
     .portfolio-section--video {

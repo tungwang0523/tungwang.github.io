@@ -25,7 +25,7 @@
 
 @media screen and (max-width: 1030px) {
   .page {
-    --page-nav-height: 64px;
+    --page-nav-height: 72px;
     padding-top: var(--page-nav-height);
   }
 }
@@ -371,7 +371,7 @@ html.content-card-page body.menu-open .page--content-card {
   }
 
   @media screen and (max-width: 768px) {
-    --page-nav-height: 64px;
+    --page-nav-height: 72px;
     --page-content-card-radius: 24px;
     --page-content-card-inset: 24px;
     --page-content-card-title-space: 64px;
@@ -393,11 +393,11 @@ html.content-card-page body.menu-open .page--content-card {
 
 @media screen and (min-width: 769px) and (max-width: 1030px) {
   .page {
-    padding-top: 64px;
+    padding-top: 72px;
   }
 
   .page--content-card {
-    --page-nav-height: 64px;
+    --page-nav-height: 72px;
     padding-top: var(--page-content-card-top);
   }
 }
@@ -560,7 +560,7 @@ html.content-card-page body.menu-open .page--content-card {
     right: 12px;
     left: 12px;
     width: auto;
-    height: 52px;
+    height: 60px;
     border-radius: 24px;
     background: $blog-bg;
   }
@@ -637,7 +637,7 @@ html.content-card-page body.menu-open .page--content-card {
   }
 
   body .page > .menu-toggle {
-    top: 24px;
+    top: 28px;
     right: 36px;
     left: auto;
   }

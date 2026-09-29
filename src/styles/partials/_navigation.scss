@@ -91,7 +91,7 @@
   }
 
   body.home-page .menu-toggle {
-    top: 26px;
+    top: 28px;
   }
 }
 
@@ -396,9 +396,9 @@ body.menu-open {
 @media screen and (max-width: 768px) {
   html.home-page,
   body.home-page {
-    /* The first card begins 64px below the mobile stage plus the shared
+    /* The first card begins 72px below the mobile stage plus the shared
        12px card gap. Centre the top-bar content in that entire interval. */
-    --home-mobile-card-edge: 68px;
+    --home-mobile-card-edge: 76px;
 
     width: 100%;
     height: var(--home-viewport-height, 100dvh);
@@ -834,6 +834,6 @@ html {
 
 @media screen and (max-width: 768px) {
   :root {
-    --page-nav-height: 64px;
+    --page-nav-height: 72px;
   }
 }

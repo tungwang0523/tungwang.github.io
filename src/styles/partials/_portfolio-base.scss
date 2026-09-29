@@ -5,13 +5,6 @@
 .portfolio-page {
   --page-content-width: 1240px;
   --project-red: #c93028;
-  --mobile-page-nav-bg: #{$panel-bg};
-  --mobile-page-nav-color: #{$title-color};
-  --mobile-menu-bg: var(--mobile-page-nav-bg);
-  --mobile-menu-color: var(--mobile-page-nav-color);
-  --mobile-menu-current-bg: var(--mobile-page-nav-color);
-  --mobile-menu-current-color: var(--mobile-page-nav-bg);
-  --mobile-menu-mark-filter: none;
   // Full-bleed project bands use 100vw. Desktop browsers include the vertical
   // scrollbar in that unit, which otherwise creates a few pixels of horizontal
   // page overflow while the bands themselves still visually fill the viewport.
@@ -48,44 +41,30 @@
 }
 .portfolio-page--mine {
   --next-theme: #1e7a46;
-  --mobile-page-nav-bg: #c93028;
-  --mobile-page-nav-color: #ffffff;
-  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--expo {
   --next-theme: #6d28d9;
-  --mobile-page-nav-bg: #1e7a46;
-  --mobile-page-nav-color: #ffffff;
-  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--seeds {
   --next-theme: #546e7a;
-  --mobile-page-nav-bg: #6d28d9;
-  --mobile-page-nav-color: #ffffff;
-  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--roof {
   --next-theme: #c2410c;
-  --mobile-page-nav-bg: #546e7a;
-  --mobile-page-nav-color: #ffffff;
-  --mobile-menu-mark-filter: invert(1);
 }
 .portfolio-page--robotaxi {
   --next-theme: #002fa7;
-  --mobile-page-nav-bg: #c2410c;
-  --mobile-page-nav-color: #ffffff;
-  --mobile-menu-mark-filter: invert(1);
 }
 
-@media screen and (max-width: 768px) {
-  .portfolio-page {
-    .menu-mobile-bar {
-      background: var(--mobile-page-nav-bg);
+@media screen and (max-width: 1030px) {
+  body .page.portfolio-page {
+    padding-top: 0;
+
+    > .menu-mobile-top-field {
+      background: transparent;
     }
 
-    .menu-mobile-bar__brand,
-    .menu-toggle {
-      color: var(--mobile-page-nav-color);
+    .portfolio-identity {
+      padding-top: calc(var(--page-nav-height) + 24px);
     }
   }
 }

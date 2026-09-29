@@ -122,7 +122,12 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
 >
   {
     showDesktopBrand && (
-      <a class="blog-menu menu-desktop-brand" href="/" aria-label="Home">
+      <a
+        class="blog-menu menu-desktop-brand"
+        href="/"
+        aria-label="Home"
+        data-main-site-link={mainSiteNavigation || undefined}
+      >
         Tung’s
       </a>
     )
