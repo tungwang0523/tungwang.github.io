@@ -6,6 +6,7 @@ import {
   cloudflareRemoteSrcset,
   isLocalSiteImage,
 } from '../utils/cloudflare-image.mjs';
+import { imageDimensionsFor } from '../utils/image-dimensions.mjs';
 
 interface Props {
   src: string;
@@ -63,12 +64,13 @@ const shouldOptimize = optimize ?? !projectDetailPage;
 const localImage = isLocalSiteImage(src);
 const rasterImage = localImage && !src.toLowerCase().endsWith('.svg');
 const metadata = rasterImage ? await readMetadata(src) : undefined;
+const remoteDimensions = !localImage ? imageDimensionsFor(src) : undefined;
 const alternateLocalImage = alternateSrc ? isLocalSiteImage(alternateSrc) : false;
 const alternateRasterImage =
   Boolean(alternateSrc) && alternateLocalImage && !alternateSrc!.toLowerCase().endsWith('.svg');
 const alternateMetadata = alternateRasterImage ? await readMetadata(alternateSrc!) : undefined;
-const intrinsicWidth = width ?? metadata?.width;
-const intrinsicHeight = height ?? metadata?.height;
+const intrinsicWidth = width ?? metadata?.width ?? remoteDimensions?.width;
+const intrinsicHeight = height ?? metadata?.height ?? remoteDimensions?.height;
 const availableWidths = metadata?.width
   ? widths.filter((candidate) => candidate <= metadata.width!)
   : widths;

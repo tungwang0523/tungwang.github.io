@@ -4,6 +4,7 @@
   --home-card-gap: 12px;
   --home-card-radius: 14px;
   --home-card-padding: clamp(18px, 1.5vw, 24px);
+  --home-nav-padding: clamp(14px, 1.15vw, 18px);
   /* Preserve the existing 35/30 shares after the three inter-column gaps
      have been deducted from the grid's content box. */
   --home-middle-column: calc(35% - 12.6px);
@@ -18,7 +19,7 @@
   // Keep the identity column compact and give the recovered space to the
   // central editorial column.
   grid-template-columns:
-    minmax(0, 1fr)
+    196px
     max-content
     minmax(0, var(--home-middle-column))
     minmax(0, var(--home-right-column));
@@ -78,68 +79,6 @@
 
     & + & {
       margin-top: 24px;
-    }
-
-    &.mention {
-      margin-top: auto;
-      font-size: 19px;
-      flex-direction: column;
-      align-items: flex-start;
-      line-height: 1.2;
-
-      @media screen and (max-width: 1260px) {
-        font-size: 1.4vw;
-      }
-
-      .mention__mark {
-        display: block;
-        width: 44px;
-        height: 44px;
-        margin-bottom: 16px;
-      }
-
-      .mention__name {
-        display: block;
-        font-family: $title-font;
-        font-size: 28px;
-        font-weight: 600;
-        line-height: 1.08;
-        letter-spacing: -2px;
-      }
-
-      .mention__role {
-        display: block;
-        margin-top: 8px;
-        font-size: 11px;
-        font-weight: 400;
-        line-height: 1.2;
-
-        a {
-          color: inherit;
-          font-weight: 600;
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-            text-underline-offset: 2px;
-          }
-        }
-      }
-
-      .mention__details {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1px;
-        margin-top: 14px;
-
-        small {
-          display: block;
-          font-size: 11px;
-          font-weight: 400;
-          line-height: 1.1;
-        }
-      }
     }
 
     &.rounded {
@@ -241,10 +180,54 @@
   @media screen and (min-width: 1031px) {
     > .is-menu {
       overflow: hidden;
-      padding: var(--home-card-padding);
+      padding: var(--home-nav-padding);
       border-right: 0;
       border-radius: var(--home-card-radius);
       background: $panel-bg;
+
+      > .blog-menu:not(.mention, .menu-desktop-brand) {
+        width: calc(100% + 20px);
+        min-height: 34px;
+        margin-left: -10px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.15;
+        letter-spacing: -0.15px;
+
+        & + .blog-menu:not(.mention, .menu-desktop-brand) {
+          margin-top: 6px;
+        }
+
+        &:hover,
+        &.menu-current {
+          background: rgba(18, 20, 24, 0.1);
+        }
+      }
+
+      > .menu-desktop-brand {
+        display: flex;
+        align-items: center;
+        width: calc(100% + 20px);
+        min-height: 42px;
+        margin-left: -10px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        font-family: $title-font;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -1px;
+
+        &:hover {
+          background: rgba(18, 20, 24, 0.1);
+        }
+
+        & + .blog-menu:not(.mention) {
+          margin-top: calc(var(--home-card-gap) + var(--home-nav-padding) - 6px);
+        }
+      }
     }
   }
 
@@ -255,6 +238,10 @@
       background: transparent;
     }
   }
+}
+
+.menu-desktop-brand {
+  display: none;
 }
 
 .page-number {
@@ -368,7 +355,7 @@
 @keyframes featured-next-arrow {
   0% {
     opacity: 0;
-    transform: translateY(-0.28em);
+    transform: translateY(0.28em);
   }
 
   28% {
@@ -377,12 +364,12 @@
 
   72% {
     opacity: 1;
-    transform: translateY(0.2em);
+    transform: translateY(-0.2em);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(0.42em);
+    transform: translateY(-0.42em);
   }
 }
 
@@ -577,6 +564,10 @@
       display: contents;
     }
   }
+}
+
+.mobile-featured__brand-card {
+  display: none;
 }
 
 .site-marquee {
@@ -791,6 +782,46 @@ body.home-page .blog {
   }
 }
 
+/* On the wide desktop homepage, the three content cards follow the visible
+   vertical extent of the navigation rail's content rather than the rail's
+   outer grid cell. This aligns their top with the Tung's control and their
+   bottom with the identity/copyright block. */
+@media screen and (min-width: 1031px) and (min-aspect-ratio: 4 / 5) {
+  .home-identity-card > .blog-is-sticky,
+  .mobile-featured > .mobile-featured__track > .blog-header-container,
+  .mobile-featured > .mobile-featured__track > .right-blog {
+    height: calc(100% - 2 * var(--home-nav-padding));
+    min-height: 0;
+    margin-top: var(--home-nav-padding);
+    margin-bottom: var(--home-nav-padding);
+  }
+}
+
+/* Once the wide layout has enough room to stop negotiating between columns,
+   freeze the editorial composition and centre it against the full viewport.
+   The threshold also guarantees clearance from the fixed navigation rail. */
+@media screen and (min-width: 1800px) and (min-aspect-ratio: 4 / 5) {
+  .blog {
+    --home-fixed-identity-column: 340px;
+    --home-fixed-feature-column: 520px;
+    --home-fixed-microblog-column: 440px;
+    grid-template-columns:
+      var(--home-fixed-identity-column)
+      var(--home-fixed-feature-column)
+      var(--home-fixed-microblog-column);
+    justify-content: center;
+
+    > .home-identity-card > .is-menu {
+      position: absolute;
+      top: var(--home-card-gap);
+      bottom: var(--home-card-gap);
+      left: var(--home-card-gap);
+      width: 196px;
+      height: auto;
+    }
+  }
+}
+
 /* ---------- Portrait desktop ----------
    Keep the navigation as a full-height rail. Identity and the featured
    editorial column form the first row; Microblog then spans their combined
@@ -805,7 +836,7 @@ body.home-page .blog {
   }
 
   .blog {
-    --home-portrait-nav-width: clamp(156px, 17vw, 196px);
+    --home-portrait-nav-width: 196px;
     --home-portrait-identity-width: clamp(230px, 25vw, 286px);
     --home-portrait-feature-height: clamp(760px, calc((100vw - 520px) * 0.75 + 360px), 940px);
 
@@ -862,6 +893,398 @@ body.home-page .blog {
           grid-column: 1 / -1;
         }
       }
+    }
+  }
+}
+
+/* ---------- Intermediate two-column homepage ----------
+   Keep the identity card beside the desktop-style vertical, snapping content
+   column. Microblog becomes its final panel after Gallery. */
+@media screen and (min-width: 561px) and (max-width: 768px) {
+  .blog {
+    grid-template-columns: minmax(max-content, clamp(0px, 30vw, 230px)) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: var(--home-card-gap);
+    padding: 68px var(--home-card-gap) var(--home-card-gap);
+  }
+
+  .home-identity-card > .blog-is-sticky {
+    position: relative;
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 0;
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
+    padding: var(--home-card-padding);
+
+    > .header-article {
+      margin: 0 0 20px;
+      padding: 0;
+    }
+
+    > .page-number {
+      position: absolute;
+      right: var(--home-card-padding);
+      bottom: var(--home-card-padding);
+      left: var(--home-card-padding);
+      width: auto;
+      height: auto;
+      padding: 0;
+
+      .page-number__context {
+        padding: 0;
+        font-size: clamp(34px, min(6.5vw, 7vh), 50px);
+      }
+    }
+  }
+
+  .mobile-featured {
+    position: relative;
+    inset: auto;
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    width: auto;
+    height: 100%;
+    min-width: 0;
+
+    &__title,
+    &__nav,
+    &__swipe-hint {
+      display: none;
+    }
+
+    &__track {
+      display: flex;
+      flex-direction: column;
+      gap: var(--home-card-gap);
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+    }
+  }
+
+  .blog-header-container {
+    display: contents;
+
+    > .blog-header {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      padding: var(--home-card-padding);
+      border-radius: var(--home-card-radius);
+      background: $blog-bg;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      touch-action: pan-y;
+
+      > .blog-article {
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      > .header-article {
+        margin: 0 0 20px;
+        padding: 0;
+      }
+    }
+
+    .header-article {
+      display: block;
+
+      .small-title:empty {
+        display: none;
+      }
+    }
+
+    > .blog-header > .featured-content {
+      height: auto;
+      padding: 0;
+    }
+  }
+
+  .home-identity-card > .blog-is-sticky .blog-big__title,
+  .blog-header-container > .blog-header .blog-big__title {
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: clamp(52px, 5.7vw, 100px);
+    line-height: 1;
+    letter-spacing: clamp(-4px, -0.22vw, -2px);
+  }
+
+  [data-featured-next] {
+    display: flex !important;
+  }
+
+  .mobile-featured__track > .microblog-sidebar {
+    display: flex;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: var(--home-card-padding);
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    touch-action: pan-y;
+
+    .microblog-sidebar__sticky-head {
+      position: static;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .blog-right-title-container {
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    .blog-right-title {
+      display: block;
+    }
+
+    .microblog-feed {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: auto;
+      padding-bottom: 0;
+    }
+  }
+}
+
+/* ---------- Mobile vertical homepage ----------
+   Responsive layout changes only how the cards are traversed. Their internal
+   hierarchy and visual language remain the same at every breakpoint. */
+@media screen and (max-width: 560px) {
+  .mobile-featured {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: var(--home-card-gap);
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: var(--home-card-gap);
+    overflow: hidden;
+
+    &__brand-card {
+      display: flex;
+      align-items: center;
+      height: 52px;
+      min-width: 0;
+      padding: 0 calc(var(--home-card-padding) + 44px) 0 var(--home-card-padding);
+      border-radius: var(--home-card-radius);
+      background: $blog-bg;
+      font-family: $title-font;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: clamp(-4px, -0.22vw, -2px);
+    }
+
+    &__track {
+      display: flex;
+      flex-direction: column;
+      gap: var(--home-card-gap);
+      width: auto;
+      height: 100%;
+      min-height: 0;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+    }
+  }
+
+  body.home-page .menu-toggle {
+    top: 24px;
+    right: calc(var(--home-card-gap) + var(--home-card-padding));
+    left: auto;
+  }
+
+  body.home-page .menu-mobile-bar--has-marquee {
+    display: none;
+  }
+
+  body.home-page.menu-open .menu-toggle {
+    top: 18px;
+    right: 24px;
+  }
+
+  .blog-header-container {
+    display: contents;
+
+    > .blog-header {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      padding: var(--home-card-padding);
+      border-radius: var(--home-card-radius);
+      background: $blog-bg;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      touch-action: pan-y;
+
+      > .header-article {
+        display: block;
+        flex: 0 0 auto;
+        margin: 0 0 20px;
+        padding: 0;
+      }
+
+      > .featured-content {
+        height: auto;
+        padding: 0;
+      }
+    }
+
+    .header-article .small-title:empty {
+      display: none;
+    }
+  }
+
+  .blog-header-container > .blog-header .blog-big__title {
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .mobile-featured__track > .microblog-sidebar {
+    display: flex;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: var(--home-card-padding);
+    border-radius: var(--home-card-radius);
+    background: $blog-bg;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    touch-action: pan-y;
+
+    .microblog-sidebar__sticky-head {
+      position: static;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .site-marquee {
+      display: block;
+    }
+
+    .blog-right-title-container {
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    .blog-right-title {
+      display: block;
+      font-family: $home-editorial-font;
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -1px;
+    }
+
+    .microblog-feed {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      padding-bottom: 0;
+    }
+  }
+}
+
+/* Card internals are shared across tablet and phone. Earlier mobile rules
+   supported a separate horizontal stage; neutralize those presentation-only
+   differences now that every narrow layout follows the desktop card system. */
+@media screen and (max-width: 768px) {
+  [data-featured-next] {
+    display: flex !important;
+  }
+
+  .blog-header-container > .blog-header > .featured-content {
+    padding: 0;
+  }
+
+  .blog-header-container .featured-content__copy {
+    padding-top: clamp(28px, 4vh, 48px);
+
+    h2 {
+      max-width: 16ch;
+      margin: 0 0 12px;
+      font-family: $title-font;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      font-family: $title-font;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+  }
+
+  .blog-header-container .featured-content__actions {
+    gap: 20px;
+    padding-top: 14px;
+    padding-bottom: 0;
+
+    a,
+    button {
+      font-size: 26px;
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .blog-header-container .featured-content__copy {
+    padding-top: clamp(18px, 3vh, 28px);
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 20px;
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+  }
+
+  .blog-header-container .featured-content__actions {
+    padding-top: 10px;
+
+    a,
+    button {
+      font-size: 18px;
+      letter-spacing: -0.5px;
     }
   }
 }

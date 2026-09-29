@@ -7,24 +7,23 @@
 
   > .page-nav,
   > .menu-mobile-bar {
-    background: rgba($panel-bg, 0.76);
-    -webkit-backdrop-filter: blur(20px) saturate(1.15);
-    backdrop-filter: blur(20px) saturate(1.15);
+    background: $panel-bg;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   &.page--content-card {
-    &::before,
-    &::after,
-    > .page-content-card-viewport,
-    > .site-footer::before {
-      display: none;
+    > .page-content-card-viewport {
+      background: $panel-bg;
     }
 
     &.page > .page-main {
       padding: 0;
-      background: transparent;
-      overflow: visible;
-      isolation: auto;
+      border-radius: var(--page-content-card-radius);
+      background: $panel-bg;
+      overflow: hidden;
+      overflow: clip;
+      isolation: isolate;
     }
 
     &.page .page-head--in-brand {
@@ -58,7 +57,10 @@
     align-items: start;
 
     &.is-masonry-ready {
-      grid-auto-rows: 2px;
+      grid-auto-flow: dense;
+      grid-auto-rows: 1px;
+      column-gap: 12px;
+      row-gap: 0;
 
       > .work-tile {
         align-self: start;
@@ -75,12 +77,13 @@
 .work-tile {
   --work-tile-inset: 36px;
   --work-image-radius: 10px;
+  --work-tile-radius: 14px;
   --work-tile-color: #{$blog-bg};
 
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: var(--work-tile-radius);
   background: var(--work-tile-color);
   color: $title-color;
   font-family: $title-font;
@@ -316,6 +319,86 @@
   color: #fff;
 }
 
+/* The page frame already rounds the outside corners. These fixed corner
+   masks complete the same treatment at the centre gutter whenever a column
+   card crosses the upper or lower viewport boundary. Unlike clipping each
+   scrolling card, the masks stay compositor-stable while scrolling. */
+.work-boundary-mask {
+  --work-boundary-radius: var(--page-content-card-radius);
+  --work-boundary-half-gap: 6px;
+
+  position: fixed;
+  z-index: 29;
+  left: var(--page-content-card-center-x);
+  width: var(--page-content-card-width);
+  height: var(--work-boundary-radius);
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  &--top {
+    top: var(--page-content-card-top);
+  }
+
+  &--bottom {
+    bottom: var(--page-content-card-gap);
+  }
+
+  &__corner {
+    position: absolute;
+    display: none;
+    width: var(--work-boundary-radius);
+    height: var(--work-boundary-radius);
+
+    &.is-visible {
+      display: block;
+    }
+
+    &--left-card {
+      left: calc(50% - var(--work-boundary-half-gap) - var(--work-boundary-radius));
+    }
+
+    &--right-card {
+      left: calc(50% + var(--work-boundary-half-gap));
+    }
+  }
+
+  &--top &__corner--left-card {
+    background: radial-gradient(
+      circle at 0 100%,
+      transparent calc(var(--work-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--work-boundary-radius)
+    );
+  }
+
+  &--top &__corner--right-card {
+    background: radial-gradient(
+      circle at 100% 100%,
+      transparent calc(var(--work-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--work-boundary-radius)
+    );
+  }
+
+  &--bottom &__corner--left-card {
+    background: radial-gradient(
+      circle at 0 0,
+      transparent calc(var(--work-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--work-boundary-radius)
+    );
+  }
+
+  &--bottom &__corner--right-card {
+    background: radial-gradient(
+      circle at 100% 0,
+      transparent calc(var(--work-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--work-boundary-radius)
+    );
+  }
+
+  @media screen and (max-width: 760px) {
+    display: none;
+  }
+}
+
 .work-tile--edge-media:hover .work-tile__media::after {
   opacity: 0;
 }
@@ -375,9 +458,10 @@
     --work-mobile-tile-height: 184px;
     --work-tile-inset: 18px;
     --work-image-radius: 14px;
+    --work-tile-radius: 24px;
 
     min-height: 0;
-    border-radius: 24px;
+    border-radius: var(--work-tile-radius);
     grid-row-end: auto !important;
 
     .work-tile__link {

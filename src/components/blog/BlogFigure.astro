@@ -5,6 +5,7 @@ import {
   imagePresets,
   isCloudflareImage,
 } from '../../utils/cloudflare-image.mjs';
+import { imageDimensionsFor } from '../../utils/image-dimensions.mjs';
 
 interface Props {
   src: string;
@@ -54,6 +55,7 @@ const lightboxMobileSrc = remote
   : src;
 const captionItems = [caption, credit ? `Image: ${credit}` : undefined].filter(Boolean);
 const hasCaption = Boolean(caption || credit);
+const dimensions = imageDimensionsFor(src);
 const sizes =
   layout === 'wide' || layout === 'panorama'
     ? '(max-width: 900px) calc(100vw - 40px), 650px'
@@ -74,6 +76,8 @@ const sizes =
       srcset={renderedSrcset}
       sizes={renderedSrcset ? sizes : undefined}
       alt={alt}
+      width={dimensions?.width}
+      height={dimensions?.height}
       loading="lazy"
       decoding="async"
       draggable="false"

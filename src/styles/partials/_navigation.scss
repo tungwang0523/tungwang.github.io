@@ -75,9 +75,23 @@
   }
 }
 
+.menu-mobile-top-field {
+  display: none;
+}
+
 @media screen and (min-width: 769px) and (max-width: 1030px) {
   .menu-mobile-bar {
     background: transparent;
+  }
+
+  /* Centre the control in the complete space above the first card, so its
+     upper and lower clearances are identical at tablet widths. */
+  .page--content-card > .menu-toggle {
+    top: calc((var(--page-nav-height) + var(--page-content-card-gap) - 28px) / 2);
+  }
+
+  body.home-page .menu-toggle {
+    top: 26px;
   }
 }
 
@@ -108,8 +122,8 @@
 
   &__bar {
     position: absolute;
-    left: 0;
-    width: 28px;
+    left: 3px;
+    width: 22px;
     height: 2px;
     background: currentColor;
     transition:
@@ -119,13 +133,13 @@
   }
 
   &__bar:nth-of-type(1) {
-    top: 4px;
+    top: 5px;
   }
   &__bar:nth-of-type(2) {
     top: 13px;
   }
   &__bar:nth-of-type(3) {
-    top: 22px;
+    top: 21px;
   }
 
   &.is-open {
@@ -164,12 +178,89 @@ body.menu-open {
   padding: 0;
   background: transparent;
   color: inherit;
-  font-weight: 700;
+  font-weight: 500;
   line-height: inherit;
   cursor: default;
 }
 
-@media screen and (min-width: 769px) {
+/* Shared desktop-rail identity. The homepage and subpages use the same
+   markup and this single typographic definition. */
+.blog-menu.mention {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: auto;
+  font-family: $subtitle-font;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+
+  @media screen and (max-width: 1260px) {
+    font-size: 1.4vw;
+  }
+
+  .mention__mark {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+
+  .mention__name {
+    display: block;
+    font-family: $title-font;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -2px;
+  }
+
+  .mention__role {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    a {
+      color: inherit;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+    }
+  }
+
+  .mention__details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    margin-top: 14px;
+
+    small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+  }
+}
+
+@media screen and (min-width: 1031px) {
+  /* The identity block is the final item in every desktop rail. Keep its
+     lower inset equal to the rail's top and side insets even when the generic
+     adjacent-link rhythm is loaded later on the homepage. */
+  .is-menu > .blog-menu.mention,
+  .page-nav__identity {
+    margin-top: auto;
+  }
+}
+
+@media screen and (min-width: 1031px) {
   .menu-mobile-bar.menu-mobile-only,
   .menu-toggle.menu-mobile-only,
   .is-menu.menu-mobile-only {
@@ -188,6 +279,117 @@ body.menu-open {
 
   .is-menu .blog-menu.mention {
     margin-top: 32px;
+  }
+
+  /* The hamburger drawer is the desktop rail moved into a full-screen layer.
+     Keep both PageLayout and the homepage on the same structure and styling. */
+  .menu-home-item {
+    display: flex;
+  }
+
+  :is(.is-menu.menu-mobile-only, body.home-page .home-identity-card > .is-menu) {
+    --drawer-navigation-width: min(196px, calc(100% - 64px));
+
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    padding: 11px 18px 18px;
+    border-right: 0;
+    background-color: var(--mobile-menu-bg, #{$panel-bg});
+    overflow-y: auto;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    will-change: transform;
+
+    &.is-swipe-dragging {
+      transition: none;
+    }
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    > .menu-desktop-brand {
+      display: flex;
+      align-items: center;
+      width: var(--drawer-navigation-width);
+      min-height: 42px;
+      margin-left: -10px;
+      padding: 7px 10px;
+      border-radius: 12px;
+      color: var(--mobile-menu-color, #{$subtitle-color});
+      font-family: $title-font;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      text-decoration: none;
+
+      &:hover {
+        background: rgba(18, 20, 24, 0.1);
+      }
+    }
+
+    > .blog-menu:not(.mention, .menu-desktop-brand) {
+      display: flex;
+      align-items: center;
+      width: var(--drawer-navigation-width);
+      min-height: 34px;
+      margin-left: -10px;
+      padding: 7px 10px;
+      border-radius: 12px;
+      color: var(--mobile-menu-color, #{$subtitle-color});
+      font-family: $subtitle-font;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.15px;
+      text-decoration: none;
+
+      & + .blog-menu:not(.mention, .menu-desktop-brand) {
+        margin-top: 6px;
+      }
+
+      &:hover,
+      &.menu-current {
+        background: rgba(18, 20, 24, 0.1);
+      }
+
+      &.menu-current {
+        align-self: stretch;
+        color: inherit;
+        font-weight: 500;
+      }
+    }
+
+    > .menu-desktop-brand + .blog-menu:not(.mention) {
+      margin-top: 24px;
+    }
+
+    > .blog-menu.mention {
+      margin-top: auto;
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 19px;
+      line-height: 1.2;
+
+      &.mention--mark-only .mention__mark {
+        margin-bottom: 0;
+      }
+
+      .mention__mark {
+        filter: var(--mobile-menu-mark-filter, none);
+      }
+    }
+
+  }
+
+  .is-menu .blog-menu.mention {
+    margin-top: auto;
   }
 }
 
@@ -287,79 +489,6 @@ body.menu-open {
     pointer-events: none;
   }
 
-  .menu-home-item {
-    display: flex;
-  }
-
-  .is-menu.menu-mobile-only {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    padding: 80px 28px 28px;
-    border-right: 0;
-    background-color: var(--mobile-menu-bg, #{$panel-bg});
-    overflow-y: auto;
-    overscroll-behavior-x: none;
-    touch-action: pan-y;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-    will-change: transform;
-
-    &.is-swipe-dragging {
-      transition: none;
-    }
-
-    &.is-open {
-      transform: translateX(0);
-    }
-
-    > .blog-menu {
-      display: flex;
-      align-items: center;
-      color: var(--mobile-menu-color, #{$subtitle-color});
-      font-family: $subtitle-font;
-      font-size: 24px;
-      letter-spacing: -0.5px;
-      text-decoration: none;
-
-      & + .blog-menu {
-        margin-top: 24px;
-      }
-
-      &.menu-current {
-        align-self: flex-start;
-        width: auto;
-        margin-left: 0;
-        padding: 0;
-        background: transparent;
-        color: inherit;
-        font-weight: 700;
-      }
-    }
-
-    > .blog-menu.mention {
-      margin-top: auto;
-      align-items: flex-start;
-      flex-direction: column;
-      font-size: 18px;
-      line-height: 1.2;
-
-      &.mention--mark-only .mention__mark {
-        margin-bottom: 0;
-      }
-
-      .mention__mark {
-        filter: var(--mobile-menu-mark-filter, none);
-      }
-    }
-  }
-
-  .is-menu .blog-menu.mention {
-    margin-top: auto;
-  }
-
   .microblog-sidebar .site-marquee {
     width: calc(100% + 40px);
   }
@@ -423,13 +552,13 @@ body.menu-open {
     &__word-track {
       --featured-progress: 0;
       display: flex;
-      width: 400%;
+      width: var(--featured-track-width);
       line-height: inherit;
-      transform: translateX(calc(var(--featured-progress) * -25%));
+      transform: translateX(calc(var(--featured-progress) * var(--featured-step)));
       will-change: transform;
 
       > span {
-        flex: 0 0 25%;
+        flex: 0 0 var(--featured-item-width);
         min-width: 0;
         white-space: nowrap;
       }

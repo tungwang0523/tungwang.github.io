@@ -4,6 +4,7 @@ import {
   imagePresets,
   isCloudflareImage,
 } from '../utils/cloudflare-image.mjs';
+import { imageDimensionsFor } from '../utils/image-dimensions.mjs';
 
 const visitImages = (node) => {
   if (!node || typeof node !== 'object') return;
@@ -15,6 +16,11 @@ const visitImages = (node) => {
 
     const source = node.properties.src;
     if (typeof source === 'string' && isCloudflareImage(source)) {
+      const dimensions = imageDimensionsFor(source);
+      if (dimensions) {
+        node.properties.width = dimensions.width;
+        node.properties.height = dimensions.height;
+      }
       const { srcWidth, widths, sizes, quality } = imagePresets.article;
       node.properties.dataOriginalSrc = source;
       node.properties.dataLightboxSrc = cloudflareImage(source, {

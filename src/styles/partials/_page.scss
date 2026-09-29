@@ -23,7 +23,7 @@
   color: $subtitle-color;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1030px) {
   .page {
     --page-nav-height: 64px;
     padding-top: var(--page-nav-height);
@@ -104,7 +104,7 @@
     gap: 28px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1030px) {
     display: none;
   }
 }
@@ -147,17 +147,24 @@
 
 body.menu-open {
   .page > .menu-mobile-bar {
-    background: var(--mobile-menu-bg) !important;
-    box-shadow: none !important;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .page > .menu-toggle {
+    right: 24px;
+    left: auto;
     color: var(--mobile-menu-color) !important;
   }
 
   .page-header-language--mobile {
     visibility: hidden;
   }
+}
+
+body.home-page.menu-open .menu-toggle {
+  right: 24px;
+  left: auto;
 }
 
 .page-main {
@@ -199,6 +206,9 @@ html.content-card-page body.menu-open .page--content-card {
     calc(100vw - 2 * var(--page-content-card-gap))
   );
   --page-content-card-edge: calc((100vw - var(--page-content-card-width)) / 2);
+  --page-content-card-left-edge: var(--page-content-card-edge);
+  --page-content-card-right-edge: var(--page-content-card-edge);
+  --page-content-card-center-x: 50%;
   --page-content-card-top: calc(var(--page-nav-height) + var(--page-content-card-gap));
   position: relative;
   width: 100%;
@@ -230,8 +240,8 @@ html.content-card-page body.menu-open .page--content-card {
     position: fixed;
     z-index: 28;
     top: var(--page-nav-height);
-    right: var(--page-content-card-edge);
-    left: var(--page-content-card-edge);
+    right: var(--page-content-card-right-edge);
+    left: var(--page-content-card-left-edge);
     height: calc(var(--page-content-card-gap) + var(--page-content-card-radius));
     background:
       linear-gradient($panel-bg, $panel-bg) left top / 100% var(--page-content-card-gap) no-repeat,
@@ -257,9 +267,9 @@ html.content-card-page body.menu-open .page--content-card {
     content: '';
     position: fixed;
     z-index: 28;
-    right: var(--page-content-card-edge);
+    right: var(--page-content-card-right-edge);
     bottom: 0;
-    left: var(--page-content-card-edge);
+    left: var(--page-content-card-left-edge);
     height: calc(var(--page-content-card-radius) + var(--page-content-card-gap));
     background:
       radial-gradient(
@@ -334,7 +344,7 @@ html.content-card-page body.menu-open .page--content-card {
       content: '';
       position: absolute;
       top: calc(-1 * var(--page-content-card-radius));
-      left: 50%;
+      left: var(--page-content-card-center-x);
       width: var(--page-content-card-width);
       height: var(--page-content-card-radius);
       background:
@@ -381,6 +391,33 @@ html.content-card-page body.menu-open .page--content-card {
   }
 }
 
+@media screen and (min-width: 769px) and (max-width: 1030px) {
+  .page {
+    padding-top: 64px;
+  }
+
+  .page--content-card {
+    --page-nav-height: 64px;
+    padding-top: var(--page-content-card-top);
+  }
+}
+
+/* On the three text-led section pages, navigation follows the inner reading
+   measure rather than the outside edge of the rounded card. Removing the
+   navigation wrappers' own inline padding makes their first and last visible
+   items share the same axes as the page content. */
+:is(.page--research, .blog-page, .microblog-page).page--content-card {
+  --page-navigation-content-inset: var(--page-content-card-inset);
+
+  > .page-nav .page-nav__inner,
+  > .site-footer .site-footer__inner {
+    width: calc(var(--page-content-card-width) - 2 * var(--page-navigation-content-inset));
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
 /* One compositor-friendly solid layer replaces the previous fixed page-wide
    gradient and four masks. Content scrolls above it; the layer itself never
    needs to be repainted during fast scrolling. */
@@ -389,7 +426,7 @@ html.content-card-page body.menu-open .page--content-card {
   z-index: 0;
   top: var(--page-content-card-top);
   bottom: var(--page-content-card-gap);
-  left: 50%;
+  left: var(--page-content-card-center-x);
   width: var(--page-content-card-width);
   border-radius: var(--page-content-card-radius);
   background: $blog-bg;
@@ -398,6 +435,85 @@ html.content-card-page body.menu-open .page--content-card {
   contain: paint;
   will-change: transform;
   pointer-events: none;
+}
+
+/* Two-column indexes share the Work page's boundary treatment. When a card
+   crosses the fixed top or bottom edge, these masks round the two corners
+   beside the centre gutter instead of leaving a visibly straight crop. */
+.masonry-boundary-mask {
+  --masonry-boundary-radius: var(--page-content-card-radius);
+  --masonry-boundary-half-gap: 6px;
+
+  position: fixed;
+  z-index: 29;
+  left: var(--page-content-card-center-x);
+  width: var(--page-content-card-width);
+  height: var(--masonry-boundary-radius);
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  &--top {
+    top: var(--page-content-card-top);
+  }
+
+  &--bottom {
+    bottom: var(--page-content-card-gap);
+  }
+
+  &__corner {
+    position: absolute;
+    display: none;
+    width: var(--masonry-boundary-radius);
+    height: var(--masonry-boundary-radius);
+
+    &.is-visible {
+      display: block;
+    }
+
+    &--left-card {
+      left: calc(50% - var(--masonry-boundary-half-gap) - var(--masonry-boundary-radius));
+    }
+
+    &--right-card {
+      left: calc(50% + var(--masonry-boundary-half-gap));
+    }
+  }
+
+  &--top &__corner--left-card {
+    background: radial-gradient(
+      circle at 0 100%,
+      transparent calc(var(--masonry-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--masonry-boundary-radius)
+    );
+  }
+
+  &--top &__corner--right-card {
+    background: radial-gradient(
+      circle at 100% 100%,
+      transparent calc(var(--masonry-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--masonry-boundary-radius)
+    );
+  }
+
+  &--bottom &__corner--left-card {
+    background: radial-gradient(
+      circle at 0 0,
+      transparent calc(var(--masonry-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--masonry-boundary-radius)
+    );
+  }
+
+  &--bottom &__corner--right-card {
+    background: radial-gradient(
+      circle at 100% 0,
+      transparent calc(var(--masonry-boundary-radius) - 0.5px),
+      #{$panel-bg} var(--masonry-boundary-radius)
+    );
+  }
+
+  @media screen and (max-width: 560px) {
+    display: none;
+  }
 }
 
 .page-body {
@@ -428,6 +544,333 @@ html.content-card-page body.menu-open .page--content-card {
   line-height: 0.86;
   margin: 0;
   color: $title-color;
+}
+
+/* ---------- Shared mobile title card ----------
+   Match the homepage: one compact rounded card at the top, with the adaptive
+   Tung's label on the left and the menu control on the right. The former
+   standalone navigation strip no longer reserves a blank band above it. */
+@media screen and (max-width: 1030px) {
+  .page {
+    padding-top: calc(var(--page-nav-height) + 12px);
+  }
+
+  body .page > .menu-mobile-bar {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    height: 52px;
+    border-radius: 24px;
+    background: $blog-bg;
+  }
+
+  html body .page.page--research > .menu-mobile-bar,
+  html body .page.page--work > .menu-mobile-bar,
+  html body .page.blog-page:not(.blog-post-page) > .menu-mobile-bar,
+  html body .page.microblog-page > .menu-mobile-bar {
+    background: $blog-bg;
+  }
+
+  body .page > .menu-mobile-bar .menu-mobile-bar__brand {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    display: block;
+    width: max-content;
+    padding: 0;
+    color: var(--mobile-menu-color);
+    font-family: $title-font;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+    text-decoration: none;
+    opacity: 1;
+    transform: translateY(-50%);
+    pointer-events: auto;
+
+    &:has(.menu-mobile-bar__brand-expanded) {
+      display: grid;
+    }
+
+    .menu-mobile-bar__brand-default,
+    .menu-mobile-bar__brand-expanded {
+      grid-area: 1 / 1;
+    }
+
+    .menu-mobile-bar__brand-expanded {
+      opacity: 0;
+    }
+
+    &.is-expanded .menu-mobile-bar__brand-default {
+      opacity: 0;
+    }
+
+    &.is-expanded .menu-mobile-bar__brand-expanded {
+      opacity: 1;
+    }
+  }
+
+  body .page > .menu-mobile-bar .page-header-language--mobile {
+    right: 68px;
+    font-family: $subtitle-font;
+
+    :is(.blog-language, .microblog-language) {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.15px;
+    }
+  }
+
+  body .page > .menu-mobile-top-field {
+    position: fixed;
+    z-index: 54;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    height: calc(var(--page-nav-height) + 12px);
+    background: var(--mobile-menu-bg, #{$panel-bg});
+    pointer-events: none;
+  }
+
+  body .page > .menu-toggle {
+    top: 24px;
+    right: 36px;
+    left: auto;
+  }
+
+  body.menu-open .page > .menu-toggle {
+    top: 18px;
+    right: 24px;
+  }
+
+  body.menu-open .page > .menu-mobile-top-field {
+    visibility: hidden;
+  }
+
+  body .page.page--gallery > .menu-mobile-bar,
+  body .page.blog-post-page > .menu-mobile-bar,
+  body .page.portfolio-page > .menu-mobile-bar {
+    background: var(--mobile-menu-bg);
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1030px) {
+  body .page > .menu-mobile-bar {
+    border-radius: 14px;
+  }
+}
+
+/* Desktop navigation uses the same persistent rail language as the homepage.
+   It deliberately overlays the page field instead of shrinking wide project
+   canvases; the compact measure keeps it clear of their content axes. */
+@media screen and (min-width: 1031px) {
+  .page {
+    --page-nav-height: 0px;
+    --desktop-page-nav-width: 196px;
+    --desktop-page-nav-gap: 12px;
+    --desktop-page-nav-padding: clamp(14px, 1.15vw, 18px);
+    --desktop-page-brand-height: 42px;
+    --desktop-page-brand-gap: calc(
+      var(--desktop-page-nav-gap) + var(--desktop-page-nav-padding) - 6px
+    );
+    --desktop-page-content-top: calc(
+      var(--desktop-page-nav-gap) + var(--desktop-page-nav-padding) - 7px +
+        var(--desktop-page-brand-height) + var(--desktop-page-brand-gap)
+    );
+  }
+
+  .page--content-card {
+    --page-content-card-width: min(
+      calc(var(--page-content-width) + 64px),
+      calc(100vw - var(--desktop-page-nav-width) - 3 * var(--desktop-page-nav-gap))
+    );
+    --page-content-card-left-edge: max(
+      calc((100vw - var(--page-content-card-width)) / 2),
+      calc(var(--desktop-page-nav-width) + 2 * var(--desktop-page-nav-gap))
+    );
+    --page-content-card-right-edge: calc(
+      100vw - var(--page-content-card-left-edge) - var(--page-content-card-width)
+    );
+    --page-content-card-center-x: calc(
+      var(--page-content-card-left-edge) + var(--page-content-card-width) / 2
+    );
+  }
+
+  .page--content-card.page > .page-main {
+    margin-right: 0;
+    margin-left: var(--page-content-card-left-edge);
+  }
+
+  .page > .page-nav {
+    position: fixed;
+    z-index: 40;
+    inset: var(--desktop-page-nav-gap) auto var(--desktop-page-nav-gap) var(--desktop-page-nav-gap);
+    width: var(--desktop-page-nav-width) !important;
+    height: auto;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .page > .page-nav .page-nav__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100% !important;
+    height: 100%;
+    min-height: 0;
+    max-width: none !important;
+    margin: 0;
+    padding: calc(var(--desktop-page-nav-padding) - 7px) var(--desktop-page-nav-padding)
+      var(--desktop-page-nav-padding) !important;
+  }
+
+  .page > .page-nav :is(.page-nav__brand, nav a, .page-nav__current) {
+    display: flex;
+    align-items: center;
+    width: calc(100% + 20px);
+    min-height: 34px;
+    margin-left: -10px;
+    padding: 7px 10px;
+    border-radius: 12px;
+    font-family: $subtitle-font;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.15px;
+    text-decoration: none;
+  }
+
+  .page > .page-nav .page-nav__brand {
+    min-height: var(--desktop-page-brand-height);
+    margin-bottom: var(--desktop-page-brand-gap);
+    padding: 7px 10px;
+    font-family: $title-font;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .page > .page-nav .page-nav__controls {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .page > .page-nav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .page > .page-nav :is(.page-nav__brand, nav a):hover,
+  .page > .page-nav .page-nav__current {
+    background: rgba(18, 20, 24, 0.1);
+  }
+
+  .page > .page-nav .page-nav__current {
+    color: inherit;
+    font-weight: 500;
+    cursor: default;
+  }
+
+  .page > .page-nav .page-nav__identity {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .page > .page-nav .page-header-language--desktop {
+    width: 100%;
+    margin-top: var(--desktop-page-brand-gap);
+    padding: 7px 0;
+    font-family: $subtitle-font;
+
+    :is(.blog-language, .microblog-language) {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.15px;
+    }
+  }
+
+  .page--section-landing > .page-section-title {
+    position: fixed;
+    z-index: 31;
+    top: calc(var(--desktop-page-nav-gap) + var(--desktop-page-nav-padding) - 7px);
+    left: var(--page-content-card-left-edge, calc(var(--desktop-page-nav-width) + 24px));
+    display: flex;
+    align-items: center;
+    min-height: var(--desktop-page-brand-height);
+    margin: 0;
+    padding: 7px 10px;
+    color: $title-color;
+    font-family: $title-font;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+  }
+
+  .page--section-landing.page--content-card {
+    --page-content-card-top: var(--desktop-page-content-top);
+
+    &::before {
+      top: 0;
+      height: calc(var(--page-content-card-top) + var(--page-content-card-radius));
+      background:
+        linear-gradient($panel-bg, $panel-bg) left top / 100% var(--page-content-card-top) no-repeat,
+        radial-gradient(
+            circle at 100% 100%,
+            transparent var(--page-content-card-radius),
+            $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+          )
+          left bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat,
+        radial-gradient(
+            circle at 0 100%,
+            transparent var(--page-content-card-radius),
+            $panel-bg calc(var(--page-content-card-radius) + 0.5px)
+          )
+          right bottom / var(--page-content-card-radius) var(--page-content-card-radius) no-repeat;
+    }
+  }
+
+  :is(.blog-page, .microblog-page).page--section-landing.page--content-card {
+    &.page > .page-main {
+      padding-top: 0;
+    }
+
+    &.page .page-head {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .page-section-title,
+  .page-nav__identity {
+    display: none;
+  }
+
+  /* On tablet and mobile, the persistent top bar already names the current
+     section. Remove the duplicated oversized in-card title and its reserved
+     leading space, while preserving custom content heads such as the CV
+     profile card. */
+  .page--section-landing.page--content-card.page
+    > .page-main:has(> .page-head:not(.cv-profile-card) > .page-title) {
+    padding-top: 0;
+
+    > .page-head:not(.cv-profile-card) {
+      display: none;
+    }
+  }
 }
 
 /* ---------- Prose (markdown article body) ---------- */
@@ -591,7 +1034,7 @@ html.content-card-page body.menu-open .page--content-card {
     line-height: 1.55;
     tab-size: 2;
     scrollbar-width: thin;
-    scrollbar-color: rgba(233, 230, 228, 0.34) transparent;
+    scrollbar-color: rgba(239, 234, 224, 0.34) transparent;
 
     &::-webkit-scrollbar {
       height: 6px;
@@ -603,7 +1046,7 @@ html.content-card-page body.menu-open .page--content-card {
 
     &::-webkit-scrollbar-thumb {
       border: 2px solid $body-bg;
-      background: rgba(233, 230, 228, 0.42);
+      background: rgba(239, 234, 224, 0.42);
     }
 
     code {

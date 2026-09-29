@@ -1,6 +1,7 @@
 @use 'foundation' as *;
 
-/* Blog articles are presented as a continuous paper surface on a black field. */
+/* Blog articles are presented as a continuous paper surface on the site's
+   neutral gray field. */
 html.blog-paper,
 html.blog-paper body {
   --blog-paper-gap: 12px;
@@ -8,13 +9,97 @@ html.blog-paper body {
   --blog-cover-radius: 8px;
   --blog-paper-width: min(920px, calc(100vw - 2 * var(--blog-paper-gap)));
   --blog-paper-edge: calc((100vw - var(--blog-paper-width)) / 2);
+  --blog-paper-left-edge: var(--blog-paper-edge);
+  --blog-paper-right-edge: var(--blog-paper-edge);
+  --blog-paper-center-x: 50%;
   --blog-paper-top: calc(76px + var(--blog-paper-gap));
   overscroll-behavior-y: none;
 }
 
+@media screen and (min-width: 1031px) {
+  .blog-paper .blog-post-page .page-main,
+  .blog-paper .blog-post-page > .post-nav--paper-external {
+    margin-right: 0 !important;
+    margin-left: var(--blog-paper-left-edge) !important;
+  }
+}
+
+@media screen and (min-width: 1031px) {
+  html.blog-paper,
+  html.blog-paper body {
+    --desktop-page-nav-width: clamp(156px, 14vw, 196px);
+    --blog-paper-width: min(
+      920px,
+      calc(100vw - var(--desktop-page-nav-width) - 3 * var(--blog-paper-gap))
+    );
+    --blog-paper-left-edge: max(
+      calc((100vw - var(--blog-paper-width)) / 2),
+      calc(var(--desktop-page-nav-width) + 2 * var(--blog-paper-gap))
+    );
+    --blog-paper-right-edge: calc(100vw - var(--blog-paper-left-edge) - var(--blog-paper-width));
+    --blog-paper-center-x: calc(var(--blog-paper-left-edge) + var(--blog-paper-width) / 2);
+    --blog-paper-top: var(--blog-paper-gap);
+  }
+
+  .blog-paper .page.blog-post-page {
+    --desktop-page-nav-width: clamp(156px, 14vw, 196px);
+    --page-nav-height: 0px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  html.blog-paper.blog-paper-has-toc,
+  html.blog-paper.blog-paper-has-toc body {
+    --blog-paper-width: min(
+      920px,
+      calc(
+        100vw - 2 *
+          (var(--desktop-page-nav-width) + 2 * var(--blog-paper-gap))
+      )
+    );
+    --blog-paper-left-edge: calc((100vw - var(--blog-paper-width)) / 2);
+    --blog-paper-right-edge: var(--blog-paper-left-edge);
+    --blog-paper-center-x: 50%;
+  }
+}
+
+@media screen and (min-width: 1031px) and (max-width: 1279px) {
+  html.blog-paper.blog-paper-has-toc,
+  html.blog-paper.blog-paper-has-toc body {
+    --blog-collapsed-toc-top: calc(
+      var(--blog-paper-gap) + clamp(14px, 1.15vw, 18px) - 7px
+    );
+    --blog-paper-top: calc(
+      var(--blog-collapsed-toc-top) + 42px + var(--blog-paper-gap) +
+        clamp(14px, 1.15vw, 18px) - 6px
+    );
+  }
+
+  html.blog-paper.blog-paper-has-toc::before {
+    top: 0;
+    height: calc(var(--blog-paper-top) + var(--blog-paper-radius));
+    background:
+      linear-gradient($panel-bg, $panel-bg) left top / 100% var(--blog-paper-top) no-repeat,
+      radial-gradient(
+          circle at 100% 100%,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        left bottom / calc(var(--blog-paper-left-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat,
+      radial-gradient(
+          circle at 0 100%,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        right bottom / calc(var(--blog-paper-right-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat;
+  }
+}
+
 html.blog-paper {
   min-height: 100%;
-  background: #000000 !important;
+  background: $panel-bg !important;
 }
 
 html.blog-paper::before {
@@ -26,20 +111,20 @@ html.blog-paper::before {
   left: 0;
   height: calc(var(--blog-paper-gap) + var(--blog-paper-radius));
   background:
-    linear-gradient(#000000, #000000) left top / 100% var(--blog-paper-gap) no-repeat,
+    linear-gradient($panel-bg, $panel-bg) left top / 100% var(--blog-paper-gap) no-repeat,
     radial-gradient(
         circle at 100% 100%,
         transparent var(--blog-paper-radius),
-        #000000 calc(var(--blog-paper-radius) + 0.5px)
+        $panel-bg calc(var(--blog-paper-radius) + 0.5px)
       )
-      left bottom / calc(var(--blog-paper-edge) + var(--blog-paper-radius)) var(--blog-paper-radius)
-      no-repeat,
+      left bottom / calc(var(--blog-paper-left-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
     radial-gradient(
         circle at 0 100%,
         transparent var(--blog-paper-radius),
-        #000000 calc(var(--blog-paper-radius) + 0.5px)
+        $panel-bg calc(var(--blog-paper-radius) + 0.5px)
       )
-      right bottom / calc(var(--blog-paper-edge) + var(--blog-paper-radius))
+      right bottom / calc(var(--blog-paper-right-edge) + var(--blog-paper-radius))
       var(--blog-paper-radius) no-repeat;
   pointer-events: none;
   transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -55,20 +140,20 @@ html.blog-paper::after {
   height: calc(var(--blog-paper-radius) + var(--blog-paper-gap));
   background:
     radial-gradient(
-        circle at calc(var(--blog-paper-edge) + var(--blog-paper-radius)) 0,
+        circle at calc(var(--blog-paper-left-edge) + var(--blog-paper-radius)) 0,
         transparent var(--blog-paper-radius),
-        #000000 calc(var(--blog-paper-radius) + 0.5px)
+        $panel-bg calc(var(--blog-paper-radius) + 0.5px)
       )
-      left top / calc(var(--blog-paper-edge) + var(--blog-paper-radius)) var(--blog-paper-radius)
-      no-repeat,
+      left top / calc(var(--blog-paper-left-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
     radial-gradient(
-        circle at calc(100% - var(--blog-paper-edge) - var(--blog-paper-radius)) 0,
+        circle at calc(100% - var(--blog-paper-right-edge) - var(--blog-paper-radius)) 0,
         transparent var(--blog-paper-radius),
-        #000000 calc(var(--blog-paper-radius) + 0.5px)
+        $panel-bg calc(var(--blog-paper-radius) + 0.5px)
       )
-      right top / calc(var(--blog-paper-edge) + var(--blog-paper-radius)) var(--blog-paper-radius)
-      no-repeat,
-    linear-gradient(#000000, #000000) left bottom / 100% var(--blog-paper-gap) no-repeat;
+      right top / calc(var(--blog-paper-right-edge) + var(--blog-paper-radius))
+      var(--blog-paper-radius) no-repeat,
+    linear-gradient($panel-bg, $panel-bg) left bottom / 100% var(--blog-paper-gap) no-repeat;
   pointer-events: none;
 }
 
@@ -80,7 +165,7 @@ html.blog-paper::after {
   z-index: 0;
   top: var(--blog-paper-top);
   bottom: var(--blog-paper-gap);
-  left: 50%;
+  left: var(--blog-paper-center-x);
   width: var(--blog-paper-width);
   border-radius: var(--blog-paper-radius);
   background: $blog-bg;
@@ -93,7 +178,7 @@ html.blog-paper::after {
 }
 
 /* On mobile the navigation and TOC move independently of the scrolling
-   article. This solid layer keeps the interval above the TOC genuinely black
+   article. This solid layer keeps the interval above the TOC consistently gray
    instead of allowing the white paper underneath to flash through while the
    two bars animate. */
 .blog-paper-viewport-top {
@@ -103,17 +188,17 @@ html.blog-paper::after {
 .blog-paper body {
   position: relative;
   min-height: 100dvh;
-  background: #000000 !important;
+  background: $panel-bg !important;
 }
 
 .blog-paper {
   .page.blog-post-page {
     --page-nav-height: 76px;
-    --mobile-menu-bg: #000000;
-    --mobile-menu-color: #ffffff;
-    --mobile-menu-current-bg: #ffffff;
-    --mobile-menu-current-color: #000000;
-    --mobile-menu-mark-filter: invert(1);
+    --mobile-menu-bg: #{$panel-bg};
+    --mobile-menu-color: #{$subtitle-color};
+    --mobile-menu-current-bg: #{$title-color};
+    --mobile-menu-current-color: #{$blog-bg};
+    --mobile-menu-mark-filter: none;
 
     width: 100%;
     max-width: none;
@@ -129,8 +214,8 @@ html.blog-paper::after {
   .blog-post-page .page-main {
     position: relative;
     z-index: 1;
-    width: calc(100% - 2 * var(--blog-paper-gap));
-    max-width: 920px;
+    width: var(--blog-paper-width);
+    max-width: none;
     margin-top: var(--blog-paper-gap);
     margin-bottom: var(--blog-paper-gap);
     padding-top: clamp(20px, 4vw, 32px);
@@ -158,11 +243,11 @@ html.blog-paper::after {
     padding: 28px clamp(20px, 4vw, 32px) 44px;
     border: 0;
     box-sizing: border-box;
-    background: #000000;
+    background: $panel-bg;
 
     /* The fixed paper-coloured canvas remains behind the scrolling article.
        Cover it only at the article's real end so the main element's bottom
-       radius reads against black without adding another scrolling layer. */
+       radius reads against the gray field without adding another scrolling layer. */
     &::before,
     &::after {
       content: '';
@@ -175,7 +260,7 @@ html.blog-paper::after {
     &::before {
       top: calc(-1 * var(--blog-paper-gap));
       height: var(--blog-paper-gap);
-      background: #000000;
+      background: $panel-bg;
     }
 
     &::after {
@@ -185,36 +270,35 @@ html.blog-paper::after {
         radial-gradient(
             circle at 100% 0,
             transparent var(--blog-paper-radius),
-            #000000 calc(var(--blog-paper-radius) + 0.5px)
+            $panel-bg calc(var(--blog-paper-radius) + 0.5px)
           )
           left top / var(--blog-paper-radius) var(--blog-paper-radius) no-repeat,
         radial-gradient(
             circle at 0 0,
             transparent var(--blog-paper-radius),
-            #000000 calc(var(--blog-paper-radius) + 0.5px)
+            $panel-bg calc(var(--blog-paper-radius) + 0.5px)
           )
           right top / var(--blog-paper-radius) var(--blog-paper-radius) no-repeat;
     }
 
     a {
-      color: rgba(255, 255, 255, 0.66);
+      color: rgba(18, 20, 24, 0.66);
 
       strong {
-        color: #ffffff;
+        color: $title-color;
       }
     }
   }
 
   .blog-post-page > .page-nav,
-  .blog-post-page > .menu-mobile-bar,
   .blog-post-page > .site-footer {
     width: 100%;
     max-width: none;
     margin-right: 0;
     margin-left: 0;
     box-sizing: border-box;
-    background: #000000;
-    color: #ffffff;
+    background: $panel-bg;
+    color: $subtitle-color;
   }
 
   /* Every navigation module follows the same outer measure as the paper. */
@@ -230,9 +314,8 @@ html.blog-paper::after {
     padding-left: clamp(20px, 4vw, 32px);
   }
 
-  .blog-post-page > .page-nav,
-  .blog-post-page > .menu-mobile-bar {
-    box-shadow: 0 var(--blog-paper-gap) 0 #000000;
+  .blog-post-page > .page-nav {
+    box-shadow: 0 var(--blog-paper-gap) 0 $panel-bg;
   }
 
   .blog-post-page > .site-footer {
@@ -240,39 +323,36 @@ html.blog-paper::after {
     z-index: 27;
   }
 
-  @media screen and (max-width: 1030px) {
-    .blog-post-page > .menu-toggle {
-      left: 24px;
-    }
-
-    .blog-post-page > .menu-mobile-bar .menu-mobile-bar__brand {
-      left: 72px;
-    }
-  }
-
-  .blog-post-page > .page-nav :is(.page-nav__brand, nav a),
+  .blog-post-page > .page-nav :is(.page-nav__brand, nav a, .page-nav__current),
   .blog-post-page > .menu-mobile-bar .menu-mobile-bar__brand,
   .blog-post-page > .menu-toggle,
   .blog-post-page > .site-footer :is(.site-footer__brand, .site-footer__nav a, .site-footer__meta) {
-    color: #ffffff;
+    color: $subtitle-color;
+  }
+
+  @media screen and (min-width: 1031px) {
+    .blog-post-page > .page-nav :is(.page-nav__brand, nav a):hover,
+    .blog-post-page > .page-nav .page-nav__current {
+      background: rgba(18, 20, 24, 0.1);
+    }
   }
 
   .blog-post-page > .site-footer .site-footer__current {
     background: transparent;
-    color: #ffffff;
+    color: $subtitle-color;
     font-weight: 700;
   }
 
   @media screen and (min-width: 1280px) {
     .page.blog-post-page {
-      --page-nav-height: 88px;
+      --page-nav-height: 0px;
     }
 
     .blog-post-page > .page-nav {
       box-shadow: none;
 
       .page-nav__inner {
-        min-height: 88px;
+        min-height: 0;
       }
     }
 
@@ -294,24 +374,59 @@ html.blog-paper::after {
     }
 
     .blog-post-page .blog-toc--desktop {
-      --blog-toc-side-gap: 32px;
-      --blog-toc-side-width: min(220px, calc((100vw - 920px) / 2 - var(--blog-toc-side-gap)));
-      top: calc(var(--blog-paper-top) + 12px);
-      width: var(--blog-toc-side-width);
-      /* The grid starts at the paper's padded content edge; include that
-         32px inset before applying the visible gap outside the paper. */
-      margin-left: calc(100% + var(--blog-toc-side-gap) + 32px);
-      color: #ffffff;
+      position: fixed;
+      z-index: 40;
+      inset: var(--blog-paper-gap) var(--blog-paper-gap) var(--blog-paper-gap) auto;
+      width: max-content;
+      min-width: var(--desktop-page-nav-width);
+      max-width: calc(var(--blog-paper-right-edge) - 2 * var(--blog-paper-gap));
+      max-height: none;
+      margin: 0;
+      padding: var(--desktop-page-nav-padding);
+      border-radius: 14px;
+      overflow: hidden;
+      background: $panel-bg;
+      color: $subtitle-color;
+      text-align: right;
+
+      .blog-toc__label {
+        text-align: right;
+      }
+
+      ol {
+        width: calc(100% + 20px);
+        margin-right: -10px;
+        margin-left: -10px;
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      li > a {
+        padding-right: 10px;
+        padding-left: 10px;
+        text-align: right;
+      }
 
       .blog-toc__label,
       li[data-depth] > a,
       li > a:hover:not([aria-current='location']) {
-        color: #ffffff;
+        color: $subtitle-color;
       }
 
       li > a[aria-current='location'] {
-        background: #ffffff;
-        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        max-width: none;
+        min-height: 34px;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 7px 10px;
+        border-radius: 12px;
+        background: rgba(18, 20, 24, 0.1);
+        color: $subtitle-color;
+        text-align: right;
       }
     }
   }
@@ -324,39 +439,39 @@ html.blog-paper::after {
       padding-right: clamp(20px, 4vw, 32px);
       padding-left: clamp(20px, 4vw, 32px);
       box-sizing: border-box;
-      background: #000000;
-      box-shadow: 0 var(--blog-paper-gap) 0 #000000;
-      color: #ffffff;
+      background: $panel-bg;
+      box-shadow: 0 var(--blog-paper-gap) 0 $panel-bg;
+      color: $subtitle-color;
 
       &[data-toc-stuck='true'] {
         /* The TOC belongs to the navigation field, not to the paper. Giving
-           this black bar upper corners exposes two empty wedges between it
+           this field-coloured bar upper corners exposes two empty wedges between it
            and the top navigation—especially obvious at the 24px mobile
            radius. Keep this edge continuous; the paper below owns the visible
            rounded corners. */
         border-radius: 0;
-        background: #000000;
+        background: $panel-bg;
 
         &::before {
           display: none;
         }
 
         nav {
-          background: #000000;
+          background: $panel-bg;
         }
       }
 
       summary {
-        color: #ffffff;
+        color: $subtitle-color;
       }
 
       .blog-toc-mobile__current {
-        color: rgba(255, 255, 255, 0.58);
+        color: rgba(18, 20, 24, 0.58);
       }
 
       &[open] nav,
       &[open][data-toc-stuck='true'] nav {
-        box-shadow: 0 0 0 100vmax #000000;
+        box-shadow: 0 0 0 100vmax $panel-bg;
       }
 
       nav {
@@ -365,31 +480,82 @@ html.blog-paper::after {
         margin-left: 0;
         padding-right: clamp(20px, 4vw, 32px);
         padding-left: clamp(20px, 4vw, 32px);
-        background: #000000;
+        background: $panel-bg;
+      }
+
+      ol {
+        padding-left: 0;
       }
 
       li[data-depth] > a,
       li > a:hover:not([aria-current='location']) {
-        color: #ffffff;
+        color: $subtitle-color;
       }
 
       li > a[aria-current='location'] {
-        background: #ffffff;
-        color: #000000;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: none;
+        min-height: 34px;
+        margin-left: 0;
+        padding: 7px 10px;
+        border-radius: 12px;
+        background: rgba(18, 20, 24, 0.1);
+        color: $subtitle-color;
       }
+    }
+  }
+
+  @media screen and (min-width: 1031px) and (max-width: 1279px) {
+    .blog-post-page.has-blog-toc .page-main {
+      margin-top: var(--blog-paper-top);
+    }
+
+    .blog-post-page .blog-toc-mobile {
+      position: fixed;
+      z-index: 40;
+      top: var(--blog-collapsed-toc-top);
+      left: var(--blog-paper-left-edge);
+      width: var(--blog-paper-width);
+      margin: 0;
+      padding: 0 10px;
+      background: $panel-bg;
+      box-shadow: 0 var(--blog-paper-gap) 0 $panel-bg;
+
+      summary {
+        min-height: 42px;
+        padding: 7px 0;
+      }
+
+      nav {
+        top: 100%;
+        width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 0 0 14px 14px;
+      }
+
+      &[open] nav,
+      &[open][data-toc-stuck='true'] nav {
+        box-shadow: 0 12px 0 $panel-bg;
+      }
+
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 
   @media screen and (max-width: 1030px) {
     .page.blog-post-page {
-      padding-top: 0;
+      padding-top: 76px;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1030px) {
     .page.blog-post-page {
       --page-nav-height: 64px;
-      padding-top: 64px;
+      padding-top: 76px;
     }
 
     .blog-post-page .blog-toc-mobile {
@@ -399,7 +565,7 @@ html.blog-paper::after {
 
     .blog-post-page > .menu-mobile-bar,
     .blog-post-page > .menu-toggle,
-    .blog-post-page .blog-toc-mobile {
+    .blog-post-page > .menu-mobile-top-field {
       transition:
         transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
         top 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -412,13 +578,11 @@ html.blog-paper::after {
         pointer-events: none;
       }
 
-      .blog-post-page .blog-toc-mobile {
-        top: calc(var(--blog-paper-gap) - var(--page-nav-height));
-
-        &[data-toc-stuck='true'] {
-          border-radius: 0;
-        }
+      .blog-post-page > .menu-mobile-top-field {
+        transform: translateY(calc(-1 * var(--page-nav-height) - 12px));
+        pointer-events: none;
       }
+
     }
   }
 }
@@ -433,10 +597,114 @@ html.blog-paper::after {
   }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (min-width: 769px) and (max-width: 1030px) {
+  html.blog-paper,
+  html.blog-paper body {
+    --blog-toc-dock-gap: 0px;
+    --blog-paper-bottom: var(--blog-paper-gap);
+  }
+
   html.blog-paper.blog-paper-has-toc,
   html.blog-paper.blog-paper-has-toc body {
-    --blog-paper-top: calc(76px + 48px + var(--blog-paper-gap));
+    --blog-paper-top: calc(64px + var(--blog-paper-gap));
+    --blog-paper-bottom: 52px;
+  }
+
+  html.blog-paper.blog-mobile-nav-hidden,
+  html.blog-paper.blog-mobile-nav-hidden body {
+    --blog-paper-top: var(--blog-paper-gap);
+  }
+
+  html.blog-paper::after {
+    bottom: var(--blog-paper-bottom);
+    height: var(--blog-paper-radius);
+    background:
+      radial-gradient(
+          circle at calc(var(--blog-paper-left-edge) + var(--blog-paper-radius)) 0,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        left top / calc(var(--blog-paper-left-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat,
+      radial-gradient(
+          circle at calc(100% - var(--blog-paper-right-edge) - var(--blog-paper-radius)) 0,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        right top / calc(var(--blog-paper-right-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat;
+  }
+
+  .blog-paper .blog-paper-viewport-bottom {
+    bottom: var(--blog-paper-bottom);
+  }
+
+  html.blog-paper body .page.blog-post-page > .menu-mobile-bar {
+    background: $blog-bg;
+    box-shadow: none;
+  }
+
+  .blog-paper .blog-post-page .blog-toc-mobile {
+    position: fixed;
+    z-index: 50;
+    top: auto;
+    right: var(--blog-paper-right-edge);
+    bottom: 0;
+    left: var(--blog-paper-left-edge);
+    width: auto;
+    margin: 0;
+    padding: 0 clamp(20px, 4vw, 32px);
+    border-radius: 0;
+    background: $panel-bg;
+    box-shadow: none;
+
+    &::before {
+      content: '';
+      position: fixed;
+      z-index: -1;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: var(--blog-paper-bottom);
+      background: $panel-bg;
+      pointer-events: none;
+    }
+
+    &[data-toc-stuck='true'] {
+      border-radius: 0;
+      background: $panel-bg;
+
+      &::before {
+        display: block;
+      }
+
+      nav {
+        background: $panel-bg;
+      }
+    }
+
+    summary {
+      min-height: 52px;
+    }
+
+    nav,
+    &[data-toc-stuck='true'] nav {
+      position: absolute;
+      top: auto;
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 18px clamp(20px, 4vw, 32px);
+      border-radius: 14px 14px 0 0;
+      background: $panel-bg;
+    }
+
+    &[open] nav,
+    &[open][data-toc-stuck='true'] nav {
+      box-shadow: none;
+    }
   }
 }
 
@@ -444,7 +712,9 @@ html.blog-paper::after {
   html.blog-paper,
   html.blog-paper body {
     --blog-paper-radius: 24px;
+    --blog-toc-dock-gap: 0px;
     --blog-paper-top: calc(64px + var(--blog-paper-gap));
+    --blog-paper-bottom: var(--blog-paper-gap);
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -465,20 +735,13 @@ html.blog-paper::after {
   }
 
   html.blog-paper-has-toc .blog-paper-viewport-top {
-    position: fixed;
-    z-index: 19;
-    top: 0;
-    right: 0;
-    left: 0;
-    display: block;
-    height: 64px;
-    background: #000000;
-    pointer-events: none;
+    display: none;
   }
 
   html.blog-paper.blog-paper-has-toc,
   html.blog-paper.blog-paper-has-toc body {
-    --blog-paper-top: calc(64px + 48px + var(--blog-paper-gap));
+    --blog-paper-top: calc(64px + var(--blog-paper-gap));
+    --blog-paper-bottom: calc(52px + 2 * var(--blog-toc-dock-gap));
   }
 
   html.blog-paper.blog-mobile-nav-hidden,
@@ -486,8 +749,95 @@ html.blog-paper::after {
     --blog-paper-top: var(--blog-paper-gap);
   }
 
-  html.blog-paper.blog-paper-has-toc.blog-mobile-nav-hidden,
-  html.blog-paper.blog-paper-has-toc.blog-mobile-nav-hidden body {
-    --blog-paper-top: calc(48px + 2 * var(--blog-paper-gap));
+  html.blog-paper::after {
+    bottom: var(--blog-paper-bottom);
+    height: var(--blog-paper-radius);
+    background:
+      radial-gradient(
+          circle at calc(var(--blog-paper-left-edge) + var(--blog-paper-radius)) 0,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        left top / calc(var(--blog-paper-left-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat,
+      radial-gradient(
+          circle at calc(100% - var(--blog-paper-right-edge) - var(--blog-paper-radius)) 0,
+          transparent var(--blog-paper-radius),
+          $panel-bg calc(var(--blog-paper-radius) + 0.5px)
+        )
+        right top / calc(var(--blog-paper-right-edge) + var(--blog-paper-radius))
+        var(--blog-paper-radius) no-repeat;
+  }
+
+  .blog-paper .blog-paper-viewport-bottom {
+    bottom: var(--blog-paper-bottom);
+  }
+
+  html.blog-paper body .page.blog-post-page > .menu-mobile-bar {
+    background: $blog-bg;
+    box-shadow: none;
+  }
+
+  .blog-paper .blog-post-page .blog-toc-mobile {
+    position: fixed;
+    z-index: 50;
+    top: auto;
+    right: var(--blog-paper-gap);
+    bottom: var(--blog-toc-dock-gap);
+    left: var(--blog-paper-gap);
+    width: auto;
+    margin: 0;
+    padding: 0 12px;
+    border-radius: 0;
+    background: $panel-bg;
+    box-shadow: none;
+
+    &::before {
+      content: '';
+      position: fixed;
+      z-index: -1;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: var(--blog-paper-bottom);
+      background: $panel-bg;
+      pointer-events: none;
+    }
+
+    &[data-toc-stuck='true'] {
+      border-radius: 0;
+      background: $panel-bg;
+
+      nav {
+        background: $panel-bg;
+      }
+    }
+
+    summary {
+      min-height: 52px;
+    }
+
+    nav,
+    &[data-toc-stuck='true'] nav {
+      position: absolute;
+      top: auto;
+      bottom: calc(100% + var(--blog-toc-dock-gap));
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 18px 12px;
+      border-radius: 24px;
+      background: $panel-bg;
+    }
+
+    &[open] nav,
+    &[open][data-toc-stuck='true'] nav {
+      box-shadow: none;
+    }
+  }
+
+  .blog-paper .blog-post-page.has-blog-toc .page-main {
+    padding-bottom: 12px;
   }
 }

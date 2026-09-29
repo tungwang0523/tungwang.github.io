@@ -12,6 +12,7 @@ const initialiseBlogToc = () => {
     .map((id) => document.getElementById(id))
     .filter((heading): heading is HTMLElement => heading instanceof HTMLElement);
   const currentLabel = page.querySelector<HTMLElement>('[data-toc-current]');
+  const paperViewport = document.querySelector<HTMLElement>('.blog-paper-viewport-bottom');
   const mobileToc = page.querySelector<HTMLDetailsElement>('[data-blog-toc-mobile]');
   const mobileSummary = mobileToc?.querySelector<HTMLElement>('summary');
   const mobileList = mobileToc?.querySelector<HTMLOListElement>('nav ol');
@@ -20,8 +21,9 @@ const initialiseBlogToc = () => {
   const desktopItems = desktopToc
     ? Array.from(desktopToc.querySelectorAll<HTMLLIElement>('li'))
     : [];
-  const mobileQuery = window.matchMedia('(max-width: 768px)');
-  const usesPageScroll = () => mobileQuery.matches;
+  const compactQuery = window.matchMedia('(max-width: 1030px)');
+  const handsetQuery = window.matchMedia('(max-width: 768px)');
+  const usesPageScroll = () => handsetQuery.matches;
 
   if (headings.length === 0) return;
 
@@ -44,6 +46,10 @@ const initialiseBlogToc = () => {
 
   const updateMobileStickyState = (navigationHeight: number) => {
     if (!mobileToc) return;
+    if (compactQuery.matches) {
+      mobileToc.dataset.tocStuck = 'false';
+      return;
+    }
     const top = mobileToc.getBoundingClientRect().top;
     const configuredTop = Number.parseFloat(window.getComputedStyle(mobileToc).top);
     const containerInset = usesPageScroll()
@@ -95,13 +101,10 @@ const initialiseBlogToc = () => {
       ) || 0;
     const mobileVisible = Boolean(mobileToc && getComputedStyle(mobileToc).display !== 'none');
     updateMobileStickyState(navigationHeight);
-    // On mobile, the reading line is always the lower rule of the TOC bar.
-    // Reading it directly avoids falling back to the page-navigation rule
-    // when sticky-position detection differs by a fractional CSS pixel.
-    const threshold =
-      mobileVisible && mobileSummary
-        ? mobileSummary.getBoundingClientRect().bottom + 16
-        : navigationHeight + 40;
+    // Keep section tracking tied to the article's visible upper edge. On
+    // mobile the TOC sits after the paper in normal flow, so it cannot serve
+    // as the reading line.
+    const threshold = readingLine();
 
     let active = headings[0];
 
@@ -140,6 +143,9 @@ const initialiseBlogToc = () => {
         getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
       ) || 0;
     const mobileVisible = Boolean(mobileToc && getComputedStyle(mobileToc).display !== 'none');
+    if (mobileVisible && compactQuery.matches && paperViewport) {
+      return paperViewport.getBoundingClientRect().top + 16;
+    }
     return mobileVisible && mobileSummary
       ? mobileSummary.getBoundingClientRect().bottom + 16
       : navigationHeight + 40;
@@ -190,23 +196,24 @@ const initialiseBlogToc = () => {
     else mobileToc.dataset.tocClosing = '';
 
     await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
-    const keyframes = opening
-      ? [
-          {
-            clipPath: 'inset(0 -100vmax 100% -100vmax)',
-            opacity: 0,
-            transform: 'translateY(-8px)',
-          },
-          { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
-        ]
-      : [
-          { clipPath: 'inset(0 -100vmax 0 -100vmax)', opacity: 1, transform: 'translateY(0)' },
-          {
-            clipPath: 'inset(0 -100vmax 100% -100vmax)',
-            opacity: 0,
-            transform: 'translateY(-8px)',
-          },
-        ];
+    const bottomDocked = compactQuery.matches;
+    const closedFrame = bottomDocked
+      ? {
+          clipPath: 'inset(100% -100vmax 0 -100vmax)',
+          opacity: 0,
+          transform: 'translateY(8px)',
+        }
+      : {
+          clipPath: 'inset(0 -100vmax 100% -100vmax)',
+          opacity: 0,
+          transform: 'translateY(-8px)',
+        };
+    const openFrame = {
+      clipPath: 'inset(0 -100vmax 0 -100vmax)',
+      opacity: 1,
+      transform: 'translateY(0)',
+    };
+    const keyframes = opening ? [closedFrame, openFrame] : [openFrame, closedFrame];
     const nav = mobileToc.querySelector<HTMLElement>('nav');
     const animation = nav?.animate(keyframes, {
       duration: 190,

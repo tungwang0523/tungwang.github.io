@@ -12,6 +12,7 @@
     "gallery": "node scripts/gallery-manager.mjs",
     "gallery:locations": "node scripts/backfill-gallery-locations.mjs",
     "images:migrate-external": "node scripts/migrate-external-images.mjs",
+    "images:dimensions": "node scripts/sync-image-dimensions.mjs",
     "astro": "astro",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

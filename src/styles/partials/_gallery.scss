@@ -27,12 +27,59 @@ html.gallery-page-root body {
     color: $blog-bg;
   }
 
-  > .page-nav :is(.page-nav__brand, nav a),
+  > .page-nav :is(.page-nav__brand, nav a, .page-nav__current),
   > .menu-mobile-bar .menu-mobile-bar__brand,
   > .menu-toggle,
   > .site-footer
     :is(.site-footer__brand, .site-footer__nav a, .site-footer__current, .site-footer__meta) {
     color: $blog-bg;
+  }
+
+  @media screen and (min-width: 1031px) {
+    --gallery-heading-inset: 4px;
+    --gallery-heading-backdrop-padding: 10px;
+    --gallery-desktop-content-left: calc(
+      var(--desktop-page-nav-width) + 2 * var(--desktop-page-nav-gap)
+    );
+
+    > .page-nav :is(.page-nav__brand, nav a):hover,
+    > .page-nav .page-nav__current {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    > .page-section-title {
+      top: calc(var(--desktop-page-nav-gap) + var(--desktop-page-nav-padding) - 7px);
+      left: calc(
+        var(--gallery-desktop-content-left) + var(--gallery-heading-inset) -
+          var(--gallery-heading-backdrop-padding)
+      );
+      min-height: 42px;
+      padding: 7px var(--gallery-heading-backdrop-padding);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.58);
+      color: $blog-bg;
+      font-size: 24px;
+      line-height: 1;
+      -webkit-backdrop-filter: blur(20px) saturate(1.15);
+      backdrop-filter: blur(20px) saturate(1.15);
+    }
+
+    > .page-nav .page-nav__identity .mention__mark {
+      filter: invert(1);
+    }
+
+    > .page-main {
+      padding-top: var(--desktop-page-content-top) !important;
+    }
+
+    > .site-footer {
+      width: calc(100% - var(--gallery-desktop-content-left));
+      margin-left: var(--gallery-desktop-content-left);
+    }
+
+    .gallery-archive {
+      padding-top: 0;
+    }
   }
 
   > .page-main {
@@ -41,6 +88,13 @@ html.gallery-page-root body {
     margin: 0;
     padding: 0;
     background: #000000;
+  }
+
+  @media screen and (min-width: 1031px) {
+    > .page-main {
+      width: calc(100% - var(--gallery-desktop-content-left));
+      margin-left: var(--gallery-desktop-content-left);
+    }
   }
 
   .page-head--in-brand {
@@ -62,32 +116,43 @@ html.gallery-page-root body {
 }
 
 .gallery-year__header {
-  padding-right: clamp(20px, 3vw, 48px);
-  padding-left: clamp(20px, 3vw, 48px);
+  padding-right: var(--gallery-heading-inset, clamp(20px, 3vw, 48px));
+  padding-left: var(--gallery-heading-inset, clamp(20px, 3vw, 48px));
+}
+
+@media screen and (max-width: 1030px) {
+  html body .page.page--gallery > .menu-mobile-bar {
+    background: rgba(0, 0, 0, 0.56);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15);
+    backdrop-filter: blur(20px) saturate(1.15);
+  }
+
+  html body .page.page--gallery > .menu-mobile-top-field {
+    display: none;
+  }
+
+  .gallery-year__header {
+    padding-left: 36px;
+  }
 }
 
 .gallery-year__header {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: clamp(42px, 6vw, 80px);
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: clamp(18px, 2vw, 28px);
   font-family: $title-font;
 
   h2 {
     margin: 0;
     font-family: $title-font;
-    font-size: clamp(38px, 5vw, 72px);
-    font-weight: 600;
-    line-height: 0.78;
-    letter-spacing: -0.07em;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
   }
 
-  span {
-    color: rgba(233, 230, 228, 0.5);
-    font-size: 12px;
-    white-space: nowrap;
-  }
 }
 
 .gallery-wall {
@@ -155,7 +220,7 @@ html.gallery-page-root body {
     display: block;
     width: 100%;
     overflow: hidden;
-    color: rgba(233, 230, 228, 0.58);
+    color: rgba(239, 234, 224, 0.58);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -181,7 +246,7 @@ html.gallery-page-root body {
 
   span {
     margin-top: 12px;
-    color: rgba(233, 230, 228, 0.62);
+    color: rgba(239, 234, 224, 0.62);
     font-size: 13px;
   }
 }
@@ -192,16 +257,14 @@ html.gallery-page-root body {
   }
 
   .gallery-year__header {
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-right: 3px;
+    padding-left: 36px;
   }
 
   .gallery-year__header {
-    margin-bottom: 38px;
+    margin-bottom: 18px;
 
-    h2 {
-      font-size: clamp(36px, 12vw, 52px);
-    }
+    h2 { font-size: 24px; }
   }
 
   .gallery-wall {

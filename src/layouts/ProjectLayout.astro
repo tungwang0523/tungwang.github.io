@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 import Menu from '../components/Menu.astro';
 
 interface Props {
@@ -32,7 +31,7 @@ const {
 
 <BaseLayout title={`${title} - Tung’s Work`} description={description}>
   <div class:list={['page', 'portfolio-page', projectClass]}>
-    <Menu mobileOnly />
+    <Menu mobileOnly showHome={false} showIdentity showDesktopBrand />
     <header class="page-nav">
       <div class="page-nav__inner">
         <a class="page-nav__brand" href="/">Tung’s</a>
@@ -43,6 +42,20 @@ const {
           <a href="/microblog">Microblog</a>
           <a href="/gallery">Gallery</a>
         </nav>
+        <div class="page-nav__identity blog-menu mention">
+          <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
+          <span class="mention__name">Tung Wang</span>
+          <small class="mention__role">
+            Founder of{' '}
+            <a href="https://mockingbird.team" target="_blank" rel="noreferrer">
+              Mockingbird Studio
+            </a>
+          </small>
+          <span class="mention__details">
+            <small>Greetings from Shanghai</small>
+            <small>© 2026 Tung Wang</small>
+          </span>
+        </div>
       </div>
     </header>
 
@@ -89,8 +102,6 @@ const {
         )
       }
     </main>
-
-    <Footer />
   </div>
 </BaseLayout>
 

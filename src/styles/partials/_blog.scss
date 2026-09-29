@@ -2,6 +2,17 @@
 
 /* ---------- Blog index cards ---------- */
 
+/* Match the Work index's single-layer canvas: the rounded page shell blends
+   into the surrounding field, leaving the posts themselves as the only
+   visible cards. */
+.blog-page.page--content-card {
+  > .page-content-card-viewport,
+  &.page > .page-main {
+    background: $panel-bg;
+  }
+
+}
+
 .blog-post-page.has-blog-toc {
   --page-content-width: 1120px;
 
@@ -15,8 +26,31 @@
 }
 
 .post-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+
+  &.is-masonry-ready {
+    grid-auto-flow: dense;
+    grid-auto-rows: 1px;
+    column-gap: 12px;
+    row-gap: 0;
+
+    > .post-card {
+      align-self: start;
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blog-index {
+  margin-right: calc(-1 * var(--page-content-card-inset));
+  margin-left: calc(-1 * var(--page-content-card-inset));
 }
 
 .blog-index__language,
@@ -769,18 +803,29 @@
 }
 
 .post-card {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 28px;
-  padding: 28px 0;
-  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--page-content-card-radius);
+  background: $blog-bg;
   color: inherit;
+  text-decoration: none;
+
+  &__cover {
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+  }
 
   &__cover img {
     width: 100%;
-    height: 160px;
+    height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  &__body {
+    padding: clamp(20px, 2.5vw, 28px);
   }
 
   &__meta {
@@ -813,10 +858,6 @@
     line-height: 1.5;
     margin: 0 0 12px;
     max-width: 60ch;
-  }
-
-  @media screen and (max-width: 560px) {
-    grid-template-columns: 1fr;
   }
 }
 

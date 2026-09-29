@@ -25,11 +25,24 @@ const entries = await Promise.all(
   contentCard
   headerLanguage="microblog"
 >
-  <div class="microblog-archive" data-microblog-scope data-language="zh">
+  <div class="microblog-archive" data-microblog-scope data-language="zh" data-masonry-grid>
     {entries.map((entry) => <MicroblogEntry entry={entry} Content={entry.Content} />)}
   </div>
   <MicroblogAnchorKeeper />
+  <div slot="after-main" class="masonry-boundary-mask masonry-boundary-mask--top" aria-hidden="true">
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--left-card"></i>
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--right-card"></i>
+  </div>
+  <div slot="after-main" class="masonry-boundary-mask masonry-boundary-mask--bottom" aria-hidden="true">
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--left-card"></i>
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--right-card"></i>
+  </div>
 </PageLayout>
+
+<script>
+  import '../scripts/masonry-grid';
+  import '../scripts/masonry-boundary-clips';
+</script>
 
 <style lang="scss" is:global>
   @use '../styles/partials/microblog';

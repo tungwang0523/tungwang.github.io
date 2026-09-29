@@ -27,7 +27,6 @@ const microblog = await Promise.all(
 );
 
 sections.sort((a, b) => a.data.order - b.data.order);
-const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : title);
 ---
 
 <BaseLayout
@@ -38,7 +37,13 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
 >
   <main class="blog">
     <div class="home-identity-card">
-      <Menu activeSection="home" marqueeItems={announcements} showIdentity showHome={false} />
+      <Menu
+        activeSection="home"
+        marqueeItems={announcements}
+        showIdentity
+        showHome={false}
+        showDesktopBrand
+      />
       <StickyHeader
         title="Tung’s"
         pinnedLabel=""
@@ -47,23 +52,12 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
       />
     </div>
 
-    <section class="mobile-featured" aria-label="Featured sections" data-mobile-featured>
-      <h1 class="mobile-featured__title" data-mobile-identity>
-        <span class="mobile-featured__brand">Tung’s</span>
-        <span class="mobile-featured__word-window" aria-hidden="true">
-          <span class="mobile-featured__word-track" data-featured-word-track>
-            {sections.map((section) => <span>{mobileSectionLabel(section.data.bigTitle)}</span>)}
-            <span>Microblog</span>
-          </span>
-        </span>
-        <span class="visually-hidden" data-featured-title-current>
-          {sections[0] ? mobileSectionLabel(sections[0].data.bigTitle) : ''}
-        </span>
-        <span class="mobile-featured__title-probe" data-featured-title-probe aria-hidden="true">
-          <span>Tung’s</span><span>Microblog</span>
-        </span>
-      </h1>
-
+    <section
+      class="mobile-featured"
+      aria-label="Featured sections"
+      data-mobile-featured
+    >
+      <div class="mobile-featured__brand-card" aria-label="Homepage title">Tung’s</div>
       <div class="mobile-featured__track" data-featured-track>
         <div class="blog-header-container">
           {
@@ -93,239 +87,9 @@ const mobileSectionLabel = (title: string) => (title === 'Works' ? 'Work' : titl
           announcements={announcements}
         />
       </div>
-
-      <nav class="mobile-featured__nav" aria-label="Choose a featured section">
-        {
-          sections.map((section, index) => (
-            <button
-              type="button"
-              data-featured-index={index}
-              aria-pressed={index === 0 ? 'true' : 'false'}
-            >
-              {mobileSectionLabel(section.data.bigTitle)}
-            </button>
-          ))
-        }
-        <button type="button" data-featured-index={sections.length} aria-pressed="false">
-          Microblog
-        </button>
-      </nav>
-      <div class="mobile-featured__swipe-hint" data-featured-swipe-hint aria-hidden="true">
-        <span>Swipe left</span>
-        <i><b></b></i>
-      </div>
     </section>
   </main>
 </BaseLayout>
-
-<script>
-  document.querySelectorAll<HTMLElement>('[data-mobile-featured]').forEach((featured) => {
-    if (featured.dataset.featuredReady === 'true') return;
-    featured.dataset.featuredReady = 'true';
-
-    const track = featured.querySelector<HTMLElement>('[data-featured-track]');
-    const wordTrack = featured.querySelector<HTMLElement>('[data-featured-word-track]');
-    const currentTitle = featured.querySelector<HTMLElement>('[data-featured-title-current]');
-    const titleHeading = featured.querySelector<HTMLElement>('.mobile-featured__title');
-    const titleProbe = featured.querySelector<HTMLElement>('[data-featured-title-probe]');
-    const swipeHint = featured.querySelector<HTMLElement>('[data-featured-swipe-hint]');
-    const buttons = Array.from(
-      featured.querySelectorAll<HTMLButtonElement>('[data-featured-index]'),
-    );
-    if (!track || !wordTrack || buttons.length === 0) return;
-
-    let frame = 0;
-    let activeIndex = 0;
-    let wheelAccumulator = 0;
-    let wheelGestureActive = false;
-    let wheelEndTimer: number | undefined;
-    let hintTimer: number | undefined;
-    let touchStartX: number | null = null;
-    let touchStartY: number | null = null;
-    let touchHintShown = false;
-
-    const fitMobileTitle = () => {
-      if (!titleHeading || !titleProbe) return;
-      titleHeading.style.removeProperty('--mobile-featured-title-size');
-      if (!window.matchMedia('(max-width: 768px)').matches) return;
-
-      const availableWidth = titleHeading.clientWidth;
-      const requiredWidth = titleProbe.getBoundingClientRect().width;
-      const baseSize = Number.parseFloat(window.getComputedStyle(titleHeading).fontSize);
-      if (!availableWidth || !requiredWidth || !baseSize) return;
-
-      let fittedSize = Math.min(baseSize, (baseSize * availableWidth) / requiredWidth);
-      titleHeading.style.setProperty('--mobile-featured-title-size', `${fittedSize}px`);
-
-      // Letter-spacing is fixed in pixels rather than ems, so one proportional
-      // pass leaves a small residual. Correct it against the rendered probe.
-      for (let pass = 0; pass < 2; pass += 1) {
-        const renderedWidth = titleProbe.getBoundingClientRect().width;
-        if (!renderedWidth) break;
-        fittedSize = Math.min(baseSize, (fittedSize * availableWidth) / renderedWidth);
-        titleHeading.style.setProperty('--mobile-featured-title-size', `${fittedSize}px`);
-      }
-    };
-
-    const panelStride = () => {
-      const panel = track.querySelector<HTMLElement>('.blog-header-container > .blog-header');
-      if (!(panel instanceof HTMLElement)) return track.clientWidth || 1;
-      const styles = window.getComputedStyle(track);
-      const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
-      return panel.getBoundingClientRect().width + gap;
-    };
-
-    const showSwipeHint = () => {
-      if (!swipeHint || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      window.clearTimeout(hintTimer);
-      swipeHint.classList.remove('is-visible');
-      void swipeHint.offsetWidth;
-      swipeHint.classList.add('is-visible');
-      hintTimer = window.setTimeout(() => swipeHint.classList.remove('is-visible'), 1650);
-    };
-
-    const update = () => {
-      frame = 0;
-      const stride = panelStride();
-      const progress = Math.max(0, Math.min(buttons.length - 1, track.scrollLeft / stride));
-      const nextIndex = Math.round(progress);
-
-      wordTrack.style.setProperty('--featured-progress', String(progress));
-
-      if (nextIndex !== activeIndex) {
-        activeIndex = nextIndex;
-        buttons.forEach((button, index) =>
-          button.setAttribute('aria-pressed', String(index === activeIndex)),
-        );
-        if (currentTitle) currentTitle.textContent = buttons[activeIndex]?.textContent ?? '';
-      }
-    };
-
-    const titleObserver = new ResizeObserver(fitMobileTitle);
-    titleObserver.observe(featured);
-    fitMobileTitle();
-
-    track.addEventListener(
-      'scroll',
-      () => {
-        if (!frame) frame = window.requestAnimationFrame(update);
-      },
-      { passive: true },
-    );
-
-    track.addEventListener(
-      'wheel',
-      (event) => {
-        if (!window.matchMedia('(max-width: 768px)').matches) return;
-
-        const target = event.target;
-        const microblogFeed =
-          target instanceof Element ? target.closest<HTMLElement>('.microblog-feed') : null;
-        if (microblogFeed) {
-          const movingDown = event.deltaY > 0;
-          const canScrollDown =
-            microblogFeed.scrollTop + microblogFeed.clientHeight < microblogFeed.scrollHeight - 1;
-          const canScrollUp = microblogFeed.scrollTop > 1;
-          if ((movingDown && canScrollDown) || (!movingDown && canScrollUp)) return;
-        }
-
-        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-        event.preventDefault();
-
-        window.clearTimeout(wheelEndTimer);
-        wheelEndTimer = window.setTimeout(() => {
-          wheelAccumulator = 0;
-          wheelGestureActive = false;
-        }, 180);
-
-        if (wheelGestureActive) return;
-
-        const normalizedDelta =
-          event.deltaMode === WheelEvent.DOM_DELTA_LINE
-            ? event.deltaY * 16
-            : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
-              ? event.deltaY * track.clientHeight
-              : event.deltaY;
-        wheelAccumulator += normalizedDelta;
-
-        if (Math.abs(wheelAccumulator) < 24) return;
-
-        wheelGestureActive = true;
-        const currentIndex = Math.round(track.scrollLeft / panelStride());
-        if (currentIndex === 0) {
-          showSwipeHint();
-          return;
-        }
-        const direction = wheelAccumulator > 0 ? 1 : -1;
-        const nextIndex = Math.max(0, Math.min(buttons.length - 1, currentIndex + direction));
-        buttons[nextIndex]?.click();
-      },
-      { passive: false },
-    );
-
-    track.addEventListener(
-      'touchstart',
-      (event) => {
-        const touch = event.changedTouches[0];
-        if (!touch) return;
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        touchHintShown = false;
-      },
-      { passive: true },
-    );
-
-    track.addEventListener(
-      'touchmove',
-      (event) => {
-        if (activeIndex !== 0 || touchHintShown || touchStartX === null || touchStartY === null)
-          return;
-        const touch = event.changedTouches[0];
-        if (!touch) return;
-        const distanceX = touch.clientX - touchStartX;
-        const distanceY = touch.clientY - touchStartY;
-        if (Math.abs(distanceY) < 20 || Math.abs(distanceY) <= Math.abs(distanceX) * 1.15) return;
-        touchHintShown = true;
-        showSwipeHint();
-      },
-      { passive: true },
-    );
-
-    track.addEventListener(
-      'touchend',
-      () => {
-        touchStartX = null;
-        touchStartY = null;
-        touchHintShown = false;
-      },
-      { passive: true },
-    );
-
-    buttons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        track.scrollTo({
-          left: index * panelStride(),
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-            ? 'auto'
-            : 'smooth',
-        });
-      });
-    });
-
-    featured.addEventListener('keydown', (event) => {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-      const direction = event.key === 'ArrowRight' ? 1 : -1;
-      const nextIndex = Math.max(0, Math.min(buttons.length - 1, activeIndex + direction));
-      if (nextIndex === activeIndex) return;
-      event.preventDefault();
-      buttons[nextIndex]?.click();
-      buttons[nextIndex]?.focus();
-    });
-
-    window.addEventListener('resize', update, { passive: true });
-    update();
-  });
-</script>
 
 <style lang="scss" is:global>
   @use '../styles/partials/home';

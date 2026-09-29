@@ -21,6 +21,7 @@ interface Props {
   marqueeItems?: string[];
   showIdentity?: boolean;
   showHome?: boolean;
+  showDesktopBrand?: boolean;
   mobileBrandExpanded?: string;
   mobileBrandExpandedAlways?: boolean;
   mobileBrandHomeBeforeTitle?: boolean;
@@ -37,6 +38,7 @@ const {
   marqueeItems = [],
   showIdentity = false,
   showHome = true,
+  showDesktopBrand = false,
   mobileBrandExpanded,
   mobileBrandExpandedAlways = false,
   mobileBrandHomeBeforeTitle = false,
@@ -95,6 +97,11 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
   <slot />
 </div>
 
+<div
+  class:list={['menu-mobile-top-field', mobileOnly && 'menu-mobile-only']}
+  aria-hidden="true"
+></div>
+
 <button
   type="button"
   class:list={['menu-toggle', mobileOnly && 'menu-mobile-only']}
@@ -113,6 +120,13 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
   id="primary-menu"
   data-menu
 >
+  {
+    showDesktopBrand && (
+      <a class="blog-menu menu-desktop-brand" href="/" aria-label="Home">
+        Tung’s
+      </a>
+    )
+  }
   {
     menuItems.map((item) =>
       item.section === activeSection ? (
@@ -151,6 +165,7 @@ const menuItems = showHome ? allMenuItems : allMenuItems.filter((item) => item.s
       ),
     )
   }
+  <slot name="drawer-controls" />
   {
     showIdentity ? (
       <div class="blog-menu mention">

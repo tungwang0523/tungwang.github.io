@@ -1,5 +1,6 @@
 ---
 import { cloudflareImage, cloudflareSrcset, imagePresets } from '../utils/cloudflare-image.mjs';
+import { imageDimensionsFor } from '../utils/image-dimensions.mjs';
 
 interface Props {
   entry: {
@@ -24,13 +25,9 @@ interface Props {
 }
 
 const { entry, Content, compact = false } = Astro.props;
-const day = String(entry.data.date.getDate()).padStart(2, '0');
-const date = `${day}.${String(entry.data.date.getMonth() + 1).padStart(2, '0')}.${entry.data.date.getFullYear()}`;
-const year = String(entry.data.date.getFullYear());
-const month = new Intl.DateTimeFormat('en', { month: 'short' })
-  .format(entry.data.date)
-  .toUpperCase();
+const date = `${entry.data.date.getFullYear()}.${String(entry.data.date.getMonth() + 1).padStart(2, '0')}.${String(entry.data.date.getDate()).padStart(2, '0')}`;
 const gallery = entry.data.images ?? [];
+const dimensionsFor = (source: string) => imageDimensionsFor(source);
 const useSmallGrid = gallery.length === 2 || gallery.length === 4;
 const singleWidths = compact ? [320, 640] : imagePresets.article.widths;
 const singleSizes = compact ? '280px' : imagePresets.article.sizes;
@@ -96,23 +93,22 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
   id={entry.id}
   data-lightbox-scope
 >
-  <div class="microblog-entry__meta">
-    <a
-      class="microblog-entry__day"
-      href={`/microblog#${entry.id}`}
-      aria-label={`Microblog entry from ${date}`}
-    >
-      {Array.from(day).map((character) => <span>{character}</span>)}
-    </a>
-    <time datetime={entry.data.date.toISOString()} aria-label={`${month} ${year}`}>
-      <span aria-hidden="true">
-        {Array.from(month).map((character) => <i>{character}</i>)}
-      </span>
-      <span aria-hidden="true">
-        {Array.from(year).map((character) => <i>{character}</i>)}
-      </span>
-    </time>
-  </div>
+  <header class="microblog-entry__meta">
+    <img
+      class="microblog-entry__avatar"
+      src="/pictures/avatar.jpg"
+      alt=""
+      width="512"
+      height="512"
+      aria-hidden="true"
+    />
+    <div class="microblog-entry__byline">
+      <strong>Tung Wang</strong>
+      <a href={`/microblog#${entry.id}`} aria-label={`Microblog entry from ${date}`}>
+        <time datetime={entry.data.date.toISOString()}>{date}</time>
+      </a>
+    </div>
+  </header>
 
   <div class="microblog-entry__content">
     <div class="microblog-entry__text">
@@ -152,6 +148,8 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
             srcset={singleSrcset(gallery[0].src)}
             sizes={singleSizes}
             alt={gallery[0].alt}
+            width={dimensionsFor(gallery[0].src)?.width}
+            height={dimensionsFor(gallery[0].src)?.height}
             loading="lazy"
             decoding="async"
           />
@@ -174,7 +172,14 @@ const imageCaption = (language: 'zh' | 'en', page: number) => {
               data-caption-en={imageCaption('en', index + 1)}
               aria-label="View full image"
             >
-              <img src={gridImage(image.src)} alt={image.alt} loading="lazy" decoding="async" />
+              <img
+                src={gridImage(image.src)}
+                alt={image.alt}
+                width={dimensionsFor(image.src)?.width}
+                height={dimensionsFor(image.src)?.height}
+                loading="lazy"
+                decoding="async"
+              />
             </button>
           ))}
         </div>

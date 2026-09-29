@@ -1,10 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 import Menu from '../components/Menu.astro';
 import BlogLanguageToggle from '../components/BlogLanguageToggle.astro';
 import MicroblogLanguageToggle from '../components/MicroblogLanguageToggle.astro';
 import { cloudflareImage, cloudflareSrcset, imagePresets } from '../utils/cloudflare-image.mjs';
+import { imageDimensionsFor } from '../utils/image-dimensions.mjs';
 
 interface Props {
   title: string;
@@ -58,8 +58,22 @@ const rootClass = [
   .filter(Boolean)
   .join(' ');
 const hasAdaptiveSectionBrand = contentCard || titleInBrand || activeSection === 'research';
+const isSectionLanding = Boolean(activeSection) && !isBlogPost;
+const sectionTitle = activeSection
+  ? {
+      research: 'Research',
+      work: 'Work',
+      blog: 'Blog',
+      microblog: 'Microblog',
+      gallery: 'Gallery',
+    }[activeSection]
+  : undefined;
 const sectionHref =
   activeSection === 'research' ? '/academic' : activeSection ? `/${activeSection}` : '/';
+const normalizedPathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const navigationSectionHref = activeSection === 'research' ? '/academic' : `/${activeSection}`;
+const navigationActiveSection =
+  activeSection && normalizedPathname === navigationSectionHref ? activeSection : undefined;
 const mobileBrandExpanded =
   activeSection === 'research'
     ? 'Tung’s Research'
@@ -87,6 +101,7 @@ const heroSrcset = heroImage
       format: 'auto',
     })
   : undefined;
+const heroDimensions = heroImage ? imageDimensionsFor(heroImage) : undefined;
 ---
 
 <BaseLayout
@@ -99,15 +114,25 @@ const heroSrcset = heroImage
   domainScope={domainScope}
   rootClass={rootClass || undefined}
 >
-  <div class:list={['page', pageClass, contentCard && 'page--content-card']}>
+  <div
+    class:list={[
+      'page',
+      pageClass,
+      contentCard && 'page--content-card',
+      isSectionLanding && 'page--section-landing',
+    ]}
+  >
     {isBlogPost && <div class="blog-paper-viewport-top" aria-hidden="true" />}
     {isBlogPost && <div class="blog-paper-viewport-bottom" aria-hidden="true" />}
     {contentCard && <div class="page-content-card-viewport" aria-hidden="true" />}
     <Menu
       mobileOnly
-      activeSection={activeSection}
+      activeSection={navigationActiveSection}
       mainSiteNavigation={mainSiteNavigation}
       blogHref={blogHref}
+      showHome={false}
+      showIdentity
+      showDesktopBrand
       mobileBrandExpanded={mobileBrandExpanded}
       mobileBrandExpandedAlways={activeSection === 'research' || titleInBrand}
       mobileBrandHomeBeforeTitle={hasAdaptiveSectionBrand}
@@ -133,67 +158,64 @@ const heroSrcset = heroImage
       <div class="page-nav__inner">
         <a
           class="page-nav__brand"
-          href={titleInBrand ? sectionHref : '/'}
-          aria-label={titleInBrand ? 'Back to top' : hasAdaptiveSectionBrand ? 'Home' : undefined}
-          data-page-brand={hasAdaptiveSectionBrand || undefined}
-          data-page-brand-expanded={hasAdaptiveSectionBrand ? mobileBrandExpanded : undefined}
-          data-page-brand-expanded-always={activeSection === 'research' ||
-            titleInBrand ||
-            undefined}
+          href="/"
+          aria-label="Home"
           data-main-site-link={mainSiteNavigation || undefined}
         >
-          {
-            hasAdaptiveSectionBrand && mobileBrandExpanded ? (
-              <>
-                <span class="page-nav__brand-default">Tung’s</span>
-                <span class="page-nav__brand-expanded">{mobileBrandExpanded}</span>
-              </>
-            ) : (
-              'Tung’s'
-            )
-          }
+          Tung’s
         </a>
         <div class="page-nav__controls">
           <nav aria-label="Primary">
             {
-              (activeSection === 'research' ||
-                activeSection === 'work' ||
-                activeSection === 'gallery') && (
-                <a href="/" data-main-site-link={mainSiteNavigation || undefined}>
-                  Home
-                </a>
-              )
-            }
-            {
-              activeSection !== 'research' && (
+              navigationActiveSection === 'research' ? (
+                <span class="page-nav__current" aria-current="page">
+                  Research
+                </span>
+              ) : (
                 <a href="/academic" data-cv-site-link>
                   Research
                 </a>
               )
             }
             {
-              activeSection !== 'work' && (
+              navigationActiveSection === 'work' ? (
+                <span class="page-nav__current" aria-current="page">
+                  Work
+                </span>
+              ) : (
                 <a href="/work" data-main-site-link={mainSiteNavigation || undefined}>
                   Work
                 </a>
               )
             }
             {
-              activeSection !== 'blog' && (
+              navigationActiveSection === 'blog' ? (
+                <span class="page-nav__current" aria-current="page">
+                  Blog
+                </span>
+              ) : (
                 <a href={blogHref} data-main-site-link={mainSiteNavigation || undefined}>
                   Blog
                 </a>
               )
             }
             {
-              activeSection !== 'microblog' && (
+              navigationActiveSection === 'microblog' ? (
+                <span class="page-nav__current" aria-current="page">
+                  Microblog
+                </span>
+              ) : (
                 <a href="/microblog" data-main-site-link={mainSiteNavigation || undefined}>
                   Microblog
                 </a>
               )
             }
             {
-              activeSection !== 'gallery' && (
+              navigationActiveSection === 'gallery' ? (
+                <span class="page-nav__current" aria-current="page">
+                  Gallery
+                </span>
+              ) : (
                 <a href="/gallery" data-main-site-link={mainSiteNavigation || undefined}>
                   Gallery
                 </a>
@@ -216,8 +238,24 @@ const heroSrcset = heroImage
             )
           }
         </div>
+        <div class="page-nav__identity blog-menu mention">
+          <img class="mention__mark" src="/favicon.svg?v=2" alt="" width="44" height="44" />
+          <span class="mention__name">Tung Wang</span>
+          <small class="mention__role">
+            Founder of{' '}
+            <a href="https://mockingbird.team" target="_blank" rel="noreferrer">
+              Mockingbird Studio
+            </a>
+          </small>
+          <span class="mention__details">
+            <small>Greetings from Shanghai</small>
+            <small>© 2026 Tung Wang</small>
+          </span>
+        </div>
       </div>
     </header>
+
+    {isSectionLanding && sectionTitle && <h1 class="page-section-title">{sectionTitle}</h1>}
 
     <slot name="after-nav" />
 
@@ -232,6 +270,8 @@ const heroSrcset = heroImage
               srcset={heroSrcset}
               sizes={heroSrcset ? imagePresets.hero.sizes : undefined}
               alt=""
+              width={heroDimensions?.width}
+              height={heroDimensions?.height}
               loading="eager"
               decoding="async"
               fetchpriority="high"
@@ -240,9 +280,11 @@ const heroSrcset = heroImage
         )
       }
 
-      <section class:list={['page-head', titleInBrand && 'page-head--in-brand']}>
-        <h1 class="page-title" data-mobile-brand-title>{title}</h1>
-      </section>
+      <slot name="page-head">
+        <section class:list={['page-head', titleInBrand && 'page-head--in-brand']}>
+          <h1 class="page-title" data-mobile-brand-title>{title}</h1>
+        </section>
+      </slot>
 
       <div class="page-body">
         <slot />
@@ -251,11 +293,6 @@ const heroSrcset = heroImage
 
     <slot name="after-main" />
 
-    <Footer
-      blogHref={blogHref}
-      mainSiteNavigation={mainSiteNavigation}
-      activeSection={activeSection}
-    />
   </div>
 </BaseLayout>
 

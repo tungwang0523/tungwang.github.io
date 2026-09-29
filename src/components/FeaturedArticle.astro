@@ -92,7 +92,7 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
             <button type="button" data-featured-next aria-label="Scroll to the next section">
               Next{' '}
               <span class="featured-next__arrow" aria-hidden="true">
-                ↓
+                ↑
               </span>
             </button>
           )
@@ -233,15 +233,9 @@ const parts = emphasis ? headline.split('{emphasis}') : [headline];
 
     const alignImages = () => {
       alignmentFrame = 0;
-      const mobileTitle =
-        featuredStage.querySelector<HTMLElement>('.mobile-featured__brand') ??
-        featuredStage.querySelector<HTMLElement>('.mobile-featured__title');
-      const useMobileTitle = window.matchMedia('(max-width: 768px)').matches;
 
       headers.forEach((header) => {
-        const title = useMobileTitle
-          ? mobileTitle
-          : header.querySelector<HTMLElement>('.blog-big__title');
+        const title = header.querySelector<HTMLElement>('.blog-big__title');
         const media = header.querySelector<HTMLElement>('.featured-content__media');
         const image = header.querySelector<HTMLImageElement>('.featured-content__image');
         const subtitle = header.querySelector<HTMLElement>('.featured-content__copy h2');

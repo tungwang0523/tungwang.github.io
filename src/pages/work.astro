@@ -25,6 +25,14 @@ const regularProjects = projects.filter((project) => project !== featuredProject
       {regularProjects.map((project) => <WorkIndexCard {...project.data} />)}
     </div>
   </div>
+  <div slot="after-main" class="work-boundary-mask work-boundary-mask--top" aria-hidden="true">
+    <i class="work-boundary-mask__corner work-boundary-mask__corner--left-card"></i>
+    <i class="work-boundary-mask__corner work-boundary-mask__corner--right-card"></i>
+  </div>
+  <div slot="after-main" class="work-boundary-mask work-boundary-mask--bottom" aria-hidden="true">
+    <i class="work-boundary-mask__corner work-boundary-mask__corner--left-card"></i>
+    <i class="work-boundary-mask__corner work-boundary-mask__corner--right-card"></i>
+  </div>
 </PageLayout>
 
 <script>
@@ -47,17 +55,16 @@ const regularProjects = projects.filter((project) => project !== featuredProject
           return;
         }
 
-        const styles = getComputedStyle(grid);
-        const row = Number.parseFloat(styles.gridAutoRows) || 2;
-        const gap = Number.parseFloat(styles.rowGap) || 12;
-
-        const spans = tiles.map((tile) =>
-          Math.max(1, Math.ceil((tile.getBoundingClientRect().height + gap) / (row + gap))),
-        );
+        const heights = tiles.map((tile) => tile.getBoundingClientRect().height);
 
         grid.classList.add('is-masonry-ready');
+        const styles = getComputedStyle(grid);
+        const row = Number.parseFloat(styles.gridAutoRows) || 1;
+        const gap = Number.parseFloat(styles.columnGap) || 12;
+
         tiles.forEach((tile, index) => {
-          tile.style.gridRowEnd = `span ${spans[index]}`;
+          const span = Math.max(1, Math.ceil((heights[index] + gap) / row));
+          tile.style.gridRowEnd = `span ${span}`;
         });
       });
     };
@@ -70,6 +77,55 @@ const regularProjects = projects.filter((project) => project !== featuredProject
     document.fonts?.ready.then(layout);
     layout();
   });
+
+  const workPage = document.querySelector<HTMLElement>('.page--work.page--content-card');
+  const workViewport = workPage?.querySelector<HTMLElement>('.page-content-card-viewport');
+  const workTiles = Array.from(workPage?.querySelectorAll<HTMLElement>('.work-tile') ?? []);
+  const topMask = workPage?.querySelector<HTMLElement>('.work-boundary-mask--top');
+  const bottomMask = workPage?.querySelector<HTMLElement>('.work-boundary-mask--bottom');
+
+  if (workPage && workViewport && topMask && bottomMask && workTiles.length > 0) {
+    let clipFrame = 0;
+
+    const updateBoundaryClips = () => {
+      cancelAnimationFrame(clipFrame);
+      clipFrame = requestAnimationFrame(() => {
+        const viewport = workViewport.getBoundingClientRect();
+        const center = (viewport.left + viewport.right) / 2;
+        const tileRects = workTiles.map((tile) => tile.getBoundingClientRect());
+
+        const updateMask = (mask: HTMLElement, boundary: number) => {
+          let clipsLeftCard = false;
+          let clipsRightCard = false;
+
+          tileRects.forEach((rect) => {
+            const crossesBoundary = rect.top < boundary && rect.bottom > boundary;
+            const isColumnCard = rect.width < viewport.width * 0.75;
+            if (!crossesBoundary || !isColumnCard) return;
+
+            if ((rect.left + rect.right) / 2 < center) clipsLeftCard = true;
+            else clipsRightCard = true;
+          });
+
+          mask
+            .querySelector('.work-boundary-mask__corner--left-card')
+            ?.classList.toggle('is-visible', clipsLeftCard);
+          mask
+            .querySelector('.work-boundary-mask__corner--right-card')
+            ?.classList.toggle('is-visible', clipsRightCard);
+        };
+
+        updateMask(topMask, viewport.top);
+        updateMask(bottomMask, viewport.bottom);
+      });
+    };
+
+    workPage.addEventListener('scroll', updateBoundaryClips, { passive: true });
+    window.addEventListener('resize', updateBoundaryClips, { passive: true });
+    new ResizeObserver(updateBoundaryClips).observe(workViewport);
+    document.fonts?.ready.then(updateBoundaryClips);
+    updateBoundaryClips();
+  }
 </script>
 
 <style lang="scss" is:global>

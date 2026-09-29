@@ -22,17 +22,30 @@ const postsEn = posts.filter((post) => post.data.lang === 'en');
 >
   <div class="blog-index" data-blog-language-scope data-blog-language="zh">
     <section data-blog-language-panel="zh" aria-label="中文文章">
-      <div class="post-list">
+      <div class="post-list" data-masonry-grid>
         {postsZh.map((post) => <BlogPostCard post={post} />)}
       </div>
     </section>
     <section data-blog-language-panel="en" aria-label="English posts">
-      <div class="post-list">
+      <div class="post-list" data-masonry-grid>
         {postsEn.map((post) => <BlogPostCard post={post} />)}
       </div>
     </section>
   </div>
+  <div slot="after-main" class="masonry-boundary-mask masonry-boundary-mask--top" aria-hidden="true">
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--left-card"></i>
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--right-card"></i>
+  </div>
+  <div slot="after-main" class="masonry-boundary-mask masonry-boundary-mask--bottom" aria-hidden="true">
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--left-card"></i>
+    <i class="masonry-boundary-mask__corner masonry-boundary-mask__corner--right-card"></i>
+  </div>
 </PageLayout>
+
+<script>
+  import '../../scripts/masonry-grid';
+  import '../../scripts/masonry-boundary-clips';
+</script>
 
 <style lang="scss" is:global>
   @use '../../styles/partials/blog';
