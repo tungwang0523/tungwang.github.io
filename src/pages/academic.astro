@@ -8,7 +8,9 @@ const publications = [
     after: ', & F. You (2026).',
     title:
       'From Subtle Embodied Social Experience to Designable Relations: An Image-Schema-Mediated Empirical-to-Design Method',
-    credit: 'First Author',
+    credit: 'First author',
+    status: 'Under review at',
+    venue: 'ACM CHI 2027',
     note: 'Preprint available on SSRN.',
     href: 'https://doi.org/10.2139/ssrn.7201181',
     linkLabel: 'doi:10.2139/ssrn.7201181',
@@ -19,8 +21,7 @@ const publications = [
     after: ', & Q. Fu (2026).',
     title:
       'Seeing the whole process: How cooperative process transparency in AR-HMI affects driver cognition in V2V lane changes.',
-    credit: 'Corresponding Author',
-    status: 'Published in',
+    credit: 'Corresponding author',
     venue: 'Transportation Research Part F: Traffic Psychology and Behaviour, 123, 103830.',
     href: 'https://doi.org/10.1016/j.trf.2026.103830',
     linkLabel: 'doi:10.1016/j.trf.2026.103830',
@@ -31,6 +32,7 @@ const publications = [
     after: ', J. Zhang, F. You, & J. Wang (2026).',
     title:
       'Designing multimodal takeover request interfaces: The impact of warning modalities and information types on drivers’ takeover performance and subjective perception.',
+    credit: 'Co-author',
     status: 'Under review at',
     venue: 'Transportation Research Part F: Traffic Psychology and Behaviour',
   },
@@ -40,6 +42,7 @@ const publications = [
     after: ', B. Mehler, & F. You (2026).',
     title:
       'Beyond attention reminders: Effects of monitoring request design type and non-driving-related task engagement on driver takeover performance and subjective perceptions.',
+    credit: 'Co-author',
     status: 'Under review at',
     venue: 'Accident Analysis & Prevention',
   },
@@ -49,7 +52,7 @@ const publications = [
     after: ', & F. You (2025).',
     title:
       'Is control necessary for drivers? Exploring the influence of human–machine collaboration modes on driving behavior and subjective perception under different hazard visibility scenarios.',
-    status: 'Published in',
+    credit: 'Co-author',
     venue: 'Accident Analysis & Prevention, 217, 108067.',
     href: 'https://doi.org/10.1016/j.aap.2025.108067',
     linkLabel: 'doi:10.1016/j.aap.2025.108067',
@@ -59,41 +62,38 @@ const publications = [
 const education = [
   {
     period: '9/2024 - 6/2027',
-    degree: 'Master’s Candidate in Design',
+    degree: 'M.A. in Design',
     institutions: [
-      { label: 'User Experience Lab', href: 'https://uxlab.tongji.edu.cn/' },
-      { label: 'College of Arts and Media', href: 'https://am.tongji.edu.cn/' },
-      { label: 'Tongji University', href: 'https://www.tongji.edu.cn/' },
+      { label: 'Tongji University, Shanghai, China', href: 'https://www.tongji.edu.cn/' },
     ],
     details: [
       'Working thesis title: Mixed-Reality Interaction Design for Public-Space Social Experience',
-      'GPA: 4.76/5.0 · Supervisor: Prof. Fang You',
+      'GPA: 4.76/5.0 · Supervisor: Professor Fang You, FRSA',
+      'Selected coursework: User Research 98/100; Narrative Studies 90/100; Service Design 96/100.',
     ],
   },
   {
     period: '9/2020 - 6/2024',
-    degree: 'Bachelor’s Degree in Physics',
+    degree: 'B.Sc. in Physics',
     institutions: [
-      { label: 'College of Physics', href: 'https://phy.jlu.edu.cn/' },
-      { label: 'Jilin University', href: 'https://www.jlu.edu.cn/' },
+      { label: 'Jilin University, Changchun, China', href: 'https://www.jlu.edu.cn/' },
     ],
-    details: [
-      'Intellectual formation in mathematical abstraction, idealization, and model-based reasoning',
-    ],
+    details: ['Selected coursework: Computational Physics A 96/100; Mechanics 93/100; C Programming 92/100.'],
   },
 ];
 
 const projects = [
   {
     period: '2025 - Present',
-    title: 'XR-Mediated Design for Subtle Embodied Social Experience',
-    role: 'Master’s Researcher, Tongji University',
-    description:
-      'Investigates how subtle embodied experiences of public-space social interaction can be reconstructed as design-operable relations and instantiated through XR design propositions.',
+    title: 'XR Design for Subtle Embodied Social Experience',
+    role: 'Master’s Thesis Researcher, Tongji University',
+    description: '',
     bullets: [
-      'Conceived the theoretical and methodological framework and designed and conducted a first-person study with 16 participants.',
-      'Developed the Evidence-Side and Design-Side Image-Schematic Systems and generated XR symbolic-metaphor propositions.',
-      'Led data analysis, visualization, and manuscript preparation; currently developing the Unity-based XR prototype and preparing its empirical evaluation.',
+      'Social and design proposition: Used gaze as a case of subtle embodied experience to reimagine relations among strangers in public space, proposing XR imagery as an interaction mediator and discursive medium for alternative forms of public sociality.',
+      'Experiential modelling: To determine what such imagery should represent, used conceptual metaphor and image-schema theories to model how gaze enters experience, acquires embodied/metaphorical meaning and informs action; distinguished substrate-level from meaning-construal affordances.',
+      'First-person inquiry: To ground this model in lived experience, combined episode-focused first-person inquiry with a dual-track analysis of fleeting gaze episodes, separating problem-defining perceptual conditions from relation-providing conceptual-metaphorical relations.',
+      'Empirical-to-design translation: To make open-ended experiential material operable in design, developed an image-schema-mediated method structuring it as a constrained relational design space, preserving empirical grounding while allowing designer judgment and multiple defensible forms.',
+      'Design case and implementation: Applied the process with 16 participants (782 interview minutes; 160,162 Chinese transcript characters), deriving a relational grammar and three XR concepts; selected Membrane–Bubble and currently implementing it in Unity XR for laboratory evaluation.',
     ],
   },
   {
@@ -101,7 +101,7 @@ const projects = [
     title: 'Cooperative Process Transparency in AR-HMI',
     role: 'Co-Researcher, Tongji University',
     description:
-      'Examines how different levels of cooperative process transparency affect driver cognition during V2V cooperative lane changes.',
+      'Examines how different levels of cooperative process transparency affect driver cognition during Vehicle-to-Vehicle (V2V) cooperative lane changes.',
     bullets: [
       'Contributed to the conceptualization and three-level operationalization of cooperative process transparency; curated and formally analysed performance and subjective data.',
       'Produced research visualizations and led manuscript preparation and revision.',
@@ -125,10 +125,40 @@ const projects = [
     description:
       'Comprises three driving-simulator studies of collaboration modes, monitoring requests, and multimodal takeover warnings.',
     bullets: [
-      'Contributed to the experimental design and execution of one controlled driving-simulator study.',
-      'Processed and analysed eye-tracking and fNIRS data across the project studies.',
+      'Contributed to the design and execution of one controlled driving-simulator study; processed and analysed eye-tracking and fNIRS data across the project studies.',
       'Contributed to the interpretation of results and manuscript review and revision.',
     ],
+  },
+];
+
+const designPractice = [
+  {
+    period: '2023 - Present',
+    title: 'ExpoCraft – Reconstruction of Expo 2010 Shanghai',
+    role: 'Independent Designer · Ongoing Project',
+    description:
+      'Reconstruct Expo 2010 Shanghai in Minecraft from maps, photographs and archival records; translate fragmented sources into a navigable spatial archive.',
+  },
+  {
+    period: '2024',
+    title: 'The Field of Seeds – Physical-Computing Installation',
+    role: 'Co-Designer · Course Project',
+    description:
+      'Developed the concept, analysed the site and designed interactions/circuitry; co-built a wind/proximity-responsive Arduino prototype inspired by the UK Pavilion (Seed Cathedral) at Expo 2010 Shanghai.',
+  },
+  {
+    period: '2024',
+    title: 'Rooftop Garden – Site-Specific Interactive Projection',
+    role: 'Independent Designer · Course Proposal',
+    description:
+      'Designed a projection proposal for a typhoon-displaced roof: passersby’s silhouettes trigger projected flowers, linking interaction with architectural memory.',
+  },
+  {
+    period: '2023',
+    title: 'Minetrarchi – Minecraft-Based Architectural Learning Game',
+    role: 'Co-Designer · Design Concept',
+    description:
+      'Designed the concept, art, game mechanics and interactions for a Minecraft-based game concept teaching traditional Chinese timber architecture through guided tasks and free building.',
   },
 ];
 
@@ -149,9 +179,34 @@ const collaborations = [
   },
 ];
 
+const leadership = [
+  {
+    period: '2020 - 2023',
+    title: 'Photojournalist; Co-Deputy Head & Head of Photography',
+    institution: 'Jilin University Press Corps',
+    description:
+      'Led photographic reporting for campus news, cultural events and public communication.',
+  },
+  {
+    period: '2020 - 2024',
+    title: 'Deputy Head',
+    institution: 'New Media Department, Physics Student Union, Jilin University',
+    description:
+      'Led college online communications and media presence; co-organised campus activities.',
+  },
+  {
+    period: '2020 - 2022',
+    title: 'Changchun Architectural Heritage Documentation',
+    institution: 'Independent Researcher / Writer / Photographer',
+    description:
+      'Studied Changchun’s Japanese-colonial (Manchukuo-era) architecture through public history writing and field photography; advocated preservation. Individual articles reached 10,000+ reads and 100+ saves.',
+  },
+];
+
 const skills = [
+  { label: 'Experimental Methods', value: 'Driving Simulation · Eye Tracking · EEG/fNIRS Analysis' },
   { label: 'Research · Analysis', value: 'SPSS · MATLAB · GraphPad Prism · NVivo · Tobii Pro Lab' },
-  { label: 'Programming · XR', value: 'Unity · Python · C/C++ · HTML' },
+  { label: 'Programming · XR', value: 'Unity · Python · C/C++' },
   {
     label: 'Design · Media',
     value: 'Figma · Adobe Photoshop · Adobe Premiere Pro · Blender · SketchUp',
@@ -164,7 +219,7 @@ const [primaryProject, ...otherProjects] = projects;
 
 <PageLayout
   title="Wang Zhaodong"
-  description="Interdisciplinary Researcher, Master’s Candidate in Design"
+  description="Design Researcher, Master’s Candidate in Design"
   pageTitle="Academic Profile - Wang Zhaodong"
   pageClass="page--research"
   canonicalUrl="https://cv.tung.mockingbird.team/"
@@ -186,9 +241,8 @@ const [primaryProject, ...otherProjects] = projects;
     <h1 class="page-title" data-mobile-brand-title>Wang Zhaodong</h1>
     <div class="cv-web__profile">
       <p>
-        Interdisciplinary researcher with a background in physics and design, studying how embodied
-        experience makes social relations meaningful and reconstructing them as designable
-        structures through technological mediation.
+        Design researcher investigating and reimagining social relations in shared environments
+        through discursive design, embodied inquiry and technological mediation.
       </p>
       <div class="cv-web__contact">
         <span>Shanghai, China</span>
@@ -212,10 +266,10 @@ const [primaryProject, ...otherProjects] = projects;
     <section class="cv-section cv-section--interests" id="research-interests">
       <h2>Research Interests</h2>
       <ul class="cv-interest-grid">
-        <li>Design Epistemology and Methodology</li>
-        <li>Cognitive Semantics and Meaning-Making</li>
-        <li>Embodied Cognition</li>
-        <li>Human–Technology Relations</li>
+        <li>Public Space and Social Relations</li>
+        <li>Discursive and Speculative Design</li>
+        <li>Embodied Experience and Meaning-Making</li>
+        <li>Human–Technology Relations and Design Methodology</li>
       </ul>
     </section>
 
@@ -259,7 +313,7 @@ const [primaryProject, ...otherProjects] = projects;
             <strong>{primaryProject.role}</strong>
           </div>
           <h3>{primaryProject.title}</h3>
-          <p>{primaryProject.description}</p>
+          {primaryProject.description && <p>{primaryProject.description}</p>}
           <ul>
             {primaryProject.bullets.map((bullet) => <li>{bullet}</li>)}
           </ul>
@@ -285,6 +339,26 @@ const [primaryProject, ...otherProjects] = projects;
       </div>
     </section>
 
+    <section class="cv-section" id="design-practice">
+      <h2>Selected Design &<br />{' '}Spatial Practice</h2>
+      <div class="cv-entries">
+        {
+          designPractice.map((item) => (
+            <article class="cv-entry">
+              <div class="cv-entry__meta">{item.period}</div>
+              <div class="cv-entry__heading">
+                <h3>{item.title}</h3>
+                <strong>{item.role}</strong>
+              </div>
+              <div class="cv-entry__content">
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
     <section class="cv-section" id="publications">
       <h2>Publications &<br />{' '}Manuscripts</h2>
       <div class="cv-publications">
@@ -304,7 +378,8 @@ const [primaryProject, ...otherProjects] = projects;
                   {publication.credit && <strong>{publication.credit}</strong>}
                   {(publication.status || publication.venue) && (
                     <span>
-                      <b>{publication.status}</b> {publication.venue}
+                      {publication.status && <b>{publication.status}</b>}{' '}
+                      {publication.venue}
                     </span>
                   )}
                 </p>
@@ -327,10 +402,10 @@ const [primaryProject, ...otherProjects] = projects;
         <section>
           <h3>Research Capabilities</h3>
           <ul class="cv-plain-list">
-            <li>Conceptual Analysis · Framework Development</li>
-            <li>Embodied Experience Analysis</li>
+            <li>First-Person / Qualitative Inquiry</li>
+            <li>Conceptual & Relational Modelling</li>
+            <li>Empirical-to-Design Translation</li>
             <li>Metaphor/Schema Analysis · XR Prototyping</li>
-            <li>Driving Simulation · Eye Tracking · EEG/fNIRS Analysis</li>
           </ul>
         </section>
         <section>
@@ -354,6 +429,26 @@ const [primaryProject, ...otherProjects] = projects;
       <div class="cv-entries">
         {
           collaborations.map((item) => (
+            <article class="cv-entry">
+              <div class="cv-entry__meta">{item.period}</div>
+              <div class="cv-entry__heading">
+                <h3>{item.title}</h3>
+                <strong>{item.institution}</strong>
+              </div>
+              <div class="cv-entry__content">
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="cv-section" id="leadership">
+      <h2>Leadership &<br />{' '}Cultural Engagement</h2>
+      <div class="cv-entries">
+        {
+          leadership.map((item) => (
             <article class="cv-entry">
               <div class="cv-entry__meta">{item.period}</div>
               <div class="cv-entry__heading">
