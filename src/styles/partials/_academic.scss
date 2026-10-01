@@ -105,6 +105,21 @@
   }
 }
 
+.cv-profile-card__identity {
+  display: grid;
+  gap: 6px;
+}
+
+.cv-web__pronunciation {
+  margin: 0;
+  color: $subtitle-color;
+  font-family: $title-font;
+  font-size: 13px;
+  font-style: italic !important;
+  line-height: 1.25;
+  letter-spacing: -0.1px;
+}
+
 .cv-web__profile {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
