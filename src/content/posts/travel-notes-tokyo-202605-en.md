@@ -155,8 +155,8 @@ After dinner I suggested walking from Roppongi to Tokyo Tower to see it at night
 >
 > To feel that someone sincerely rejoices in one’s happiness—perhaps the author still has never known that feeling, even now.
 >
-> *First day of the tenth lunar month, bingwu year (9 November 2026)*<br/>
-> *Annotated in Shanghai by Natsuhara Akari, a woman of Ōmi*
+> *9 November 2026*<br/>
+> *Annotated in Shanghai by Natsuhara Akari, a lady of Ōmi*
 
 I had also hoped to see the Sangedatsumon Gate at Zōjōji beside the tower; I knew the building from a Kawase Hasui print. It was undergoing restoration, however, and had been sealed behind construction hoardings. I would not be seeing it this time.
 
@@ -867,8 +867,8 @@ I looked across the Sumida River at Skytree. Originally, I had planned only to l
 >
 > To feel that someone sincerely rejoices in one’s very existence—perhaps the author still has never known that feeling, even now.
 >
-> *First day of the tenth lunar month, bingwu year (9 November 2026)*<br/>
-> *Annotated in Shanghai by Natsuhara Akari, a woman of Ōmi*
+> *9 November 2026*<br/>
+> *Annotated in Shanghai by Natsuhara Akari, a lady of Ōmi*
 
 ## Birthday Night
 
