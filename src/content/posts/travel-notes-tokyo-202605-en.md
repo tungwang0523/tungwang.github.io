@@ -141,6 +141,23 @@ After dinner I suggested walking from Roppongi to Tokyo Tower to see it at night
 
 ![](https://img.mockingbird.team/images/2026/08/e3ecc706064e9eef7f036d10fe408cd7.webp "In fact, Tokyo Tower came into view fewer than fifty paces from the restaurant")
 
+> The author was probably unwilling, at first, to spell out what he felt at this point. After all, it was his twenty-fourth birthday, and the memory involved someone who seemed extraordinarily important to him; naturally, one would rather leave such a memory whole and happy. Perhaps circumstances have changed, or perhaps the author is no longer in the state of mind in which he wrote this piece. At last, he has permitted a few comments here. He may suppose that other people—including the parties themselves—are unlikely ever to open and read this travelogue. Besides, the two female characters in it and the author are now practically strangers. So although the comments below may be far bolder than the author himself would have imagined, he has allowed them.
+>
+> Of course, the author may also understand that some feelings simply cannot be put directly into words. What follows is therefore still no more than a handful of trivialities. Having said all this, the commentary, too, must begin to hedge and equivocate in the manner of the author’s own prose.
+>
+> Toward the end of the author’s birthday dinner, the two female characters finally said that they should leave. The author replied, “I would like to sit here a little longer.” They could only say that, since he wished to remain by himself and sit quietly for a while, they would go on ahead. There seems to have been a brief exchange of farewells, and then the author was the only person left at the table.
+>
+> Apparently everyone in the restaurant looked at him with expressions that might have been concern or merely gossiping curiosity—especially the lady at the table opposite (whenever a woman with a pretty face or an elegant bearing appears near him, the author cannot help directing some of his attention toward her; he really is rather ridiculous). One can probably understand why they looked that way. The staff may have done so because the two female characters left without settling the bill, but that presumably was not what the other diners had in mind. We hear that, in this age, money can buy anything, including company. In Japan especially, there are said to be many people who cannot find anyone to spend their birthday with, yet cannot bear the loneliness of celebrating alone. Online, they can “rent” a friend, even a “girlfriend”: arrange the time, pay so much per hour, and when the time is up, she leaves. Such things really have become more common lately. What a strange age, the lady across the way may also have thought.
+>
+> If the bystanders thought this, it was of course deeply unfair to the author and to the two female characters. Yet under such gazes, perhaps even the author could not avoid the same thought. Had he not, in a sense, “bought” their company? He had merely paid not with money, but with the pressure of social obligation. A senior from their lab—someone they may have spent time with before—happened to be celebrating his birthday in Tokyo just when they were there and sent them an invitation. How could they refuse under such circumstances?
+>
+> How could one impute such malicious thoughts to the three people at that table? But if this was not so, would anyone other than the author have been seated there that night?
+>
+> To feel that someone sincerely rejoices in one’s happiness—perhaps the author still has never known that feeling, even now.
+>
+> *First day of the tenth lunar month, bingwu year (9 November 2026)*<br/>
+> *Annotated in Shanghai by Natsuhara Akari, a woman of Ōmi*
+
 I had also hoped to see the Sangedatsumon Gate at Zōjōji beside the tower; I knew the building from a Kawase Hasui print. It was undergoing restoration, however, and had been sealed behind construction hoardings. I would not be seeing it this time.
 
 ![](https://img.mockingbird.team/blog/external/71e6d5909a98b0f71d198859ff7b314c84a2457cc35e761efb8366ec27828e83.jpg "Sangedatsumon as depicted by Kawase Hasui")
@@ -841,6 +858,17 @@ Alas.
 Every journey contains moments of unhappiness, even misery. Today is your birthday by the lunar calendar, I reminded myself. What should I eat for dinner?
 
 I looked across the Sumida River at Skytree. Originally, I had planned only to look at it from the opposite bank.
+
+> Before this annotation was added, the travelogue always became inexplicable around here. In fact, it concerns the person described in the previous annotation as “someone who seemed extraordinarily important to the author”: one of the two female characters mentioned earlier, who by this point had already returned to Shanghai. To prevent unnecessary trouble or misunderstanding, the author takes pains to clarify that this is not the woman whom he already knew to be in a relationship with one of his friends. There is, in truth, no need for all this deliberate mystification; anyone who knows the three people involved will immediately understand who this “extraordinarily important” person is. But the author probably knows that none of them will go out of their way to open this travelogue and read this far, so perhaps it does not matter.
+>
+> To say that it concerns her is perhaps misleading. If these words were spoken to that woman, she would probably be utterly bewildered and have no idea what they meant. She likely never noticed the author’s unusual feelings; nor did she likely notice whether his presence or absence made any difference to her life. Just as the line the author himself quoted says, “The tender-hearted is left troubled by the heartless”: the sentimental are always easily wounded. Why is the author so inclined to imagine affection where none was offered? That is not a question this annotation can presume to answer on his behalf. We hear, however, that he kept all this pent up for nearly half a year, his state of mind worsening without relief until something like his *daoxin*—his inner spiritual resolve—had shattered. But who would honestly admit that all their feelings had been one-sided imaginings? Perhaps no one can be quite so cruel to oneself.
+>
+> These words are indeed rather unfair to both of the people concerned. You say that this woman was “extraordinarily important” to the author—but what evidence is there? Admittedly, it is hard to find any. Yet the authority to amend this travelogue rests with the author alone.
+>
+> To feel that someone sincerely rejoices in one’s very existence—perhaps the author still has never known that feeling, even now.
+>
+> *First day of the tenth lunar month, bingwu year (9 November 2026)*<br/>
+> *Annotated in Shanghai by Natsuhara Akari, a woman of Ōmi*
 
 ## Birthday Night
 
