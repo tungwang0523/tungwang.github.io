@@ -904,6 +904,15 @@ This trip to Tokyo was decided in the space of two hours during the May Day holi
 
 If I ask what places in Japan I still want to see, only two come immediately to mind. One is Itsukushima Shrine in Hiroshima; a shrine standing in the sea must be beautiful. The other is Meiji-mura in Aichi, where the entrance hall of Frank Lloyd Wright’s old Imperial Hotel was reconstructed after being dismantled in Tokyo. With the steep rise in Japanese visa fees (for Chinese applicants), however, future visits may become more difficult.
 
+> **Note.** Why did the author suddenly permit these annotations to be added to the travelogue?
+>
+> The author had seen a video: a first-person view from a car gliding quietly through central Tokyo at night. When it reached Roppongi—the very street along which the author had walked alone toward Tokyo Tower after leaving the restaurant on the night of 23 May 2026—the trees on both sides were draped in white lights, an illumination installed only in winter. Walking down such a street with the orange-red Tokyo Tower in the distance, what word could describe the feeling other than “romantic”? the author remarked. How wonderful it would be, he mused, if another winter brought the chance to walk that street once more.
+>
+> The author is still in the habit of leaving things unsaid. By choosing the word “romantic,” he plainly hopes that, when that day comes, his hand will no longer be empty.
+>
+> *9 November 2026*<br/>
+> *Annotated in Shanghai by Natsuhara Akari, a lady of Ōmi*
+
 You can see the prose grow simpler toward the end. The truth is that I no longer had the heart to write, and the ending offered little else worth writing down.
 
 　
