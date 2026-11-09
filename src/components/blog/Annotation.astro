@@ -1,0 +1,20 @@
+---
+import { annotationPreview } from '../../utils/annotation-preview.mjs';
+
+interface Props {
+  summary: string;
+}
+
+const { summary } = Astro.props;
+// Render the slot once so nested MDX and images are not evaluated twice.
+const content = await Astro.slots.render('default');
+const preview = annotationPreview(content);
+---
+
+<details class="blog-annotation">
+  <summary>
+    <span class="blog-annotation__label">{summary}</span>
+    {preview && <span class="blog-annotation__preview" aria-hidden="true" set:html={preview} />}
+  </summary>
+  <div class="blog-annotation__body"><Fragment set:html={content} /></div>
+</details>

@@ -1224,6 +1224,11 @@ html.content-card-page body.menu-open .page--content-card {
     margin: 1.6em 0;
     padding: 16px 18px;
     background: $panel-bg;
+    font-family: $blog-serif-font;
+    font-size: 0.9em;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba($subtitle-color, 0.65);
 
     summary {
       font-family: $title-font;

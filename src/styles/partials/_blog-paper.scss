@@ -194,6 +194,7 @@ html.blog-paper::after {
 .blog-paper {
   .page.blog-post-page {
     --page-nav-height: 76px;
+    --blog-paper-inset: clamp(20px, 4vw, 32px);
     --mobile-menu-bg: #{$panel-bg};
     --mobile-menu-color: #{$subtitle-color};
     --mobile-menu-current-bg: #{$title-color};
@@ -216,9 +217,13 @@ html.blog-paper::after {
     z-index: 1;
     width: var(--blog-paper-width);
     max-width: none;
-    margin-top: var(--blog-paper-gap);
+    // The mobile page already reserves the space above the visible paper.
+    // Adding another gap here makes the cover's top inset larger than its sides.
+    margin-top: 0;
     margin-bottom: var(--blog-paper-gap);
-    padding-top: clamp(20px, 4vw, 32px);
+    padding-top: var(--blog-paper-inset);
+    padding-right: var(--blog-paper-inset);
+    padding-left: var(--blog-paper-inset);
     border-radius: var(--blog-paper-radius);
     background: $blog-bg;
     background-clip: padding-box;
@@ -231,7 +236,19 @@ html.blog-paper::after {
   }
 
   .blog-post-page .page-hero {
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+    margin-left: 0;
     overflow: hidden;
+  }
+
+  @media screen and (min-width: 1031px) {
+    .blog-post-page .page-main {
+      // On desktop there is no padded mobile header: align the actual paper
+      // with the fixed white surface before applying the shared cover inset.
+      margin-top: var(--blog-paper-top);
+    }
   }
 
   .blog-post-page > .post-nav--paper-external {
@@ -357,7 +374,7 @@ html.blog-paper::after {
     }
 
     .blog-post-page .page-main {
-      margin-top: 0;
+      margin-top: var(--blog-paper-top);
     }
 
     .blog-post-page.has-blog-toc .blog-post-layout {
@@ -616,6 +633,7 @@ html.blog-paper::after {
 @media screen and (min-width: 769px) and (max-width: 1030px) {
   html.blog-paper,
   html.blog-paper body {
+    --blog-paper-top: calc(72px + var(--blog-paper-gap));
     --blog-toc-dock-gap: 0px;
     --blog-paper-bottom: var(--blog-paper-gap);
   }

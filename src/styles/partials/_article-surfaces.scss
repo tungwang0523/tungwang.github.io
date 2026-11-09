@@ -1,0 +1,208 @@
+@use 'foundation' as *;
+
+// Article-only surfaces: do not affect navigation, work pages, or the lightbox.
+.blog-post-page .prose {
+  // Inner blocks must not reuse the gray field surrounding the white paper.
+  --article-block-bg: #e6e6e6;
+  --article-block-radius: 16px;
+  --article-media-radius: 12px;
+  --article-block-inset: clamp(18px, 3vw, 26px);
+
+  :is(
+    details,
+    pre,
+    table,
+    .blog-callout,
+    .blog-bibliography,
+    .blog-sidenote,
+    .katex-display,
+    [data-footnotes]
+  ) {
+    border-radius: var(--article-block-radius);
+  }
+
+  :is(details, .blog-bibliography, .blog-sidenote, .katex-display, [data-footnotes]) {
+    padding: var(--article-block-inset);
+    background: var(--article-block-bg);
+    border: 0;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  details {
+    min-width: 0;
+
+    > summary {
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  pre {
+    min-width: 0;
+    padding: var(--article-block-inset);
+    font-family: $mono-font;
+    scrollbar-color: rgba($blog-bg, 0.34) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 99px;
+      background: rgba($blog-bg, 0.42);
+    }
+
+    code {
+      border-radius: 0;
+    }
+  }
+
+  :not(pre) > code {
+    background: var(--article-block-bg);
+    border-radius: 5px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  mark {
+    border-radius: 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  kbd {
+    border: 0;
+    border-radius: 5px;
+    padding: 3px 7px;
+    background: var(--article-block-bg);
+  }
+
+  .task-list-item input {
+    border-radius: 4px;
+  }
+
+  table {
+    border-spacing: 0;
+    background: var(--article-block-bg);
+    overscroll-behavior-inline: contain;
+  }
+
+  tbody tr {
+    background: var(--article-block-bg);
+  }
+
+  th,
+  td {
+    padding: 14px 16px;
+    line-height: 1.6;
+  }
+
+  tbody tr + tr td {
+    border-top: 2px solid $blog-bg;
+  }
+
+  .blog-callout {
+    min-width: 0;
+    overflow: hidden;
+
+    &__body {
+      min-width: 0;
+      padding: 18px 20px;
+    }
+
+    &__label {
+      // Match the first body line, not the center of the entire note.
+      padding-top: calc(18px + (18px * 1.65 - 12px * 1.2) / 2);
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .blog-callout:not(.blog-callout--warning) {
+    --callout-body-color: var(--article-block-bg);
+  }
+
+  .blog-sidenote {
+    strong {
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    p + p {
+      margin-top: 0.8em;
+    }
+  }
+
+  [data-footnotes] {
+    margin-top: 2.8em;
+  }
+
+  :is(.blog-figure__media, .blog-video__stage, .blog-compare__stage, .youtube-embed-lite__stage) {
+    border-radius: var(--article-media-radius);
+  }
+
+  img[data-blog-image] {
+    border-radius: var(--article-media-radius);
+  }
+
+  .blog-figure__media > img {
+    border-radius: inherit;
+  }
+
+  .blog-image-grid {
+    gap: 8px;
+
+    &__media {
+      border-radius: 8px;
+    }
+
+    img[data-blog-image] {
+      border-radius: 0;
+    }
+  }
+
+  :is(
+    .blog-image-caption,
+    .blog-figure__caption,
+    .blog-video figcaption,
+    .blog-compare figcaption
+  ) {
+    font-family: $blog-serif-font;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba($subtitle-color, 0.68);
+  }
+
+  .youtube-embed-lite {
+    &__play {
+      border-radius: 10px;
+    }
+
+    &__external,
+    &__noscript {
+      color: rgba($subtitle-color, 0.68);
+
+      a {
+        color: $title-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .blog-post-page .prose {
+    --article-block-radius: 18px;
+    --article-media-radius: 14px;
+    --article-block-inset: 18px;
+
+    .blog-callout__body {
+      padding: 16px;
+    }
+
+    .blog-callout__label {
+      padding-top: calc(16px + (18px * 1.65 - 11px * 1.2) / 2);
+    }
+  }
+}

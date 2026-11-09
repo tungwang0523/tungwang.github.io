@@ -1,5 +1,85 @@
 @use 'foundation' as *;
 
+.prose details.blog-annotation {
+  min-width: 0;
+  border-radius: 14px;
+
+  > summary {
+    display: grid;
+    grid-template-columns: 0.75em minmax(0, 1fr);
+    column-gap: 0.5em;
+    row-gap: 0.45em;
+    align-items: baseline;
+    margin: 0;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      margin-top: 0.48em;
+      width: 0;
+      height: 0;
+      border-top: 0.27em solid transparent;
+      border-bottom: 0.27em solid transparent;
+      border-left: 0.38em solid currentColor;
+    }
+  }
+
+  .blog-annotation__label {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 1em;
+    line-height: 1.6;
+  }
+
+  .blog-annotation__preview {
+    grid-column: 2;
+    grid-row: 2;
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: $blog-serif-font;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba($subtitle-color, 0.65);
+  }
+
+  &[open] {
+    > summary {
+      margin-bottom: 1em;
+
+      &::before {
+        transform: rotate(90deg);
+      }
+    }
+
+    .blog-annotation__preview {
+      display: none;
+    }
+  }
+
+  .blog-annotation__body {
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .blog-callout,
 .blog-pullquote,
 .blog-bibliography,

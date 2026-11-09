@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import BlogTableOfContents from '../../components/BlogTableOfContents.astro';
+import Annotation from '../../components/blog/Annotation.astro';
 import Bibliography from '../../components/blog/Bibliography.astro';
 import BlogFigure from '../../components/blog/BlogFigure.astro';
 import BlogGallery from '../../components/blog/BlogGallery.astro';
@@ -45,6 +46,7 @@ export async function getStaticPaths() {
 const { post, prev, next, translation } = Astro.props;
 const { Content, headings } = await render(post);
 const mdxComponents = {
+  Annotation,
   Bibliography,
   BlogFigure,
   BlogGallery,
@@ -157,6 +159,7 @@ const alternateLanguages = translation
   @use '../../styles/partials/blog';
   @use '../../styles/partials/youtube';
   @use '../../styles/partials/editorial-elements';
+  @use '../../styles/partials/article-surfaces';
   @use '../../styles/partials/blog-paper';
 </style>
 
