@@ -1,52 +1,71 @@
 <script is:inline>
   (() => {
     const hashPattern = /^#dev-preview-(\d+)-([a-z0-9]+)$/;
+    const storageKey = 'dev-preview-scroll:' + location.pathname + location.search;
     const requestedAnchor = location.hash.match(hashPattern);
+    let saved = null;
+    try {
+      const value = JSON.parse(sessionStorage.getItem(storageKey) || 'null');
+      if (
+        value?.version === 2 &&
+        Number.isFinite(value.top) &&
+        Date.now() - value.time < 43200000
+      ) {
+        saved = value;
+      }
+    } catch {
+      // Preview panes may disable storage. URL anchors remain a fallback.
+    }
+    // An explicit section link must win over an earlier editing position.
+    if (location.hash && !requestedAnchor) saved = null;
+    const shouldRestore = Boolean(requestedAnchor || saved);
+    const previousRestoration = history.scrollRestoration;
+    let guardStyle = null;
+    const reveal = () => delete document.documentElement.dataset.devAnchorHidden;
+    const clearGuard = () => {
+      reveal();
+      delete document.documentElement.dataset.devAnchorRestoring;
+      guardStyle?.remove();
+      history.scrollRestoration = previousRestoration;
+    };
 
-    if (requestedAnchor) {
+    if (shouldRestore) {
       history.scrollRestoration = 'manual';
       document.documentElement.dataset.devAnchorRestoring = '';
       document.documentElement.dataset.devAnchorHidden = '';
-      const guardStyle = document.createElement('style');
-      guardStyle.dataset.devAnchorGuard = '';
-      guardStyle.textContent = `
-        html[data-dev-anchor-restoring] { scroll-behavior: auto !important; }
-        html[data-dev-anchor-hidden] body { visibility: hidden !important; }
-      `;
+      guardStyle = document.createElement('style');
+      guardStyle.textContent =
+        'html[data-dev-anchor-restoring], html[data-dev-anchor-restoring] .blog-post-page { scroll-behavior: auto !important; }' +
+        'html[data-dev-anchor-hidden] body { visibility: hidden !important; }';
       document.head.append(guardStyle);
+      // Never leave a failed or interrupted development preview invisible.
+      setTimeout(clearGuard, 3000);
     }
 
     const start = () => {
-      const article = document.querySelector('.blog-post-page .prose');
+      const page = document.querySelector('.blog-post-page');
+      const article = page?.querySelector('.prose');
       if (!article) {
-        document.documentElement.removeAttribute('data-dev-anchor-restoring');
-        document.documentElement.removeAttribute('data-dev-anchor-hidden');
+        clearGuard();
         return;
       }
-      const blockSelector =
-        ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > p, :scope > blockquote, :scope > ul, :scope > ol, :scope > pre, :scope > .blog-image-grid';
-      const blocks = Array.from(article.querySelectorAll(blockSelector));
-      let updateFrame = 0;
-      let correctionFrame = 0;
-      let correctionsActive = Boolean(requestedAnchor);
-
+      const blocks = Array.from(article.children).filter(
+        (element) =>
+          element instanceof HTMLElement &&
+          !['SCRIPT', 'STYLE', 'TEMPLATE'].includes(element.tagName),
+      );
+      const details = Array.from(article.querySelectorAll('details'));
+      const usesPageScroll = () => /(auto|scroll)/.test(getComputedStyle(page).overflowY);
+      const scrollTop = () => (usesPageScroll() ? page.scrollTop : window.scrollY);
+      const scrollTo = (top) => {
+        const options = { top: Math.max(0, top), behavior: 'auto' };
+        if (usesPageScroll()) page.scrollTo(options);
+        else window.scrollTo(options);
+      };
       const topGuide = () => {
-        const navHeight =
-          Number.parseFloat(
-            getComputedStyle(document.documentElement).getPropertyValue('--page-nav-height'),
-          ) || 0;
-        return navHeight + 16;
+        const paper = document.querySelector('.blog-paper-viewport-bottom');
+        return (paper?.getBoundingClientRect().top || 0) + 16;
       };
-
-      const signature = (element) => {
-        const text = element.textContent?.replace(/\s+/g, ' ').trim().slice(0, 160) || '';
-        const imageSources = Array.from(element.querySelectorAll('img'))
-          .slice(0, 3)
-          .map((image) => image.getAttribute('src') || '')
-          .join('|');
-        return `${element.tagName}:${text || imageSources}`;
-      };
-
       const hashSignature = (value) => {
         let hash = 2166136261;
         for (let index = 0; index < value.length; index += 1) {
@@ -55,118 +74,136 @@
         }
         return (hash >>> 0).toString(36);
       };
-
+      const signature = (element) => {
+        const summary = element.matches('details') ? element.querySelector('summary') : null;
+        const text =
+          (summary || element).textContent?.replace(/\s+/g, ' ').trim().slice(0, 160) || '';
+        const images = Array.from(element.querySelectorAll('img'))
+          .slice(0, 3)
+          .map((image) => image.dataset.originalSrc || image.getAttribute('src') || '')
+          .join('|');
+        return hashSignature(element.tagName + ':' + (text || images));
+      };
       blocks.forEach((block, index) => {
-        block.dataset.devPreviewAnchor = `dev-preview-${index}-${hashSignature(signature(block))}`;
+        block.dataset.devPreviewAnchor = 'dev-preview-' + index + '-' + signature(block);
       });
-
-      const targetFromHash = () => {
-        const match = location.hash.match(hashPattern);
+      const findTarget = (anchor) => {
+        const match = anchor?.match(/^dev-preview-(\d+)-([a-z0-9]+)$/);
         if (!match) return null;
-        const exact = article.querySelector(
-          `[data-dev-preview-anchor="${location.hash.slice(1)}"]`,
+        const exact = blocks.find((block) => block.dataset.devPreviewAnchor === anchor);
+        // Inserting paragraphs changes indices; editing text changes signatures.
+        return (
+          exact ||
+          blocks.find((block) => block.dataset.devPreviewAnchor.endsWith('-' + match[2])) ||
+          blocks[Number(match[1])] ||
+          null
         );
-        return exact || blocks[Number(match[1])] || null;
       };
 
-      const restore = () => {
-        if (!correctionsActive) return;
-        const target = targetFromHash();
-        if (!target) return;
-        const targetTop = window.scrollY + target.getBoundingClientRect().top - topGuide();
-        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
-      };
-
-      const reveal = () => {
-        document.documentElement.removeAttribute('data-dev-anchor-hidden');
-      };
-
-      const finishCorrections = () => {
-        correctionsActive = false;
-        document.documentElement.removeAttribute('data-dev-anchor-restoring');
-        document.querySelector('style[data-dev-anchor-guard]')?.remove();
-      };
-
-      const cancelCorrections = () => {
-        if (!correctionsActive) return;
-        reveal();
-        finishCorrections();
-      };
-
-      const updateHash = () => {
-        if (correctionsActive) return;
+      let updateFrame = 0;
+      let correctionFrame = 0;
+      let restoring = shouldRestore;
+      const detailStates = () =>
+        details.map((detail, index) => ({
+          index,
+          signature: signature(detail),
+          open: detail.open,
+        }));
+      const capture = () => {
+        if (restoring) return;
         const guide = topGuide();
-        const articleTop = window.scrollY + article.getBoundingClientRect().top;
-
-        if (window.scrollY + guide < articleTop) {
-          if (hashPattern.test(location.hash)) {
-            history.replaceState(history.state, '', `${location.pathname}${location.search}`);
-          }
-          return;
-        }
-
-        const firstVisibleIndex = blocks.findIndex(
-          (block) => block.getBoundingClientRect().bottom > guide,
-        );
-        const index = firstVisibleIndex >= 0 ? firstVisibleIndex : blocks.length - 1;
-        const anchor = blocks[index]?.dataset.devPreviewAnchor;
-        if (anchor && location.hash !== `#${anchor}`) {
-          history.replaceState(
-            history.state,
-            '',
-            `${location.pathname}${location.search}#${anchor}`,
-          );
+        const inArticle = article.getBoundingClientRect().top <= guide;
+        const target = inArticle
+          ? blocks.find((block) => block.getBoundingClientRect().bottom > guide) || blocks.at(-1)
+          : null;
+        const anchor = target?.dataset.devPreviewAnchor || null;
+        const state = {
+          version: 2,
+          top: scrollTop(),
+          anchor,
+          offset: target ? target.getBoundingClientRect().top - guide : 0,
+          details: detailStates(),
+          time: Date.now(),
+        };
+        try {
+          sessionStorage.setItem(storageKey, JSON.stringify(state));
+        } catch {}
+        const hash = anchor ? '#' + anchor : '';
+        if (hash !== location.hash && (anchor || hashPattern.test(location.hash))) {
+          try {
+            history.replaceState(history.state, '', location.pathname + location.search + hash);
+          } catch {}
         }
       };
-
-      const scheduleHashUpdate = () => {
-        if (updateFrame || correctionsActive) return;
+      const scheduleCapture = () => {
+        if (restoring || updateFrame) return;
         updateFrame = requestAnimationFrame(() => {
           updateFrame = 0;
-          updateHash();
+          capture();
         });
       };
+      // Narrow article pages scroll internally; desktop/tablet scroll the window.
+      window.addEventListener('scroll', scheduleCapture, { passive: true });
+      page.addEventListener('scroll', scheduleCapture, { passive: true });
+      article.addEventListener('toggle', scheduleCapture, true);
+      window.addEventListener('pagehide', capture);
+      window.addEventListener('beforeunload', capture);
 
-      window.addEventListener('scroll', scheduleHashUpdate, { passive: true });
-
-      if (!requestedAnchor) {
-        updateHash();
+      if (!shouldRestore) {
+        capture();
         return;
       }
-
-      window.addEventListener('wheel', cancelCorrections, { passive: true, once: true });
-      window.addEventListener('touchstart', cancelCorrections, { passive: true, once: true });
-      window.addEventListener('pointerdown', cancelCorrections, { passive: true, once: true });
-      window.addEventListener('keydown', cancelCorrections, { once: true });
-
-      requestAnimationFrame(() => {
-        restore();
-        reveal();
-      });
-      setTimeout(restore, 120);
-      setTimeout(restore, 500);
-      setTimeout(restore, 1000);
-      setTimeout(restore, 1800);
-      window.addEventListener('load', restore, { once: true });
-
-      article.querySelectorAll('img').forEach((image) => {
-        if (!image.complete) image.addEventListener('load', restore, { once: true });
-      });
-
-      const resizeObserver = new ResizeObserver(() => {
-        if (!correctionsActive || correctionFrame) return;
+      for (const state of saved?.details || []) {
+        const detail = details[state.index];
+        if (detail && signature(detail) === state.signature) detail.open = state.open;
+      }
+      const anchor = requestedAnchor ? location.hash.slice(1) : saved?.anchor;
+      const target = findTarget(anchor);
+      const offset = saved?.anchor === anchor && Number.isFinite(saved.offset) ? saved.offset : 0;
+      const restore = () => {
+        if (!restoring) return;
+        if (target && document.contains(target)) {
+          scrollTo(scrollTop() + target.getBoundingClientRect().top - topGuide() - offset);
+        } else if (saved) {
+          scrollTo(saved.top);
+        }
+      };
+      const scheduleCorrection = () => {
+        if (!restoring || correctionFrame) return;
         correctionFrame = requestAnimationFrame(() => {
           correctionFrame = 0;
           restore();
         });
-      });
-      resizeObserver.observe(article);
-
-      setTimeout(() => {
+      };
+      const resizeObserver = new ResizeObserver(scheduleCorrection);
+      const finish = () => {
+        if (!restoring) return;
+        restoring = false;
         resizeObserver.disconnect();
-        finishCorrections();
-        updateHash();
-      }, 2500);
+        if (correctionFrame) cancelAnimationFrame(correctionFrame);
+        clearGuard();
+        capture();
+      };
+      // Stop correcting immediately once the reader takes control.
+      window.addEventListener('wheel', finish, { passive: true, once: true });
+      window.addEventListener('touchstart', finish, { passive: true, once: true });
+      window.addEventListener('pointerdown', finish, { passive: true, once: true });
+      window.addEventListener('keydown', finish, { once: true });
+      resizeObserver.observe(article);
+      document.fonts?.ready.then(scheduleCorrection);
+      article.querySelectorAll('img').forEach((image) => {
+        if (!image.complete) {
+          image.addEventListener('load', scheduleCorrection, { once: true });
+          image.addEventListener('error', scheduleCorrection, { once: true });
+        }
+      });
+      window.addEventListener('load', scheduleCorrection, { once: true });
+      requestAnimationFrame(() => {
+        restore();
+        reveal();
+      });
+      [120, 500, 1000, 1800].forEach((delay) => setTimeout(restore, delay));
+      setTimeout(finish, 2500);
     };
 
     if (document.readyState === 'loading') {
